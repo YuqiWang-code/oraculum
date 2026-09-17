@@ -5,7 +5,6 @@
 核心计算完全本地、确定性、可复现，不依赖云端 AI，支持离线使用。
 
 > **免责声明**
->
 > ：本应用用于传统文化研究、娱乐与自我反思，不代表客观事实或未来必然结果。涉及医疗、法律、财务、安全、升学就业等重要决定时，请以现实证据和专业意见为准，不以占卜结果替代决策。
 
 ## 技术栈
@@ -92,23 +91,33 @@ tests/          Vitest
 
 ### 1. 创建了什么
 
-Vue 3 + TypeScript(strict) + Vite + Pinia + Vue Router + Vitest + Dexie + lunar-javascript + vite-plugin-pwa 的完整 PWA 工程。三层架构严格分离：`src/data/`（经典资料层，只读常量带 source）、`src/engine/`（确定性规则引擎）、`src/engine/interpretation/`（本地模板化解读）。AI 不参与卦象 / 干支 / 动爻 / 评分基础数据。
+Vue 3 + TypeScript (strict) + Vite + Pinia + Vue Router + Vitest + Dexie + lunar-javascript + vite-plugin-pwa 的完整 PWA 工程。三层架构严格分离：`src/data/`（经典资料层，只读常量带 source）、`src/engine/`（确定性规则引擎）、`src/engine/interpretation/`（本地模板化解读）。AI 不参与卦象 / 干支 / 动爻 / 评分基础数据。
 
 ### 2. 目录结构（关键部分）
 
+
+
 ```
 src/data/      trigrams, hexagrams(64卦), palaces, najia, sixRelations, sixSpirits, shensha, solarTerms
+
 src/engine/    calendar/, hexagram/, meihua/, liuyao/ (layout, hiddenSpirits, score), scoring/, interpretation/, orchestrator.ts
+
 src/db/        Dexie 历史（增删/搜索/导出/导入，存 ruleVersion + datasetVersion）
+
 src/views/     Home / Divination / Result / History / Knowledge / Settings / About
+
 tests/         4 个测试文件；docs/ 7 份文档；public/icons/ PWA 图标
 ```
 
 ### 3. 核心规则
 
-- **梅花时间起卦 `meihua_time_v1`**：A = 年支 + 农历月 + 日，B = +时支，上卦 / 下卦 / 动爻按资料 5.2；体用、互卦、变卦。
-- **六爻**：八宫表、世应表、纳甲表驱动；六亲以宫五行为我；六神按日干；旬空由日柱查六旬；伏神从本宫纯卦定位；神煞（驿马 / 桃花 / 华盖 / 天乙贵人，低权重可关闭）。
-- **评分**：`score = clamp(0,100, 50 + Σdelta)`，五档 0–19 大凶 / 20–39 凶 / 40–59 平 / 60–79 吉 / 80–100 大吉，每项加减分都生成 `ScoreEvidence{id,title,delta,reason,sourceRule}`，结果页可展开"评分依据"。
+
+
+* **梅花时间起卦&#x20;**`meihua_time_v1`：A = 年支 + 农历月 + 日，B = + 时支，上卦 / 下卦 / 动爻按资料 5.2；体用、互卦、变卦。
+
+* **六爻**：八宫表、世应表、纳甲表驱动；六亲以宫五行为我；六神按日干；旬空由日柱查六旬；伏神从本宫纯卦定位；神煞（驿马 / 桃花 / 华盖 / 天乙贵人，低权重可关闭）。
+
+* **评分**：`score = clamp(0,100, 50 + Σdelta)`，五档 0–19 大凶 / 20–39 凶 / 40–59 平 / 60–79 吉 / 80–100 大吉，每项加减分都生成 `ScoreEvidence{id,title,delta,reason,sourceRule}`，结果页可展开 "评分依据"。
 
 ### 4. 测试结果
 
@@ -120,37 +129,54 @@ tests/         4 个测试文件；docs/ 7 份文档；public/icons/ PWA 图标
 
 ### 6. 电脑启动
 
-```bash
+
+
+```
 cd F:\豆包\Projects\智能推理与预测
+
 npm run dev      # http://localhost:5173
 ```
 
 ### 7. 手机测试
 
-- 局域网：`npm run dev -- --host`，手机同 Wi-Fi 访问 `http://电脑IP:5173`。
-- PWA：`dist` 部署到 HTTPS 后，手机浏览器"添加到主屏幕"即可离线安装（详见 `docs/MOBILE_INSTALL.md`）。
+
+
+* 局域网：`npm run dev -- --host`，手机同 Wi-Fi 访问 `http://电脑IP:5173`。
+
+* PWA：`dist` 部署到 HTTPS 后，手机浏览器 "添加到主屏幕" 即可离线安装（详见 `docs/MOBILE_INSTALL.md`）。
 
 ### 8. 待办 TODO
 
-- **六十四卦经典卦辞 / 爻辞**：资料库未逐字提供，按要求结构已就位、原文字段留空并标 `needsVerify`，未凭记忆冒充原文；待联网用 ctext / 维基文库逐字核对后补录并升 `DATASET_VERSION`（清单见 `docs/DATA_SOURCES.md`）。
-- **六爻起卦 v1** 以"梅花卦结构作六爻输入"的综合实验模式呈现（UI 已标注）；三枚钱法 / 纯手动录入 UI 为二期。
-- 旺衰为可解释简化版，未做完整冲合刑害加权；分享长图、Capacitor 打 APK 为二期。
+
+
+* **六十四卦经典卦辞 / 爻辞**：资料库未逐字提供，按要求结构已就位、原文字段留空并标 `needsVerify`，未凭记忆冒充原文；待联网用 ctext / 维基文库逐字核对后补录并升 `DATASET_VERSION`（清单见 `docs/DATA_SOURCES.md`）。
+
+* **六爻起卦 v1** 以 "梅花卦结构作六爻输入" 的综合实验模式呈现（UI 已标注）；三枚钱法 / 纯手动录入 UI 为二期。
+
+* 旺衰为可解释简化版，未做完整冲合刑害加权；分享长图、Capacitor 打 APK 为二期。
 
 ### 9. 经典文本核验状态
 
-- **已核验**：八卦 / 64 卦结构、上下卦组合、八宫归属、世应、纳甲、六亲、六神、旬空（均有测试锁定）。
-- **未核验（已标记）**：64 卦卦辞与 384 爻辞原文——`judgmentClassic` / `lineTextsClassic` 留空、`needsVerify=true`，待逐字核对。
 
-结果页与关于页均已固定写明"传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见"。
+
+* **已核验**：八卦 / 64 卦结构、上下卦组合、八宫归属、世应、纳甲、六亲、六神、旬空（均有测试锁定）。
+
+* **未核验（已标记）**：64 卦卦辞与 384 爻辞原文 ——`judgmentClassic` / `lineTextsClassic` 留空、`needsVerify=true`，待逐字核对。
+
+结果页与关于页均已固定写明 "传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见"。
 
 ## Git 提交
 
 后续有改动时，直接：
 
-```bash
+
+
+```
 git add -A
+
 git commit -m "说明本次改动"
+
 git push
 ```
 
-远程仓库：`https://github.com/YuqiWang-code/-.git`（main 分支）。
+远程仓库：`https://github.com/YuqiWang-code/oraculum`（main 分支）。
