@@ -1,4 +1,5 @@
 import type { DivinationRecord } from '../engine/orchestrator'
+import type { AiInterpretation, AiChatMessage } from '../types/ai'
 
 export interface HistoryRecord extends DivinationRecord {
   /** 便于列表展示与搜索的冗余字段 */
@@ -14,4 +15,16 @@ export interface Settings {
   useShenshaInScore: boolean
   showLunarDetail: boolean
   dayBoundaryRule: string
+  aiEnabled?: boolean
+}
+
+export interface AiSession {
+  id: string
+  recordId: string
+  createdAt: string
+  updatedAt: string
+  model: string
+  promptVersion: 'oraculum_ai_v1'
+  response: AiInterpretation
+  messages: AiChatMessage[]
 }

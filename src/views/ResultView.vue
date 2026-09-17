@@ -107,6 +107,8 @@
     <button class="btn" @click="copyText">复制文字结果</button>
     <button class="btn secondary" @click="$router.push('/')">返回首页</button>
 
+    <AiInterpretationCard :record="rec" />
+
     <div class="card muted">
       免责声明：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。
     </div>
@@ -118,6 +120,7 @@
 import { computed } from 'vue'
 import { useAppStore } from '../stores/app'
 import HexagramDiagram from '../components/hexagram/HexagramDiagram.vue'
+import AiInterpretationCard from '../components/ai/AiInterpretationCard.vue'
 
 const store = useAppStore()
 const rec = computed(() => store.lastResult)

@@ -4,6 +4,28 @@
 
 核心计算完全本地、确定性、可复现，不依赖云端 AI，支持离线使用。
 
+## 本地引擎 vs AI
+
+- **本地传统引擎**：离线可用，负责起卦/卦象/干支/评分。
+- **AI 深度解读**：可选增强，需联网，把本次最小卦象快照发到自建后端再调 OpenAI，不改变卦象与评分。
+- ChatGPT Plus **不包含** API 免费额度；API 在 OpenAI Platform 单独计费。
+
+## 运行方式
+
+```
+npm install
+
+# 无 AI 模式（纯 PWA，本地全部可用）
+npm run dev
+
+# 完整模式（前端 5173 + 后端 8787，后端读 .env）
+npm run dev:full
+
+npm run build && npm start   # 生产：一个 Node 服务同时托管 PWA 与 /api
+```
+
+后端首次使用：复制 `.env.example` 为 `.env`，填入真实 `OPENAI_API_KEY` 与 `AI_ACCESS_TOKEN`（不要提交到 git）。
+
 ## 起卦方式（v2）
 
 | 方式 | 规则版本 | 性质 |

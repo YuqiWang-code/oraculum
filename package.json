@@ -6,7 +6,12 @@
   "description": "智能推理与预测 - 移动端优先的传统文化问卦 PWA（梅花易数/六爻纳甲）",
   "scripts": {
     "dev": "vite",
+    "dev:web": "vite",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:full": "concurrently -k \"npm:dev:server\" \"npm:dev:web\"",
     "build": "vue-tsc --noEmit && vite build",
+    "start": "node dist-server/index.js",
+    "build:server": "tsc -p server/tsconfig.json",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -15,13 +20,21 @@
     "validate": "tsx scripts/validate-data.ts"
   },
   "dependencies": {
+    "concurrently": "^10.0.5",
     "dexie": "^4.0.8",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
     "lunar-javascript": "^1.6.13",
+    "openai": "^7.17.0",
     "pinia": "^2.2.2",
     "vue": "^3.4.38",
-    "vue-router": "^4.4.3"
+    "vue-router": "^4.4.3",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/express-rate-limit": "^5.1.3",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^25.0.0",
