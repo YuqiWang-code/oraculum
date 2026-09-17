@@ -1,0 +1,36 @@
+{
+  "name": "smart-reasoning-divination",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "智能推理与预测 - 移动端优先的传统文化问卦 PWA（梅花易数/六爻纳甲）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .ts,.vue",
+    "format": "prettier --write \"src/**/*.{ts,vue}\"",
+    "validate": "tsx scripts/validate-data.ts"
+  },
+  "dependencies": {
+    "dexie": "^4.0.8",
+    "lunar-javascript": "^1.6.13",
+    "pinia": "^2.2.2",
+    "vue": "^3.4.38",
+    "vue-router": "^4.4.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^25.0.0",
+    "prettier": "^3.3.3",
+    "tsx": "^4.23.13",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vite-plugin-pwa": "^0.20.1",
+    "vitest": "^2.0.5",
+    "vue-tsc": "^2.0.29"
+  }
+}
