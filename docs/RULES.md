@@ -2,12 +2,44 @@
 
 ## 版本
 
-- `RULESET_VERSION = 1.0.0`
+- `RULESET_VERSION = 2.0.0`
 - `DATASET_VERSION = 1.0.0`
 
-历史记录同时保存两个版本号；未来改算法会升版本，旧记录按旧版重放，不静默覆盖。
+历史记录同时保存两个版本号；未来改算法会升版本，旧记录按旧版重放，不静默覆盖。每个 caster 另存独立 `castingRuleVersion`。
 
-## 梅花时间起卦 meihua_time_v1（资料 5.2）
+## v2 新增起卦规则（资料 v2）
+
+### 梅花·秒级时间 meihua_time_second_v2（现代扩展）
+- A = 年支数 + 农历月 + 农历日；B = A + 时支数；P = 分×60 + 秒。
+- 上卦 = mod8(A)，下卦 = mod8(B+P)，动爻 = mod6(B+P)。
+- 秒级部分为本项目现代扩展，不冒充古籍原始年月日时算法。
+
+### 梅花·随机数 meihua_random_numbers_v1（现代数字化）
+- N1,N2,N3 ∈ [1,9999]，crypto.getRandomValues + rejection sampling（无 modulo bias）。
+- 上卦=mod8(N1)，下卦=mod8(N2)，动爻=mod6(N1+N2+N3)。
+
+### 梅花·摇骰 meihua_dice_v1（现代交互）
+- d8×2 直接定上下卦（1乾…8坤），d6 直接定动爻（1初…6上）。
+
+### 六爻·三枚钱 liuyao_three_coins_v1（传统实践）
+- 正面=3 反面=2；和 6老阴动/7少阳/8少阴/9老阳动。第一次=初爻自下而上。
+
+### 梅花·文字 meihua_text_count_v1（传统长文本路线）
+- NFKC + 去空白标点 + Intl.Segmenter grapheme，11–100 字。
+- 偶 N 平分上下；奇 N 上 floor/下 ceil；上卦=mod8(upperCount)，下卦=mod8(lowerCount)，动爻=mod6(N)。
+- 短字占涉及笔画/声调，未引入未核验笔画表，不硬算。
+
+### 梅花·外应 meihua_external_omen_v1（传统+规范化）
+- 颜色仅 5 组核验映射（青震/红离/黄坤/白兑/黑坎）；八象 8；方位后天八卦 8。
+- 上卦=外应卦，下卦=方位卦，动爻=mod6(上先天数+下先天数+时支数)。
+
+### 六源合参 six_source_hybrid_v1（本项目实验，非古籍原法）
+- 六源固定字段序 canonical JSON → FNV-1a（种子 0x811c9dc5/0x01000193/0xdeadbeef）派生 H1/H2/H3。
+- 上卦=mod8(H1)，下卦=mod8(H2)，动爻=mod6(H3)。纯本地确定性。
+
+---
+
+## 梅花时间起卦 meihua_time_v1（资料 5.2，保留兼容）
 
 1. 年支数：子1…亥12。
 2. A = 年支数 + 农历月 M + 农历日 D。

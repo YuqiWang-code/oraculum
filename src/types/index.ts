@@ -1,5 +1,5 @@
 // 全局规则版本：算法或数据变更时必须递增，历史记录据此可重现
-export const RULESET_VERSION = '1.0.0'
+export const RULESET_VERSION = '2.0.0'
 export const DATASET_VERSION = '1.0.0'
 
 /** 五行 */
@@ -36,7 +36,38 @@ export type QuestionCategory =
   | '其他'
 
 /** 起卦方式 */
-export type CastingMode = 'meihua_time' | 'liuyao_coins' | 'manual_hexagram' | 'hybrid_experimental'
+export type CastingMode =
+  | 'meihua_time' // v1 旧时间起卦（保留兼容）
+  | 'meihua_time_second' // 秒级时间（现代扩展）
+  | 'meihua_random' // 随机数（现代数字化）
+  | 'meihua_dice' // 骰子（现代交互）
+  | 'meihua_text' // 文字字数（传统字占的长文本路线）
+  | 'meihua_external_omen' // 外应（传统+规范化）
+  | 'liuyao_coins' // 三枚钱六爻（传统实践）
+  | 'manual_hexagram'
+  | 'six_source_hybrid' // 六源合参（实验）
+  | 'hybrid_experimental'
+
+/** 起卦证据（结果页"为什么得到这个卦"） */
+export interface CastingEvidence {
+  source: 'time' | 'random' | 'dice' | 'coins' | 'text' | 'omen'
+  ruleVersion: string
+  raw: unknown
+  normalized: Record<string, unknown>
+  explanation: string
+}
+
+/** 六源合参 payload（固定字段序序列化） */
+export interface SixSourcePayload {
+  version: 'six_source_hybrid_v1'
+  exactTime: string
+  secondOfHour: number
+  randomNumber: number
+  dice: { d8: number; d6: number }
+  omen: { kind: 'color' | 'symbol'; value: string; trigramNumber: number }
+  text: { normalized: string; graphemeCount: number }
+  coin: { coins: [2 | 3, 2 | 3, 2 | 3]; sum: 6 | 7 | 8 | 9 }
+}
 
 export type Gender = 'male' | 'female' | 'unspecified'
 

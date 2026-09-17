@@ -42,10 +42,25 @@
     <div class="card">
       <h2>起卦信息</h2>
       <div class="muted">
+        起卦时刻：{{ castTimeText }}<br/>
         {{ rec.calendar.lunarDate }}　{{ rec.calendar.yearGanzhi }}年 {{ rec.calendar.monthGanzhi }}月
         {{ rec.calendar.dayGanzhi }}日 {{ rec.calendar.hourGanzhi }}时<br/>
         节气：{{ rec.calendar.solarTerm }}　月建：{{ rec.calendar.monthBranch }}　旬空：{{ rec.calendar.xunKong.join('、') }}<br/>
+        起卦规则：{{ rec.castingRuleVersion || rec.ruleVersion }}<br/>
         规则版本：{{ rec.ruleVersion }} / 数据集：{{ rec.datasetVersion }}
+      </div>
+    </div>
+
+    <div class="card" v-if="rec.castingEvidence && rec.castingEvidence.length">
+      <h2>起卦依据</h2>
+      <div v-for="(ev, i) in rec.castingEvidence" :key="i" style="font-size:14px">
+        <div class="muted">{{ sourceName(ev.source) }} · {{ ev.ruleVersion }}</div>
+        <div style="white-space:pre-wrap">{{ ev.explanation }}</div>
+        <details v-if="rec.sixSource" style="margin-top:6px">
+          <summary>六源合参 canonical / hash</summary>
+          <div class="muted" style="word-break:break-all;font-size:12px">{{ rec.sixSource.canonical }}</div>
+          <div class="muted">H1={{ rec.sixSource.h1 }} H2={{ rec.sixSource.h2 }} H3={{ rec.sixSource.h3 }}</div>
+        </details>
       </div>
     </div>
 
@@ -109,6 +124,13 @@ const rec = computed(() => store.lastResult)
 
 const judgment = computed(() => rec.value?.meihua?.ben.judgmentClassic || rec.value?.liuyao?.hexagram.judgmentClassic || '')
 const keywords = computed(() => (rec.value?.meihua?.ben || rec.value?.liuyao?.hexagram)?.editorialKeywords.join('、') || '')
+const castTimeText = computed(() => {
+  if (!rec.value) return ''
+  return new Date(rec.value.input.castTime).toLocaleString('zh-CN', { hour12: false })
+})
+function sourceName(s: string) {
+  return { time: '时间', random: '随机数', dice: '骰子', coins: '三枚钱', text: '文字', omen: '外应' }[s] || s
+}
 
 function labelClass(l: string) {
   return l === '大吉' || l === '吉' ? 'label-good' : l === '大凶' || l === '凶' ? 'label-bad' : 'label-flat'
