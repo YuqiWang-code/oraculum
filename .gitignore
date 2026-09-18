@@ -34,3 +34,7 @@ _backup_before_build/
 
 # server build output
 dist-server/
+
+test-output*.txt
+build-log.txt
+test-results.json

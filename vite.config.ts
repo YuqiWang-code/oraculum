@@ -36,6 +36,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        minForks: 1,
+        maxForks: 2
+      }
+    },
     include: ['tests/**/*.test.ts']
   }
 })
