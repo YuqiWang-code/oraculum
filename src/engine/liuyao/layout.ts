@@ -12,6 +12,7 @@ import type { TrigramName } from '../../types'
 
 export interface LiuYaoResult {
   hexagram: HexagramData
+  changedHexagram?: HexagramData
   palace: HexagramData['palace']
   palaceElement: string
   shiLine: number
@@ -73,8 +74,13 @@ export function buildLiuyao(lines: YinYang[], movingMask: boolean[], cal: Calend
   const lineBranches = withHidden.map((l) => l.branch)
   const shensha = computeShensha(cal.dayBranch, cal.dayStem, lineBranches)
 
+  // v3.4: 完整变卦（翻转全部动爻）
+  const changedLines = lines.map((l, i) => movingMask[i] ? (l === 1 ? 0 : 1) : l) as HexagramData['lines']
+  const changedHexagram = hexagramFromLines(changedLines)
+
   return {
     hexagram: hex,
+    changedHexagram,
     palace: hex.palace,
     palaceElement: palaceEl,
     shiLine: hex.shiLine,

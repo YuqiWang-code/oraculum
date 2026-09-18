@@ -100,5 +100,18 @@ export function selectLiuyaoClassicEvidence(r: LiuYaoResult): ClassicEvidence[] 
     }
   }
 
+  // v3.4: 变卦卦辞（来自 changedHexagram）
+  if (r.changedHexagram && r.changedHexagram.judgmentClassic) {
+    out.push({
+      id: 'ZHOUYI_BIAN_JUDGMENT',
+      type: 'judgment',
+      hexagramKingWen: r.changedHexagram.kingWen,
+      hexagramName: r.changedHexagram.name,
+      lineIndex: 0,
+      original: r.changedHexagram.judgmentClassic,
+      source: '维基文库《周易》'
+    })
+  }
+
   return out
 }

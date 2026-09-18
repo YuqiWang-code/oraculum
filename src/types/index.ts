@@ -78,6 +78,11 @@ export type Gender = 'male' | 'female' | 'unspecified'
 /** 五档标签 */
 export type RatingLabel = '大凶' | '凶' | '平' | '吉' | '大吉'
 
+/** 评分分类 bucket（v3.4） */
+export type RatingBucket =
+  | 'usefulGod' | 'sourceTaboo' | 'shiYing' | 'monthDay'
+  | 'movement' | 'conflictHarmony' | 'classicTheme' | 'auxiliary'
+
 /** 评分证据项 */
 export interface ScoreEvidence {
   id: string
@@ -85,6 +90,7 @@ export interface ScoreEvidence {
   delta: number
   reason: string
   sourceRule: string
+  bucket?: RatingBucket
 }
 
 /** 评分分类明细（v3.2） */
