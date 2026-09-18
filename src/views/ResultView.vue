@@ -6,12 +6,14 @@
       <span :class="labelClass(rec.rating.label)" style="float:right">{{ rec.rating.label }} {{ rec.rating.score }}</span>
     </h1>
 
+    <!-- 1. 本次所问 -->
     <div class="card">
       <h2>本次所问</h2>
       <div>{{ rec.input.question }}</div>
       <div class="muted">类别：{{ rec.input.category }}　{{ rec.input.querentAlias || '未署名' }}</div>
     </div>
 
+    <!-- 2. 卦象 -->
     <div class="card" v-if="rec.meihua">
       <h2>卦象</h2>
       <div style="display:flex;gap:16px">
@@ -32,25 +34,141 @@
     <div class="card" v-if="rec.liuyao">
       <h2>六爻排盘</h2>
       <div v-for="l in rec.liuyao.lines" :key="l.index" style="display:flex;justify-content:space-between;font-size:14px;padding:3px 0;border-bottom:1px dashed var(--line)">
-        <span>{{ l.index }}爻 {{ l.yinYang ? '阳' : '阴' }}{{ l.moving ? '○动' : '' }}</span>
+        <span>{{ l.index }}爻 {{ l.yinYang ? '阳' : '阴' }}{{ l.moving ? ' ○动' : '' }}</span>
         <span>{{ l.sixSpirit }} {{ l.branch }}{{ l.branchElement }} {{ l.sixRelation }}{{ l.isShi ? ' 世' : '' }}{{ l.isYing ? ' 应' : '' }}</span>
       </div>
-      <div class="muted" v-if="rec.usefulGodReason">{{ rec.usefulGodReason }}</div>
       <div class="muted" v-if="rec.liuyao.shensha.length">神煞：{{ rec.liuyao.shensha.map(s=>`${s.name}${s.branch}`).join('、') }}</div>
     </div>
 
+    <!-- 3. 核心解读 -->
+    <template v-if="detailed">
+      <div class="card" style="border-color:var(--accent)">
+        <h2>核心解读</h2>
+        <p class="muted" style="margin:0">{{ detailed.overview }}</p>
+      </div>
+
+      <!-- 本卦 -->
+      <div class="card">
+        <h2>{{ detailed.base.title }}</h2>
+        <div v-for="ct in detailed.base.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div class="muted">{{ ct.label }}</div>
+          <div style="white-space:pre-wrap">{{ ct.text }}</div>
+          <div class="muted" style="font-size:11px">{{ ct.source }}</div>
+        </div>
+        <div style="margin-top:8px"><b>白话：</b>{{ detailed.base.plainExplanation }}</div>
+        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.base.roleExplanation }}</div>
+      </div>
+
+      <!-- 动爻 -->
+      <div class="card" v-for="(ml, i) in detailed.movingLines" :key="'ml'+i">
+        <h2>{{ ml.title }}</h2>
+        <div v-for="ct in ml.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div class="muted">{{ ct.label }}</div>
+          <div style="white-space:pre-wrap">{{ ct.text }}</div>
+          <div class="muted" style="font-size:11px">{{ ct.source }}</div>
+        </div>
+        <div style="margin-top:8px"><b>白话：</b>{{ ml.plainExplanation }}</div>
+        <div style="margin-top:4px"><b>本次角色：</b>{{ ml.roleExplanation }}</div>
+      </div>
+
+      <!-- 互卦（梅花用） -->
+      <div class="card" v-if="detailed.mutual">
+        <h2>{{ detailed.mutual.title }}</h2>
+        <div v-for="ct in detailed.mutual.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div class="muted">{{ ct.label }}</div>
+          <div style="white-space:pre-wrap">{{ ct.text }}</div>
+          <div class="muted" style="font-size:11px">{{ ct.source }}</div>
+        </div>
+        <div style="margin-top:8px"><b>白话：</b>{{ detailed.mutual.plainExplanation }}</div>
+        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.mutual.roleExplanation }}</div>
+      </div>
+
+      <!-- 变卦 -->
+      <div class="card" v-if="detailed.changed">
+        <h2>{{ detailed.changed.title }}</h2>
+        <div v-for="ct in detailed.changed.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div class="muted">{{ ct.label }}</div>
+          <div style="white-space:pre-wrap">{{ ct.text }}</div>
+          <div class="muted" style="font-size:11px">{{ ct.source }}</div>
+        </div>
+        <div style="margin-top:8px"><b>白话：</b>{{ detailed.changed.plainExplanation }}</div>
+        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.changed.roleExplanation }}</div>
+      </div>
+
+      <!-- 体用（梅花用） -->
+      <div class="card" v-if="detailed.bodyUse">
+        <h2>{{ detailed.bodyUse.title }}</h2>
+        <div v-for="ct in detailed.bodyUse.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div class="muted">{{ ct.label }}</div>
+          <div style="white-space:pre-wrap">{{ ct.text }}</div>
+          <div class="muted" style="font-size:11px">{{ ct.source }}</div>
+        </div>
+        <div style="margin-top:8px"><b>白话：</b>{{ detailed.bodyUse.plainExplanation }}</div>
+        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.bodyUse.roleExplanation }}</div>
+      </div>
+
+      <!-- 综合解读 -->
+      <div class="card" style="border-color:var(--accent)">
+        <h2>综合解读</h2>
+        <p style="white-space:pre-wrap;margin:0">{{ detailed.synthesis }}</p>
+      </div>
+
+      <!-- 有利信号 -->
+      <div class="card" v-if="detailed.favorable.length">
+        <h2>有利信号</h2>
+        <div v-for="(f,i) in detailed.favorable" :key="'fav'+i" class="label-good" style="margin:4px 0">+ {{ f }}</div>
+      </div>
+
+      <!-- 制约信号 -->
+      <div class="card" v-if="detailed.constraints.length">
+        <h2>制约信号</h2>
+        <div v-for="(c,i) in detailed.constraints" :key="'con'+i" class="label-bad" style="margin:4px 0">− {{ c }}</div>
+      </div>
+    </template>
+
+    <!-- 4. 传统评分 -->
     <div class="card">
-      <h2>起卦信息</h2>
-      <div class="muted">
-        起卦时刻：{{ castTimeText }}<br/>
-        {{ rec.calendar.lunarDate }}　{{ rec.calendar.yearGanzhi }}年 {{ rec.calendar.monthGanzhi }}月
-        {{ rec.calendar.dayGanzhi }}日 {{ rec.calendar.hourGanzhi }}时<br/>
-        节气：{{ rec.calendar.solarTerm }}　月建：{{ rec.calendar.monthBranch }}　旬空：{{ rec.calendar.xunKong.join('、') }}<br/>
-        起卦规则：{{ rec.castingRuleVersion || rec.ruleVersion }}<br/>
-        规则版本：{{ rec.ruleVersion }} / 数据集：{{ rec.datasetVersion }}
+      <h2>传统评分（{{ rec.rating.score }} 分 · 一致性 {{ Math.round(rec.rating.consistency*100) }}%）</h2>
+      <div class="muted" style="margin-bottom:8px">标签：{{ rec.rating.label }}　有利{{ rec.rating.favorableCount }}条 / 制约{{ rec.rating.constraintCount }}条</div>
+      <details>
+        <summary>查看评分依据</summary>
+        <div v-for="e in rec.rating.evidence" :key="e.id" style="font-size:13px;margin:6px 0">
+          <span :class="e.delta>=0?'label-good':'label-bad'">{{ e.delta>0?'+':'' }}{{ e.delta }}</span>
+          {{ e.title }} — {{ e.reason }}
+          <div class="muted">规则：{{ e.sourceRule }}<span v-if="e.bucket">　分类：{{ bucketLabel(e.bucket) }}</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 5. 六爻规则状态（仅六爻） -->
+    <div class="card" v-if="rec.liuyao">
+      <h2>六爻规则状态</h2>
+      <div v-if="detailed?.usefulGodReason" style="margin-bottom:6px">{{ detailed.usefulGodReason }}</div>
+      <div v-if="rec.liuyao" class="muted" style="margin-bottom:6px">
+        本宫：{{ rec.liuyao.palace }}宫（{{ rec.liuyao.palaceElement }}）　世爻第{{ rec.liuyao.shiLine }}爻　应爻第{{ rec.liuyao.yingLine }}爻
+      </div>
+      <details v-if="breakdownEntries.length">
+        <summary>查看评分分类明细</summary>
+        <div v-for="e in breakdownEntries" :key="e.key" style="font-size:13px;margin:4px 0">
+          <span :class="e.value > 0 ? 'label-good' : 'label-bad'">
+            {{ e.value > 0 ? '+' : '' }}{{ e.value }}
+          </span>
+          {{ e.label }}
+        </div>
+      </details>
+    </div>
+
+    <!-- 6. 经典证据 -->
+    <div class="card" v-if="rec.classicEvidence && rec.classicEvidence.length">
+      <h2>经典证据</h2>
+      <div v-for="ev in rec.classicEvidence" :key="ev.id" style="margin:6px 0;font-size:14px">
+        <div class="muted">{{ ev.hexagramName }}{{ ev.lineIndex > 0 ? ` · 第${ev.lineIndex}爻` : ' · 卦辞' }}</div>
+        <div style="white-space:pre-wrap">{{ ev.original }}</div>
+        <div class="muted" style="font-size:11px">{{ ev.source }}</div>
       </div>
     </div>
 
+    <!-- 7. 起卦依据 -->
     <div class="card" v-if="rec.castingEvidence && rec.castingEvidence.length">
       <h2>起卦依据</h2>
       <div v-for="(ev, i) in rec.castingEvidence" :key="i" style="font-size:14px">
@@ -64,53 +182,30 @@
       </div>
     </div>
 
+    <!-- 起卦信息（历法元数据） -->
     <div class="card">
-      <h2>经典卦辞</h2>
-      <div v-if="judgment" style="white-space:pre-wrap">{{ judgment }}</div>
-      <div class="muted">经典原文待联网逐字核验（见 docs/DATA_SOURCES.md）。主题关键词：{{ keywords }}</div>
+      <h2>起卦信息</h2>
+      <div class="muted">
+        起卦时刻：{{ castTimeText }}<br/>
+        {{ rec.calendar.lunarDate }}　{{ rec.calendar.yearGanzhi }}年 {{ rec.calendar.monthGanzhi }}月
+        {{ rec.calendar.dayGanzhi }}日 {{ rec.calendar.hourGanzhi }}时<br/>
+        节气：{{ rec.calendar.solarTerm }}　月建：{{ rec.calendar.monthBranch }}　旬空：{{ rec.calendar.xunKong.join('、') }}<br/>
+        起卦规则：{{ rec.castingRuleVersion || rec.ruleVersion }}<br/>
+        规则版本：{{ rec.ruleVersion }} / 数据集：{{ rec.datasetVersion }}
+      </div>
     </div>
 
-    <div class="card">
-      <h2>核心解读</h2>
-      <p>{{ rec.interpretation.summary }}</p>
-      <p>{{ rec.interpretation.trend }}</p>
-    </div>
-
-    <div class="card">
-      <h2>有利因素</h2>
-      <div v-for="(f,i) in rec.interpretation.favorable" :key="i" class="label-good">+ {{ f }}</div>
-    </div>
-
-    <div class="card">
-      <h2>制约因素</h2>
-      <div v-for="(f,i) in rec.interpretation.constraints" :key="i" class="label-bad">− {{ f || '（无明显制约）' }}</div>
-      <div v-if="!rec.interpretation.constraints.length" class="muted">无明显制约。</div>
-    </div>
-
-    <div class="card">
+    <!-- 8. 现实行动提示 -->
+    <div class="card" v-if="detailed && detailed.actionTips.length">
       <h2>现实行动提示</h2>
-      <div v-for="(t,i) in rec.interpretation.actionTips" :key="i">· {{ t }}</div>
-    </div>
-
-    <div class="card">
-      <h2>评分明细（{{ rec.rating.score }} 分 · 一致性 {{ Math.round(rec.rating.consistency*100) }}%）</h2>
-      <details>
-        <summary>查看评分依据</summary>
-        <div v-for="e in rec.rating.evidence" :key="e.id" style="font-size:13px;margin:6px 0">
-          <span :class="e.delta>=0?'label-good':'label-bad'">{{ e.delta>0?'+':'' }}{{ e.delta }}</span>
-          {{ e.title }} — {{ e.reason }}
-          <div class="muted">规则：{{ e.sourceRule }}</div>
-        </div>
-      </details>
+      <div v-for="(t,i) in detailed.actionTips" :key="'tip'+i" style="margin:4px 0">· {{ t }}</div>
     </div>
 
     <button class="btn" @click="copyText">复制文字结果</button>
     <button class="btn secondary" @click="$router.push('/')">返回首页</button>
 
-    <AiInterpretationCard :record="rec" />
-
     <div class="card muted">
-      免责声明：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。
+      免责声明：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。所有解读均来自本地经典数据与确定性规则引擎，不调用大模型。
     </div>
   </div>
   <div v-else class="card muted">尚无结果，请先去问卦。</div>
@@ -120,17 +215,72 @@
 import { computed } from 'vue'
 import { useAppStore } from '../stores/app'
 import HexagramDiagram from '../components/hexagram/HexagramDiagram.vue'
-import AiInterpretationCard from '../components/ai/AiInterpretationCard.vue'
+import { composeMeihuaInterpretation } from '../engine/localInterpretation/composeMeihuaInterpretation'
+import { composeLiuyaoInterpretation } from '../engine/localInterpretation/composeLiuyaoInterpretation'
+import type { LocalDetailedInterpretation } from '../engine/localInterpretation/types'
+import type { RatingBucket } from '../types'
 
 const store = useAppStore()
 const rec = computed(() => store.lastResult)
 
-const judgment = computed(() => rec.value?.meihua?.ben.judgmentClassic || rec.value?.liuyao?.hexagram.judgmentClassic || '')
-const keywords = computed(() => (rec.value?.meihua?.ben || rec.value?.liuyao?.hexagram)?.editorialKeywords.join('、') || '')
+/** 本地确定性解读——根据梅花/六爻分支调用对应组合器 */
+const detailed = computed<LocalDetailedInterpretation | undefined>(() => {
+  const r = rec.value
+  if (!r) return undefined
+  if (r.meihua) {
+    return composeMeihuaInterpretation(r.meihua, r.rating, r.input.category)
+  }
+  if (r.liuyao) {
+    return composeLiuyaoInterpretation(r.liuyao, r.rating, r.input.category)
+  }
+  return undefined
+})
+
+/** RatingBucket 中文名 */
+const BUCKET_LABELS: Record<RatingBucket, string> = {
+  usefulGod: '用神旺衰',
+  sourceTaboo: '来源禁忌',
+  shiYing: '世应关系',
+  monthDay: '月建日辰',
+  movement: '动爻变化',
+  conflictHarmony: '冲合关系',
+  classicTheme: '卦象主题',
+  auxiliary: '辅助神煞'
+}
+
+function bucketLabel(b: RatingBucket): string {
+  return BUCKET_LABELS[b] || b
+}
+
+/** RatingBreakdown 分类名映射 */
+const BREAKDOWN_LABEL_MAP: Record<string, string> = {
+  usefulGod: '用神旺衰',
+  shiYing: '世应关系',
+  monthDay: '月建日辰',
+  movement: '动爻变化',
+  conflictHarmony: '冲合关系',
+  classicTheme: '卦象主题',
+  auxiliary: '辅助神煞'
+}
+
+/** RatingBreakdown 明细条目（过滤掉 0 值） */
+const breakdownEntries = computed(() => {
+  const bd = rec.value?.rating.breakdown
+  if (!bd) return [] as { key: string; value: number; label: string }[]
+  return Object.entries(bd)
+    .filter(([, v]) => v !== 0)
+    .map(([k, v]) => ({
+      key: k,
+      value: v,
+      label: BREAKDOWN_LABEL_MAP[k] || k
+    }))
+})
+
 const castTimeText = computed(() => {
   if (!rec.value) return ''
   return new Date(rec.value.input.castTime).toLocaleString('zh-CN', { hour12: false })
 })
+
 function sourceName(s: string) {
   return { time: '时间', random: '随机数', dice: '骰子', coins: '三枚钱', text: '文字', omen: '外应' }[s] || s
 }
@@ -142,15 +292,21 @@ function labelClass(l: string) {
 function copyText() {
   if (!rec.value) return
   const r = rec.value
+  const d = detailed.value
   const txt = [
     `【智能推理与预测】`,
     `所问：${r.input.question}（${r.input.category}）`,
     `卦：${r.meihua?.ben.name ?? r.liuyao?.hexagram.name}　评分：${r.rating.score}（${r.rating.label}）`,
     `历法：${r.calendar.lunarDate} ${r.calendar.dayGanzhi}日`,
-    `解读：${r.interpretation.summary}`,
-    `有利：${r.interpretation.favorable.join('；')}`,
-    `制约：${r.interpretation.constraints.join('；')}`,
-    '免责：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。'
+    '',
+    d ? `【核心解读】\n${d.overview}\n\n${d.base.title}\n${d.base.plainExplanation}\n` : '',
+    d?.mutual ? `互卦：${d.mutual.title}\n${d.mutual.plainExplanation}\n` : '',
+    d?.changed ? `变卦：${d.changed.title}\n${d.changed.plainExplanation}\n` : '',
+    d ? `\n【综合】\n${d.synthesis}\n` : '',
+    d && d.favorable.length ? `\n有利：${d.favorable.join('；')}` : '',
+    d && d.constraints.length ? `\n制约：${d.constraints.join('；')}` : '',
+    d && d.actionTips.length ? `\n提示：${d.actionTips.join('；')}` : '',
+    '\n免责：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。'
   ].join('\n')
   navigator.clipboard.writeText(txt).then(() => alert('已复制'))
 }

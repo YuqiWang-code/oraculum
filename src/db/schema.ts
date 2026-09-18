@@ -1,5 +1,4 @@
 import type { DivinationRecord } from '../engine/orchestrator'
-import type { AiInterpretation, AiChatMessage } from '../types/ai'
 import type { DayBoundaryRule } from '../types'
 
 export interface HistoryRecord extends DivinationRecord {
@@ -16,17 +15,4 @@ export interface Settings {
   useShenshaInScore: boolean
   showLunarDetail: boolean
   dayBoundaryRule: DayBoundaryRule
-  aiEnabled?: boolean
-}
-
-export interface AiSession {
-  id: string
-  recordId: string
-  createdAt: string
-  updatedAt: string
-  model: string
-  promptVersion: 'oraculum_ai_v1'
-  response: AiInterpretation
-  messages: AiChatMessage[]
-  usage?: { input_tokens?: number; output_tokens?: number }
 }

@@ -1,0 +1,1044 @@
+/**
+ * 六十四卦 Oraculum 现代释义 — 第二部分（卦 33-52, 54-64）
+ * 本文件由开发阶段逐条整理，运行时只读查表，不生成。
+ * 所有现代释义均标注「Oraculum 现代释义」，不冒充古籍。
+ * 古籍原文来源：维基文库《周易》（zh.wikisource.org）。
+ */
+
+import type { LocalHexagramKnowledge } from '../types'
+
+// 维基文库《周易》单卦页面 URL
+const WS = (name: string) =>
+  `https://zh.wikisource.org/wiki/周易/${name}`
+
+// 本项目统一 sourceRefs 格式
+const SR = (_name: string): string[] => [
+  'https://zh.wikisource.org/wiki/周易',
+  WS(_name)
+]
+
+// ============================================================
+// 第 33 卦：遁
+// ============================================================
+const DUN: LocalHexagramKnowledge = {
+  kingWen: 33, name: '遁',
+  classic: {
+    judgment: '亨。小利貞。',
+    tuan: '遯亨，遯而亨也。剛當位而應，與時行也。小利貞，浸而長也。遯之時義大矣哉！',
+    daXiang: '天下有山，遯；君子以遠小人，不惡而嚴。',
+    sourceRefs: SR('遁')
+  },
+  localMeaning: {
+    plainJudgment: '遁：亨通，小利有所往。',
+    plainTuan: '《彖传》说：遁而亨通，是因为退避而得亨。刚健居上位，与下相得。虽然小利有所往，但已经到了该退的时候。遁之时义大矣哉。',
+    plainDaXiang: '《大象传》说：天下有山，遁。君子以远小人，不恶而严。',
+    coreMeaning: '遁代表退避、隐退、避让。核心：不是逃避责任，而是在不利时机明智退守。远小人不恶而严——不恶声相向，但态度严肃。',
+    keyThemes: ['退避隐遁', '明智退守', '远小人', '待时而动'],
+    asBaseHexagram: '当前主旨偏向退避退守、暂避锋芒。时机不利时应主动退让。',
+    asMutualHexagram: '互卦表示中段处于退避收敛、不宜强进的阶段。',
+    asChangedHexagram: '变卦表示后段趋向退避隐退、收敛保全。',
+    cautions: ['退避不是逃避是时机判断', '远小人不恶而严', '退中仍需保持原则']
+  },
+  lines: [
+    { index: 1, classicText: '初六：遯尾，厲，勿用有攸往。', xiaoXiang: '遯尾之厲，不往何災也。', plainText: '初六：遁尾，厉，勿用有攸往。', plainXiaoXiang: '《象传》：遁尾之厉，不往何灾。', coreMeaning: '退避落在最后，有危，不可前往。', favorableMeaning: '落后则危，暂守勿动。' },
+    { index: 2, classicText: '六二：執之用黃牛之革，莫之勝說。', xiaoXiang: '執用黃牛，固志也。', plainText: '六二：执之用黄牛之革，莫之胜说。', plainXiaoXiang: '《象传》：执用黄牛，固志。', coreMeaning: '用黄牛皮绳绑住，无法解脱。', favorableMeaning: '心志坚定如皮革，不可移。' },
+    { index: 3, classicText: '九三：系遯，有疾厲，畜臣妾吉。', xiaoXiang: '系遯之厲，有疾憊也。畜臣妾吉，不可大事也。', plainText: '九三：系遁，有疾厉，畜臣妾吉。', plainXiaoXiang: '《象传》：系遁之厉，有疾惫。畜臣妾吉，不可大事。', coreMeaning: '心有系累而退，有疾危。蓄养臣妾则吉，不可大事。', cautionMeaning: '心有牵挂则退不彻底。' },
+    { index: 4, classicText: '九四：好遯君子吉，小人否。', xiaoXiang: '君子好遯，小人否也。', plainText: '九四：好遁，君子吉，小人否。', plainXiaoXiang: '《象传》：君子好遁，小人否。', coreMeaning: '有所好而能退，君子吉，小人做不到。', favorableMeaning: '割舍所好而退，君子之吉。' },
+    { index: 5, classicText: '九五：嘉遯，貞吉。', xiaoXiang: '嘉遯貞吉，以正志也。', plainText: '九五：嘉遁，贞吉。', plainXiaoXiang: '《象传》：嘉遁贞吉，以正志。', coreMeaning: '嘉美而退，守正吉。', favorableMeaning: '进退从容，守正则吉。' },
+    { index: 6, classicText: '上九：肥遯，无不利。', xiaoXiang: '肥遯，无不利；无所疑也。', plainText: '上九：肥遁，无不利。', plainXiaoXiang: '《象传》：肥遁无不利，无所疑。', coreMeaning: '宽裕从容地退避，无不利。', favorableMeaning: '超然物外，无挂无碍。' }
+  ]
+}
+
+
+// ============================================================
+// 第 34 卦：大壮
+// ============================================================
+const DAZHUANG: LocalHexagramKnowledge = {
+  kingWen: 34, name: '大壮',
+  classic: {
+    judgment: '利貞。',
+    tuan: '大壯，大者壯也。剛以動，故壯。大壯利貞；大者正也。正大而天地之情可見矣！',
+    daXiang: '雷在天上，大壯；君子以非禮弗履。',
+    sourceRefs: SR('大壮')
+  },
+  localMeaning: {
+    plainJudgment: '大壮：利贞。',
+    plainTuan: '《彖传》说：大壮，大者壮也。刚以动，故壮。大壮利贞，大者正也。正大而天地之情可见。',
+    plainDaXiang: '《大象传》说：雷在天上，大壮。君子以非礼弗履。',
+    coreMeaning: '大壮代表大为壮盛、刚强有力。核心：壮必须正——非礼弗履。力量强大时最需要守正，不可恃强妄动。',
+    keyThemes: ['大为壮盛', '刚正不阿', '非礼弗履', '守正用壮'],
+    asBaseHexagram: '当前主旨处于力量壮盛、阳气强盛的阶段。有实力但必须守正。',
+    asMutualHexagram: '互卦表示中段处于壮盛有力、可以行动的阶段。',
+    asChangedHexagram: '变卦表示后段趋向大壮强盛、力量充足。',
+    cautions: ['壮盛时最需守正', '非礼弗履不可逞强', '刚以动须刚正']
+  },
+  lines: [
+    { index: 1, classicText: '初九：壯于趾，征凶，有孚。', xiaoXiang: '壯于趾，其孚窮也。', plainText: '初九：壮于趾，征凶，有孚。', plainXiaoXiang: '《象传》：壮于趾，其孚穷。', coreMeaning: '壮在脚趾上，急于前进则凶。', favorableMeaning: '刚壮在下易冲动，征凶。' },
+    { index: 2, classicText: '九二：貞吉。', xiaoXiang: '九二貞吉，以中也。', plainText: '九二：贞吉。', plainXiaoXiang: '《象传》：九二贞吉，以中。', coreMeaning: '守正则吉。', favorableMeaning: '居中守正，吉。' },
+    { index: 3, classicText: '九三：小人用壯，君子用罔，貞厲。羝羊觸藩，羸其角。', xiaoXiang: '小人用壯，君子罔也。', plainText: '九三：小人用壮，君子用罔，贞厉。羝羊触藩，羸其角。', plainXiaoXiang: '《象传》：小人用壮，君子罔。', coreMeaning: '小人逞强力，君子不用。公羊触篱，角被缠住。', cautionMeaning: '恃强妄动则困。' },
+    { index: 4, classicText: '九四：貞吉悔亡，藩決不羸，壯于大輿之輹。', xiaoXiang: '藩決不羸，尚往也。', plainText: '九四：贞吉悔亡，藩决不羸，壮于大舆之輹。', plainXiaoXiang: '《象传》：藩决不羸，尚往。', coreMeaning: '守正吉悔亡，藩篱决开不再缠角，大车輹壮。', favorableMeaning: '障碍已除，可往。' },
+    { index: 5, classicText: '六五：喪羊于易，无悔。', xiaoXiang: '喪羊于易，位不當也。', plainText: '六五：丧羊于易，无悔。', plainXiaoXiang: '《象传》：丧羊于易，位不当。', coreMeaning: '在田畔丢失了羊，无悔。', favorableMeaning: '壮气渐消，无悔。' },
+    { index: 6, classicText: '上六：羝羊觸藩，不能退，不能遂，无攸利，艱則吉。', xiaoXiang: '不能退，不能遂，不詳也。艱則吉，咎不長也。', plainText: '上六：羝羊触藩，不能退，不能遂，无攸利，艰则吉。', plainXiaoXiang: '《象传》：不能退不能遂，不详。艰则吉，咎不长。', coreMeaning: '公羊触篱，退不得进不得，无利。艰守则吉。', cautionMeaning: '进退两难时艰守则吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 35 卦：晋
+// ============================================================
+const JIN: LocalHexagramKnowledge = {
+  kingWen: 35, name: '晋',
+  classic: {
+    judgment: '康侯用錫馬蕃庶，晝日三接。',
+    tuan: '晉，進也。明出地上，順而麗乎大明，柔進而上行。是以康侯用錫馬蕃庶，晝日三接也。',
+    daXiang: '明出地上，晉；君子以自昭明德。',
+    sourceRefs: SR('晋')
+  },
+  localMeaning: {
+    plainJudgment: '晋：康侯用锡马蕃庶，昼日三接。',
+    plainTuan: '《彖传》说：晋，进也。明出地上，顺而丽乎大明，柔进而上行。是以康侯用锡马蕃庶，昼日三接。',
+    plainDaXiang: '《大象传》说：明出地上，晋。君子以自昭明德。',
+    coreMeaning: '晋代表晋升、前进、光明渐出。核心：明出地上——太阳升起，柔顺依附于光明。自昭明德——自己彰显光明之德。',
+    keyThemes: ['晋升前进', '明德自昭', '顺丽大明', '日出地上'],
+    asBaseHexagram: '当前主旨偏向晋升发展、光明渐显。宜依附贤明、积极上进。',
+    asMutualHexagram: '互卦表示中段处于稳步晋升、逐步上升的阶段。',
+    asChangedHexagram: '变卦表示后段趋向晋升发展、光明来临。',
+    cautions: ['晋升须依附明德', '自昭明德而非自夸', '柔进而上行']
+  },
+  lines: [
+    { index: 1, classicText: '初六：晉如，摧如，貞吉。罔孚，裕无咎。', xiaoXiang: '晉如，摧如；獨行正也。裕无咎；未受命也。', plainText: '初六：晋如，摧如，贞吉。罔孚，裕无咎。', plainXiaoXiang: '《象传》：晋如摧如，独行正。裕无咎，未受命。', coreMeaning: '前进之初遇挫折，守正吉。未被信任，宽裕以待无咎。', favorableMeaning: '初进受挫，从容待时。' },
+    { index: 2, classicText: '六二：晉如，愁如，貞吉。受茲介福，于其王母。', xiaoXiang: '受茲介福，以中正也。', plainText: '六二：晋如，愁如，贞吉。受兹介福，于其王母。', plainXiaoXiang: '《象传》：六二之吉，以中正。', coreMeaning: '前进中忧愁，守正吉。从王母受大福。', favorableMeaning: '中正守道，终将受福。' },
+    { index: 3, classicText: '六三：眾允，悔亡。', xiaoXiang: '眾允之志，上行也。', plainText: '六三：众允，悔亡。', plainXiaoXiang: '《象传》：众允之志，上行。', coreMeaning: '众人信任允从，悔亡。', favorableMeaning: '得众人心，悔亡。' },
+    { index: 4, classicText: '九四：晉如鼫鼠，貞厲。', xiaoXiang: '鼫鼠貞厲，位不當也。', plainText: '九四：晋如鼫鼠，贞厉。', plainXiaoXiang: '《象传》：鼫鼠贞厉，位不当。', coreMeaning: '前进像硕鼠贪而畏人，贞厉。', cautionMeaning: '贪而畏人位不当。' },
+    { index: 5, classicText: '六五：悔亡，失得勿恤，往吉无不利。', xiaoXiang: '失得勿恤，往有慶也。', plainText: '六五：悔亡，失得勿恤，往吉无不利。', plainXiaoXiang: '《象传》：失得勿恤，往有庆。', coreMeaning: '悔亡，不必计较得失，前往吉无不利。', favorableMeaning: '不计得失，往吉。' },
+    { index: 6, classicText: '上九：晉其角，維用伐邑，厲吉无咎，貞吝。', xiaoXiang: '維用伐邑，道未光也。', plainText: '上九：晋其角，维用伐邑，厉吉无咎，贞吝。', plainXiaoXiang: '《象传》：维用伐邑，道未光。', coreMeaning: '前进到角尖，用于征伐邑国，厉吉无咎，贞吝。', favorableMeaning: '进至极处仅可小用。' }
+  ]
+}
+
+
+// ============================================================
+// 第 36 卦：明夷
+// ============================================================
+const MINGYI: LocalHexagramKnowledge = {
+  kingWen: 36, name: '明夷',
+  classic: {
+    judgment: '利艱貞。',
+    tuan: '明入地中，明夷。內文明而外柔順，以蒙大難，文王以之。利艱貞，晦其明也，內難而能正其志，箕子以之。',
+    daXiang: '明入地中，明夷；君子以蒞眾，用晦而明。',
+    sourceRefs: SR('明夷')
+  },
+  localMeaning: {
+    plainJudgment: '明夷：利艰贞。',
+    plainTuan: '《彖传》说：明夷，明入地中。内文明而外柔顺，以蒙大难，文王以之。利艰贞，晦其明也。内难而能正其志，箕子以之。',
+    plainDaXiang: '《大象传》说：明入地中，明夷。君子以莅众，用晦而明。',
+    coreMeaning: '明夷代表光明受伤、黑暗时期。核心：内文明外柔顺——内心保持光明，外表柔顺蒙难。利艰贞——在艰难中守正。用晦而明——外表晦藏内心明。',
+    keyThemes: ['光明受伤', '内明外柔', '用晦而明', '艰贞守志'],
+    asBaseHexagram: '当前主旨处于光明受损、环境黑暗的时期。内守文明，外示柔顺。',
+    asMutualHexagram: '互卦表示中段处于韬光养晦、隐藏光芒的阶段。',
+    asChangedHexagram: '变卦表示后段趋向明夷受伤、艰难守正。',
+    cautions: ['环境黑暗时用晦而明', '内心光明外表柔顺', '艰贞守志不可屈']
+  },
+  lines: [
+    { index: 1, classicText: '初九：明夷于飛，垂其翼。君子于行，三日不食，有攸往，主人有言。', xiaoXiang: '君子于行，義不食也。', plainText: '初九：明夷于飞，垂其翼。君子于行，三日不食。有攸往，主人有言。', plainXiaoXiang: '《象传》：君子于行，义不食。', coreMeaning: '明夷之时飞鸟垂翼，君子出行三日不食。有往则主人有责言。', favorableMeaning: '遭难远行，不食为义。' },
+    { index: 2, classicText: '六二：明夷，夷于左股，用拯馬壯，吉。', xiaoXiang: '六二之吉，順以則也。', plainText: '六二：明夷，夷于左股，用拯马壮，吉。', plainXiaoXiang: '《象传》：六二之吉，顺以则。', coreMeaning: '明夷伤了左腿，用壮马拯救，吉。', favorableMeaning: '受伤而能救，吉。' },
+    { index: 3, classicText: '九三：明夷于南狩，得其大首，不可疾貞。', xiaoXiang: '南狩之志，乃大得也。', plainText: '九三：明夷于南狩，得其大首，不可疾贞。', plainXiaoXiang: '《象传》：南狩之志，乃大得。', coreMeaning: '明夷时南狩猎获大首，不可操切，守正。', favorableMeaning: '除害有功，不可急躁。' },
+    { index: 4, classicText: '六四：入于左腹，獲明夷之心，于出門庭。', xiaoXiang: '入于左腹，獲心意也。', plainText: '六四：入于左腹，获明夷之心，于出门庭。', plainXiaoXiang: '《象传》：入于左腹，获心意。', coreMeaning: '深入左腹，得知明夷之心，出门离去。', favorableMeaning: '洞悉内情后离去。' },
+    { index: 5, classicText: '六五：箕子之明夷，利貞。', xiaoXiang: '箕子之貞，明不可息也。', plainText: '六五：箕子之明夷，利贞。', plainXiaoXiang: '《象传》：箕子之贞，明不可息。', coreMeaning: '像箕子一样在黑暗中守正，利贞。', favorableMeaning: '内心光明不可熄灭。' },
+    { index: 6, classicText: '上六：不明晦，初登于天，后入于地。', xiaoXiang: '初登于天，照四國也。后入于地，失則也。', plainText: '上六：不明晦，初登于天，后入于地。', plainXiaoXiang: '《象传》：初登于天，照四国。后入于地，失则。', coreMeaning: '最初不明，后晦暗。先升天照四国，后入于地。', cautionMeaning: '由明转暗失其法则。' }
+  ]
+}
+
+
+// ============================================================
+// 第 37 卦：家人
+// ============================================================
+const JIAREN: LocalHexagramKnowledge = {
+  kingWen: 37, name: '家人',
+  classic: {
+    judgment: '利女貞。',
+    tuan: '家人，女正位乎內，男正位乎外，男女正，天地之大義也。家人有嚴君焉，父母之謂也。父父，子子，兄兄，弟弟，夫夫，婦婦，而家道正；正家而天下定矣。',
+    daXiang: '風自火出，家人；君子以言有物，而行有恆。',
+    sourceRefs: SR('家人')
+  },
+  localMeaning: {
+    plainJudgment: '家人：利女贞。',
+    plainTuan: '《彖传》说：家人，女正位乎内，男正位乎外。男女正，天地之大义。家人有严君焉，父母之谓也。父父，子子，兄兄，弟弟，夫夫，妇妇，而家道正。正家而天下定。',
+    plainDaXiang: '《大象传》说：风自火出，家人。君子以言有物而行有恒。',
+    coreMeaning: '家人代表家庭、家道、内部伦理。核心：各正其位——父父子子夫夫妇妇。言有物行有恒——言行有据有恒。',
+    keyThemes: ['家庭伦理', '各正其位', '言有物行有恒', '正家定天下'],
+    asBaseHexagram: '当前主旨偏向内部治理、家庭或团队关系。各正其位则家道正。',
+    asMutualHexagram: '互卦表示中段处于内部和睦、各尽其责的阶段。',
+    asChangedHexagram: '变卦表示后段趋向家庭和睦、内部有序。',
+    cautions: ['各正其位不可越位', '言行有物有恒', '正家而后天下定']
+  },
+  lines: [
+    { index: 1, classicText: '初九：閑有家，悔亡。', xiaoXiang: '閑有家，志未變也。', plainText: '初九：闲有家，悔亡。', plainXiaoXiang: '《象传》：闲有家，志未变。', coreMeaning: '家初立就立规矩，悔亡。', favorableMeaning: '防闲于初，悔亡。' },
+    { index: 2, classicText: '六二：无攸遂，在中饋，貞吉。', xiaoXiang: '六二之吉，順以巽也。', plainText: '六二：无攸遂，在中馈，贞吉。', plainXiaoXiang: '《象传》：六二之吉，顺以巽。', coreMeaning: '不自专，主持中馈，守正吉。', favorableMeaning: '顺中正位，主内则吉。' },
+    { index: 3, classicText: '九三：家人嗃嗃，悔厲吉；婦子嘻嘻，終吝。', xiaoXiang: '家人嗃嗃，未失也；婦子嘻嘻，失家節也。', plainText: '九三：家人嗃嗃，悔厉吉。妇子嘻嘻，终吝。', plainXiaoXiang: '《象传》：家人嗃嗃，未失。妇子嘻嘻，终失家节。', coreMeaning: '家法严厉，虽悔厉终吉。妇子嘻嘻笑乐，终吝。', cautionMeaning: '严家吉，放纵终吝。' },
+    { index: 4, classicText: '六四：富家，大吉。', xiaoXiang: '富家大吉，順在位也。', plainText: '六四：富家，大吉。', plainXiaoXiang: '《象传》：富家大吉，顺在位。', coreMeaning: '使家富足，大吉。', favorableMeaning: '顺理富家，大吉。' },
+    { index: 5, classicText: '九五：王假有家，勿恤。吉。', xiaoXiang: '王假有家，交相愛也。', plainText: '九五：王假有家，勿恤吉。', plainXiaoXiang: '《象传》：王假有家，交相爱。', coreMeaning: '王德至于家，勿忧吉。', favorableMeaning: '家道兴盛，交相爱。' },
+    { index: 6, classicText: '上九：有孚威如，終吉。', xiaoXiang: '威如之吉，反身之謂也。', plainText: '上九：有孚威如，终吉。', plainXiaoXiang: '《象传》：威如之吉，反身之。', coreMeaning: '有诚信又威严，终吉。', favorableMeaning: '反身修德，有孚威如。' }
+  ]
+}
+
+
+// ============================================================
+// 第 38 卦：睽
+// ============================================================
+const KUI: LocalHexagramKnowledge = {
+  kingWen: 38, name: '睽',
+  classic: {
+    judgment: '小事吉。',
+    tuan: '睽，火動而上，澤動而下；二女同居，其志不同行；說而麗乎明，柔進而上行，得中而應乎剛；是以小事吉。天地睽，而其事同也；男女睽，而其志通也；萬物睽，而其事類也；睽之時用大矣哉！',
+    daXiang: '上火下澤，睽；君子以同而異。',
+    sourceRefs: SR('睽')
+  },
+  localMeaning: {
+    plainJudgment: '睽：小事吉。',
+    plainTuan: '《彖传》说：睽，火动而上，泽动而下，二女同居其志不同行。说而丽乎明，柔进而上行，得中而应乎刚。是以小事吉。天地睽而其事同也，男女睽而其志通也，万物睽而其事类也。睽之时用大矣哉。',
+    plainDaXiang: '《大象传》说：上火下泽，睽。君子以同而异。',
+    coreMeaning: '睽代表乖离、不合、异中求同。核心：表面乖离，实则事同志通。同而异——在大同中存小异。',
+    keyThemes: ['乖离不合', '异中求同', '同而异', '小事吉'],
+    asBaseHexagram: '当前主旨处于意见不合、方向不同的状态。小事尚可，大事难成。',
+    asMutualHexagram: '互卦表示中段处于分歧对立、需要求同存异的阶段。',
+    asChangedHexagram: '变卦表示后段趋向乖离分歧、渐行渐远。',
+    cautions: ['乖离中仍有事同之处', '同而异不可强求一致', '小事吉大事难']
+  },
+  lines: [
+    { index: 1, classicText: '初九：悔亡，喪馬勿逐，自復；見惡人无咎。', xiaoXiang: '見惡人，以辟咎也。', plainText: '初九：悔亡。丧马勿逐，自复。见恶人，无咎。', plainXiaoXiang: '《象传》：见恶人，以辟咎。', coreMeaning: '悔亡。失马不必追，自回。见恶人，无咎。', favorableMeaning: '失马自复，见恶辟咎。' },
+    { index: 2, classicText: '九二：遇主于巷，无咎。', xiaoXiang: '遇主于巷，未失道也。', plainText: '九二：遇主于巷，无咎。', plainXiaoXiang: '《象传》：遇主于巷，未失道。', coreMeaning: '在小巷遇到主人，无咎。', favorableMeaning: '不拘常礼遇合，无咎。' },
+    { index: 3, classicText: '六三：見輿曳，其牛掣，其人天且劓，无初有終。', xiaoXiang: '見輿曳，位不當也。无初有終，遇剛也。', plainText: '六三：见舆曳，其牛掣，其人天且劓，无初有终。', plainXiaoXiang: '《象传》：见舆曳，位不当。无初有终，遇刚。', coreMeaning: '车被拖曳，牛被牵制，人受刑。初难终成。', cautionMeaning: '初虽艰难终遇刚。' },
+    { index: 4, classicText: '九四：睽孤，遇元夫，交孚，厲无咎。', xiaoXiang: '交孚无咎，志行也。', plainText: '九四：睽孤，遇元夫，交孚，厉无咎。', plainXiaoXiang: '《象传》：交孚无咎，志行。', coreMeaning: '乖离孤独，遇大丈夫，以诚相交，厉无咎。', favorableMeaning: '异中遇合，交孚无咎。' },
+    { index: 5, classicText: '六五：悔亡，厥宗噬膚，往何咎。', xiaoXiang: '厥宗噬膚，往有慶也。', plainText: '六五：悔亡，厥宗噬肤，往何咎。', plainXiaoXiang: '《象传》：厥宗噬肤，往有庆。', coreMeaning: '悔亡，同宗之人相合如咬嫩肉，往何咎。', favorableMeaning: '同宗相合，往有庆。' },
+    { index: 6, classicText: '上九：睽孤， 見豕負涂，載鬼一車， 先張之弧，后說之弧，匪寇婚媾，往遇雨則吉。', xiaoXiang: '遇雨之吉，群疑亡也。', plainText: '上九：睽孤，见豕负涂，载鬼一车。先张之弧，后说之弧，匪寇婚媾。往遇雨则吉。', plainXiaoXiang: '《象传》：遇雨之吉，群疑亡。', coreMeaning: '乖离至极，疑神疑鬼。先张弓后放下，非寇而是婚媾。遇雨则吉。', cautionMeaning: '疑虑消除后吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 39 卦：蹇
+// ============================================================
+const JIAN: LocalHexagramKnowledge = {
+  kingWen: 39, name: '蹇',
+  classic: {
+    judgment: '利西南，不利東北；利見大人，貞吉。',
+    tuan: '蹇，難也，險在前也。見險而能止，知矣哉！蹇利西南，往得中也；不利東北，其道窮也。利見大人，往有功也。當位貞吉，以正邦也。蹇之時用大矣哉！',
+    daXiang: '山上有水，蹇；君子以反身修德。',
+    sourceRefs: SR('蹇')
+  },
+  localMeaning: {
+    plainJudgment: '蹇：利西南，不利东北。利见大人，贞吉。',
+    plainTuan: '《彖传》说：蹇，难也，险在前也。见险而能止，知矣哉。蹇利西南，往得中。不利东北，其道穷。利见大人，往有功。当位贞吉，以正邦。蹇之时用大矣哉。',
+    plainDaXiang: '《大象传》说：山上有水，蹇。君子以反身修德。',
+    coreMeaning: '蹇代表艰难、险阻、步履维艰。核心：见险而能止——知险而止步。反身修德——遇到困难时反躬自省。利见大人——需贵人相助。',
+    keyThemes: ['艰难险阻', '见险能止', '反身修德', '利见大人'],
+    asBaseHexagram: '当前主旨处于艰难险阻之中。知难而止，反身修德。',
+    asMutualHexagram: '互卦表示中段处于困难重重、需要修德待援的阶段。',
+    asChangedHexagram: '变卦表示后段趋向艰难险阻、步履维艰。',
+    cautions: ['见险能止是智', '反身修德而非怨人', '利见大人须求助']
+  },
+  lines: [
+    { index: 1, classicText: '初六：往蹇，來譽。', xiaoXiang: '往蹇來譽，宜待也。', plainText: '初六：往蹇来誉。', plainXiaoXiang: '《象传》：往蹇来誉，宜待。', coreMeaning: '前往则难，归来有誉。', favorableMeaning: '知难而退，待时则誉。' },
+    { index: 2, classicText: '六二：王臣蹇蹇，匪躬之故。', xiaoXiang: '王臣蹇蹇，終无尤也。', plainText: '六二：王臣蹇蹇，匪躬之故。', plainXiaoXiang: '《象传》：王臣蹇蹇，终无尤。', coreMeaning: '王臣屡犯艰难，非为自身。', favorableMeaning: '为公忘私，终无尤。' },
+    { index: 3, classicText: '九三：往蹇來反。', xiaoXiang: '往蹇來反，內喜之也。', plainText: '九三：往蹇来反。', plainXiaoXiang: '《象传》：往蹇来反，内喜。', coreMeaning: '前往则难，返回反而。', favorableMeaning: '知难而返，内部喜。' },
+    { index: 4, classicText: '六四：往蹇來連。', xiaoXiang: '往蹇來連，當位實也。', plainText: '六四：往蹇来连。', plainXiaoXiang: '《象传》：往蹇来连，当位实。', coreMeaning: '前往则难，归来连合。', favorableMeaning: '来而连合，当位实。' },
+    { index: 5, classicText: '九五：大蹇朋來。', xiaoXiang: '大蹇朋來，以中節也。', plainText: '九五：大蹇朋来。', plainXiaoXiang: '《象传》：大蹇朋来，以中节。', coreMeaning: '大难之中朋友来助。', favorableMeaning: '居中行节，朋来助。' },
+    { index: 6, classicText: '上六：往蹇來碩，吉；利見大人。', xiaoXiang: '往蹇來碩，志在內也。利見大人，以從貴也。', plainText: '上六：往蹇来硕，吉。利见大人。', plainXiaoXiang: '《象传》：往蹇来硕，志在内。利见大人，以贵。', coreMeaning: '前往则难，归来有硕功，吉。利见大人。', favorableMeaning: '来而有功，利见大人。' }
+  ]
+}
+
+
+// ============================================================
+// 第 40 卦：解
+// ============================================================
+const XIE: LocalHexagramKnowledge = {
+  kingWen: 40, name: '解',
+  classic: {
+    judgment: '利西南，无所往，其來復吉。有攸往，夙吉。',
+    tuan: '解，險以動，動而免乎險，解。解利西南，往得眾也。其來復吉，乃得中也。有攸往夙吉，往有功也。天地解，而雷雨作，雷雨作，而百果草木皆甲坼，解之時義大矣哉！',
+    daXiang: '雷雨作，解；君子以赦過宥罪。',
+    sourceRefs: SR('解')
+  },
+  localMeaning: {
+    plainJudgment: '解：利西南。无所往，其来复吉。有攸往，夙吉。',
+    plainTuan: '《彖传》说：解，险以动，动而免乎险。解利西南，往得众。其来复吉，乃得中。有攸往夙吉，往有功。天地解而雷雨作，雷雨作而百果草木皆甲坼。解之时义大矣哉。',
+    plainDaXiang: '《大象传》说：雷雨作，解。君子以赦过宥罪。',
+    coreMeaning: '解代表缓解、解除、困难消散。核心：险而动——在险中行动而脱离险。赦过宥罪——宽赦过失，解除心结。',
+    keyThemes: ['缓解解除', '雷雨作', '赦过宥罪', '困难消散'],
+    asBaseHexagram: '当前主旨处于困难缓解、危机解除的阶段。宜宽赦过往，重新出发。',
+    asMutualHexagram: '互卦表示中段处于困难渐解、开始松动的阶段。',
+    asChangedHexagram: '变卦表示后段趋向缓解消散、雨过天晴。',
+    cautions: ['困难解除后宜宽赦', '勿再纠缠旧过', '夙吉——行动要早']
+  },
+  lines: [
+    { index: 1, classicText: '初六：无咎。', xiaoXiang: '剛柔之際，義无咎也。', plainText: '初六：无咎。', plainXiaoXiang: '《象传》：刚柔之际，义无咎。', coreMeaning: '危难初解，无咎。', favorableMeaning: '初解无咎。' },
+    { index: 2, classicText: '九二：田獲三狐，得黃矢，貞吉。', xiaoXiang: '九二貞吉，得中道也。', plainText: '九二：田获三狐，得黄矢，贞吉。', plainXiaoXiang: '《象传》：九二贞吉，得中道。', coreMeaning: '田猎获三狐，得黄色箭矢，守正吉。', favorableMeaning: '去邪得中，贞吉。' },
+    { index: 3, classicText: '六三：負且乘，致寇至，貞吝。', xiaoXiang: '負且乘，亦可丑也，自我致戎，又誰咎也。', plainText: '六三：负且乘，致寇至，贞吝。', plainXiaoXiang: '《象传》：负且乘，亦可丑。自我致戎，又谁咎。', coreMeaning: '负重物又乘车，招致寇盗，贞吝。', cautionMeaning: '小人居位致寇。' },
+    { index: 4, classicText: '九四：解而拇，朋至斯孚。', xiaoXiang: '解而拇，未當位也。', plainText: '九四：解而拇，朋至斯孚。', plainXiaoXiang: '《象传》：解而拇，位未当。', coreMeaning: '解开拇指束缚，朋友来此诚信。', favorableMeaning: '解去小人，朋友方至。' },
+    { index: 5, classicText: '六五：君子維有解，吉；有孚于小人。', xiaoXiang: '君子有解，小人退也。', plainText: '六五：君子维有解，吉。有孚于小人。', plainXiaoXiang: '《象传》：君子有解，小人退。', coreMeaning: '君子能解除困难，吉。诚信感退小人。', favorableMeaning: '君子解难，小人退。' },
+    { index: 6, classicText: '上六：公用射隼，于高墉之上，獲之，无不利。', xiaoXiang: '公用射隼，以解悖也。', plainText: '上六：公用射隼于高墉之上，获之，无不利。', plainXiaoXiang: '《象传》：公用射隼，以解悖。', coreMeaning: '公在高墙射隼，获之，无不利。', favorableMeaning: '除去悖乱，无不利。' }
+  ]
+}
+
+
+// ============================================================
+// 第 41 卦：损
+// ============================================================
+const SUN: LocalHexagramKnowledge = {
+  kingWen: 41, name: '损',
+  classic: {
+    judgment: '有孚，元吉。无咎，可貞，利有攸往。曷之用？二簋可用享。',
+    tuan: '損，損下益上，其道上行。損而有孚，元吉，无咎，可貞，利有攸往。曷之用？二簋可用享；二簋應有時。損剛益柔有時，損益盈虛，與時偕行。',
+    daXiang: '山下有澤，損；君子以懲忿窒欲。',
+    sourceRefs: SR('损')
+  },
+  localMeaning: {
+    plainJudgment: '损：有孚，元吉。无咎可贞，利有攸往。曷之用，二簋可用享。',
+    plainTuan: '《彖传》说：损，损下益上，其道上行。损而有孚，元吉无咎可贞。利有攸往。曷之用，二簋可用享。二簋应有时，损刚益柔有时。损益盈虚，与时偕行。',
+    plainDaXiang: '《大象传》说：山下有泽，损。君子以惩忿窒欲。',
+    coreMeaning: '损代表减损、克制、损下益上。核心：损中有孚——减损但有诚信。惩忿窒欲——克制忿怒和欲望。损益盈虚随时。',
+    keyThemes: ['减损克制', '惩忿窒欲', '损下益上', '与时偕行'],
+    asBaseHexagram: '当前主旨偏向减损付出、自我克制。损中有孚，诚心则元吉。',
+    asMutualHexagram: '互卦表示中段处于有所付出、有所减损的阶段。',
+    asChangedHexagram: '变卦表示后段趋向减损收敛、克制欲望。',
+    cautions: ['损须有孚否则徒损', '惩忿窒欲是修身要务', '损益随时不可固执']
+  },
+  lines: [
+    { index: 1, classicText: '初九：已事遄往，无咎，酌損之。', xiaoXiang: '已事遄往，尚合志也。', plainText: '初九：已事遄往，无咎。酌损之。', plainXiaoXiang: '《象传》：已事遄往，尚合志。', coreMeaning: '完成自己的事速往助人，无咎。酌量减损。', favorableMeaning: '速往合志，酌损。' },
+    { index: 2, classicText: '九二：利貞，征凶，弗損益之。', xiaoXiang: '九二利貞，中以為志也。', plainText: '九二：利贞，征凶。弗损益之。', plainXiaoXiang: '《象传》：九二利贞，中以为志。', coreMeaning: '利贞，征凶。不损己而益人。', favorableMeaning: '居中不妄损，利贞。' },
+    { index: 3, classicText: '六三：三人行，則損一人；一人行，則得其友。', xiaoXiang: '一人行，三則疑也。', plainText: '六三：三人行则损一人，一人行则得其友。', plainXiaoXiang: '《象传》：一人行，三则疑。', coreMeaning: '三人同行损一人，一人行得朋友。', favorableMeaning: '精简则专一。' },
+    { index: 4, classicText: '六四：損其疾，使遄有喜，无咎。', xiaoXiang: '損其疾，亦可喜也。', plainText: '六四：损其疾，使遄有喜，无咎。', plainXiaoXiang: '《象传》：损其疾，亦可喜。', coreMeaning: '减损自己的毛病，速改有喜，无咎。', favorableMeaning: '损疾速改，有喜。' },
+    { index: 5, classicText: '六五：或益之，十朋之龜弗克違，元吉。', xiaoXiang: '六五元吉，自上佑也。', plainText: '六五：或益之十朋之龟，弗克违，元吉。', plainXiaoXiang: '《象传》：六五元吉，自上佑。', coreMeaning: '有人献十朋之龟，不可辞，元吉。', favorableMeaning: '损而受益，元吉。' },
+    { index: 6, classicText: '上九：弗損益之，无咎，貞吉，利有攸往，得臣无家。', xiaoXiang: '弗損益之，大得志也。', plainText: '上九：弗损益之，无咎。贞吉，利有攸往。得臣无家。', plainXiaoXiang: '《象传》：弗损益之，大德。', coreMeaning: '不损人而益人，无咎。贞吉利往。', favorableMeaning: '不损而益，得臣无家。' }
+  ]
+}
+
+
+// ============================================================
+// 第 42 卦：益
+// ============================================================
+const YI: LocalHexagramKnowledge = {
+  kingWen: 42, name: '益',
+  classic: {
+    judgment: '利有攸往。利涉大川。',
+    tuan: '益，損上益下，民說无疆，自上下下，其道大光。利有攸往，中正有慶。利涉大川，木道乃行。益動而巽，日進无疆。天施地生，其益无方。凡益之道，與時偕行。',
+    daXiang: '風雷，益；君子以見善則遷，有過則改。',
+    sourceRefs: SR('益')
+  },
+  localMeaning: {
+    plainJudgment: '益：利有攸往，利涉大川。',
+    plainTuan: '《彖传》说：益，损上益下，民说无疆。自上下下，其道大光。利有攸往，中正有庆。利涉大川，木道乃行。益动而巽，日进无疆。天施地生，其益无方。凡益之道，与时偕行。',
+    plainDaXiang: '《大象传》说：风雷，益。君子以见善则迁，有过则改。',
+    coreMeaning: '益代表增益、受益、损上益下。核心：见善则迁有过则改——见善就学，有过就改。益动而巽——动而谦逊。',
+    keyThemes: ['增益受益', '见善则迁', '有过则改', '损上益下'],
+    asBaseHexagram: '当前主旨偏向增益受益、有所进步。见善则迁，利有攸往。',
+    asMutualHexagram: '互卦表示中段处于增益发展、日进无疆的阶段。',
+    asChangedHexagram: '变卦表示后段趋向增益受益、日益向好。',
+    cautions: ['见善则迁有过则改', '损上益下则民悦', '益道随时不可贪']
+  },
+  lines: [
+    { index: 1, classicText: '初九：利用為大作，元吉，无咎。', xiaoXiang: '元吉无咎，下不厚事也。', plainText: '初九：利用为大作，元吉无咎。', plainXiaoXiang: '《象传》：元吉无咎，下不厚事。', coreMeaning: '利于大有作为，元吉无咎。', favorableMeaning: '益初大有作为，元吉。' },
+    { index: 2, classicText: '六二：或益之，十朋之龜弗克違，永貞吉。王用享于帝，吉。', xiaoXiang: '或益之，自外來也。', plainText: '六二：或益之十朋之龟，弗克违，永贞吉。王用享于帝，吉。', plainXiaoXiang: '《象传》：或益之，自外来。', coreMeaning: '有人献十朋之龟，不可辞，永贞吉。王用祭帝，吉。', favorableMeaning: '外来增益，永贞吉。' },
+    { index: 3, classicText: '六三：益之用凶事，无咎。有孚中行，告公用圭。', xiaoXiang: '益用凶事，固有之也。', plainText: '六三：益之用凶事，无咎。有孚中行，告公用圭。', plainXiaoXiang: '《象传》：益用凶事，固有之。', coreMeaning: '用增益来处理凶事，无咎。诚信中行，告公用圭。', favorableMeaning: '凶中用益，中行无咎。' },
+    { index: 4, classicText: '六四：中行，告公從。利用為依遷國。', xiaoXiang: '告公從，以益志也。', plainText: '六四：中行告公从，利用为依迁国。', plainXiaoXiang: '《象传》：告公从，以益志。', coreMeaning: '中行告公，公听从。利于依此迁国。', favorableMeaning: '中行见从，志在益下。' },
+    { index: 5, classicText: '九五：有孚惠心，勿問元吉。有孚惠我德。', xiaoXiang: '有孚惠心，勿問之矣。惠我德，大得志也。', plainText: '九五：有孚惠心，勿问元吉。有孚惠我德。', plainXiaoXiang: '《象传》：有孚惠心，勿问之。惠我德，大得志。', coreMeaning: '有诚信惠人之心，不问元吉。人亦惠我之德。', favorableMeaning: '惠人以德，大得志。' },
+    { index: 6, classicText: '上九：莫益之，或擊之，立心勿恆，凶。', xiaoXiang: '莫益之，偏辭也。或擊之，自外來也。', plainText: '上九：莫益之，或击之。立心勿恒，凶。', plainXiaoXiang: '《象传》：莫益之，偏辞。或击之，外来。', coreMeaning: '无人增益他，反而有人攻击他。立心无恒，凶。', cautionMeaning: '求益无恒，凶。' }
+  ]
+}
+
+
+// ============================================================
+// 第 43 卦：夬
+// ============================================================
+const GUAI: LocalHexagramKnowledge = {
+  kingWen: 43, name: '夬',
+  classic: {
+    judgment: '揚于王庭，孚號，有厲，告自邑，不利即戎，利有攸往。',
+    tuan: '夬，決也，剛決柔也。健而說，決而和，揚于王庭，柔乘五剛也。孚號有厲，其危乃光也。告自邑，不利即戎，所尚乃窮也。利有攸往，剛長乃終也。',
+    daXiang: '澤上于天，夬；君子以施祿及下，居德則忌。',
+    sourceRefs: SR('夬')
+  },
+  localMeaning: {
+    plainJudgment: '夬：扬于王庭，孚号有厉。告自邑，不利即戎，利有攸往。',
+    plainTuan: '《彖传》说：夬，决也，刚决柔。健而说，决而和。扬于王庭，柔乘五刚。孚号有厉，其危乃光。告自邑不利即戎，所尚乃穷。利有攸往，刚长乃终。',
+    plainDaXiang: '《大象传》说：泽上于天，夬。君子以施禄及下，居德则忌。',
+    coreMeaning: '夬代表决断、果决、刚决柔。核心：五刚决一柔——以正道决断小人。健而说决而和——刚健和悦，决而能和。',
+    keyThemes: ['决断果决', '刚决柔', '决而能和', '施禄及下'],
+    asBaseHexagram: '当前主旨偏向需要果断决断、清除积弊。刚健和悦地决而能和。',
+    asMutualHexagram: '互卦表示中段处于需要果断决策、清除障碍的阶段。',
+    asChangedHexagram: '变卦表示后段趋向决断果决、清除小人。',
+    cautions: ['决断须光明正大', '不可轻易动武', '决而能和为上']
+  },
+  lines: [
+    { index: 1, classicText: '初九：壯于前趾，往不勝為咎。', xiaoXiang: '不勝而往，咎也。', plainText: '初九：壮于前趾，往不胜为咎。', plainXiaoXiang: '《象传》：不胜而往，咎。', coreMeaning: '前趾壮盛，前往不胜，为咎。', favorableMeaning: '轻进不胜，为咎。' },
+    { index: 2, classicText: '九二：惕號，莫夜有戎，勿恤。', xiaoXiang: '莫夜有戎，得中道也。', plainText: '九二：惕号，莫夜有戎，勿恤。', plainXiaoXiang: '《象传》：有戎勿恤，得中道。', coreMeaning: '警惕呼号，暮夜有兵戎，勿忧。', favorableMeaning: '警惕戒备，得中道。' },
+    { index: 3, classicText: '九三：壯于頄，有凶。君子夬夬，獨行遇雨，若濡有慍，无咎。', xiaoXiang: '君子夬夬，終无咎也。', plainText: '九三：壮于頄，有凶。君子夬夬，独行遇雨，若濡有愠，无咎。', plainXiaoXiang: '《象传》：君子夬夬，终无咎。', coreMeaning: '面部壮盛，有凶。君子果决独行遇雨，虽湿有愠，无咎。', favorableMeaning: '果决独行，终无咎。' },
+    { index: 4, classicText: '九四：臀无膚，其行次且。牽羊悔亡，聞言不信。', xiaoXiang: '其行次且，位不當也。聞言不信，聰不明也。', plainText: '九四：臀无肤，其行次且。牵羊悔亡，闻言不信。', plainXiaoXiang: '《象传》：其行次且，位不当。闻言不信，聪不明。', coreMeaning: '臀无皮肤，行走困难。牵羊悔亡，但闻言不信。', cautionMeaning: '位不当而行难。' },
+    { index: 5, classicText: '九五：莧陸夬夬，中行无咎。', xiaoXiang: '中行无咎，中未光也。', plainText: '九五：苋陆夬夬，中行无咎。', plainXiaoXiang: '《象传》：中行无咎，中未光。', coreMeaning: '像苋陆草一样果断，中行无咎。', favorableMeaning: '果断中行，无咎。' },
+    { index: 6, classicText: '上六：无號，終有凶。', xiaoXiang: '无號之凶，終不可長也。', plainText: '上六：无号，终有凶。', plainXiaoXiang: '《象传》：无号之凶，终不可长。', coreMeaning: '无人呼号，终有凶。', favorableMeaning: '小人终穷，凶。' }
+  ]
+}
+
+
+// ============================================================
+// 第 44 卦：姤
+// ============================================================
+const GOU: LocalHexagramKnowledge = {
+  kingWen: 44, name: '姤',
+  classic: {
+    judgment: '女壯，勿用取女。',
+    tuan: '姤，遇也，柔遇剛也。勿用取女，不可與長也。天地相遇，品物咸章也。剛遇中正，天下大行也。姤之時義大矣哉！',
+    daXiang: '天下有風，姤；后以施命誥四方。',
+    sourceRefs: SR('姤')
+  },
+  localMeaning: {
+    plainJudgment: '姤：女壮，勿用取女。',
+    plainTuan: '《彖传》说：姤，遇也，柔遇刚。勿用取女，不可与长。天地相遇，品物咸章。刚遇中正，天下大行。姤之时义大矣哉。',
+    plainDaXiang: '《大象传》说：天下有风，姤。后以施命诰四方。',
+    coreMeaning: '姤代表相遇、不期而遇。核心：一阴遇五阳——柔遇刚。女壮不可娶——阴长阳消之始。天地相遇则品物咸章。',
+    keyThemes: ['相遇不期', '柔遇刚', '天地相遇', '施命四方'],
+    asBaseHexagram: '当前主旨偏向意外相遇、机缘出现。需警惕阴长阳消之始。',
+    asMutualHexagram: '互卦表示中段处于不期而遇、机缘巧合的阶段。',
+    asChangedHexagram: '变卦表示后段趋向相遇邂逅、意外相逢。',
+    cautions: ['相遇须辨正邪', '女壮勿取——阴长阳消', '天地相遇品物咸章']
+  },
+  lines: [
+    { index: 1, classicText: '初六：系于金柅，貞吉，有攸往，見凶，羸豕孚踟躅。', xiaoXiang: '系于金柅，柔道牽也。', plainText: '初六：系于金柅，贞吉。有攸往，见凶。羸豕孚蹢躅。', plainXiaoXiang: '《象传》：系于金柅，柔道牵。', coreMeaning: '绑在金属车闸上，贞吉。前往见凶。瘦猪躁动。', favorableMeaning: '初遇须系止，贞吉。' },
+    { index: 2, classicText: '九二：包有魚，无咎，不利賓。', xiaoXiang: '包有魚，義不及賓也。', plainText: '九二：包有鱼，无咎。不利宾。', plainXiaoXiang: '《象传》：包有鱼，义不及宾。', coreMeaning: '厨中有鱼，无咎。不利于宾客。', favorableMeaning: '有鱼自享，不及宾。' },
+    { index: 3, classicText: '九三：臀无膚，其行次且，厲，无大咎。', xiaoXiang: '其行次且，行未牽也。', plainText: '九三：臀无肤，其行次且，厉无大咎。', plainXiaoXiang: '《象传》：其行次且，行未牵。', coreMeaning: '臀无皮肤，行走困难，厉无大咎。', favorableMeaning: '行难但未牵，无大咎。' },
+    { index: 4, classicText: '九四：包无魚，起凶。', xiaoXiang: '无魚之凶，遠民也。', plainText: '九四：包无鱼，起凶。', plainXiaoXiang: '《象传》：无鱼之凶，远民。', coreMeaning: '厨中无鱼，起凶。', favorableMeaning: '无鱼则凶，远民。' },
+    { index: 5, classicText: '九五：以杞包瓜，含章，有隕自天。', xiaoXiang: '九五含章，中正也。有隕自天，志不舍命也。', plainText: '九五：以杞包瓜，含章，有陨自天。', plainXiaoXiang: '《象传》：九五含章，中正。有陨自天，志不舍命。', coreMeaning: '用杞叶包瓜，内含章美，有陨落自天。', favorableMeaning: '含章中正，待天至。' },
+    { index: 6, classicText: '上九：姤其角，吝，无咎。', xiaoXiang: '姤其角，上窮吝也。', plainText: '上九：姤其角，吝，无咎。', plainXiaoXiang: '《象传》：姤其角，上穷吝。', coreMeaning: '遇到角尖，吝，无咎。', favorableMeaning: '遇于角尖，上穷吝。' }
+  ]
+}
+
+
+// ============================================================
+// 第 45 卦：萃
+// ============================================================
+const CUI: LocalHexagramKnowledge = {
+  kingWen: 45, name: '萃',
+  classic: {
+    judgment: '亨。王假有廟，利見大人，亨。利貞。用大牲吉，利有攸往。',
+    tuan: '萃，聚也；順以說，剛中而應，故聚也。王假有廟，致孝享也。利見大人亨，聚以正也。用大牲吉，利有攸往，順天命也。觀其所聚，而天地萬物之情可見矣。',
+    daXiang: '澤上于地，萃；君子以除戎器，戒不虞。',
+    sourceRefs: SR('萃')
+  },
+  localMeaning: {
+    plainJudgment: '萃：亨。王假有庙，利见大人，亨，利贞。用大牲吉，利有攸往。',
+    plainTuan: '《彖传》说：萃，聚也。顺以说，刚中而应，故聚。王假有庙，致孝享。利见大人亨，聚以正。用大牲吉，利有攸往，顺天命。观其所聚，而天地万物之情可见。',
+    plainDaXiang: '《大象传》说：泽上于地，萃。君子以除戎器，戒不虞。',
+    coreMeaning: '萃代表聚集、荟萃、群英汇聚。核心：聚以正——聚集必须守正。顺天命——顺天应人。除戎器戒不虞——聚时也要防备不测。',
+    keyThemes: ['聚集荟萃', '聚以正', '顺天命', '防不虞'],
+    asBaseHexagram: '当前主旨偏向聚集汇合、人脉汇聚。聚须以正，利见大人。',
+    asMutualHexagram: '互卦表示中段处于人才汇聚、资源集中的阶段。',
+    asChangedHexagram: '变卦表示后段趋向聚集荟萃、众志成城。',
+    cautions: ['聚以正不可聚为私利', '聚时须防不虞', '顺天命则吉']
+  },
+  lines: [
+    { index: 1, classicText: '初六：有孚不終，乃亂乃萃，若號一握為笑，勿恤，往无咎。', xiaoXiang: '乃亂乃萃，其志亂也。', plainText: '初六：有孚不终，乃乱乃萃。若号一握为笑，勿恤，往无咎。', plainXiaoXiang: '《象传》：乃乱乃萃，其志乱。', coreMeaning: '诚信不终，心乱而聚。呼号后一笑和解，勿恤往无咎。', favorableMeaning: '初聚心乱，和解无咎。' },
+    { index: 2, classicText: '六二：引吉，无咎，孚乃利用禴。', xiaoXiang: '引吉无咎，中未變也。', plainText: '六二：引吉，无咎。孚乃利用禴。', plainXiaoXiang: '《象传》：引吉无咎，中未变。', coreMeaning: '被引而聚，吉无咎。诚信则薄祭可。', favorableMeaning: '居中被引，吉。' },
+    { index: 3, classicText: '六三：萃如，嗟如，无攸利，往无咎，小吝。', xiaoXiang: '往无咎，上巽也。', plainText: '六三：萃如，嗟如，无攸利。往无咎，小吝。', plainXiaoXiang: '《象传》：往无咎，上巽。', coreMeaning: '聚而叹息，无利。往无咎，小吝。', favorableMeaning: '聚不得正，往无咎小吝。' },
+    { index: 4, classicText: '九四：大吉，无咎。', xiaoXiang: '大吉无咎，位不當也。', plainText: '九四：大吉，无咎。', plainXiaoXiang: '《象传》：大吉无咎，位不当。', coreMeaning: '大吉然后无咎。', favorableMeaning: '虽聚众须大吉方无咎。' },
+    { index: 5, classicText: '九五：萃有位，无咎。匪孚，元永貞，悔亡。', xiaoXiang: '萃有位，志未光也。', plainText: '九五：萃有位，无咎。匪孚，元永贞，悔亡。', plainXiaoXiang: '《象传》：萃有位，志未光。', coreMeaning: '聚而有位，无咎。未取信于人，当永守正道，悔亡。', favorableMeaning: '有位须永贞，悔亡。' },
+    { index: 6, classicText: '上六：齎咨涕洟，无咎。', xiaoXiang: '齎咨涕洟，未安上也。', plainText: '上六：赍咨涕洟，无咎。', plainXiaoXiang: '《象传》：赍咨涕洟，未安。', coreMeaning: '叹息涕泣，无咎。', favorableMeaning: '聚极而散，恐惧无咎。' }
+  ]
+}
+
+
+// ============================================================
+// 第 46 卦：升
+// ============================================================
+const SHENG: LocalHexagramKnowledge = {
+  kingWen: 46, name: '升',
+  classic: {
+    judgment: '元亨，用見大人，勿恤，南征吉。',
+    tuan: '柔以時升，巽而順，剛中而應，是以大亨。用見大人，勿恤；有慶也。南征吉，志行也。',
+    daXiang: '地中生木，升；君子以順德，積小以高大。',
+    sourceRefs: SR('升')
+  },
+  localMeaning: {
+    plainJudgment: '升：元亨，用见大人，勿恤，南征吉。',
+    plainTuan: '《彖传》说：柔以时升，巽而顺，刚中而应，是以大亨。用见大人勿恤，有庆。南征吉，志行。',
+    plainDaXiang: '《大象传》说：地中生木，升。君子以顺德，积小以高大。',
+    coreMeaning: '升代表上升、晋升、生长。核心：柔以时升——顺势而升。积小以高大——积小善成高大。地中生木——树木从地里生长。',
+    keyThemes: ['上升晋升', '柔以时升', '积小高大', '顺德生长'],
+    asBaseHexagram: '当前主旨偏向上升发展、循序渐进。积小成大，南征吉。',
+    asMutualHexagram: '互卦表示中段处于逐步上升、生长壮大的阶段。',
+    asChangedHexagram: '变卦表示后段趋向上升晋升、日益高涨。',
+    cautions: ['升须柔以时不可急躁', '积小善成高大', '顺德而行']
+  },
+  lines: [
+    { index: 1, classicText: '初六：允升，大吉。', xiaoXiang: '允升大吉，上合志也。', plainText: '初六：允升，大吉。', plainXiaoXiang: '《象传》：允升大吉，上合志。', coreMeaning: '诚信上升，大吉。', favorableMeaning: '允而上升，大吉。' },
+    { index: 2, classicText: '九二：孚乃利用禴，无咎。', xiaoXiang: '九二之孚，有喜也。', plainText: '九二：孚乃利用禴，无咎。', plainXiaoXiang: '《象传》：九二之孚，有喜。', coreMeaning: '诚信则薄祭可，无咎。', favorableMeaning: '孚诚上升，无咎有喜。' },
+    { index: 3, classicText: '九三：升虛邑。', xiaoXiang: '升虛邑，无所疑也。', plainText: '九三：升虚邑。', plainXiaoXiang: '《象传》：升虚邑，无所疑。', coreMeaning: '上升如入无人之城。', favorableMeaning: '上升无阻，无所疑。' },
+    { index: 4, classicText: '六四：王用亨于岐山，吉无咎。', xiaoXiang: '王用亨于岐山，順事也。', plainText: '六四：王用亨于岐山，吉无咎。', plainXiaoXiang: '《象传》：王用亨于岐山，顺事。', coreMeaning: '王在岐山祭祀，吉无咎。', favorableMeaning: '顺事天子，吉无咎。' },
+    { index: 5, classicText: '六五：貞吉，升階。', xiaoXiang: '貞吉升階，大得志也。', plainText: '六五：贞吉，升阶。', plainXiaoXiang: '《象传》：贞吉升阶，大得志。', coreMeaning: '守正吉，沿阶而升。', favorableMeaning: '守正升阶，大得志。' },
+    { index: 6, classicText: '上六：冥升，利于不息之貞。', xiaoXiang: '冥升在上，消不富也。', plainText: '上六：冥升，利于不息之贞。', plainXiaoXiang: '《象传》：冥升在上，消不富。', coreMeaning: '昏冥上升，利于不息守正。', cautionMeaning: '升极而昏，利不息贞。' }
+  ]
+}
+
+
+// ============================================================
+// 第 47 卦：困
+// ============================================================
+const KUN: LocalHexagramKnowledge = {
+  kingWen: 47, name: '困',
+  classic: {
+    judgment: '亨，貞大人吉，无咎，有言不信。',
+    tuan: '困，剛掩也。險以說，困而不失其所，亨；其唯君子乎？貞大人吉，以剛中也。有言不信，尚口乃窮也。',
+    daXiang: '澤无水，困；君子以致命遂志。',
+    sourceRefs: SR('困')
+  },
+  localMeaning: {
+    plainJudgment: '困：亨，贞，大人吉，无咎。有言不信。',
+    plainTuan: '《彖传》说：困，刚掩。险以说，困而不失其所亨。其唯君子。贞大人吉，以刚中。有言不信，口乃起。',
+    plainDaXiang: '《大象传》说：泽无水，困。君子以致命遂志。',
+    coreMeaning: '困代表困窘、困顿、资源匮乏。核心：困而不失其所亨——困境中仍守正道亨通。致命遂志——豁出性命实现志向。有言不信——此时说话没人信。',
+    keyThemes: ['困窘困顿', '致命遂志', '困而不失亨', '有言不信'],
+    asBaseHexagram: '当前主旨处于资源困窘、环境艰难的时期。致命遂志，言多不信。',
+    asMutualHexagram: '互卦表示中段处于资源匮乏、受制于人但坚守志向的阶段。',
+    asChangedHexagram: '变卦表示后段趋向困窘艰难、言语难信。',
+    cautions: ['困境中致命遂志', '有言不信不如沉默', '困而不失其所亨']
+  },
+  lines: [
+    { index: 1, classicText: '初六：臀困于株木，入于幽谷，三歲不覿。', xiaoXiang: '入于幽谷，幽不明也。', plainText: '初六：臀困于株木，入于幽谷，三岁不觌。', plainXiaoXiang: '《象传》：入于幽谷，幽不明。', coreMeaning: '臀部困于木桩，入幽谷，三年不见。', favorableMeaning: '初困即幽，三岁不觌。' },
+    { index: 2, classicText: '九二：困于酒食，朱紱方來，利用亨祀，征凶，无咎。', xiaoXiang: '困于酒食，中有慶也。', plainText: '九二：困于酒食，朱绂方来，利用亨祀。征凶，无咎。', plainXiaoXiang: '《象传》：困于酒食，中有庆。', coreMeaning: '困于酒食，朱绂方来，宜祭祀。征凶无咎。', favorableMeaning: '困而有庆，征凶无咎。' },
+    { index: 3, classicText: '六三：困于石，據于蒺藜，入于其宮，不見其妻，凶。', xiaoXiang: '據于蒺藜，乘剛也。入于其宮，不見其妻，不祥也。', plainText: '六三：困于石，据于蒺藜。入于其宫，不见其妻，凶。', plainXiaoXiang: '《象传》：据于蒺藜，乘刚。入于其宫不见其妻，不祥。', coreMeaning: '困于石下，据于蒺藜。回家不见妻，凶。', cautionMeaning: '前后皆困，凶。' },
+    { index: 4, classicText: '九四：來徐徐，困于金車，吝，有終。', xiaoXiang: '來徐徐，志在下也。雖不當位，有與也。', plainText: '九四：来徐徐，困于金车，吝，有终。', plainXiaoXiang: '《象传》：来徐徐，志在下。虽不当位，有与。', coreMeaning: '缓缓而来，困于金车，吝，有终。', favorableMeaning: '来迟虽吝，终有所合。' },
+    { index: 5, classicText: '九五：劓刖，困于赤紱，乃徐有說，利用祭祀。', xiaoXiang: '劓刖，志未得也。乃徐有說，以中直也。利用祭祀，受福也。', plainText: '九五：劓刖，困于赤绂。乃徐有说，利用祭祀。', plainXiaoXiang: '《象传》：劓刖，志未得。乃徐有说，以中直。', coreMeaning: '受刑困于赤绂，慢慢解脱，宜祭祀。', favorableMeaning: '虽困中直，徐脱利祭。' },
+    { index: 6, classicText: '上六：困于葛藟，于臲卼，曰動悔。有悔，征吉。', xiaoXiang: '困于葛藟，未當也。動悔，有悔，吉行也。', plainText: '上六：困于葛藟，于臲卼，曰动悔有悔。征吉。', plainXiaoXiang: '《象传》：困于葛藟，未当。动悔有悔，吉行。', coreMeaning: '困于葛藟，动摇不安。动则有悔，知悔征吉。', favorableMeaning: '知悔而改，征吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 48 卦：井
+// ============================================================
+const JING: LocalHexagramKnowledge = {
+  kingWen: 48, name: '井',
+  classic: {
+    judgment: '改邑不改井，无喪无得，往來井井。汔至亦未繘井。羸其瓶，凶。',
+    tuan: '巽乎水而上水，井；井養而不窮也。改邑不改井，乃以剛中也。汔至亦未繘井，未有功也。羸其瓶，是以凶也。',
+    daXiang: '木上有水，井；君子以勞民勸相。',
+    sourceRefs: SR('井')
+  },
+  localMeaning: {
+    plainJudgment: '井：改邑不改井，无丧无得。往来井井，汔至亦未繘井，羸其瓶，凶。',
+    plainTuan: '《彖传》说：巽乎水而上水，井。井养而不穷。改邑不改井，乃以刚中。汔至亦未繘井，未有功。羸其瓶，是以凶。',
+    plainDaXiang: '《大象传》说：木上有水，井。君子以劳民劝相。',
+    coreMeaning: '井代表井养、恒常不变、滋养众人。核心：改邑不改井——村落可变，井不变。井养不穷——井水养人无穷。劳民劝相——勉励百姓互助。',
+    keyThemes: ['井养不穷', '改邑不改井', '劳民劝相', '恒常滋养'],
+    asBaseHexagram: '当前主旨偏向恒常滋养、稳定供给。改邑不改井，守住根本。',
+    asMutualHexagram: '互卦表示中段处于稳定滋养、持续服务他人的阶段。',
+    asChangedHexagram: '变卦表示后段趋向井养不竭、持续奉献。',
+    cautions: ['井养须不竭不污', '不可半途而废', '劳民劝相是为政之道']
+  },
+  lines: [
+    { index: 1, classicText: '初六：井泥不食，舊井无禽。', xiaoXiang: '井泥不食，下也。舊井无禽，時舍也。', plainText: '初六：井泥不食，旧井无禽。', plainXiaoXiang: '《象传》：井泥不食，下也。旧井无禽，时舍。', coreMeaning: '井泥浑浊不可食，旧井连鸟都不来。', favorableMeaning: '井底污泥，无人用。' },
+    { index: 2, classicText: '九二：井谷射鮒，瓮敝漏。', xiaoXiang: '井谷射鮒，无與也。', plainText: '九二：井谷射鲋，瓮敝漏。', plainXiaoXiang: '《象传》：井谷射鲋，无与。', coreMeaning: '井谷中射小鱼，瓮破漏水。', favorableMeaning: '井水旁漏，不可食。' },
+    { index: 3, classicText: '九三：井渫不食，為我心惻，可用汲，王明，并受其福。', xiaoXiang: '井渫不食，行惻也。求王明，受福也。', plainText: '九三：井渫不食，为我心恻。可用汲，王明，并受其福。', plainXiaoXiang: '《象传》：井渫不食，行恻。求王明，受福。', coreMeaning: '井已清洁却无人食，令人心痛。若王明则同受福。', favorableMeaning: '井渫待明主，求用。' },
+    { index: 4, classicText: '六四：井甃，无咎。', xiaoXiang: '井甃无咎，修井也。', plainText: '六四：井甃，无咎。', plainXiaoXiang: '《象传》：井甃无咎，修井。', coreMeaning: '井壁砌好了，无咎。', favorableMeaning: '修井加固，无咎。' },
+    { index: 5, classicText: '九五：井冽，寒泉食。', xiaoXiang: '寒泉之食，中正也。', plainText: '九五：井冽寒泉食。', plainXiaoXiang: '《象传》：寒泉之食，中正。', coreMeaning: '井水清冽寒凉可食。', favorableMeaning: '中正清冽，众食。' },
+    { index: 6, classicText: '上六：井收勿幕，有孚元吉。', xiaoXiang: '元吉在上，大成也。', plainText: '上六：井收勿幕，有孚元吉。', plainXiaoXiang: '《象传》：元吉在上，大成。', coreMeaning: '井修成不加盖，有孚元吉。', favorableMeaning: '井养开放，有孚元吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 49 卦：革
+// ============================================================
+const GE: LocalHexagramKnowledge = {
+  kingWen: 49, name: '革',
+  classic: {
+    judgment: '巳日乃孚，元亨。利貞。悔亡。',
+    tuan: '革，水火相息，二女同居，其志不相得，曰革。巳日乃孚；革而信也。文明以說，大亨以正，革而當，其悔乃亡。天地革而四時成，湯武革命，順乎天而應乎人，革之時義大矣哉！',
+    daXiang: '澤中有火，革；君子以治歷明時。',
+    sourceRefs: SR('革')
+  },
+  localMeaning: {
+    plainJudgment: '革：巳日乃孚，元亨利贞，悔亡。',
+    plainTuan: '《彖传》说：革，水火相息，二女同居其志不相得。巳日乃孚，信而后从。文明以说，大亨以正。革而当，其悔乃亡。天地革而四时成，汤武革命，顺乎天而应乎人。革之时义大矣哉。',
+    plainDaXiang: '《大象传》说：泽中有火，革。君子以治历明时。',
+    coreMeaning: '革代表变革、革命、除旧布新。核心：巳日乃孚——时机到了才能取信于人。汤武革命顺天应人。文明以说——文明而和悦地变革。',
+    keyThemes: ['变革革命', '巳日乃孚', '顺天应人', '治历明时'],
+    asBaseHexagram: '当前主旨处于变革除旧的关键时期。时机到了才变革，变革须顺天应人。',
+    asMutualHexagram: '互卦表示中段处于变革进行中、除旧布新的阶段。',
+    asChangedHexagram: '变卦表示后段趋向变革更新、洗心革面。',
+    cautions: ['变革须待时机不可躁进', '巳日乃孚——信而后革', '革而当则悔亡']
+  },
+  lines: [
+    { index: 1, classicText: '初九：鞏用黃牛之革。', xiaoXiang: '鞏用黃牛，不可以有為也。', plainText: '初九：巩用黄牛之革。', plainXiaoXiang: '《象传》：巩用黄牛，不可以有为。', coreMeaning: '用黄牛皮绳巩固。', favorableMeaning: '初革须巩固，不可有为。' },
+    { index: 2, classicText: '六二：巳日乃革之，征吉，无咎。', xiaoXiang: '巳日革之，行有嘉也。', plainText: '六二：巳日乃革之，征吉，无咎。', plainXiaoXiang: '《象传》：巳日革之，行有嘉。', coreMeaning: '时机到了才变革，征吉无咎。', favorableMeaning: '时至而革，征吉。' },
+    { index: 3, classicText: '九三：征凶，貞厲，革言三就，有孚。', xiaoXiang: '革言三就，又何之矣。', plainText: '九三：征凶，贞厉。革言三就，有孚。', plainXiaoXiang: '《象传》：革言三就，又何之。', coreMeaning: '征凶贞厉。变革之论三次成就，有孚。', favorableMeaning: '变革须审慎三就。' },
+    { index: 4, classicText: '九四：悔亡，有孚改命，吉。', xiaoXiang: '改命之吉，信志也。', plainText: '九四：悔亡，有孚改命，吉。', plainXiaoXiang: '《象传》：改命之吉，信志。', coreMeaning: '悔亡，有孚改命，吉。', favorableMeaning: '有孚改命，吉。' },
+    { index: 5, classicText: '九五：大人虎變，未占有孚。', xiaoXiang: '大人虎變，其文炳也。', plainText: '九五：大人虎变，未占有孚。', plainXiaoXiang: '《象传》：大人虎变，其文炳。', coreMeaning: '大人变革如虎纹炳焕，不占而有孚。', favorableMeaning: '大人变革，文采炳。' },
+    { index: 6, classicText: '上六：君子豹變，小人革面，征凶，居貞吉。', xiaoXiang: '君子豹變，其文蔚也。小人革面，順以從君也。', plainText: '上六：君子豹变，小人革面。征凶，居贞吉。', plainXiaoXiang: '《象传》：君子豹变，其文蔚。小人革面，顺。', coreMeaning: '君子变革如豹纹蔚然，小人洗心革面。征凶居贞吉。', favorableMeaning: '变革已成，居贞吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 50 卦：鼎
+// ============================================================
+const DING: LocalHexagramKnowledge = {
+  kingWen: 50, name: '鼎',
+  classic: {
+    judgment: '元吉，亨。',
+    tuan: '鼎，象也。以木巽火，亨飪也。聖人亨以享上帝，而大亨以養聖賢。巽而耳目聰明，柔進而上行，得中而應乎剛，是以元亨。',
+    daXiang: '木上有火，鼎；君子以正位凝命。',
+    sourceRefs: SR('鼎')
+  },
+  localMeaning: {
+    plainJudgment: '鼎：元吉，亨。',
+    plainTuan: '《彖传》说：鼎，象也。以木巽火，亨饪。圣人亨以享上帝，而大亨以养圣贤。巽而耳聪目明，柔进而上行，得中而应乎刚。是以元亨。',
+    plainDaXiang: '《大象传》说：木上有火，鼎。君子以正位凝命。',
+    coreMeaning: '鼎代表鼎新、稳重、养贤。核心：正位凝命——端正位次，凝聚使命。以木巽火烹饪——象征调和鼎鼐。鼎三足稳固。',
+    keyThemes: ['鼎新稳重', '正位凝命', '养贤烹饪', '调和鼎鼐'],
+    asBaseHexagram: '当前主旨处于鼎新稳固、养贤成事的阶段。正位凝命，元亨。',
+    asMutualHexagram: '互卦表示中段处于稳固格局、调和各方的阶段。',
+    asChangedHexagram: '变卦表示后段趋向鼎新成熟、定鼎成事。',
+    cautions: ['正位凝命是根本', '养贤则鼎新', '鼎须正位方稳']
+  },
+  lines: [
+    { index: 1, classicText: '初六：鼎顛趾，利出否，得妾以其子，无咎。', xiaoXiang: '鼎顛趾，未悖也。利出否，以從貴也。', plainText: '初六：鼎颠趾，利出否。得妾以其子，无咎。', plainXiaoXiang: '《象传》：鼎颠趾，未悖。利出否，以从贵。', coreMeaning: '鼎足颠倒，利于倒出废物。得妾因其子，无咎。', favorableMeaning: '鼎颠出否，无咎。' },
+    { index: 2, classicText: '九二：鼎有實，我仇有疾，不我能即，吉。', xiaoXiang: '鼎有實，慎所之也。我仇有疾，終无尤也。', plainText: '九二：鼎有实，我仇有疾，不我能即，吉。', plainXiaoXiang: '《象传》：鼎有实，慎所之。我仇有疾，终无尤。', coreMeaning: '鼎中有食，我仇有疾，不能近我，吉。', favorableMeaning: '有实慎处，终无尤。' },
+    { index: 3, classicText: '九三：鼎耳革，其行塞，雉膏不食，方雨虧悔，終吉。', xiaoXiang: '鼎耳革，失其義也。', plainText: '九三：鼎耳革，其行塞，雉膏不食。方雨亏悔，终吉。', plainXiaoXiang: '《象传》：鼎耳革，失义。', coreMeaning: '鼎耳变形，移动困难，雉膏不得食。方雨悔亡，终吉。', cautionMeaning: '变革失义终吉。' },
+    { index: 4, classicText: '九四：鼎折足，覆公餗，其形渥，凶。', xiaoXiang: '覆公餗，信如何也。', plainText: '九四：鼎折足，覆公餗，其形渥，凶。', plainXiaoXiang: '《象传》：覆公餗，信如何。', coreMeaning: '鼎足折断，打翻公食，形渥，凶。', cautionMeaning: '力不胜任则凶。' },
+    { index: 5, classicText: '六五：鼎黃耳金鉉，利貞。', xiaoXiang: '鼎黃耳，中以為實也。', plainText: '六五：鼎黄耳金铉，利贞。', plainXiaoXiang: '《象传》：鼎黄耳，中为实。', coreMeaning: '鼎有黄耳金铉，利贞。', favorableMeaning: '中实正位，利贞。' },
+    { index: 6, classicText: '上九：鼎玉鉉，大吉，无不利。', xiaoXiang: '玉鉉在上，剛柔節也。', plainText: '上九：鼎玉铉，大吉，无不利。', plainXiaoXiang: '《象传》：玉铉在上，刚柔节。', coreMeaning: '鼎有玉铉，大吉无不利。', favorableMeaning: '刚柔节度，大吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 51 卦：震
+// ============================================================
+const ZHEN: LocalHexagramKnowledge = {
+  kingWen: 51, name: '震',
+  classic: {
+    judgment: '亨。震來虩虩，笑言啞啞。震驚百里，不喪匕鬯。',
+    tuan: '震，亨。震來虩虩，恐致福也。笑言啞啞，后有則也。震驚百里，驚遠而懼邇也。出可以守宗廟社稷，以為祭主也。',
+    daXiang: '洊雷，震；君子以恐懼修省。',
+    sourceRefs: SR('震')
+  },
+  localMeaning: {
+    plainJudgment: '震：亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。',
+    plainTuan: '《彖传》说：震，亨。震来虩虩，恐致福。笑言哑哑，后有则。震惊百里，惊远而惧迩。出可以守宗庙社稷，以为祭主。',
+    plainDaXiang: '《大象传》说：洊雷震，君子以恐惧修省。',
+    coreMeaning: '震代表震动、惊雷、警醒。核心：恐惧修省——面对震动恐惧而反身修省。震来虩虩——因恐惧而致福。不丧匕鬯——主祭者镇定。',
+    keyThemes: ['震动警醒', '恐惧修省', '震来虩虩', '镇定如常'],
+    asBaseHexagram: '当前主旨处于突然震动、惊变发生的时刻。恐惧修省，镇定不丧。',
+    asMutualHexagram: '互卦表示中段处于接连震动、考验应变的阶段。',
+    asChangedHexagram: '变卦表示后段趋向震动惊变、需要镇定应对。',
+    cautions: ['震来恐惧反而致福', '镇定不丧匕鬯', '恐惧修省是修身']
+  },
+  lines: [
+    { index: 1, classicText: '初九：震來虩虩，后笑言啞啞，吉。', xiaoXiang: '震來虩虩，恐致福也。笑言啞啞，后有則也。', plainText: '初九：震来虩虩，后笑言哑哑，吉。', plainXiaoXiang: '《象传》：震来虩虩，恐致福。笑言哑哑，后有则。', coreMeaning: '雷来恐惧，而后笑言，吉。', favorableMeaning: '恐惧后有则，吉。' },
+    { index: 2, classicText: '六二：震來厲，億喪貝，躋于九陵，勿逐，七日得。', xiaoXiang: '震來厲，乘剛也。', plainText: '六二：震来厉，亿丧贝。跻于九陵，勿逐，七日得。', plainXiaoXiang: '《象传》：震来厉，乘刚。', coreMeaning: '震来有危，丧失贝币。登九陵不追，七日后得。', favorableMeaning: '危中丧贝，七日自复。' },
+    { index: 3, classicText: '六三：震蘇蘇，震行无眚。', xiaoXiang: '震蘇蘇，位不當也。', plainText: '六三：震苏苏，震行无眚。', plainXiaoXiang: '《象传》：震苏苏，位不当。', coreMeaning: '震而苏醒，震行无眚。', favorableMeaning: '苏苏而行，位不当无眚。' },
+    { index: 4, classicText: '九四：震遂泥。', xiaoXiang: '震遂泥，未光也。', plainText: '九四：震遂泥。', plainXiaoXiang: '《象传》：震遂泥，光未。', coreMeaning: '震而坠于泥中。', cautionMeaning: '坠泥不能自振。' },
+    { index: 5, classicText: '六五：震往來厲，億无喪，有事。', xiaoXiang: '震往來厲，危行也。其事在中，大无喪也。', plainText: '六五：震往来厉，亿无丧，有事。', plainXiaoXiang: '《象传》：震往来厉，危行。其事在中，大无丧。', coreMeaning: '震往来皆危，无所丧，有祭事。', favorableMeaning: '危中守中，大事无丧。' },
+    { index: 6, classicText: '上六：震索索，視矍矍，征凶。震不于其躬，于其鄰，无咎。婚媾有言。', xiaoXiang: '震索索，中未得也。雖凶无咎，畏鄰戒也。', plainText: '上六：震索索，视矍矍，征凶。震不于其躬，于其邻，无咎。婚媾有言。', plainXiaoXiang: '《象传》：震索索，中未得。虽凶无咎，畏邻戒。', coreMeaning: '震而索索，惊视不定，征凶。震不及其身及其邻，无咎。', favorableMeaning: '畏邻而戒，无咎。' }
+  ]
+}
+
+
+// ============================================================
+// 第 52 卦：艮
+// ============================================================
+const GEN: LocalHexagramKnowledge = {
+  kingWen: 52, name: '艮',
+  classic: {
+    judgment: '艮其背，不獲其身，行其庭，不見其人，无咎。',
+    tuan: '艮，止也。時止則止，時行則行，動靜不失其時，其道光明。艮其止，止其所也。上下敵應，不相與也。是以不獲其身，行其庭不見其人，无咎也。',
+    daXiang: '兼山，艮；君子以思不出其位。',
+    sourceRefs: SR('艮')
+  },
+  localMeaning: {
+    plainJudgment: '艮其背，不获其身。行其庭，不见其人。无咎。',
+    plainTuan: '《彖传》说：艮，止也。时止则止，时行则行，动静不失其时，其道光明。艮其止，止其所。上下敌应，不相与。是以不获其身，行其庭不见其人，无咎。',
+    plainDaXiang: '《大象传》说：兼山，艮。君子以思不出其位。',
+    coreMeaning: '艮代表停止、静止、知止。核心：时止则止——该停就停。思不出其位——思考不越出本位。艮其背——止于所不见。',
+    keyThemes: ['知止静止', '时止则止', '思不出位', '动静有时'],
+    asBaseHexagram: '当前主旨偏向知止不动、安守本位。时止则止，思不出位。',
+    asMutualHexagram: '互卦表示中段处于静止不动、安守本位的阶段。',
+    asChangedHexagram: '变卦表示后段趋向静止停止、知止不殆。',
+    cautions: ['时止则止不可妄动', '思不出其位', '知止而后有定']
+  },
+  lines: [
+    { index: 1, classicText: '初六：艮其趾，无咎，利永貞。', xiaoXiang: '艮其趾，未失正也。', plainText: '初六：艮其趾，无咎，利永贞。', plainXiaoXiang: '《象传》：艮其趾，未失正。', coreMeaning: '止于脚趾，无咎，利永贞。', favorableMeaning: '止于初不动，利永贞。' },
+    { index: 2, classicText: '六二：艮其腓，不拯其隨，其心不快。', xiaoXiang: '不拯其隨，未退聽也。', plainText: '六二：艮其腓，不拯其随，其心不快。', plainXiaoXiang: '《象传》：艮其腓，不拯。未退听。', coreMeaning: '止于小腿，不能跟随，心不快。', favorableMeaning: '止而不随，心不快。' },
+    { index: 3, classicText: '九三：艮其限，列其夤，厲薰心。', xiaoXiang: '艮其限，危薰心也。', plainText: '九三：艮其限，列其夤，厉薰心。', plainXiaoXiang: '《象传》：艮其限，危薰心。', coreMeaning: '止于腰脊，撕裂夹脊肉，危厉薰心。', cautionMeaning: '强止则危薰心。' },
+    { index: 4, classicText: '六四：艮其身，无咎。', xiaoXiang: '艮其身，止諸躬也。', plainText: '六四：艮其身，无咎。', plainXiaoXiang: '《象传》：艮其身，止诸躬。', coreMeaning: '止于自身，无咎。', favorableMeaning: '止于躬己，无咎。' },
+    { index: 5, classicText: '六五：艮其輔，言有序，悔亡。', xiaoXiang: '艮其輔，以中正也。', plainText: '六五：艮其辅，言有序，悔亡。', plainXiaoXiang: '《象传》：艮其辅，以中正。', coreMeaning: '止于面颊，说话有序，悔亡。', favorableMeaning: '言有序则悔亡。' },
+    { index: 6, classicText: '上九：敦艮，吉。', xiaoXiang: '敦艮之吉，以厚終也。', plainText: '上九：敦艮，吉。', plainXiaoXiang: '《象传》：敦艮之吉，以厚终。', coreMeaning: '敦厚而止，吉。', favorableMeaning: '敦厚而止，吉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 54 卦：归妹
+// ============================================================
+const GUIMEI: LocalHexagramKnowledge = {
+  kingWen: 54, name: '归妹',
+  classic: {
+    judgment: '征凶，无攸利。',
+    tuan: '歸妹，天地之大義也。天地不交，而萬物不興，歸妹人之終始也。說以動，所歸妹也。征凶，位不當也。无攸利，柔乘剛也。',
+    daXiang: '澤上有雷，歸妹；君子以永終知敝。',
+    sourceRefs: SR('归妹')
+  },
+  localMeaning: {
+    plainJudgment: '归妹：征凶，无攸利。',
+    plainTuan: '《彖传》说：归妹，天地之大义。天地不交而万物不兴。归妹，人之终始。说以动，所归妹。征凶，位不当。无攸利，柔乘刚。',
+    plainDaXiang: '《大象传》说：泽上有雷，归妹。君子以永终知敝。',
+    coreMeaning: '归妹代表出嫁、归宿、以说而动。核心：永终知敝——要想长久就得知道弊端。说以动——因喜悦而动，须警惕。',
+    keyThemes: ['出嫁归宿', '说以动', '永终知敝', '位不当'],
+    asBaseHexagram: '当前主旨偏向有所归属、结合。但位不当，征凶。须警惕说以动之弊。',
+    asMutualHexagram: '互卦表示中段处于结合归属、因悦而动的阶段。',
+    asChangedHexagram: '变卦表示后段趋向归妹结合、各得其位。',
+    cautions: ['说以动须防位不当', '永终知敝才能久', '征凶无攸利']
+  },
+  lines: [
+    { index: 1, classicText: '初九：歸妹以娣，跛能履，征吉。', xiaoXiang: '歸妹以娣，以恆也。跛能履吉，相承也。', plainText: '初九：归妹以娣，跛能履，征吉。', plainXiaoXiang: '《象传》：归妹以娣，以恒。跛能履，相承。', coreMeaning: '嫁作侧室，跛能行，征吉。', favorableMeaning: '侧室相承，征吉。' },
+    { index: 2, classicText: '九二：眇能視，利幽人之貞。', xiaoXiang: '利幽人之貞，未變常也。', plainText: '九二：眇能视，利幽人之贞。', plainXiaoXiang: '《象传》：利幽人之贞，未变。', coreMeaning: '一目盲能视，利幽静人守正。', favorableMeaning: '幽人守正，利。' },
+    { index: 3, classicText: '六三：歸妹以須，反歸以娣。', xiaoXiang: '歸妹以須，未當也。', plainText: '六三：归妹以须，反归以娣。', plainXiaoXiang: '《象传》：归妹以须，未当。', coreMeaning: '嫁后等待，反归作侧室。', favorableMeaning: '未当而待，反归以娣。' },
+    { index: 4, classicText: '九四：歸妹愆期，遲歸有時。', xiaoXiang: '愆期之志，有待而行也。', plainText: '九四：归妹愆期，迟归有时。', plainXiaoXiang: '《象传》：愆期之志，有待。', coreMeaning: '嫁期延误，迟嫁有时。', favorableMeaning: '待时而嫁，有志。' },
+    { index: 5, classicText: '六五：帝乙歸妹，其君之袂，不如其娣之袂良，月幾望，吉。', xiaoXiang: '帝乙歸妹，不如其娣之袂良也。其位在中，以貴行也。', plainText: '六五：帝乙归妹，其君之袂，不如其娣之袂良。月几望，吉。', plainXiaoXiang: '《象传》：帝乙归妹，不如其娣之袂良。其位在中，以贵。', coreMeaning: '帝乙嫁女，君后衣袂不如侧室美。月几望，吉。', favorableMeaning: '中位不尚饰，吉。' },
+    { index: 6, classicText: '上六：女承筐无實，士刲羊无血，无攸利。', xiaoXiang: '上六无實，承虛筐也。', plainText: '上六：女承筐无实，士刲羊无血，无攸利。', plainXiaoXiang: '《象传》：上六无实，承虚筐。', coreMeaning: '女捧筐无实，士杀羊无血，无攸利。', cautionMeaning: '承虚无实，无利。' }
+  ]
+}
+
+
+// ============================================================
+// 第 55 卦：丰
+// ============================================================
+const FENG: LocalHexagramKnowledge = {
+  kingWen: 55, name: '丰',
+  classic: {
+    judgment: '亨。王假之，勿憂，宜日中。',
+    tuan: '豐，大也。明以動，故豐。王假之，尚大也。勿憂宜日中，宜照天下也。日中則昃，月盈則食，天地盈虛，與時消息，而況于人乎？況于鬼神乎？',
+    daXiang: '雷電皆至，豐；君子以折獄致刑。',
+    sourceRefs: SR('丰')
+  },
+  localMeaning: {
+    plainJudgment: '丰：亨，王假之。勿忧，宜日中。',
+    plainTuan: '《彖传》说：丰，大也。明以动，故丰。王假之，尚大。勿忧宜日中，宜照天下。日中则昃，月盈则食，天地盈虚，与时消息。而况于人乎，况于鬼神乎。',
+    plainDaXiang: '《大象传》说：雷电皆至，丰。君子以折狱致刑。',
+    coreMeaning: '丰代表丰大、丰盛、盛大。核心：日中则昃——丰盛到极点就要转衰。明以动——光明而行动。宜日中——如日中天之时。',
+    keyThemes: ['丰大盛大', '明以动', '日中则昃', '与时消息'],
+    asBaseHexagram: '当前主旨处于丰盛盛大的顶点。但须知日中则昃，盛极必衰。',
+    asMutualHexagram: '互卦表示中段处于丰盛丰大、如日中天的阶段。',
+    asChangedHexagram: '变卦表示后段趋向丰大丰盛、但须防盛极而衰。',
+    cautions: ['盛极必衰须知戒', '勿忧但须保日中', '明以动方能保丰']
+  },
+  lines: [
+    { index: 1, classicText: '初九：遇其配主，雖旬无咎，往有尚。', xiaoXiang: '雖旬无咎，過旬災也。', plainText: '初九：遇其配主，虽旬无咎，往有尚。', plainXiaoXiang: '《象传》：虽旬无咎，过旬灾。', coreMeaning: '遇到匹配之主，均等无咎，往有尚。', favorableMeaning: '均等相遇，往有尚。' },
+    { index: 2, classicText: '六二：豐其蔀，日中見斗，往得疑疾，有孚發若，吉。', xiaoXiang: '有孚發若，信以發志也。', plainText: '六二：丰其蔀，日中见斗。往得疑疾，有孚发若，吉。', plainXiaoXiang: '《象传》：丰其蔀，位当。往得疑疾，诚发。', coreMeaning: '遮蔽大，日中见北斗。往见疑疾，以诚发之，吉。', favorableMeaning: '蔽明见斗，诚发则吉。' },
+    { index: 3, classicText: '九三：豐其沛，日中見沫，折其右肱，无咎。', xiaoXiang: '豐其沛，不可大事也。折其右肱，終不可用也。', plainText: '九三：丰其沛，日中见沬。折其右肱，无咎。', plainXiaoXiang: '《象传》：丰其沛，不可大事。折其右肱，终不可用。', coreMeaning: '遮蔽大如沛，日中见小星。折断右臂，无咎。', favorableMeaning: '明微折肱，不可大事。' },
+    { index: 4, classicText: '九四：豐其蔀，日中見斗，遇其夷主，吉。', xiaoXiang: '豐其蔀，位不當也。日中見斗，幽不明也。遇其夷主，吉；行也。', plainText: '九四：丰其蔀，日中见斗。遇其夷主，吉。', plainXiaoXiang: '《象传》：丰其蔀，位不当。日中见斗，幽明。遇其夷主，行。', coreMeaning: '遮蔽大，日中见斗。遇到对等之主，吉。', favorableMeaning: '遇夷主吉，明行。' },
+    { index: 5, classicText: '六五：來章，有慶譽，吉。', xiaoXiang: '六五之吉，有慶也。', plainText: '六五：来章，有庆誉，吉。', plainXiaoXiang: '《象传》：六五之吉，有庆。', coreMeaning: '有章美而来，有庆誉，吉。', favorableMeaning: '来章有庆，吉。' },
+    { index: 6, classicText: '上六：豐其屋，蔀其家，窺其戶，闃其无人，三歲不觌，凶。', xiaoXiang: '豐其屋，天際翔也。窺其戶，闃其无人，自藏也。', plainText: '上六：丰其屋，蔀其家。窥其户，阒其无人，三岁不觌，凶。', plainXiaoXiang: '《象传》：丰其屋，天际。窥其户阒其无人，自藏。', coreMeaning: '房屋宽大，遮蔽其家。窥户无人，三年不见，凶。', cautionMeaning: '自藏自绝，凶。' }
+  ]
+}
+
+
+// ============================================================
+// 第 56 卦：旅
+// ============================================================
+const LV: LocalHexagramKnowledge = {
+  kingWen: 56, name: '旅',
+  classic: {
+    judgment: '小亨，旅貞吉。',
+    tuan: '旅，小亨，柔得中乎外，而順乎剛，止而麗乎明，是以小亨，旅貞吉也。旅之時義大矣哉！',
+    daXiang: '山上有火，旅；君子以明慎用刑，而不留獄。',
+    sourceRefs: SR('旅')
+  },
+  localMeaning: {
+    plainJudgment: '旅：小亨，旅贞吉。',
+    plainTuan: '《彖传》说：旅，小亨。柔得中乎外而顺乎刚，止而丽乎明，是以小亨旅贞吉。旅之时义大矣哉。',
+    plainDaXiang: '《大象传》说：山上有火，旅。君子以明慎用刑而不留狱。',
+    coreMeaning: '旅代表行旅、寄居、在外。核心：旅贞吉——在外须守正。柔得中乎外——在外柔顺中正。明慎用刑——明察谨慎用刑。',
+    keyThemes: ['行旅寄居', '旅贞吉', '明慎用刑', '柔得中外'],
+    asBaseHexagram: '当前主旨处于在外行旅、客居他方的状态。柔顺守正则小亨。',
+    asMutualHexagram: '互卦表示中段处于客居在外、谨慎行事的阶段。',
+    asChangedHexagram: '变卦表示后段趋向行旅在外、漂泊寄居。',
+    cautions: ['在外须柔顺守正', '明慎用刑不留狱', '旅小亨不可自大']
+  },
+  lines: [
+    { index: 1, classicText: '初六：旅瑣瑣，斯其所取災。', xiaoXiang: '旅瑣瑣，志窮災也。', plainText: '初六：旅琐琐，斯其所取灾。', plainXiaoXiang: '《象传》：旅琐琐，志穷灾。', coreMeaning: '旅中琐琐小器，自取灾祸。', cautionMeaning: '旅中琐细，志穷取灾。' },
+    { index: 2, classicText: '六二：旅即次，懷其資，得童僕貞。', xiaoXiang: '得童僕貞，終无尤也。', plainText: '六二：旅即次，怀其资，得童仆贞。', plainXiaoXiang: '《象传》：得童仆贞，终无尤。', coreMeaning: '旅中住店，怀资财，得童仆贞。', favorableMeaning: '旅中有资有仆，终无尤。' },
+    { index: 3, classicText: '九三：旅焚其次，喪其童僕，貞厲。', xiaoXiang: '旅焚其次，亦以傷矣。以旅與下，其義喪也。', plainText: '九三：旅焚其次，丧其童仆，贞厉。', plainXiaoXiang: '《象传》：旅焚其次，亦以伤。以旅与下，其义丧。', coreMeaning: '旅舍被焚，丧失童仆，贞厉。', cautionMeaning: '旅中焚舍丧仆，贞厉。' },
+    { index: 4, classicText: '九四：旅于處，得其資斧，我心不快。', xiaoXiang: '旅于處，未得位也。得其資斧，心未快也。', plainText: '九四：旅于处，得其资斧，我心不快。', plainXiaoXiang: '《象传》：旅于处，未得位。得其资斧，心未快。', coreMeaning: '旅中得处，得资斧，心不快。', favorableMeaning: '虽得资斧，未得位不快。' },
+    { index: 5, classicText: '六五：射雉一矢亡，終以譽命。', xiaoXiang: '終以譽命，上逮也。', plainText: '六五：射雉一矢亡，终以誉命。', plainXiaoXiang: '《象传》：终以誉命，上逮。', coreMeaning: '射雉一箭丧失，终得誉命。', favorableMeaning: '亡矢终誉，上逮。' },
+    { index: 6, classicText: '上九：鳥焚其巢，旅人先笑后號咷。喪牛于易，凶。', xiaoXiang: '以旅在上，其義焚也。喪牛于易，終莫之聞也。', plainText: '上九：鸟焚其巢，旅人先笑后号咷。丧牛于易，凶。', plainXiaoXiang: '《象传》：以旅在上，其义焚。丧牛于易，终莫闻。', coreMeaning: '鸟巢被焚，旅人先笑后哭。在田畔丧牛，凶。', cautionMeaning: '旅极自骄，先笑后号。' }
+  ]
+}
+
+
+// ============================================================
+// 第 57 卦：巽
+// ============================================================
+const XUN: LocalHexagramKnowledge = {
+  kingWen: 57, name: '巽',
+  classic: {
+    judgment: '小亨。利有攸往。利見大人。',
+    tuan: '重巽以申命，剛巽乎中正而志行。柔皆順乎剛，是以小亨，利有攸往，利見大人。',
+    daXiang: '隨風，巽；君子以申命行事。',
+    sourceRefs: SR('巽')
+  },
+  localMeaning: {
+    plainJudgment: '巽：小亨，利有攸往，利见大人。',
+    plainTuan: '《彖传》说：重巽以申命。刚巽乎中正而志行，柔皆顺乎刚。是以小亨，利有攸往，利见大人。',
+    plainDaXiang: '《大象传》说：随风，巽。君子以申命行事。',
+    coreMeaning: '巽代表谦逊、顺从、风。核心：随风——随风相随，无孔不入。申命行事——重复命令，推行事务。刚巽乎中正——刚而顺中正。',
+    keyThemes: ['谦逊顺从', '随风申命', '刚巽中正', '小亨利往'],
+    asBaseHexagram: '当前主旨偏向谦逊顺从、随顺而行。小亨，利见大人。',
+    asMutualHexagram: '互卦表示中段处于谦逊顺从、随风潜入的阶段。',
+    asChangedHexagram: '变卦表示后段趋向随顺谦逊、随风而行。',
+    cautions: ['巽是顺从不是盲从', '申命行事须反复', '刚巽中正方志行']
+  },
+  lines: [
+    { index: 1, classicText: '初六：進退，利武人之貞。', xiaoXiang: '進退，志疑也。利武人之貞，志治也。', plainText: '初六：进退，利武人之贞。', plainXiaoXiang: '《象传》：进退，志疑。利武人之贞，志治。', coreMeaning: '进退犹豫，利武人守正。', favorableMeaning: '志疑不决，利武人贞。' },
+    { index: 2, classicText: '九二：巽在牀下，用史巫紛若，吉无咎。', xiaoXiang: '紛若之吉，得中也。', plainText: '九二：巽在床下，用史巫纷若，吉无咎。', plainXiaoXiang: '《象传》：纷若之吉，得中。', coreMeaning: '卑顺在床下，用史巫纷若，吉无咎。', favorableMeaning: '过巽得中，吉无咎。' },
+    { index: 3, classicText: '九三：頻巽，吝。', xiaoXiang: '頻巽之吝，志窮也。', plainText: '九三：频巽，吝。', plainXiaoXiang: '《象传》：频巽之吝，志穷。', coreMeaning: '频频勉强顺巽，吝。', cautionMeaning: '频巽志穷，吝。' },
+    { index: 4, classicText: '六四：悔亡，田獲三品。', xiaoXiang: '田獲三品，有功也。', plainText: '六四：悔亡，田获三品。', plainXiaoXiang: '《象传》：田获三品，有功。', coreMeaning: '悔亡，田猎获三品。', favorableMeaning: '田获三品，有功。' },
+    { index: 5, classicText: '九五：貞吉悔亡，无不利。无初有終，先庚三日，后庚三日，吉。', xiaoXiang: '九五之吉，位正中也。', plainText: '九五：贞吉悔亡，无不利。无初有终，先庚三日，后庚三日，吉。', plainXiaoXiang: '《象传》：九五之吉，位正中。', coreMeaning: '贞吉悔亡，无不利。无初有终，先庚后庚，吉。', favorableMeaning: '中正变更，吉。' },
+    { index: 6, classicText: '上九：巽在牀下，喪其資斧，貞凶。', xiaoXiang: '巽在牀下，上窮也。喪其資斧，正乎凶也。', plainText: '上九：巽在床下，丧其资斧，贞凶。', plainXiaoXiang: '《象传》：巽在床下，上穷。丧其资斧，正凶。', coreMeaning: '卑顺在床下，丧失资斧，贞凶。', cautionMeaning: '巽极丧资，贞凶。' }
+  ]
+}
+
+
+// ============================================================
+// 第 59 卦：涣
+// ============================================================
+const HUAN: LocalHexagramKnowledge = {
+  kingWen: 59, name: '涣',
+  classic: {
+    judgment: '亨。王假有廟，利涉大川，利貞。',
+    tuan: '渙，亨。剛來而不窮，柔得位乎外而上同。王假有廟，王乃在中也。利涉大川，乘木有功也。',
+    daXiang: '風行水上，渙；先王以享于帝立廟。',
+    sourceRefs: SR('涣')
+  },
+  localMeaning: {
+    plainJudgment: '涣：亨。王假有庙，利涉大川，利贞。',
+    plainTuan: '《彖传》说：涣亨，刚来而不穷，柔得位乎外而上同。王假有庙，王乃在中。利涉大川，乘木有功。',
+    plainDaXiang: '《大象传》说：风行水上，涣。先王以享于帝立庙。',
+    coreMeaning: '涣代表涣散、流散、冰释。核心：风行水上——涣散但有序。王假有庙——聚人心于宗庙。乘木有功——涉险有功。',
+    keyThemes: ['涣散流散', '风行水上', '聚人心', '乘木涉川'],
+    asBaseHexagram: '当前主旨处于人心涣散、需要凝聚的阶段。王假有庙以聚人心。',
+    asMutualHexagram: '互卦表示中段处于涣散流散、需要重新凝聚的阶段。',
+    asChangedHexagram: '变卦表示后段趋向涣散冰释、各散东西。',
+    cautions: ['涣散须聚以庙', '聚而后能涉川', '涣而不聚则穷']
+  },
+  lines: [
+    { index: 1, classicText: '初六：用拯馬壯，吉。', xiaoXiang: '初六之吉，順也。', plainText: '初六：用拯马壮，吉。', plainXiaoXiang: '《象传》：初六之吉，顺。', coreMeaning: '用壮马拯救，吉。', favorableMeaning: '初涣能拯，吉。' },
+    { index: 2, classicText: '九二：渙奔其机，悔亡。', xiaoXiang: '渙奔其机，得愿也。', plainText: '九二：涣奔其机，悔亡。', plainXiaoXiang: '《象传》：涣奔其机，得愿。', coreMeaning: '涣散时奔靠几案，悔亡。', favorableMeaning: '涣而得依，悔亡。' },
+    { index: 3, classicText: '六三：渙其躬，无悔。', xiaoXiang: '渙其躬，志在外也。', plainText: '六三：涣其躬，无悔。', plainXiaoXiang: '《象传》：涣其躬，志在外。', coreMeaning: '涣散自身，无悔。', favorableMeaning: '涣己从人，志在外。' },
+    { index: 4, classicText: '六四：渙其群，元吉。渙有丘，匪夷所思。', xiaoXiang: '渙其群，元吉；光大也。', plainText: '六四：涣其群，元吉。涣有丘，匪夷所思。', plainXiaoXiang: '《象传》：涣其群元吉，光大。', coreMeaning: '涣散朋党，元吉。涣而有丘，非平常所思。', favorableMeaning: '涣群光大，元吉。' },
+    { index: 5, classicText: '九五：渙汗其大號，渙王居，无咎。', xiaoXiang: '王居无咎，正位也。', plainText: '九五：涣汗其大号，涣王居，无咎。', plainXiaoXiang: '《象传》：王居无咎，正位。', coreMeaning: '涣如出汗发大号令，涣散王居，无咎。', favorableMeaning: '涣号正位，无咎。' },
+    { index: 6, classicText: '上九：渙其血，去逖出，无咎。', xiaoXiang: '渙其血，遠害也。', plainText: '上九：涣其血，去逖出，无咎。', plainXiaoXiang: '《象传》：涣其血，远害。', coreMeaning: '涣散血光，远离出去，无咎。', favorableMeaning: '涣血远害，无咎。' }
+  ]
+}
+
+
+// ============================================================
+// 第 60 卦：节
+// ============================================================
+const JIE: LocalHexagramKnowledge = {
+  kingWen: 60, name: '节',
+  classic: {
+    judgment: '亨。苦節不可貞。',
+    tuan: '節，亨，剛柔分，而剛得中。苦節不可貞，其道窮也。說以行險，當位以節，中正以通。天地節而四時成，節以制度，不傷財，不害民。',
+    daXiang: '澤上有水，節；君子以制數度，議德行。',
+    sourceRefs: SR('节')
+  },
+  localMeaning: {
+    plainJudgment: '节：亨。苦节不可贞。',
+    plainTuan: '《彖传》说：节亨，刚柔分而刚得中。苦节不可贞，其道穷。说以行险，当位以节，中正以通。天地节而四时成。节以制度，不伤财，不害民。',
+    plainDaXiang: '《大象传》说：泽上有水，节。君子以制数度，议德行。',
+    coreMeaning: '节代表节制、节约、制度。核心：苦节不可贞——过度节制不可守。说以行险——和悦地节制。制数度议德行——制定法度，评议德行。',
+    keyThemes: ['节制节约', '苦节不可贞', '制数度', '中正以通'],
+    asBaseHexagram: '当前主旨偏向节制有度、制定规范。苦节不可贞，适度则亨。',
+    asMutualHexagram: '互卦表示中段处于节制约束、按制度行事的阶段。',
+    asChangedHexagram: '变卦表示后段趋向节制节约、有度有节。',
+    cautions: ['苦节不可贞——过犹不及', '节以制度不伤财', '中正以通']
+  },
+  lines: [
+    { index: 1, classicText: '初九：不出戶庭，无咎。', xiaoXiang: '不出戶庭，知通塞也。', plainText: '初九：不出户庭，无咎。', plainXiaoXiang: '《象传》：不出户庭，知通塞。', coreMeaning: '不出门庭，无咎。', favorableMeaning: '知塞不出，无咎。' },
+    { index: 2, classicText: '九二：不出門庭，凶。', xiaoXiang: '不出門庭，失時極也。', plainText: '九二：不出门庭，凶。', plainXiaoXiang: '《象传》：不出门庭凶，失时极。', coreMeaning: '不出门庭，凶。', favorableMeaning: '知塞而不出，失时凶。' },
+    { index: 3, classicText: '六三：不節若，則嗟若，无咎。', xiaoXiang: '不節之嗟，又誰咎也。', plainText: '六三：不节若，则嗟若，无咎。', plainXiaoXiang: '《象传》：不节之嗟，又谁咎。', coreMeaning: '不节制，叹息，无咎。', favorableMeaning: '不节则嗟，无可咎。' },
+    { index: 4, classicText: '六四：安節，亨。', xiaoXiang: '安節之亨，承上道也。', plainText: '六四：安节，亨。', plainXiaoXiang: '《象传》：安节之亨，承上道。', coreMeaning: '安于节制，亨。', favorableMeaning: '安节承上，亨。' },
+    { index: 5, classicText: '九五：甘節，吉；往有尚。', xiaoXiang: '甘節之吉，居位中也。', plainText: '九五：甘节，吉，往有尚。', plainXiaoXiang: '《象传》：甘节之吉，居位中。', coreMeaning: '甘美地节制，吉，往有尚。', favorableMeaning: '甘节居中，往有尚。' },
+    { index: 6, classicText: '上六：苦節，貞凶，悔亡。', xiaoXiang: '苦節貞凶，其道窮也。', plainText: '上六：苦节，贞凶，悔亡。', plainXiaoXiang: '《象传》：苦节贞凶，其道穷。', coreMeaning: '苦节，贞凶，悔亡。', cautionMeaning: '苦节道穷，贞凶。' }
+  ]
+}
+
+
+// ============================================================
+// 第 61 卦：中孚
+// ============================================================
+const ZHONGFU: LocalHexagramKnowledge = {
+  kingWen: 61, name: '中孚',
+  classic: {
+    judgment: '豚魚吉，利涉大川，利貞。',
+    tuan: '中孚，柔在內而剛得中。說而巽，孚，乃化邦也。豚魚吉，信及豚魚也。利涉大川，乘木舟虛也。中孚以利貞，乃應乎天也。',
+    daXiang: '澤上有風，中孚；君子以議獄緩死。',
+    sourceRefs: SR('中孚')
+  },
+  localMeaning: {
+    plainJudgment: '中孚：豚鱼吉。利涉大川，利贞。',
+    plainTuan: '《彖传》说：中孚，柔在内而刚得中。说而巽，孚乃化邦。豚鱼吉，信及豚鱼。利涉大川，乘木舟虚。中孚以利贞，应乎天。',
+    plainDaXiang: '《大象传》说：泽上有风，中孚。君子以议狱缓死。',
+    coreMeaning: '中孚代表内心诚信、中正信实。核心：信及豚鱼——诚信连豚鱼都能感化。柔在内刚得中——内柔外刚，中心诚信。议狱缓死——诚信则慎用刑。',
+    keyThemes: ['内心诚信', '信及豚鱼', '柔内刚中', '议狱缓死'],
+    asBaseHexagram: '当前主旨偏向内心诚信、以诚感人。利涉大川，利贞。',
+    asMutualHexagram: '互卦表示中段处于诚信感通、中心信实的阶段。',
+    asChangedHexagram: '变卦表示后段趋向中孚诚信、以诚相感。',
+    cautions: ['诚信须由衷发', '信及豚鱼方为诚', '议狱缓死慎用刑']
+  },
+  lines: [
+    { index: 1, classicText: '初九：虞吉，有他不燕。', xiaoXiang: '初九虞吉，志未變也。', plainText: '初九：虞吉，有它不燕。', plainXiaoXiang: '《象传》：初九虞吉，志未变。', coreMeaning: '安守则吉，有他念则不安。', favorableMeaning: '虞安志不变，吉。' },
+    { index: 2, classicText: '九二：鳴鶴在陰，其子和之，我有好爵，吾與爾靡之。', xiaoXiang: '其子和之，中心愿也。', plainText: '九二：鸣鹤在阴，其子和之。我有好爵，吾与尔靡之。', plainXiaoXiang: '《象传》：其子和之，中心愿。', coreMeaning: '鹤在树荫鸣叫，小鹤应和。我有美酒，与你共饮。', favorableMeaning: '中心相感，同声相应。' },
+    { index: 3, classicText: '六三：得敵，或鼓或罷，或泣或歌。', xiaoXiang: '或鼓或罷，位不當也。', plainText: '六三：得敌，或鼓或罢，或泣或歌。', plainXiaoXiang: '《象传》：或鼓或罢，位不当。', coreMeaning: '遇到对手，或鼓或罢，或泣或歌。', cautionMeaning: '位不当而心不定。' },
+    { index: 4, classicText: '六四：月几望，馬匹亡，无咎。', xiaoXiang: '馬匹亡，絕類上也。', plainText: '六四：月几望，马匹亡，无咎。', plainXiaoXiang: '《象传》：马匹亡，绝类上。', coreMeaning: '月将圆，马匹走失，无咎。', favorableMeaning: '绝类从上，无咎。' },
+    { index: 5, classicText: '九五：有孚攣如，无咎。', xiaoXiang: '有孚攣如，位正當也。', plainText: '九五：有孚挛如，无咎。', plainXiaoXiang: '《象传》：有孚挛如，位正当。', coreMeaning: '诚信维系不舍，无咎。', favorableMeaning: '孚信挛如，位正当。' },
+    { index: 6, classicText: '上九：翰音登于天，貞凶。', xiaoXiang: '翰音登于天，何可長也。', plainText: '上九：翰音登于天，贞凶。', plainXiaoXiang: '《象传》：翰音登于天，何可长。', coreMeaning: '鸡鸣之声上闻于天，贞凶。', cautionMeaning: '虚声登天，何可长。' }
+  ]
+}
+
+
+// ============================================================
+// 第 62 卦：小过
+// ============================================================
+const XIAOGUO: LocalHexagramKnowledge = {
+  kingWen: 62, name: '小过',
+  classic: {
+    judgment: '亨。利貞。可小事，不可大事。飛鳥遺之音，不宜上宜下，大吉。',
+    tuan: '小過，小者過而亨也。過以利貞，與時行也。柔得中，是以小事吉也。剛失位而不中，是以不可大事也。有飛鳥之象焉，有飛鳥遺之音，不宜上宜下，大吉；上逆而下順也。',
+    daXiang: '山上有雷，小過；君子以行過乎恭，喪過乎哀，用過乎儉。',
+    sourceRefs: SR('小过')
+  },
+  localMeaning: {
+    plainJudgment: '小过：亨，利贞。可小事，不可大事。飞鸟遗之音，不宜上，宜下，大吉。',
+    plainTuan: '《彖传》说：小过，小者过而亨。过以利贞，与时行。柔得中，是以小事吉。刚失位而不中，是以不可大事。有飞鸟之象，飞鸟遗之音，不宜上宜下大吉，上逆而下顺。',
+    plainDaXiang: '《大象传》说：山上有雷，小过。君子以行过乎恭，丧过乎哀，用过乎俭。',
+    coreMeaning: '小过代表小有过越、略有超出。核心：可小事不可大事——小处可过，大处不可。行过乎恭——行略过于恭谨。不宜上宜下——宜下不宜上。',
+    keyThemes: ['小有过越', '可小事', '过恭过哀过俭', '宜下不宜上'],
+    asBaseHexagram: '当前主旨偏向小有过越、略超常规。小事可过，大事不可。',
+    asMutualHexagram: '互卦表示中段处于略有超出、小处变通的阶段。',
+    asChangedHexagram: '变卦表示后段趋向小过略超、行过于恭。',
+    cautions: ['小过可大事不可', '行过乎恭丧过乎哀', '不宜上宜下']
+  },
+  lines: [
+    { index: 1, classicText: '初六：飛鳥以凶。', xiaoXiang: '飛鳥以凶，不可如何也。', plainText: '初六：飞鸟以凶。', plainXiaoXiang: '《象传》：飞鸟以凶，不可如何。', coreMeaning: '飞鸟强行，凶。', cautionMeaning: '飞鸟逆上，凶。' },
+    { index: 2, classicText: '六二：過其祖，遇其妣；不及其君，遇其臣；无咎。', xiaoXiang: '不及其君，臣不可過也。', plainText: '六二：过其祖，遇其妣。不及其君，遇其臣，无咎。', plainXiaoXiang: '《象传》：不及其君，臣不可过。', coreMeaning: '越过祖父，遇到祖母。不及君王，遇到臣子，无咎。', favorableMeaning: '过祖遇妣，无咎。' },
+    { index: 3, classicText: '九三：弗過防之，從或戕之，凶。', xiaoXiang: '從或戕之，凶如何也。', plainText: '九三：弗过防之，从或戕之，凶。', plainXiaoXiang: '《象传》：从或戕之，凶。', coreMeaning: '不加防备，从而被害，凶。', cautionMeaning: '弗过防则凶。' },
+    { index: 4, classicText: '九四：无咎，弗過遇之。往厲必戒，勿用永貞。', xiaoXiang: '弗過遇之，位不當也。往厲必戒，終不可長也。', plainText: '九四：无咎，弗过遇之。往厉必戒，勿用永贞。', plainXiaoXiang: '《象传》：弗过遇之，位不当。往厉必戒，终不可长。', coreMeaning: '无咎，不过于遇。往厉必戒，不可永贞。', favorableMeaning: '位不当往厉，必戒。' },
+    { index: 5, classicText: '六五：密云不雨，自我西郊，公弋取彼在穴。', xiaoXiang: '密云不雨，已上也。', plainText: '六五：密云不雨，自我西郊。公弋取彼在穴。', plainXiaoXiang: '《象传》：密云不雨，已上。', coreMeaning: '密云不雨，从西郊来。公射取穴中之物。', favorableMeaning: '密云不雨，取彼在穴。' },
+    { index: 6, classicText: '上六：弗遇過之，飛鳥離之，凶，是謂災眚。', xiaoXiang: '弗遇過之，已亢也。', plainText: '上六：弗遇过之，飞鸟离之，凶。是谓灾眚。', plainXiaoXiang: '《象传》：弗遇过之，已亢。', coreMeaning: '不遇而过之，飞鸟罹之，凶。', cautionMeaning: '过亢飞鸟离之，灾眚。' }
+  ]
+}
+
+
+// ============================================================
+// 第 63 卦：既济
+// ============================================================
+const JIJI: LocalHexagramKnowledge = {
+  kingWen: 63, name: '既济',
+  classic: {
+    judgment: '亨小。利貞。初吉終亂。',
+    tuan: '既濟，亨，小者亨也。利貞，剛柔正而位當也。初吉，柔得中也。終止則亂，其道窮也。',
+    daXiang: '水在火上，既濟；君子以思患而豫防之。',
+    sourceRefs: SR('既济')
+  },
+  localMeaning: {
+    plainJudgment: '既济：亨小，利贞。初吉终乱。',
+    plainTuan: '《彖传》说：既济亨，小者亨。利贞，刚柔正而位当。初吉，柔得中。终止则乱，其道穷。',
+    plainDaXiang: '《大象传》说：水在火上，既济。君子以思患而豫防之。',
+    coreMeaning: '既济代表已经完成、事已成。核心：初吉终乱——初时吉，最终乱。思患豫防——想到祸患预先防备。刚柔正位当——一切就位。',
+    keyThemes: ['事已成', '初吉终乱', '思患豫防', '刚柔正位'],
+    asBaseHexagram: '当前主旨处于事情已经完成、大功告成的阶段。但须思患豫防，初吉终乱。',
+    asMutualHexagram: '互卦表示中段处于既成之后、须防懈怠的阶段。',
+    asChangedHexagram: '变卦表示后段趋向既济完成、但防终乱。',
+    cautions: ['初吉终乱须警惕', '思患豫防不可怠', '既济之时更须守正']
+  },
+  lines: [
+    { index: 1, classicText: '初九：曳其輪，濡其尾，无咎。', xiaoXiang: '曳其輪，義无咎也。', plainText: '初九：曳其轮，濡其尾，无咎。', plainXiaoXiang: '《象传》：曳其轮，义无咎。', coreMeaning: '拖住车轮，沾湿尾巴，无咎。', favorableMeaning: '既济初慎，无咎。' },
+    { index: 2, classicText: '六二：婦喪其茀，勿逐，七日得。', xiaoXiang: '七日得，以中道也。', plainText: '六二：妇丧其茀，勿逐，七日得。', plainXiaoXiang: '《象传》：七日得，以中道。', coreMeaning: '妇人丧失车蔽，不必追，七日得。', favorableMeaning: '丧茁勿逐，七日自复。' },
+    { index: 3, classicText: '九三：高宗伐鬼方，三年克之，小人勿用。', xiaoXiang: '三年克之，憊也。', plainText: '九三：高宗伐鬼方，三年克之。小人勿用。', plainXiaoXiang: '《象传》：三年克之，惫。', coreMeaning: '高宗伐鬼方，三年才胜。小人不可用。', favorableMeaning: '三年克之，惫。' },
+    { index: 4, classicText: '六四：繻有衣袽，終日戒。', xiaoXiang: '終日戒，有所疑也。', plainText: '六四：繻有衣袽，终日戒。', plainXiaoXiang: '《象传》：终日戒，有所疑。', coreMeaning: '华美衣裳变成破衣，终日戒备。', favorableMeaning: '终日戒备，防患。' },
+    { index: 5, classicText: '九五：東鄰殺牛，不如西鄰之禴祭，實受其福。', xiaoXiang: '東鄰殺牛，不如西鄰之時也；實受其福，吉大來也。', plainText: '九五：东邻杀牛，不如西邻之禴祭，实受其福。', plainXiaoXiang: '《象传》：东邻杀牛，不如西邻之时。实受其福，吉大来。', coreMeaning: '东邻杀牛，不如西邻薄祭实受福。', favorableMeaning: '诚祭胜奢祭，实受福。' },
+    { index: 6, classicText: '上六：濡其首，厲。', xiaoXiang: '濡其首厲，何可久也。', plainText: '上六：濡其首，厉。', plainXiaoXiang: '《象传》：濡其首厉，何可久。', coreMeaning: '沾湿头部，危厉。', cautionMeaning: '既济极而濡首，危厉。' }
+  ]
+}
+
+
+// ============================================================
+// 第 64 卦：未济
+// ============================================================
+const WEIJI: LocalHexagramKnowledge = {
+  kingWen: 64, name: '未济',
+  classic: {
+    judgment: '亨。小狐汔濟，濡其尾，无攸利。',
+    tuan: '未濟，亨；柔得中也。小狐汔濟，未出中也。濡其尾，无攸利；不續終也。雖不當位，剛柔應也。',
+    daXiang: '火在水上，未濟；君子以慎辨物居方。',
+    sourceRefs: SR('未济')
+  },
+  localMeaning: {
+    plainJudgment: '未济：亨。小狐汔济，濡其尾，无攸利。',
+    plainTuan: '《彖传》说：未济亨，柔得中。小狐汔济，未出中。濡其尾无攸利，不续终。虽不当位，刚柔应。',
+    plainDaXiang: '《大象传》说：火在水上，未济。君子以慎辨物居方。',
+    coreMeaning: '未济代表尚未完成、事未成。核心：小狐汔济——小狐快渡河时湿了尾巴，功亏一篑。慎辨物居方——谨慎辨别事物，各居其方。虽不当位刚柔应——位置虽不正但刚柔相应。',
+    keyThemes: ['事未成', '小狐汔济', '慎辨物居方', '不续终'],
+    asBaseHexagram: '当前主旨处于事情尚未完成、接近终点但未到底的阶段。慎终如始。',
+    asMutualHexagram: '互卦表示中段处于尚未完成、须谨慎收尾的阶段。',
+    asChangedHexagram: '变卦表示后段趋向未济待成、功亏一篑。',
+    cautions: ['小狐汔济须防功亏一篑', '慎辨物居方', '未济之时刚柔应']
+  },
+  lines: [
+    { index: 1, classicText: '初六：濡其尾，吝。', xiaoXiang: '濡其尾，亦不知極也。', plainText: '初六：濡其尾，吝。', plainXiaoXiang: '《象传》：濡其尾，亦不知极。', coreMeaning: '沾湿尾巴，吝。', favorableMeaning: '未济初即濡尾，不知极。' },
+    { index: 2, classicText: '九二：曳其輪，貞吉。', xiaoXiang: '九二貞吉，中以行正也。', plainText: '九二：曳其轮，贞吉。', plainXiaoXiang: '《象传》：九二贞吉，中以行正。', coreMeaning: '拖住车轮，守正吉。', favorableMeaning: '曳轮守中，贞吉。' },
+    { index: 3, classicText: '六三：未濟，征凶，利涉大川。', xiaoXiang: '未濟征凶，位不當也。', plainText: '六三：未济，征凶，利涉大川。', plainXiaoXiang: '《象传》：未济征凶，位不当。', coreMeaning: '未济之时征凶，但利涉大川。', favorableMeaning: '位不当征凶，利涉川。' },
+    { index: 4, classicText: '九四：貞吉，悔亡，震用伐鬼方，三年有賞于大國。', xiaoXiang: '貞吉悔亡，志行也。', plainText: '九四：贞吉悔亡，震用伐鬼方，三年有赏于大国。', plainXiaoXiang: '《象传》：贞吉悔亡，志行。', coreMeaning: '守正吉悔亡，震伐鬼方，三年有赏大国。', favorableMeaning: '震伐三年，有赏大国。' },
+    { index: 5, classicText: '六五：貞吉，无悔，君子之光，有孚，吉。', xiaoXiang: '君子之光，其暉吉也。', plainText: '六五：贞吉无悔，君子之光，有孚，吉。', plainXiaoXiang: '《象传》：君子之光，其晖吉。', coreMeaning: '守正吉无悔，君子之光，有孚吉。', favorableMeaning: '君子之光，有孚晖吉。' },
+    { index: 6, classicText: '上九：有孚于飲酒，无咎，濡其首，有孚失是。', xiaoXiang: '飲酒濡首，亦不知節也。', plainText: '上九：有孚于饮酒，无咎。濡其首，有孚失是。', plainXiaoXiang: '《象传》：饮酒濡首，亦不知节。', coreMeaning: '诚信饮酒，无咎。但濡其首，则有孚失正。', cautionMeaning: '饮酒濡首，不知节。' }
+  ]
+}
+
+
+/**
+ * 本地卦象知识表 Part2（按 kingWen 索引）
+ */
+export const HEXAGRAM_MEANINGS_PART2: Record<number, LocalHexagramKnowledge> = {
+  33: DUN,
+  34: DAZHUANG,
+  35: JIN,
+  36: MINGYI,
+  37: JIAREN,
+  38: KUI,
+  39: JIAN,
+  40: XIE,
+  41: SUN,
+  42: YI,
+  43: GUAI,
+  44: GOU,
+  45: CUI,
+  46: SHENG,
+  47: KUN,
+  48: JING,
+  49: GE,
+  50: DING,
+  51: ZHEN,
+  52: GEN,
+  54: GUIMEI,
+  55: FENG,
+  56: LV,
+  57: XUN,
+  59: HUAN,
+  60: JIE,
+  61: ZHONGFU,
+  62: XIAOGUO,
+  63: JIJI,
+  64: WEIJI
+}

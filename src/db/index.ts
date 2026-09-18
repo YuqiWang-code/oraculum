@@ -1,13 +1,11 @@
 import Dexie, { Table } from 'dexie'
-import type { HistoryRecord, Settings, AiSession } from './schema'
+import type { HistoryRecord, Settings } from './schema'
 import type { DivinationRecord } from '../engine/orchestrator'
-import type { AiInterpretation, AiChatMessage } from '../types/ai'
 import { APP_VERSION } from '../types'
 
 class DivinationDB extends Dexie {
   history!: Table<HistoryRecord, string>
   settings!: Table<Settings, string>
-  aiSessions!: Table<AiSession, string>
 
   constructor() {
     super('smart-divination')
@@ -15,11 +13,16 @@ class DivinationDB extends Dexie {
       history: 'id, createdAt, category, label',
       settings: 'key'
     })
-    // v2：新增 aiSessions；不删 history/settings，旧数据保留
+    // v2：曾新增 aiSessions；v3 起彻底移除 AI，此 store 被删除
     this.version(2).stores({
       history: 'id, createdAt, category, label',
       settings: 'key',
       aiSessions: 'id, recordId, updatedAt'
+    })
+    // v3：删除 aiSessions store（Dexie 官方：新版 schema 中设为 null 即删除 store）
+    // history / settings 完全保留，旧数据不丢
+    this.version(3).stores({
+      aiSessions: null
     })
   }
 }
@@ -45,36 +48,25 @@ export async function listHistory(limit = 100): Promise<HistoryRecord[]> {
   return db.history.orderBy('createdAt').reverse().limit(limit).toArray()
 }
 
-// v3.1: 删除历史同时级联删除 aiSessions
 export async function deleteRecord(id: string): Promise<void> {
-  await db.transaction('rw', db.history, db.aiSessions, async () => {
-    await db.history.delete(id)
-    await db.aiSessions.where('recordId').equals(id).delete()
-  })
+  await db.history.delete(id)
 }
 
-// v3.1: 清空同时清两表
 export async function clearHistory(): Promise<void> {
-  await db.transaction('rw', db.history, db.aiSessions, async () => {
-    await db.history.clear()
-    await db.aiSessions.clear()
-  })
+  await db.history.clear()
 }
 
 export async function exportAll(): Promise<string> {
   const rows = await db.history.toArray()
-  const sessions = await db.aiSessions.toArray()
   return JSON.stringify({
     app: 'Oraculum',
-    exportSchemaVersion: 2,
+    exportSchemaVersion: 3,
     appVersion: APP_VERSION,
     exportedAt: new Date().toISOString(),
-    records: rows,
-    aiSessions: sessions
+    records: rows
   }, null, 2)
 }
 
-// v3.1: 简单 schema 校验，非法 JSON 不 bulkPut
 export async function importAll(json: string): Promise<number> {
   let data: { records?: unknown }
   try {
@@ -84,7 +76,6 @@ export async function importAll(json: string): Promise<number> {
   }
   if (!Array.isArray(data.records)) throw new Error('导入文件缺少 records 数组')
   const rows = data.records as HistoryRecord[]
-  // 简单校验：每条必须有 id 和 rating
   for (const r of rows) {
     if (!r.id || !r.rating || typeof r.rating.score !== 'number') {
       throw new Error('导入文件格式不正确：存在缺少 id/rating 的记录')
@@ -103,7 +94,6 @@ const DEFAULT_SETTINGS: Settings = {
 
 export async function getSettings(): Promise<Settings> {
   const row = await db.settings.get('main')
-  // v3.1: 旧数据 dayBoundaryRule 可能是 '00:00'/'23:00' 字符串，映射为新枚举
   const merged = row ? { ...DEFAULT_SETTINGS, ...row } : { ...DEFAULT_SETTINGS }
   const rawRule = String(merged.dayBoundaryRule)
   if (rawRule === '00:00') {
@@ -116,31 +106,4 @@ export async function getSettings(): Promise<Settings> {
 
 export async function saveSettings(s: Settings): Promise<void> {
   await db.settings.put({ key: 'main', ...s } as Settings & { key: string })
-}
-
-// ---- AI 会话（v2）----
-export async function getAiSession(recordId: string): Promise<AiSession | undefined> {
-  return db.aiSessions.where('recordId').equals(recordId).first()
-}
-
-export async function saveAiSession(
-  recordId: string,
-  response: AiInterpretation,
-  messages: AiChatMessage[],
-  model: string,
-  usage?: { input_tokens?: number; output_tokens?: number }
-): Promise<void> {
-  const existing = await getAiSession(recordId)
-  const row: AiSession = {
-    id: existing?.id || (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)),
-    recordId,
-    createdAt: existing?.createdAt || new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    model,
-    promptVersion: 'oraculum_ai_v1',
-    response: JSON.parse(JSON.stringify(response)),
-    messages: messages.slice(-6),
-    usage
-  }
-  await db.aiSessions.put(row)
 }

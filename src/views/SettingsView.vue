@@ -27,18 +27,8 @@
     </div>
     <button class="btn" @click="save">保存设置</button>
 
-    <div class="card">
-      <h2>AI 深度解读</h2>
-      <div class="muted">AI 为可选增强，需要联网；关闭 AI 不影响本地确定性起卦。</div>
-      <div>服务状态：<b>{{ healthText }}</b></div>
-      <label>AI 访问口令（只存本机，不同步）</label>
-      <input v-model="token" type="password" placeholder="服务端设置的 AI_ACCESS_TOKEN" />
-      <button class="btn secondary" @click="testConn">测试连接</button>
-      <div v-if="authText" class="muted" style="margin-top:4px">{{ authText }}</div>
-    </div>
-
     <div class="card muted">
-      本地传统引擎离线可用；AI 深度解读可选、需要联网。
+      Oraculum v{{ appVersion }}：核心计算与解读完全本地、离线可用，无需后端、无需 API Key、无需 AI。
     </div>
   </div>
 </template>
@@ -46,29 +36,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAppStore } from '../stores/app'
-import { checkAiHealth, checkAiAuth, getAiToken, setAiToken } from '../services/ai'
+import { APP_VERSION } from '../types'
+
 const store = useAppStore()
+const appVersion = APP_VERSION
 const tz = ref(store.settings.timezone)
 const boundary = ref<'midnight' | 'zi_hour'>(store.settings.dayBoundaryRule)
 const shensha = ref(store.settings.useShenshaInScore)
 const detail = ref(store.settings.showLunarDetail)
-const token = ref(getAiToken())
-const healthText = ref('未检测')
-const authText = ref('')
 
 async function save() {
   await store.updateSettings({ timezone: tz.value, dayBoundaryRule: boundary.value, useShenshaInScore: shensha.value, showLunarDetail: detail.value })
-  setAiToken(token.value.trim())
   alert('已保存')
-}
-
-async function testConn() {
-  setAiToken(token.value.trim())
-  const h = await checkAiHealth()
-  healthText.value = h.enabled ? `已连接（${h.model}）` : '未配置（后端未设置 API key）'
-  if (h.enabled) {
-    const a = await checkAiAuth()
-    authText.value = a.ok ? '访问口令：正确' : '访问口令：' + (a.message || '错误')
-  }
 }
 </script>
