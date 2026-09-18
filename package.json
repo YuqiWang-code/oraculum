@@ -1,6 +1,6 @@
 {
     "name":  "oraculum",
-    "version":  "3.3.0",
+    "version":  "3.4.0",
     "private":  true,
     "type":  "module",
     "description":  "智能推理与预测 - 移动端优先的传统文化问卦 PWA（梅花易数/六爻纳甲）",

@@ -95,7 +95,7 @@ describe('.env 被 gitignore', () => {
   })
   it('.env.example 只有占位符', () => {
     const ex = readFileSync(join(root, '.env.example'), 'utf8')
-    expect(ex).toContain('YOUR_ARK_API_KEY_HERE')
+    expect(ex).toContain('YOUR_LLM_API_KEY_HERE')
     expect(ex).not.toMatch(/sk-[A-Za-z0-9]{20}/)
   })
 })

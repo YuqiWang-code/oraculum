@@ -6,7 +6,7 @@ import fs from 'node:fs'
 import { isConfigured, getModel, getProviderInfo } from './openaiClient.js'
 import { sanitizeRecord } from './ai/sanitizeRecord.js'
 import { runInterpret, runFollowUp } from './ai/interpret.js'
-import { moderate } from './ai/moderation.js'
+import { moderate, getSafetyMode } from './ai/moderation.js'
 import { requireToken } from './middleware/auth.js'
 import { errorHandler, SAFETY_BLOCK } from './middleware/errorHandler.js'
 import { InterpretRequestSchema, FollowUpRequestSchema } from './ai/schema.js'
@@ -33,7 +33,8 @@ export function createApp(): express.Express {
       provider: info.provider,
       model: info.model,
       apiMode: info.apiMode,
-      structuredOutputMode: info.structuredOutputMode
+      structuredOutputMode: info.structuredOutputMode,
+      safetyMode: getSafetyMode()
     })
   })
 

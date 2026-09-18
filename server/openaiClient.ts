@@ -11,10 +11,21 @@ export interface ProviderInfo {
   structuredOutputMode: 'json-prompt-zod' | 'json-mode-zod' | 'responses-zod'
 }
 
+export function isPlaceholderSecret(v?: string): boolean {
+  if (!v) return true
+  const s = v.trim()
+  if (!s) return true
+  if (s.startsWith('YOUR_')) return true
+  if (s.startsWith('CHANGE_ME')) return true
+  if (s.startsWith('REPLACE_ME')) return true
+  if (/^<.*>$/.test(s)) return true
+  return false
+}
+
 export function getApiKey(): string | undefined {
   // v3.3: LLM_* > OPENAI_*
   const k = process.env.LLM_API_KEY || process.env.OPENAI_API_KEY
-  if (!k || k === 'YOUR_NEW_KEY_HERE' || k === 'YOUR_ARK_API_KEY_HERE' || k === 'CHANGE_ME_TO_A_PRIVATE_TOKEN') return undefined
+  if (isPlaceholderSecret(k)) return undefined
   return k
 }
 
