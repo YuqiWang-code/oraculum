@@ -1,14 +1,22 @@
-/** 从 DivinationRecord 只提取 AI 需要的最小快照（不含 alias/历史/设备信息） */
-export function sanitizeRecord(rec: any): Record<string, unknown> {
+/**
+ * 从 DivinationRecord 只提取 AI 需要的最小快照。
+ * v3.1 扩充：加入 rating.evidence、卦辞、动爻辞、六爻用神等必要证据。
+ * 不含 alias / 历史全库 / 设备信息。
+ */
+export function sanitizeRecord(rec: Record<string, unknown> | null | undefined): Record<string, unknown> {
   if (!rec) return {}
-  const cal = rec.calendar || {}
-  const cast = rec.castingEvidence?.[0] || {}
+  const cal = (rec.calendar || {}) as Record<string, unknown>
+  const cast = Array.isArray(rec.castingEvidence) ? (rec.castingEvidence[0] || {}) as Record<string, unknown> : {}
+  const rating = (rec.rating || {}) as Record<string, unknown>
+  const meihua = (rec.meihua || {}) as Record<string, unknown>
+  const liuyao = (rec.liuyao || {}) as Record<string, unknown>
+
   const out: Record<string, unknown> = {
-    question: rec.input?.question ?? '',
-    category: rec.input?.category ?? '',
+    question: String((rec.input as Record<string, unknown>)?.question || ''),
+    category: String((rec.input as Record<string, unknown>)?.category || ''),
     casting: {
-      ruleVersion: rec.castingRuleVersion ?? cast.ruleVersion,
-      evidence: cast.explanation ? { explanation: cast.explanation } : undefined
+      ruleVersion: String(rec.castingRuleVersion || cast.ruleVersion || ''),
+      explanation: String(cast.explanation || '')
     },
     calendar: {
       lunarDate: cal.lunarDate,
@@ -20,50 +28,62 @@ export function sanitizeRecord(rec: any): Record<string, unknown> {
       monthBranch: cal.monthBranch,
       xunKong: cal.xunKong
     },
-    rating: rec.rating
-      ? {
-          score: rec.rating.score,
-          label: rec.rating.label,
-          consistency: rec.rating.consistency
-        }
-      : undefined,
-    localInterpretation: rec.interpretation
-      ? {
-          summary: rec.interpretation.summary,
-          favorable: rec.interpretation.favorable,
-          constraints: rec.interpretation.constraints,
-          trend: rec.interpretation.trend
-        }
-      : undefined
+    rating: rating.score !== undefined ? {
+      score: rating.score,
+      label: rating.label,
+      consistency: rating.consistency,
+      evidence: Array.isArray(rating.evidence) ? rating.evidence.map((e: Record<string, unknown>) => ({
+        id: e.id, title: e.title, delta: e.delta, reason: e.reason, sourceRule: e.sourceRule
+      })) : []
+    } : undefined,
+    localInterpretation: rec.interpretation ? {
+      summary: (rec.interpretation as Record<string, unknown>).summary,
+      favorable: (rec.interpretation as Record<string, unknown>).favorable,
+      constraints: (rec.interpretation as Record<string, unknown>).constraints,
+      trend: (rec.interpretation as Record<string, unknown>).trend
+    } : undefined
   }
 
   if (rec.meihua) {
+    const ben = (meihua.ben || {}) as Record<string, unknown>
+    const bian = (meihua.bian || {}) as Record<string, unknown>
     out.meihua = {
-      ben: rec.meihua.ben?.name,
-      hu: rec.meihua.hu?.name,
-      bian: rec.meihua.bian?.name,
-      movingLine: rec.meihua.movingLine,
-      ti: rec.meihua.tiElement,
-      yong: rec.meihua.yongElement,
-      relation: rec.meihua.relation
+      ben: ben.name,
+      benKeywords: ben.editorialKeywords,
+      benJudgmentClassic: ben.judgmentClassic || '',
+      movingLine: meihua.movingLine,
+      movingLineClassicText: (meihua.movingLineIndex0 !== undefined && Array.isArray(ben.lineTextsClassic))
+        ? (ben.lineTextsClassic as string[])[meihua.movingLineIndex0 as number] || ''
+        : '',
+      hu: (meihua.hu as Record<string, unknown>)?.name,
+      bian: bian.name,
+      bianKeywords: bian.editorialKeywords,
+      ti: meihua.tiElement,
+      yong: meihua.yongElement,
+      relation: meihua.relation
     }
   }
   if (rec.liuyao) {
     out.liuyao = {
-      hexagram: rec.liuyao.hexagram?.name,
-      lines: rec.liuyao.lines?.map((l: any) => ({
+      hexagram: (liuyao.hexagram as Record<string, unknown>)?.name,
+      usefulGodReason: rec.usefulGodReason,
+      lines: Array.isArray(liuyao.lines) ? liuyao.lines.map((l: Record<string, unknown>) => ({
         n: l.index,
         yinYang: l.yinYang,
         moving: l.moving,
-        spirit: l.sixSpirit,
         branch: l.branch,
+        element: l.branchElement,
         relation: l.sixRelation,
-        shi: l.isShi,
-        ying: l.isYing
-      }))
+        spirit: l.sixSpirit,
+        isShi: l.isShi,
+        isYing: l.isYing,
+        hidden: l.hidden,
+        changedBranch: l.changedBranch
+      })) : []
     }
   }
   // 主动剔除敏感字段
   delete out.querentAlias
+  delete out.gender
   return out
 }

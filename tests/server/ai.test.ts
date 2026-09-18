@@ -36,9 +36,9 @@ describe('sanitizeRecord 数据最小化', () => {
 describe('AI schema 可验证', () => {
   const mock = {
     answer: '综合结论',
-    traditionalReading: { summary: 's', favorable: ['a'], constraints: [], trend: 't', evidenceUsed: ['体用'] },
+    traditionalReading: { summary: 's', favorable: ['a'], constraints: [], trend: 't', evidenceIds: ['体用'] },
     timing: { applicable: true, window: '数日', confidence: 'low', basis: ['动爻'] },
-    likelihood: { applicable: true, traditionalScore: 68, traditionalLabel: '吉', realityFeasibility: 'uncertain', explanation: '信息不足' },
+    likelihood: { applicable: true, realityFeasibility: 'uncertain', explanation: '信息不足' },
     realityCheck: '现实核对',
     actionSuggestions: ['先确认进度'],
     uncertainties: ['依赖未知'],
@@ -50,6 +50,11 @@ describe('AI schema 可验证', () => {
   it('likelihood 不产生伪精确百分比', () => {
     const r = AiInterpretationSchema.parse(mock)
     expect(r.likelihood.realityFeasibility).not.toMatch(/\d+%/)
+  })
+  it('AI 输出不含 traditionalScore/traditionalLabel（v3.1）', () => {
+    const r = AiInterpretationSchema.parse(mock)
+    expect((r.likelihood as Record<string, unknown>).traditionalScore).toBeUndefined()
+    expect((r.likelihood as Record<string, unknown>).traditionalLabel).toBeUndefined()
   })
 })
 
@@ -90,7 +95,7 @@ describe('.env 被 gitignore', () => {
   })
   it('.env.example 只有占位符', () => {
     const ex = readFileSync(join(root, '.env.example'), 'utf8')
-    expect(ex).toContain('YOUR_NEW_KEY_HERE')
+    expect(ex).toContain('YOUR_ARK_API_KEY_HERE')
     expect(ex).not.toMatch(/sk-[A-Za-z0-9]{20}/)
   })
 })

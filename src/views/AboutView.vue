@@ -2,7 +2,7 @@
   <div>
     <h1>关于</h1>
     <div class="card">
-      <h2>智能推理与预测 v1.0.0</h2>
+      <h2>Oraculum v{{ av }}</h2>
       <p>一个移动端优先的传统文化问卦/解卦 PWA，支持梅花易数时间起卦与六爻纳甲排盘。</p>
       <p class="muted">规则版本：{{ rv }}　数据集版本：{{ dv }}</p>
     </div>
@@ -19,7 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { RULESET_VERSION, DATASET_VERSION } from '../types'
+import { APP_VERSION, RULESET_VERSION, DATASET_VERSION } from '../types'
 const rv = RULESET_VERSION
 const dv = DATASET_VERSION
+const av = APP_VERSION
 </script>

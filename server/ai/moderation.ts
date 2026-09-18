@@ -1,4 +1,4 @@
-import { getOpenAI } from '../openaiClient'
+import { getOpenAI } from '../openaiClient.js'
 
 export interface ModerationResult {
   ok: boolean
@@ -7,7 +7,7 @@ export interface ModerationResult {
 
 const BLOCKED = ['sexual', 'violence', 'self-harm', 'hate']
 
-/** 用 omni-moderation-latest 对文本做安全检查；失败时默认放行（不阻断本地功能） */
+/** 用 omni-moderation-latest 对文本做安全检查；失败时返回 error（不 fail-open） */
 export async function moderate(text: string): Promise<ModerationResult> {
   try {
     const res = await getOpenAI().moderations.create({
@@ -20,7 +20,7 @@ export async function moderate(text: string): Promise<ModerationResult> {
     const hit = BLOCKED.filter((c) => cats[c])
     return { ok: hit.length === 0, categories: hit }
   } catch {
-    // moderation 不可用时不阻断主流程
-    return { ok: true }
+    // v3.1: moderation 故障不 fail-open，返回不可用
+    return { ok: false, categories: ['moderation_unavailable'] }
   }
 }

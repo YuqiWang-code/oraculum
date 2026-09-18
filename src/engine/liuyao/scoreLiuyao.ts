@@ -1,29 +1,60 @@
-import type { Rating, ScoreEvidence } from '../../types'
+import type { Rating, ScoreEvidence, QuestionCategory } from '../../types'
 import type { LiuYaoResult } from './layout'
 import { buildRating } from '../scoring/rating'
 import { BRANCH_ELEMENT } from '../../data/najia'
+import { selectUsefulGod } from './selectUsefulGod'
+import { evaluateBranchRelation, branchRelationEvidence } from './relations'
+import { xunKongFromDay } from '../../data/solarTerms'
 
 /**
- * 六爻评分（资料 11.2 v1）
+ * 六爻评分（v3.1）
+ * v1：以世爻为核心。
+ * v3.1：按问题类别选用神，加入旬空/月破/六冲/六合基础证据。
  * 基准50：用神强弱±18 / 世用关系±10 / 动变趋势±12 / 卦象±6 / 六神神煞≤±4。
- * v1 做简化可解释版，不做复杂旺衰黑箱。
  */
-export function scoreLiuyao(r: LiuYaoResult, monthBranch: string, dayBranch: string, useShensha: boolean): Rating {
+export function scoreLiuyao(
+  r: LiuYaoResult,
+  monthBranch: string,
+  dayGanzhi: string,
+  useShensha: boolean,
+  category: QuestionCategory
+): Rating {
   const ev: ScoreEvidence[] = []
   const monthEl = BRANCH_ELEMENT[monthBranch]
+  const dayBranch = dayGanzhi[1]
   const dayEl = BRANCH_ELEMENT[dayBranch]
+  const xunkong = xunKongFromDay(dayGanzhi)
 
-  // 用神取世爻所在爻（v1 简化：以世爻为核心评分对象，实际用神在解释层说明）
+  // v3.1: 按类别选用神
+  const ug = selectUsefulGod(category, r)
+  const usefulLines = ug.matchedLines.map((i) => r.lines[i - 1]).filter(Boolean)
+
+  // A. 用神旺衰：月日生扶
+  for (const line of usefulLines.slice(0, 2)) {
+    if (!line) continue
+    const el = line.branchElement
+    if (monthEl === el) ev.push({ id: `ly_useful_month_${line.index}`, title: `用神${line.branch}得月建`, delta: 6, reason: `用神${line.branch}（${el}）临月建${monthBranch}`, sourceRule: 'ly_strength_v2' })
+    else if (generates(monthEl, el)) ev.push({ id: `ly_useful_month_sheng_${line.index}`, title: `用神得月建生`, delta: 5, reason: `月建${monthBranch}生用神${line.branch}`, sourceRule: 'ly_strength_v2' })
+    else if (controls(monthEl, el)) ev.push({ id: `ly_useful_month_ctrl_${line.index}`, title: `用神受月建克`, delta: -5, reason: `月建${monthBranch}克用神${line.branch}`, sourceRule: 'ly_strength_v2' })
+
+    if (dayEl === el) ev.push({ id: `ly_useful_day_${line.index}`, title: `用神临日辰`, delta: 5, reason: `日辰${dayBranch}与用神同五行`, sourceRule: 'ly_strength_v2' })
+    else if (generates(dayEl, el)) ev.push({ id: `ly_useful_day_sheng_${line.index}`, title: `用神得日辰生`, delta: 4, reason: `日辰${dayBranch}生用神`, sourceRule: 'ly_strength_v2' })
+    else if (controls(dayEl, el)) ev.push({ id: `ly_useful_day_ctrl_${line.index}`, title: `用神受日辰克`, delta: -4, reason: `日辰${dayBranch}克用神`, sourceRule: 'ly_strength_v2' })
+  }
+
+  // B. 世爻基础（仍保留）
   const shi = r.lines.find((l) => l.isShi)
   if (shi) {
-    // A. 世爻旺衰：月日生扶
-    if (monthEl === shi.branchElement) ev.push({ id: 'ly_month_same', title: '世爻得月建', delta: 6, reason: `世爻${shi.branch}（${shi.branchElement}）临月建${monthBranch}`, sourceRule: 'ly_strength_v1' })
-    else if (BRANCH_ELEMENT[monthBranch] && generates(monthEl, shi.branchElement)) ev.push({ id: 'ly_month_sheng', title: '世爻得月建生', delta: 5, reason: `月建${monthBranch}生世爻`, sourceRule: 'ly_strength_v1' })
-    else if (controls(monthEl, shi.branchElement)) ev.push({ id: 'ly_month_ctrl', title: '世爻受月建克', delta: -5, reason: `月建${monthBranch}克世爻`, sourceRule: 'ly_strength_v1' })
+    if (monthEl === shi.branchElement) ev.push({ id: 'ly_month_same', title: '世爻得月建', delta: 3, reason: `世爻${shi.branch}临月建`, sourceRule: 'ly_strength_v1' })
+    else if (generates(monthEl, shi.branchElement)) ev.push({ id: 'ly_month_sheng', title: '世爻得月建生', delta: 2, reason: `月建生世爻`, sourceRule: 'ly_strength_v1' })
+    else if (controls(monthEl, shi.branchElement)) ev.push({ id: 'ly_month_ctrl', title: '世爻受月建克', delta: -2, reason: `月建克世爻`, sourceRule: 'ly_strength_v1' })
+  }
 
-    if (dayEl === shi.branchElement) ev.push({ id: 'ly_day_same', title: '世爻临日辰', delta: 5, reason: `日辰${dayBranch}与世爻同五行`, sourceRule: 'ly_strength_v1' })
-    else if (generates(dayEl, shi.branchElement)) ev.push({ id: 'ly_day_sheng', title: '世爻得日辰生', delta: 4, reason: `日辰${dayBranch}生世爻`, sourceRule: 'ly_strength_v1' })
-    else if (controls(dayEl, shi.branchElement)) ev.push({ id: 'ly_day_ctrl', title: '世爻受日辰克', delta: -4, reason: `日辰${dayBranch}克世爻`, sourceRule: 'ly_strength_v1' })
+  // v3.1: 基础冲合空破（对用神爻）
+  for (const line of usefulLines.slice(0, 2)) {
+    if (!line) continue
+    const rel = evaluateBranchRelation(line.branch, dayBranch, monthBranch, xunkong)
+    ev.push(...branchRelationEvidence(line.index, line.branch, rel))
   }
 
   // C. 动变趋势
@@ -31,7 +62,7 @@ export function scoreLiuyao(r: LiuYaoResult, monthBranch: string, dayBranch: str
   if (movingCount === 0) {
     ev.push({ id: 'ly_no_move', title: '六爻安静', delta: 2, reason: '无动爻，事态相对稳定', sourceRule: 'ly_move_v1' })
   } else {
-    ev.push({ id: 'ly_moving', title: `有${movingCount}个动爻`, delta: movingCount > 2 ? -2 : 1, reason: movingCount > 2 ? '动爻较多，变化多端、证据一致性较低' : '有动爻，事情处于变化中', sourceRule: 'ly_move_v1' })
+    ev.push({ id: 'ly_moving', title: `有${movingCount}个动爻`, delta: movingCount > 2 ? -2 : 1, reason: movingCount > 2 ? '动爻较多，变化多端' : '有动爻，事情处于变化中', sourceRule: 'ly_move_v1' })
   }
 
   // D. 卦象主题 ±6

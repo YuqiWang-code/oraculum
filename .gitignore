@@ -31,3 +31,6 @@ Thumbs.db
 
 # backup
 _backup_before_build/
+
+# server build output
+dist-server/

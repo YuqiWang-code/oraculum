@@ -10,7 +10,7 @@ export const useAppStore = defineStore('app', () => {
     timezone: 'Asia/Shanghai',
     useShenshaInScore: true,
     showLunarDetail: true,
-    dayBoundaryRule: '00:00'
+    dayBoundaryRule: 'midnight'
   })
 
   async function loadSettings() {

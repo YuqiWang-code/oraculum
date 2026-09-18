@@ -92,7 +92,7 @@ function finishMeihua(
 
 /** v1 旧时间起卦（保留兼容，行为不变） */
 export function runMeihuaTime(input: DivinationInput, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const meihua = castMeihuaByTime(cal)
   const rating = scoreMeihua(meihua, cal.monthBranch)
   const interpretation = interpretMeihua(meihua, rating, input.category)
@@ -112,7 +112,7 @@ export function runMeihuaTime(input: DivinationInput, useShensha: boolean): Divi
 
 /** 秒级时间起卦 v2 */
 export function runMeihuaSecondTime(input: DivinationInput, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const date = parseLocalDateTime(input.castTime)
   const caster: SecondTimeResult = castBySecondTime(cal, date)
   return finishMeihua(input, cal, caster, useShensha)
@@ -120,35 +120,35 @@ export function runMeihuaSecondTime(input: DivinationInput, useShensha: boolean)
 
 /** 随机数起卦 */
 export function runMeihuaRandom(input: DivinationInput, numbers: [number, number, number], useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const caster: RandomResult = castByRandomNumbers(numbers)
   return finishMeihua(input, cal, caster, useShensha)
 }
 
 /** 骰子起卦 */
 export function runMeihuaDice(input: DivinationInput, upperD8: number, lowerD8: number, movingD6: number, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const caster: DiceResult = castByDice(upperD8, lowerD8, movingD6)
   return finishMeihua(input, cal, caster, useShensha)
 }
 
 /** 文字起卦 */
 export function runMeihuaText(input: DivinationInput, text: string, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const caster: TextResult = castByText(text)
   return finishMeihua(input, cal, caster, useShensha)
 }
 
 /** 外应起卦 */
 export function runMeihuaOmen(input: DivinationInput, omen: { kind: 'color' | 'symbol'; value: string; direction: string }, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const caster: OmenResult = castByOmen(omen, cal)
   return finishMeihua(input, cal, caster, useShensha)
 }
 
 /** 六源合参 */
 export function runSixSourceHybrid(input: DivinationInput, payload: import('../types').SixSourcePayload, useShensha: boolean): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const caster: SixSourceResult = castBySixSources(payload)
   const rec = finishMeihua(input, cal, caster, useShensha)
   rec.sixSource = { payload, canonical: caster.canonical, h1: caster.h1, h2: caster.h2, h3: caster.h3 }
@@ -163,9 +163,9 @@ export function runLiuyao(
   useShensha: boolean,
   throws?: CoinThrow[]
 ): DivinationRecord {
-  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone })
+  const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const liuyao = buildLiuyao(lines as 0[], movingMask, cal)
-  const rating = scoreLiuyao(liuyao, cal.monthBranch, cal.dayBranch, useShensha)
+  const rating = scoreLiuyao(liuyao, cal.monthBranch, cal.dayGanzhi, useShensha, input.category)
   const { interpretation, usefulGodReason } = interpretLiuyao(liuyao, rating, input.category)
 
   const evidence: CastingEvidence[] = []

@@ -15,7 +15,7 @@ export interface AiTraditionalReading {
   favorable: string[]
   constraints: string[]
   trend: string
-  evidenceUsed: string[]
+  evidenceIds: string[]
 }
 
 export interface AiTiming {
@@ -27,8 +27,6 @@ export interface AiTiming {
 
 export interface AiLikelihood {
   applicable: boolean
-  traditionalScore: number | null
-  traditionalLabel: string | null
   realityFeasibility: RealityFeasibility
   explanation: string
 }
@@ -42,6 +40,12 @@ export interface AiInterpretation {
   actionSuggestions: string[]
   uncertainties: string[]
   disclaimer: string
+}
+
+export interface AiInterpretationResult {
+  result: AiInterpretation
+  model: string
+  usage?: { input_tokens?: number; output_tokens?: number }
 }
 
 export interface AiChatMessage {

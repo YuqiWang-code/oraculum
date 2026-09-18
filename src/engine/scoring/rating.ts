@@ -1,4 +1,4 @@
-import type { Rating, RatingLabel, ScoreEvidence } from '../../types'
+import type { Rating, RatingBreakdown, RatingLabel, ScoreEvidence } from '../../types'
 import { RULESET_VERSION } from '../../types'
 
 export function clamp(n: number, lo: number, hi: number): number {
@@ -16,16 +16,21 @@ export function labelForScore(score: number): RatingLabel {
 /**
  * 由证据项汇总评分。
  * score = clamp(0,100, 50 + sum(delta))
- * 证据一致性：正、负证据数量平衡度（0-1）。
+ * 证据一致性：基于正负证据权重的方向一致度（0-1）。
+ * 全正或全负 = 1（方向完全一致）；正负完全平衡 ≈ 0。
  */
-export function buildRating(evidence: ScoreEvidence[]): Rating {
+export function buildRating(evidence: ScoreEvidence[], breakdown?: RatingBreakdown): Rating {
   const totalDelta = evidence.reduce((s, e) => s + e.delta, 0)
   const score = clamp(50 + totalDelta, 0, 100)
   const favorable = evidence.filter((e) => e.delta > 0)
   const constraint = evidence.filter((e) => e.delta < 0)
-  // 一致性：两方数量越接近且总权重越集中越高；简单用 1 - |正-负|/(总数)
-  const total = favorable.length + constraint.length
-  const consistency = total === 0 ? 0.5 : clamp(1 - Math.abs(favorable.length - constraint.length) / total, 0.2, 1)
+
+  // v2.1.0: 基于 delta 权重的方向一致度
+  const positiveWeight = evidence.reduce((s, e) => s + (e.delta > 0 ? e.delta : 0), 0)
+  const negativeWeight = evidence.reduce((s, e) => s + (e.delta < 0 ? Math.abs(e.delta) : 0), 0)
+  const totalWeight = positiveWeight + negativeWeight
+  const consistency = totalWeight === 0 ? 0.5 : clamp(Math.abs(positiveWeight - negativeWeight) / totalWeight, 0, 1)
+
   return {
     score,
     label: labelForScore(score),
@@ -33,6 +38,7 @@ export function buildRating(evidence: ScoreEvidence[]): Rating {
     favorableCount: favorable.length,
     constraintCount: constraint.length,
     evidence,
+    breakdown,
     ruleVersion: RULESET_VERSION
   }
 }

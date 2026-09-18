@@ -1,5 +1,9 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <keep-alive include="DivinationView">
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
   <nav class="bottom">
     <router-link to="/">首页</router-link>
     <router-link to="/divination">问卦</router-link>

@@ -1,5 +1,6 @@
 import type { HexagramData, PalaceName, TrigramName } from '../types'
 import { TRIGRAMS } from './trigrams'
+import { ZHOUYI_MAP } from './classics/zhouyi'
 
 /**
  * 六十四卦（通行《周易》/ King Wen 次序）
@@ -107,6 +108,7 @@ function build(): HexagramData[] {
     const upperLines = [...TRIGRAMS[r.upper].lines] as [0 | 1, 0 | 1, 0 | 1]
     const lines = [...lowerLines, ...upperLines] as HexagramData['lines']
     const [shi, ying] = SHI_YING_BY_POS[r.pos]
+    const classic = ZHOUYI_MAP.get(kingWen)
     return {
       kingWen,
       name: r.name,
@@ -119,11 +121,13 @@ function build(): HexagramData[] {
       palacePosition: r.pos,
       shiLine: shi as HexagramData['shiLine'],
       yingLine: ying as HexagramData['yingLine'],
-      judgmentClassic: TODO_CLASSIC,
-      lineTextsClassic: ['', '', '', '', '', ''],
+      judgmentClassic: classic?.judgment || '',
+      lineTextsClassic: classic ? [...classic.lines] : ['', '', '', '', '', ''],
       editorialKeywords: r.keywords,
-      sources: ['资料第3节六十四卦索引', '资料第6.1节八宫表', '《周易》通行本（经典原文待逐字核验）'],
-      needsVerify: true
+      sources: classic
+        ? ['资料第3节六十四卦索引', '资料第6.1节八宫表', '维基文库《周易》']
+        : ['资料第3节六十四卦索引', '资料第6.1节八宫表'],
+      needsVerify: classic ? false : true
     }
   })
 }

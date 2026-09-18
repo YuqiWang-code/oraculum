@@ -1,43 +1,73 @@
-import { zodTextFormat } from 'openai/helpers/zod'
-import { getOpenAI, getModel } from '../openaiClient'
-import { SYSTEM_PROMPT } from './prompt'
-import { AiInterpretationSchema } from './schema'
-import type { AiInterpretation } from './schema'
+import { getOpenAI, getModel } from '../openaiClient.js'
+import { SYSTEM_PROMPT } from './prompt.js'
+import { AiInterpretationSchema } from './schema.js'
+import type { AiInterpretation } from './schema.js'
 import type { AiChatMessage } from '../../src/types/ai'
 
-/** 首次结构化解读 */
-export async function runInterpret(snapshot: Record<string, unknown>): Promise<AiInterpretation> {
-  const client = getOpenAI()
-  const response = await client.responses.parse({
-    model: getModel(),
-    store: false,
-    input: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: JSON.stringify(snapshot) }
-    ],
-    text: { format: zodTextFormat(AiInterpretationSchema, 'oraculum_ai_interpretation') }
-  })
-  return response.output_parsed as AiInterpretation
+export interface InterpretResult {
+  result: AiInterpretation
+  model: string
+  usage?: { input_tokens?: number; output_tokens?: number }
 }
 
-/** 追问：把 snapshot + 最近消息 + 当前问题一起发给模型 */
+/** 从模型输出中提取 JSON（兼容 ```json 包裹和直接输出） */
+function extractJson(text: string): unknown {
+  const trimmed = text.trim()
+  // ```json ... ```
+  const fence = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/)
+  const raw = fence ? fence[1].trim() : trimmed
+  return JSON.parse(raw)
+}
+
+/** 首次解读 */
+export async function runInterpret(snapshot: Record<string, unknown>): Promise<InterpretResult> {
+  const client = getOpenAI()
+  const model = getModel()
+  const res = await client.chat.completions.create({
+    model,
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT + '\n\n请严格按 JSON 格式输出，不要输出其他内容。' },
+      { role: 'user', content: JSON.stringify(snapshot) }
+    ],
+    max_tokens: Number(process.env.OPENAI_MAX_OUTPUT_TOKENS || 2500)
+  })
+  const text = res.choices[0]?.message?.content || '{}'
+  const result = AiInterpretationSchema.parse(extractJson(text))
+  return {
+    result,
+    model,
+    usage: res.usage ? {
+      input_tokens: res.usage.prompt_tokens,
+      output_tokens: res.usage.completion_tokens
+    } : undefined
+  }
+}
+
+/** 追问（messages 最后一条即用户问题，不再单独传 question） */
 export async function runFollowUp(
   snapshot: Record<string, unknown>,
-  messages: AiChatMessage[],
-  question: string
-): Promise<AiInterpretation> {
+  messages: AiChatMessage[]
+): Promise<InterpretResult> {
   const client = getOpenAI()
-  const input: any[] = [
-    { role: 'system', content: SYSTEM_PROMPT },
+  const model = getModel()
+  const all: { role: 'system' | 'user' | 'assistant'; content: string }[] = [
+    { role: 'system', content: SYSTEM_PROMPT + '\n\n请严格按 JSON 格式输出，不要输出其他内容。' },
     { role: 'user', content: '本次卦象快照：' + JSON.stringify(snapshot) },
-    ...messages.map((m) => ({ role: m.role, content: m.content })),
-    { role: 'user', content: '继续追问：' + question }
+    ...messages.map((m) => ({ role: m.role, content: m.content }))
   ]
-  const response = await client.responses.parse({
-    model: getModel(),
-    store: false,
-    input,
-    text: { format: zodTextFormat(AiInterpretationSchema, 'oraculum_ai_interpretation') }
+  const res = await client.chat.completions.create({
+    model,
+    messages: all,
+    max_tokens: Number(process.env.OPENAI_MAX_OUTPUT_TOKENS || 2500)
   })
-  return response.output_parsed as AiInterpretation
+  const text = res.choices[0]?.message?.content || '{}'
+  const result = AiInterpretationSchema.parse(extractJson(text))
+  return {
+    result,
+    model,
+    usage: res.usage ? {
+      input_tokens: res.usage.prompt_tokens,
+      output_tokens: res.usage.completion_tokens
+    } : undefined
+  }
 }

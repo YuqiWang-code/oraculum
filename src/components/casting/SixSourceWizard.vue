@@ -39,19 +39,24 @@
     </div>
     <!-- 6 铜钱 -->
     <div v-else-if="step===6">
-      <p>6/6 一枚钱：{{ coinSum || '未投' }}</p>
-      <button class="btn secondary" @click="flipCoin">投一枚（正3反2）</button>
-      <button class="btn" :disabled="!coinSum" @click="finish">合成并起卦</button>
+      <p>6/6 三枚钱一掷：{{ coinThrow ? `和=${coinThrow.sum}` : '未投' }}</p>
+      <div v-if="coinThrow" style="font-size:14px">
+        <span v-for="(c,i) in coinThrow.coins" :key="i" :class="c===3?'label-good':'label-bad'">
+          {{ c===3?'正(3)':'反(2)' }}{{ i<2?'、':'' }}
+        </span>
+      </div>
+      <button class="btn secondary" :disabled="!!coinThrow" @click="flipThree">掷三枚钱</button>
+      <button class="btn" :disabled="!coinThrow" @click="finish">合成并起卦</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import type { SixSourcePayload } from '../../types'
-import { formatDateTimeLocalSeconds } from '../../utils/datetime'
+import { formatDateTimeLocalSeconds, formatDisplaySeconds } from '../../utils/datetime'
 import { rollRandomNumbers } from '../../engine/casting/castByRandomNumbers'
-import { rollD6, rollD8, coinBit } from '../../engine/casting/secureRandom'
+import { rollD6, rollD8, flipThreeCoins } from '../../engine/casting/secureRandom'
 import { normalizeText, countGraphemes } from '../../engine/casting/castByText'
 import { SYMBOL_TO_TRIGRAM } from '../../engine/casting/castByExternalOmen'
 import { TRIGRAMS } from '../../data/trigrams'
@@ -67,12 +72,19 @@ const random = ref(0)
 const diceD8 = ref(0), diceD6 = ref(0)
 const omenValue = ref('水'), omenDir = ref('北')
 const text = ref('这是一段六源合参的占位文字内容示例')
-const coinArr = ref<[2 | 3, 2 | 3, 2 | 3]>([2, 2, 2])
-let coinIdx = 0
+// v3.1 修复：coinThrow 为 null 时不能 finish，必须真正掷三枚钱
+const coinThrow = ref<{ coins: [2 | 3, 2 | 3, 2 | 3]; sum: 6 | 7 | 8 | 9 } | null>(null)
 
-const timeText = formatDateTimeLocalSeconds(new Date())
+// v3.1 修复：时间实时刷新
+const timeText = ref('')
+let timer: ReturnType<typeof setInterval> | null = null
+onMounted(() => {
+  timeText.value = formatDisplaySeconds(new Date())
+  timer = setInterval(() => { timeText.value = formatDisplaySeconds(new Date()) }, 1000)
+})
+onUnmounted(() => { if (timer) clearInterval(timer) })
+
 const textCount = computed(() => countGraphemes(normalizeText(text.value)))
-const coinSum = computed(() => coinArr.value[0] + coinArr.value[1] + coinArr.value[2])
 
 function lockTime() {
   const d = new Date()
@@ -81,12 +93,11 @@ function lockTime() {
   step.value = 2
 }
 function roll() { diceD8.value = rollD8(); diceD6.value = rollD6() }
-function flipCoin() {
-  const v = (coinBit() === 1 ? 3 : 2) as 2 | 3
-  coinArr.value[coinIdx] = v
-  coinIdx++
+function flipThree() {
+  coinThrow.value = flipThreeCoins()
 }
 function finish() {
+  if (!coinThrow.value) return
   const payload: SixSourcePayload = {
     version: 'six_source_hybrid_v1',
     exactTime: exactTime.value,
@@ -99,7 +110,7 @@ function finish() {
       trigramNumber: TRIGRAMS[SYMBOL_TO_TRIGRAM[omenValue.value]].xiantianNumber
     },
     text: { normalized: normalizeText(text.value), graphemeCount: textCount.value },
-    coin: { coins: coinArr.value, sum: coinSum.value as 6 | 7 | 8 | 9 }
+    coin: { coins: coinThrow.value.coins, sum: coinThrow.value.sum }
   }
   emit('confirm', { payload })
 }

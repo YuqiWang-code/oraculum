@@ -31,7 +31,9 @@ import { ref, onMounted } from 'vue'
 import { listHistory } from '../db'
 import type { HistoryRecord } from '../db/schema'
 import { buildCalendarContext } from '../engine/calendar/calendarEngine'
+import { useAppStore } from '../stores/app'
 
+const store = useAppStore()
 const today = ref('')
 const lunar = ref('')
 const term = ref('')
@@ -44,7 +46,9 @@ function labelClass(l: string) {
 }
 
 onMounted(async () => {
-  const cal = buildCalendarContext({ date: new Date(), timezone: 'Asia/Shanghai' })
+  const tz = store.settings.timezone || 'Asia/Shanghai'
+  const dbRule = store.settings.dayBoundaryRule || 'midnight'
+  const cal = buildCalendarContext({ date: new Date(), timezone: tz, dayBoundaryRule: dbRule })
   today.value = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })
   lunar.value = cal.lunarDate
   term.value = cal.solarTerm

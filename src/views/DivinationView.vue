@@ -42,6 +42,10 @@
   </div>
 </template>
 
+<script lang="ts">
+export default { name: 'DivinationView' }
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -71,7 +75,6 @@ const category = ref<QuestionCategory>('日常综合')
 const alias = ref('')
 const gender = ref<Gender>('unspecified')
 const mode = ref<CastingMode>('six_source_hybrid')
-const timezone = ref('Asia/Shanghai')
 const categories = QUESTION_CATEGORIES
 
 const methods = [
@@ -91,7 +94,8 @@ function buildInput(castTimeLocal: string) {
   return {
     id: id(),
     createdAt: new Date().toISOString(),
-    timezone: timezone.value,
+    timezone: store.settings.timezone || 'Asia/Shanghai',
+    dayBoundaryRule: store.settings.dayBoundaryRule || 'midnight',
     question: question.value.trim(),
     category: category.value,
     querentAlias: alias.value || undefined,
@@ -121,8 +125,14 @@ function onDice(p: { upperD8: number; lowerD8: number; movingD6: number }) {
   finish(runMeihuaDice(input, p.upperD8, p.lowerD8, p.movingD6, store.settings.useShenshaInScore))
 }
 function onCoins(p: { lines: number[]; movingMask: boolean[]; throws: any[] }) {
-  const input = buildInput('')
-  finish(runLiuyao(input, p.lines, p.movingMask, store.settings.useShenshaInScore, p.throws))
+  try {
+    const input = buildInput('')
+    const rec = runLiuyao(input, p.lines, p.movingMask, store.settings.useShenshaInScore, p.throws)
+    finish(rec)
+  } catch (e: any) {
+    console.error('六爻起卦失败:', e)
+    alert('起卦出错：' + (e?.message || e))
+  }
 }
 function onText(p: { text: string }) {
   const input = buildInput('')

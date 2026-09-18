@@ -24,6 +24,7 @@
 import { ref } from 'vue'
 import { HEXAGRAMS } from '../data/hexagrams'
 import { TRIGRAMS } from '../data/trigrams'
+import { RULESET_VERSION, DATASET_VERSION, APP_VERSION } from '../types'
 
 const kw = ref('')
 
@@ -34,9 +35,11 @@ const groups: (TextGroup | GuaGroup)[] = [
   { name: '八卦', kind: 'text', items: Object.values(TRIGRAMS).map((t) => `${t.name}：先天数${t.xiantianNumber}，${t.element}，象：${t.images.join('、')}`) },
   { name: '六十四卦', kind: 'gua', items: guaItems },
   { name: '规则与来源', kind: 'text', items: [
-    '梅花时间起卦规则版本：meihua_time_v1',
+    `Oraculum v${APP_VERSION}`,
+    `规则版本：RULESET v${RULESET_VERSION} / DATASET v${DATASET_VERSION}`,
+    '梅花时间起卦：meihua_time_v1 / meihua_time_second_v2',
     '六爻纳甲/八宫/世应：v1（资料第6节）',
-    '评分规则版本：1.0.0（资料第11节）',
+    '六源合参：six_source_hybrid_v1（本项目实验规则）',
     '神煞为低权重辅助，不单独定吉凶'
   ]}
 ]

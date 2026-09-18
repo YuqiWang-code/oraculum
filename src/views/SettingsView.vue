@@ -4,15 +4,15 @@
     <div class="card">
       <label>时区</label>
       <select v-model="tz">
-        <option value="Asia/Shanghai">Asia/Shanghai</option>
+        <option value="Asia/Shanghai">Asia/Shanghai（中国标准时间）</option>
         <option value="UTC">UTC</option>
       </select>
 
-      <label>日界规则说明</label>
-      <div class="muted">默认按 00:00 换日；传统另有子初 23:00 换日之说。v1 默认 00:00，结果页保存当次设置。</div>
+      <label>日界规则</label>
+      <div class="muted">默认按 00:00 换日；传统另有子初 23:00 换日之说。</div>
       <select v-model="boundary">
-        <option value="00:00">00:00（现代公历日界）</option>
-        <option value="23:00">23:00（子初换日，传统说法）</option>
+        <option value="midnight">00:00（现代公历日界）</option>
+        <option value="zi_hour">23:00（子初换日，传统说法）</option>
       </select>
 
       <label style="display:flex;align-items:center;gap:8px;margin-top:12px">
@@ -34,6 +34,7 @@
       <label>AI 访问口令（只存本机，不同步）</label>
       <input v-model="token" type="password" placeholder="服务端设置的 AI_ACCESS_TOKEN" />
       <button class="btn secondary" @click="testConn">测试连接</button>
+      <div v-if="authText" class="muted" style="margin-top:4px">{{ authText }}</div>
     </div>
 
     <div class="card muted">
@@ -45,14 +46,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAppStore } from '../stores/app'
-import { checkAiHealth, getAiToken, setAiToken } from '../services/ai'
+import { checkAiHealth, checkAiAuth, getAiToken, setAiToken } from '../services/ai'
 const store = useAppStore()
 const tz = ref(store.settings.timezone)
-const boundary = ref(store.settings.dayBoundaryRule)
+const boundary = ref<'midnight' | 'zi_hour'>(store.settings.dayBoundaryRule)
 const shensha = ref(store.settings.useShenshaInScore)
 const detail = ref(store.settings.showLunarDetail)
 const token = ref(getAiToken())
 const healthText = ref('未检测')
+const authText = ref('')
 
 async function save() {
   await store.updateSettings({ timezone: tz.value, dayBoundaryRule: boundary.value, useShenshaInScore: shensha.value, showLunarDetail: detail.value })
@@ -64,5 +66,9 @@ async function testConn() {
   setAiToken(token.value.trim())
   const h = await checkAiHealth()
   healthText.value = h.enabled ? `已连接（${h.model}）` : '未配置（后端未设置 API key）'
+  if (h.enabled) {
+    const a = await checkAiAuth()
+    authText.value = a.ok ? '访问口令：正确' : '访问口令：' + (a.message || '错误')
+  }
 }
 </script>

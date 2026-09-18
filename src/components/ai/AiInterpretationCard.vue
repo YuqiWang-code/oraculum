@@ -29,7 +29,7 @@
 
       <template v-if="result.likelihood.applicable">
         <h3>可能性 / 可行性</h3>
-        <div>传统规则倾向：{{ result.likelihood.traditionalScore }} / 100 · {{ result.likelihood.traditionalLabel }}（来自本地评分，非现实概率）</div>
+        <div>传统规则倾向：{{ record.rating.score }} / 100 · {{ record.rating.label }}（来自本地评分，非现实概率）</div>
         <div>现实可行性：{{ feasibilityText(result.likelihood.realityFeasibility) }}</div>
         <div class="muted">{{ result.likelihood.explanation }}</div>
       </template>
@@ -90,30 +90,38 @@ async function generate() {
   loading.value = true; error.value = ''
   try {
     const r = await requestAiInterpretation(props.record)
-    result.value = r
-    model.value = 'gpt'
+    result.value = r.result
+    model.value = r.model || 'ai'
     modelTime.value = new Date().toLocaleString('zh-CN', { hour12: false })
-    await saveAiSession(props.record.id, r, [], model.value)
-  } catch (e: any) {
-    error.value = 'AI 深度解读暂时不可用。你的本地确定性卦象和评分不受影响。'
+    await saveAiSession(props.record.id, r.result, [], model.value, r.usage)
+  } catch (e: unknown) {
+    error.value = 'AI 深度解读失败：' + ((e as Error)?.message || e) + '。本地卦象和评分不受影响。'
+    console.error('AI interpret error:', e)
   } finally { loading.value = false }
 }
 async function regenerate() {
   cached.value = false
+  // 重新生成时清空旧追问
+  messages.value = []
   await generate()
 }
 async function followUp() {
   const q = question.value.trim()
   if (!q) return
   busy.value = true; safetyBlocked.value = false
-  messages.value.push({ role: 'user', content: q })
+  // v3.1: 先把用户消息加入 messages，然后只传 messages（不再单独传 q，避免重复）
+  const prior: AiChatMessage[] = [...messages.value, { role: 'user', content: q }]
   question.value = ''
   try {
-    const { result: r, safetyBlocked: sb } = await askAiFollowUp(props.record, messages.value, q)
-    if (sb) { safetyBlocked.value = true } else {
-      result.value = r
-      messages.value.push({ role: 'assistant', content: r.answer })
-      await saveAiSession(props.record.id, r, messages.value, model.value)
+    const { result: r, safetyBlocked: sb } = await askAiFollowUp(props.record, prior)
+    if (sb) {
+      safetyBlocked.value = true
+      // 安全拦截时不把问题写入历史
+      messages.value = [...messages.value]
+    } else {
+      result.value = r.result
+      messages.value = [...prior, { role: 'assistant', content: r.result.answer }]
+      await saveAiSession(props.record.id, r.result, messages.value, model.value, r.usage)
     }
   } catch {
     error.value = 'AI 追问失败。'

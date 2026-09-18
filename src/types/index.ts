@@ -1,6 +1,10 @@
 // 全局规则版本：算法或数据变更时必须递增，历史记录据此可重现
-export const RULESET_VERSION = '2.0.0'
-export const DATASET_VERSION = '1.0.0'
+export const APP_VERSION = '3.2.0'
+export const RULESET_VERSION = '2.2.0'
+export const DATASET_VERSION = '2.0.0'
+
+/** 日界规则：00:00 现代公历日界；23:00 传统子初换日 */
+export type DayBoundaryRule = 'midnight' | 'zi_hour'
 
 /** 五行 */
 export type Element = '金' | '木' | '水' | '火' | '土'
@@ -83,6 +87,17 @@ export interface ScoreEvidence {
   sourceRule: string
 }
 
+/** 评分分类明细（v3.2） */
+export interface RatingBreakdown {
+  usefulGod: number
+  shiYing: number
+  monthDay: number
+  movement: number
+  conflictHarmony: number
+  classicTheme: number
+  auxiliary: number
+}
+
 /** 评分结果 */
 export interface Rating {
   score: number
@@ -92,6 +107,7 @@ export interface Rating {
   favorableCount: number
   constraintCount: number
   evidence: ScoreEvidence[]
+  breakdown?: RatingBreakdown
   ruleVersion: string
 }
 
@@ -99,12 +115,16 @@ export interface Rating {
 export interface CalendarContext {
   localDateTime: string
   timezone: string
+  dayBoundaryRule: DayBoundaryRule
   lunarDate: string
   yearGanzhi: string
   monthGanzhi: string
   dayGanzhi: string
   hourGanzhi: string
+  /** 当前完整24节气名 */
   solarTerm: string
+  /** 最近一个节令（换月之用） */
+  monthBoundaryJie: string
   prevSolarTermAt: string
   nextSolarTermAt: string
   /** 月建地支（按节令） */
@@ -194,6 +214,7 @@ export interface DivinationInput {
   id: string
   createdAt: string
   timezone: string
+  dayBoundaryRule: DayBoundaryRule
   question: string
   category: QuestionCategory
   querentAlias?: string
