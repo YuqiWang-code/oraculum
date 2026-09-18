@@ -20,6 +20,7 @@ import type { SecondTimeResult } from './casting/castBySecondTime'
 import type { CoinThrow } from './casting/castByCoins'
 import { throwsToLines, throwsExplanation } from './casting/castByCoins'
 import { parseLocalDateTime } from '../utils/datetime'
+import { selectMeihuaClassicEvidence, selectLiuyaoClassicEvidence } from './classics/selectClassicEvidence'
 
 export const DISCLAIMER = '传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。'
 
@@ -36,6 +37,7 @@ export interface DivinationRecord {
   usefulGodReason?: string
   castingRuleVersion?: string
   castingEvidence?: CastingEvidence[]
+  classicEvidence?: import('./classics/selectClassicEvidence').ClassicEvidence[]
   /** 六源合参专用 */
   sixSource?: {
     payload: unknown
@@ -86,6 +88,7 @@ function finishMeihua(
     interpretation,
     castingRuleVersion: caster.castingRuleVersion,
     castingEvidence: [caster.evidence],
+    classicEvidence: selectMeihuaClassicEvidence(meihua),
     createdAt: input.createdAt
   }
 }
@@ -106,6 +109,7 @@ export function runMeihuaTime(input: DivinationInput, useShensha: boolean): Divi
     rating,
     interpretation,
     castingRuleVersion: 'meihua_time_v1',
+    classicEvidence: selectMeihuaClassicEvidence(meihua),
     createdAt: input.createdAt
   }
 }
@@ -191,6 +195,7 @@ export function runLiuyao(
     usefulGodReason,
     castingRuleVersion: throws ? 'liuyao_three_coins_v1' : 'manual_hexagram',
     castingEvidence: evidence,
+    classicEvidence: selectLiuyaoClassicEvidence(liuyao),
     createdAt: input.createdAt
   }
 }

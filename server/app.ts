@@ -28,7 +28,13 @@ export function createApp(): express.Express {
   app.get('/api/ai/health', (_req, res) => {
     if (!isConfigured()) return res.json({ enabled: false, provider: 'none' })
     const info = getProviderInfo()
-    res.json({ enabled: true, provider: info.provider, model: info.model, apiMode: info.apiMode })
+    res.json({
+      enabled: true,
+      provider: info.provider,
+      model: info.model,
+      apiMode: info.apiMode,
+      structuredOutputMode: info.structuredOutputMode
+    })
   })
 
   app.get('/api/ai/auth-check', requireToken, (_req, res) => {

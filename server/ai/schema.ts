@@ -45,6 +45,8 @@ export const InterpretRequestSchema = z.object({
 
 export const FollowUpRequestSchema = z.object({
   record: z.unknown(),
-  messages: z.array(AiChatMessageSchema).max(6),
-  question: z.string().trim().min(1).max(2000)
-})
+  messages: z.array(AiChatMessageSchema).min(1).max(6)
+}).refine(
+  (data) => data.messages[data.messages.length - 1]?.role === 'user',
+  { message: '最后一条消息必须为 user' }
+)

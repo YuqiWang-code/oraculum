@@ -1,6 +1,6 @@
 // 全局规则版本：算法或数据变更时必须递增，历史记录据此可重现
-export const APP_VERSION = '3.2.0'
-export const RULESET_VERSION = '2.2.0'
+export const APP_VERSION = '3.3.0'
+export const RULESET_VERSION = '3.0.0'
 export const DATASET_VERSION = '2.0.0'
 
 /** 日界规则：00:00 现代公历日界；23:00 传统子初换日 */

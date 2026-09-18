@@ -52,8 +52,8 @@ export function sanitizeRecord(rec: Record<string, unknown> | null | undefined):
       benKeywords: ben.editorialKeywords,
       benJudgmentClassic: ben.judgmentClassic || '',
       movingLine: meihua.movingLine,
-      movingLineClassicText: (meihua.movingLineIndex0 !== undefined && Array.isArray(ben.lineTextsClassic))
-        ? (ben.lineTextsClassic as string[])[meihua.movingLineIndex0 as number] || ''
+      movingLineClassicText: (meihua.movingIndex0 !== undefined && Array.isArray(ben.lineTextsClassic))
+        ? (ben.lineTextsClassic as string[])[meihua.movingIndex0 as number] || ''
         : '',
       hu: (meihua.hu as Record<string, unknown>)?.name,
       bian: bian.name,
