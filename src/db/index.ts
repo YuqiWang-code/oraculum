@@ -2,6 +2,7 @@ import Dexie, { Table } from 'dexie'
 import type { HistoryRecord, Settings, AiSession } from './schema'
 import type { DivinationRecord } from '../engine/orchestrator'
 import type { AiInterpretation, AiChatMessage } from '../types/ai'
+import { APP_VERSION } from '../types'
 
 class DivinationDB extends Dexie {
   history!: Table<HistoryRecord, string>
@@ -66,7 +67,7 @@ export async function exportAll(): Promise<string> {
   return JSON.stringify({
     app: 'Oraculum',
     exportSchemaVersion: 2,
-    appVersion: '3.1.0',
+    appVersion: APP_VERSION,
     exportedAt: new Date().toISOString(),
     records: rows,
     aiSessions: sessions
