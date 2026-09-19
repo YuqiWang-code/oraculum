@@ -1,6 +1,6 @@
 import type { CalendarContext } from '../../types'
 import { BRANCH_INDEX } from '../../data/solarTerms'
-import { mod8, mod6, buildMeihuaFromTrigrams, MeihuaCastingResult } from './common'
+import { mod8, mod6, MeihuaCastingResult } from './common'
 import type { TrigramName } from '../../types'
 import { TRIGRAM_BY_NUMBER } from '../../data/trigrams'
 

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { flipOnce, throwsToLines, throwsExplanation, CoinThrow } from '../../engine/casting/castByCoins'
+import { flipOnce, throwsToLines, CoinThrow } from '../../engine/casting/castByCoins'
 
 const emit = defineEmits<{
   (e: 'confirm', payload: { lines: number[]; movingMask: boolean[]; throws: CoinThrow[] }): void

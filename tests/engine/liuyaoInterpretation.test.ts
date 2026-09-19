@@ -9,6 +9,7 @@ import { HEXAGRAM_BY_KINGWEN } from '../../src/data/hexagrams'
 function buildTestRatingWithBreakdown(): Rating {
   const breakdown: RatingBreakdown = {
     usefulGod: 10,
+    sourceTaboo: 0,
     shiYing: 5,
     monthDay: -3,
     movement: 8,

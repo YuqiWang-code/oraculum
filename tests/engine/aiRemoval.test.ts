@@ -57,10 +57,10 @@ describe('AI 彻底移除验证', () => {
   })
 
   it('版本号正确', () => {
-    expect(APP_VERSION).toBe('4.0.0')
+    expect(APP_VERSION).toBe('4.1.0')
     expect(DATASET_VERSION).toBe('3.0.0')
     expect(LOCAL_KNOWLEDGE_VERSION).toBe('1.0.0')
-    expect(RULESET_VERSION).toBe('4.0.0')
+    expect(RULESET_VERSION).toBe('4.1.0')
   })
 
   it('package.json scripts 不含 dev:server/dev:full/build:server/start', async () => {

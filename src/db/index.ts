@@ -44,6 +44,10 @@ export async function saveRecord(rec: DivinationRecord): Promise<string> {
   return rec.id
 }
 
+export async function getRecord(id: string): Promise<HistoryRecord | undefined> {
+  return db.history.get(id)
+}
+
 export async function listHistory(limit = 100): Promise<HistoryRecord[]> {
   return db.history.orderBy('createdAt').reverse().limit(limit).toArray()
 }

@@ -8,8 +8,6 @@ export type {
   LocalKnowledgeLookup
 } from './types'
 
-export { HEXAGRAM_MEANINGS } from './interpretation/hexagramMeanings'
-export { HEXAGRAM_MEANINGS_PART2 } from './interpretation/hexagramMeaningsPart2'
 export { LINE_POSITION_MEANINGS } from './interpretation/lineMeanings'
 export { TRIGRAM_MEANINGS } from './interpretation/trigramMeanings'
 export { CATEGORY_HINTS } from './interpretation/categoryHints'
@@ -22,8 +20,13 @@ export type { BodyUseRelation, BodyUseMeaning } from './meihua/bodyUseMeanings'
 export { SOURCE_REFS, WIKISOURCE_ZHOUYI } from './classics/sources'
 
 import type { LocalHexagramKnowledge } from './types'
-import { HEXAGRAM_MEANINGS } from './interpretation/hexagramMeanings'
-import { HEXAGRAM_MEANINGS_PART2 } from './interpretation/hexagramMeaningsPart2'
+import HEXAGRAM_MEANINGS_JSON from './interpretation/hexagramMeanings.json'
+import HEXAGRAM_MEANINGS_PART2_JSON from './interpretation/hexagramMeaningsPart2.json'
+
+const HEXAGRAM_MEANINGS = HEXAGRAM_MEANINGS_JSON as unknown as Record<number, LocalHexagramKnowledge>
+const HEXAGRAM_MEANINGS_PART2 = HEXAGRAM_MEANINGS_PART2_JSON as unknown as Record<number, LocalHexagramKnowledge>
+
+export { HEXAGRAM_MEANINGS, HEXAGRAM_MEANINGS_PART2 }
 
 /** 合并全部卦象知识（Part1 + Part2） */
 const ALL_MEANINGS: Record<number, LocalHexagramKnowledge> = {

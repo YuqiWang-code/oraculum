@@ -19,16 +19,34 @@
     </div>
 
     <h2 style="margin:16px 0 8px">选择起卦方式</h2>
-    <div class="method-grid">
-      <button v-for="m in methods" :key="m.key" :class="['method-card', mode===m.key?'on':'']" @click="mode=m.key">
-        <div class="m-icon">{{ m.icon }}</div>
-        <div class="m-name">{{ m.name }}</div>
-        <div class="m-desc">{{ m.desc }}</div>
-        <span :class="['badge', m.tier]">{{ m.badge }}</span>
-      </button>
+
+    <fieldset v-for="g in groups" :key="g.title" class="method-group">
+      <legend>{{ g.title }}</legend>
+      <div class="method-grid">
+        <button v-for="m in g.items" :key="m.key" :class="['method-card', mode===m.key?'on':'']" @click="mode=m.key">
+          <div class="m-icon">{{ m.icon }}</div>
+          <div class="m-name">{{ m.name }}</div>
+          <div class="m-desc">{{ m.desc }}</div>
+          <span :class="['badge', m.tier]">{{ m.badge }}</span>
+        </button>
+      </div>
+    </fieldset>
+
+    <div v-if="!mode" class="card muted">请选择起卦方式</div>
+
+    <!-- 梅花年月日时（v1 旧法，传统时间起卦） -->
+    <div v-if="mode==='meihua_time'" class="card">
+      <h2>梅花 · 年月日时 <span class="tag">传统</span></h2>
+      <div class="muted">以农历年支、月、日、时支起卦（v1 旧法）。</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        <button class="btn" @click="onMeihuaTime('')">用当前时间起卦</button>
+        <div class="muted">或手工指定：</div>
+        <input type="datetime-local" v-model="manualTime" />
+        <button class="btn secondary" @click="onMeihuaTime(manualTime)">按指定时间起卦</button>
+      </div>
     </div>
 
-    <TimeSecondCaster v-if="mode==='meihua_time_second'" @confirm="onSecondTime" />
+    <TimeSecondCaster v-else-if="mode==='meihua_time_second'" @confirm="onSecondTime" />
     <RandomCaster v-else-if="mode==='meihua_random'" @confirm="onRandom" />
     <DiceCaster v-else-if="mode==='meihua_dice'" @confirm="onDice" />
     <CoinCaster v-else-if="mode==='liuyao_coins'" @confirm="onCoins" />
@@ -74,18 +92,44 @@ const question = ref('')
 const category = ref<QuestionCategory>('日常综合')
 const alias = ref('')
 const gender = ref<Gender>('unspecified')
-const mode = ref<CastingMode>('six_source_hybrid')
+const mode = ref<CastingMode | ''>('')
+const manualTime = ref(formatDateTimeLocalSeconds(new Date()))
 const categories = QUESTION_CATEGORIES
 
-const methods = [
-  { key: 'six_source_hybrid', name: '六源合参', desc: '六点合一，实验模式', badge: '实验', tier: 'warn', icon: '☯' },
-  { key: 'meihua_time_second', name: '秒级时间', desc: '精确到秒参与算法', badge: '现代扩展', tier: 'info', icon: '⏱' },
-  { key: 'meihua_random', name: '随机数', desc: '安全随机取数', badge: '现代数字化', tier: 'info', icon: '🎲' },
-  { key: 'meihua_dice', name: '摇骰子', desc: 'd8×2 + d6', badge: '现代交互', tier: 'info', icon: '⚂' },
-  { key: 'liuyao_coins', name: '三枚钱', desc: '传统六爻', badge: '传统实践', tier: 'ok', icon: '🪙' },
-  { key: 'meihua_text', name: '文字', desc: '所问字数', badge: '传统', tier: 'ok', icon: '✍' },
-  { key: 'meihua_external_omen', name: '外应', desc: '见象/色/方位', badge: '传统+规范', tier: 'ok', icon: '👁' }
-] as const
+interface MethodItem {
+  key: CastingMode
+  name: string
+  desc: string
+  badge: string
+  tier: 'warn' | 'info' | 'ok'
+  icon: string
+}
+
+const groups: { title: string; items: MethodItem[] }[] = [
+  {
+    title: '传统 / 常用',
+    items: [
+      { key: 'meihua_time', name: '梅花年月日时', desc: '农历年月日时起卦', badge: '传统', tier: 'ok', icon: '☰' },
+      { key: 'liuyao_coins', name: '三枚钱六爻', desc: '传统六爻', badge: '传统实践', tier: 'ok', icon: '🪙' },
+      { key: 'meihua_text', name: '传统思想·项目规范', desc: '所问字数', badge: '传统', tier: 'ok', icon: '✍' },
+      { key: 'meihua_external_omen', name: '外应', desc: '见象/色/方位', badge: '传统+规范', tier: 'ok', icon: '👁' }
+    ]
+  },
+  {
+    title: '现代数字化',
+    items: [
+      { key: 'meihua_time_second', name: '秒级时间', desc: '精确到秒参与算法', badge: '现代扩展', tier: 'info', icon: '⏱' },
+      { key: 'meihua_random', name: '随机数', desc: '安全随机取数', badge: '现代数字化', tier: 'info', icon: '🎲' },
+      { key: 'meihua_dice', name: '骰子', desc: 'd8×2 + d6', badge: '现代交互', tier: 'info', icon: '⚂' }
+    ]
+  },
+  {
+    title: '实验',
+    items: [
+      { key: 'six_source_hybrid', name: '六源合参', desc: '六点合一，实验模式', badge: '实验', tier: 'warn', icon: '☯' }
+    ]
+  }
+]
 
 function id() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7) }
 
@@ -100,7 +144,7 @@ function buildInput(castTimeLocal: string) {
     category: category.value,
     querentAlias: alias.value || undefined,
     gender: gender.value,
-    castingMode: mode.value,
+    castingMode: mode.value as CastingMode,
     castTime: d.toISOString()
   }
 }
@@ -109,9 +153,13 @@ async function finish(rec: Awaited<ReturnType<typeof runMeihuaTime>>) {
   if (!question.value.trim()) { alert('请输入所问之事'); return }
   store.lastResult = rec
   await saveRecord(rec)
-  router.push('/result')
+  router.push('/result/' + rec.id)
 }
 
+function onMeihuaTime(useManual: string) {
+  const input = buildInput(useManual || formatDateTimeLocalSeconds(new Date()))
+  finish(runMeihuaTime(input, store.settings.useShenshaInScore))
+}
 function onSecondTime(p: { useManual?: string }) {
   const input = buildInput(p.useManual || formatDateTimeLocalSeconds(new Date()))
   finish(runMeihuaSecondTime(input, store.settings.useShenshaInScore))
@@ -149,7 +197,9 @@ function onSixSource(p: { payload: SixSourcePayload }) {
 </script>
 
 <style scoped>
-.method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px }
+.method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px }
+.method-group { border:1px solid var(--line); border-radius:12px; margin:0 12px 12px; padding:10px 12px 14px; }
+.method-group legend { font-size:13px; color:var(--muted); padding:0 6px; }
 .method-card { position:relative; text-align:left; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--text) }
 .method-card.on { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) }
 .m-icon { font-size:22px }

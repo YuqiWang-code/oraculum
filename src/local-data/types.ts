@@ -17,6 +17,8 @@ export interface LocalLineKnowledge {
   plainXiaoXiang: string
   /** Oraculum 现代释义——此爻核心含义 */
   coreMeaning: string
+  /** 动爻主题词（2-6 字，取自爻辞核心短语，如"潜龙勿用"） */
+  themeKeyword: string
   /** 有利面（可选） */
   favorableMeaning?: string
   /** 警示面（可选） */

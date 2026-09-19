@@ -15,8 +15,6 @@ export interface SanHeGroup {
   includesDay: boolean
   includesMonth: boolean
   containsUseful: boolean
-  containsSource: boolean
-  containsTaboo: boolean
   experimental: boolean
 }
 
@@ -43,8 +41,6 @@ export function evaluateSanHe(
       includesDay: group.branches.includes(dayBranch),
       includesMonth: group.branches.includes(monthBranch),
       containsUseful: participantLineIndexes.some((i) => usefulIndexes.includes(i)),
-      containsSource: false,
-      containsTaboo: false,
       experimental: !complete
     })
   }

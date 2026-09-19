@@ -10,8 +10,6 @@ import { ZHOUYI_MAP } from './classics/zhouyi'
  *   见 docs/DATA_SOURCES.md。
  */
 
-const TODO_CLASSIC = ''
-
 // 八宫位置 -> 世爻/应爻（资料 6.2）
 const SHI_YING_BY_POS: Record<number, [number, number]> = {
   0: [6, 3], // 本宫

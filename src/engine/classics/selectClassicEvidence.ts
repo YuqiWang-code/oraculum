@@ -1,5 +1,3 @@
-import { HEXAGRAM_BY_KINGWEN } from '../../data/hexagrams'
-import { ZHOUYI_MAP } from '../../data/classics/zhouyi'
 import type { MeihuaResult } from '../meihua/castByTime'
 import type { LiuYaoResult } from '../liuyao/layout'
 

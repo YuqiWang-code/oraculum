@@ -1,6 +1,7 @@
 /**
  * 六爻本地解读组合器
  * 使用：本卦经典、全部动爻经典、变卦经典、用神、元神/忌神、旺衰、RatingBreakdown
+ * Phase 2：用神/元神/忌神从 analysis.roles 读取，不再自行推导。
  * 不输出"有利信号多于制约信号"这类空洞总结，而是列出具体的 breakdown 分类。
  */
 
@@ -13,12 +14,13 @@ import { interpretChangedHexagram } from './interpretChangedHexagram'
 import { selectHexagramKnowledge } from './selectKnowledge'
 import { CATEGORY_USEFUL_GOD } from '../../data/sixRelations'
 import { PALACE_POSITION_NAMES } from '../../data/palaces'
-import { GENERATES, CONTROLS } from '../../data/trigrams'
 import { CATEGORY_HINTS } from '../../local-data/interpretation/categoryHints'
+import { analyzeLiuyao, type LiuYaoAnalysis } from '../liuyao/analyze'
 
 /** RatingBreakdown 分类中文名 */
 const BREAKDOWN_LABELS: Record<keyof RatingBreakdown, string> = {
   usefulGod: '用神旺衰',
+  sourceTaboo: '元神忌神',
   shiYing: '世应关系',
   monthDay: '月建日辰',
   movement: '动爻变化',
@@ -44,11 +46,12 @@ function summarizeBreakdown(breakdown?: RatingBreakdown): string[] {
 }
 
 /**
- * 找用神爻、元神爻、忌神爻
+ * 从 analysis.roles 提取用神/元神/忌神描述
  */
-function analyzeUsefulGod(
+function analyzeUsefulGodFromRoles(
   r: LiuYaoResult,
-  category: QuestionCategory
+  category: QuestionCategory,
+  analysis: LiuYaoAnalysis
 ): {
   usefulGodReason: string
   usefulGodLines: string[]
@@ -62,39 +65,22 @@ function analyzeUsefulGod(
   const yuanShenLines: string[] = []
   const jiShenLines: string[] = []
 
-  // 找用神爻
-  const ugLine = r.lines.find((l) => ugConfig.gods.includes(l.sixRelation) || (ugConfig.gods.includes('世爻') && l.isShi))
-  if (ugLine) {
-    usefulGodLines.push(
-      `用神为第${ugLine.index}爻（${ugLine.sixSpirit}坐${ugLine.branch}，${ugLine.sixRelation}）`
-    )
-
-    // 元神：生用神五行者
-    const ugElement = ugLine.branchElement
-    const yuanShenEntry = (Object.entries(GENERATES) as [string, string][]).find(
-      ([, gen]) => gen === ugElement
-    )
-    if (yuanShenEntry) {
-      const yuanElement = yuanShenEntry[0] as keyof typeof GENERATES
-      const yuanLines = r.lines.filter((l) => l.branchElement === yuanElement)
-      for (const yl of yuanLines) {
-        yuanShenLines.push(`元神为第${yl.index}爻（${yl.branchElement}，${yl.sixRelation}）`)
-      }
+  for (const ra of analysis.roles) {
+    const line = r.lines.find((l) => l.index === ra.lineIndex)
+    if (!line) continue
+    if (ra.role === 'useful') {
+      usefulGodLines.push(
+        `用神为第${line.index}爻（${line.sixSpirit}坐${line.branch}，${line.sixRelation}）`
+      )
+    } else if (ra.role === 'source') {
+      yuanShenLines.push(`元神为第${line.index}爻（${line.branchElement}，${line.sixRelation}）`)
+    } else if (ra.role === 'taboo') {
+      jiShenLines.push(`忌神为第${line.index}爻（${line.branchElement}，${line.sixRelation}）`)
     }
+  }
 
-    // 忌神：克用神五行者
-    const jiShenEntry = (Object.entries(CONTROLS) as [string, string][]).find(
-      ([, ctrl]) => ctrl === ugElement
-    )
-    if (jiShenEntry) {
-      const jiElement = jiShenEntry[0] as keyof typeof CONTROLS
-      const jiLines = r.lines.filter((l) => l.branchElement === jiElement)
-      for (const jl of jiLines) {
-        jiShenLines.push(`忌神为第${jl.index}爻（${jl.branchElement}，${jl.sixRelation}）`)
-      }
-    }
-  } else {
-    // 没找到明确用神爻，用世爻
+  // 如果没有找到用神爻（例如用神不上卦），用世爻兜底
+  if (usefulGodLines.length === 0) {
     const shi = r.lines.find((l) => l.isShi)
     if (shi) {
       usefulGodLines.push(`以世爻为参考：第${shi.index}爻（${shi.sixSpirit}坐${shi.branch}，${shi.sixRelation}）`)
@@ -110,7 +96,9 @@ function analyzeUsefulGod(
 export function composeLiuyaoInterpretation(
   r: LiuYaoResult,
   rating: Rating,
-  category: QuestionCategory
+  category: QuestionCategory,
+  monthBranch?: string,
+  dayGanzhi?: string
 ): LocalDetailedInterpretation {
   // 本卦
   const base = interpretBaseHexagram(r.hexagram)
@@ -129,9 +117,14 @@ export function composeLiuyaoInterpretation(
     changed = interpretChangedHexagram(r.changedHexagram)
   }
 
-  // 用神分析
+  // 用神分析：从单一事实源读取
+  // 若提供了月建/日辰，则完整分析；否则仅用 roles 部分
+  const analysis = monthBranch && dayGanzhi
+    ? analyzeLiuyao(r, monthBranch, dayGanzhi, category)
+    : analyzeLiuyao(r, '', '甲子', category) // fallback: 空月日仅取 roles
+
   const { usefulGodReason, usefulGodLines, yuanShenLines, jiShenLines } =
-    analyzeUsefulGod(r, category)
+    analyzeUsefulGodFromRoles(r, category, analysis)
 
   // 概览
   const overview =

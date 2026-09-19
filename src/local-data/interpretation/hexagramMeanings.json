@@ -1,0 +1,3217 @@
+{
+  "1": {
+    "kingWen": 1,
+    "name": "乾",
+    "classic": {
+      "judgment": "元亨。利貞。",
+      "tuan": "大哉乾元，萬物資始，乃統天。雲行雨施，品物流形，大明終始，六位時成。時乘六龍以御天，乾道變化，各正性命，保合大和，乃利貞。首出庶物，萬國咸寧。",
+      "daXiang": "天行健，君子以自強不息。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/乾"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "乾：大通顺。利于守正。",
+      "plainTuan": "《彖传》说：伟大啊乾元，万物由此开始，统属于天。云行雨降，万物成形；太阳周而复始，六爻因时而成。乾道变化，万物各正性命，保持太和之气，才利于守正。乾元统领万物，万国安宁。",
+      "plainDaXiang": "《大象传》说：天道运行刚健不息，君子因此自强不息。",
+      "coreMeaning": "\"乾\"代表刚健、创造、主动进取。但\"利贞\"强调：刚健必须以正道为方向，否则容易变成逞强冒进。",
+      "keyThemes": [
+        "刚健进取",
+        "自强不息",
+        "创造",
+        "守正",
+        "领导力"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向主动进取、刚健有为。可以大力推进，但必须守正，不可逞强冒进。",
+      "asMutualHexagram": "作为互卦，表示事情中段偏向刚健推进、积极行动，势头很强。",
+      "asChangedHexagram": "作为变卦，表示后段趋向刚健有力、主动开创的状态。",
+      "cautions": [
+        "刚健过头容易变成冒进",
+        "\"利贞\"是底线：进取必须走正道",
+        "自强不息不等于一味硬撑"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "潜龙勿用",
+        "classicText": "初九：潛龍勿用。",
+        "xiaoXiang": "潛龍勿用，陽在下也。",
+        "plainText": "初九：潜伏的龙，暂时不宜行动。",
+        "plainXiaoXiang": "《象传》说：潜龙勿用，因为阳气还在下位。",
+        "coreMeaning": "力量尚在潜藏阶段，不宜贸然行动，应积蓄待时。",
+        "cautionMeaning": "时机未到，不可强行出头。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "见龙在田",
+        "classicText": "九二：見龍在田，利見大人。",
+        "xiaoXiang": "見龍在田，德施普也。",
+        "plainText": "九二：龙出现在田野，利于见到大人（贵人）。",
+        "plainXiaoXiang": "《象传》说：龙出现在田野，德行开始普及。",
+        "coreMeaning": "力量初显，可以出而施展，寻求贵人相助。",
+        "favorableMeaning": "初露锋芒，可寻求支持。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "终日乾乾",
+        "classicText": "九三：君子終日乾乾，夕惕若；厲，无咎。",
+        "xiaoXiang": "終日乾乾，反復道也。",
+        "plainText": "九三：君子整天刚健振作，夜晚仍警惕戒惧；虽有危险，无咎。",
+        "plainXiaoXiang": "《象传》说：整天刚健振作，是反复行道。",
+        "coreMeaning": "处于上进的关键位置，白天努力不懈，夜晚仍保持警惕，虽危无咎。",
+        "favorableMeaning": "勤勉警惕，虽危无咎。",
+        "cautionMeaning": "不可因进展顺利而松懈。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "或跃在渊",
+        "classicText": "九四：或躍在淵，无咎。",
+        "xiaoXiang": "或躍在淵，進无咎也。",
+        "plainText": "九四：龙或跃居渊中，无咎。",
+        "plainXiaoXiang": "《象传》说：或跃在渊，进退自如而无咎。",
+        "coreMeaning": "处于可进可退的位置，审时度势，决定进退则无咎。",
+        "favorableMeaning": "审时度势，进退有据。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "飞龙在天",
+        "classicText": "九五：飛龍在天，利見大人。",
+        "xiaoXiang": "飛龍在天，大人造也。",
+        "plainText": "九五：龙飞在天空，利于见到大人。",
+        "plainXiaoXiang": "《象传》说：飞龙在天，是大人大有作为之时。",
+        "coreMeaning": "到了大展宏图的最佳位置，如龙飞天，可以大有作为。",
+        "favorableMeaning": "全盛之时，可大展宏图。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "亢龙有悔",
+        "classicText": "上九：亢龍，有悔。",
+        "xiaoXiang": "亢龍有悔，盈不可久也。",
+        "plainText": "上九：龙飞得过高，必有悔恨。",
+        "plainXiaoXiang": "《象传》说：亢龙有悔，因为盈满不可长久。",
+        "coreMeaning": "刚健到了极点，骄傲自满，必然后悔。盛极必衰。",
+        "cautionMeaning": "不可骄盈自满，盛极必衰。"
+      }
+    ]
+  },
+  "2": {
+    "kingWen": 2,
+    "name": "坤",
+    "classic": {
+      "judgment": "元亨。利牝馬之貞。",
+      "tuan": "至哉坤元，萬物資生，乃順承天。坤厚載物，德合无疆；含弘光大，品物咸亨。牝馬地類，行地无疆，柔順利貞。君子攸行，先迷失道，後順得常。西南得朋，乃與類行，東北喪朋，乃終有慶。安貞之吉，應地无疆。",
+      "daXiang": "地勢坤，君子以厚德載物。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/坤"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "坤：大通顺。利于像母马一样守正。",
+      "plainTuan": "《彖传》说：至善啊坤元，万物由此生长，顺承天道。坤德深厚承载万物，广大无疆；包容弘大，万物皆亨。母马属于地类，行于无疆之地，柔顺而利于守正。君子有所行，抢先会迷失道路，随后顺承则得其常道。西南得朋，与同类同行；东北丧朋，最终有喜庆。安守正道则吉祥，顺应大地无疆之德。",
+      "plainDaXiang": "《大象传》说：大地气势宽厚和顺，君子因此以深厚德行承载万物。",
+      "coreMeaning": "\"坤\"代表柔顺、承载、包容。它不是消极被动，而是以宽厚之德承载万物、配合刚健。牝马之贞强调：柔顺不等于无原则，而是有方向地追随。",
+      "keyThemes": [
+        "柔顺承载",
+        "厚德载物",
+        "包容",
+        "配合",
+        "守正"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向顺应、配合、承载。宜以宽厚德行待人接物，不宜抢先出头。",
+      "asMutualHexagram": "作为互卦，表示事情中段偏向以柔顺包容的方式配合推进，不宜强硬主导。",
+      "asChangedHexagram": "作为变卦，表示后段趋向柔顺承载、宽厚包容的状态。",
+      "cautions": [
+        "柔顺不等于盲从无原则",
+        "\"先迷失道\"：不宜抢先出头",
+        "厚德载物需要长期积累"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "履霜坚冰",
+        "classicText": "初六：履霜，堅冰至。",
+        "xiaoXiang": "履霜堅冰，陰始凝也。馴致其道，至堅冰也。",
+        "plainText": "初六：踩到霜，就知道坚冰将要到来。",
+        "plainXiaoXiang": "《象传》说：踩到霜而知坚冰将至，是阴气开始凝结。顺着这个趋势，就会到坚冰。",
+        "coreMeaning": "见微知著，从初现的征兆预见发展趋势，及早防范。",
+        "cautionMeaning": "小征兆背后是大趋势，不可忽视。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "直方大",
+        "classicText": "六二：直方大，不習无不利。",
+        "xiaoXiang": "六二之動，直以方也。不習无不利，地道光也。",
+        "plainText": "六二：正直、端方、宏大，不刻意造作也无不利。",
+        "plainXiaoXiang": "《象传》说：六二的动，正直而端方。不刻意造作也无不利，因为地道广大。",
+        "coreMeaning": "以正直端方的本性行事，不刻意造作，自然无不利。",
+        "favorableMeaning": "本性正直端方，自然顺遂。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "含章可贞",
+        "classicText": "六三：含章，可貞。或從王事，无成有終。",
+        "xiaoXiang": "含章可貞，以時發也。或從王事，知光大也。",
+        "plainText": "六三：蕴含文采而守正。或者从事王事，不居功而有好结果。",
+        "plainXiaoXiang": "《象传》说：含章可贞，等待时机发挥。从事王事，是智慧广大。",
+        "coreMeaning": "内藏才华而不炫耀，随时而动，不居功自傲，终有好结果。",
+        "favorableMeaning": "内藏才华，不居功，终有善果。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "括囊无咎",
+        "classicText": "六四：括囊，无咎无譽。",
+        "xiaoXiang": "括囊无咎，慎不害也。",
+        "plainText": "六四：扎紧口袋，无咎也无誉。",
+        "plainXiaoXiang": "《象传》说：括囊无咎，因为谨慎所以无害。",
+        "coreMeaning": "收敛缄口，谨慎自守，不求名声，也无咎害。",
+        "cautionMeaning": "谨言慎行，不轻易暴露自己。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "黄裳元吉",
+        "classicText": "六五：黃裳，元吉。",
+        "xiaoXiang": "黃裳元吉，文在中也。",
+        "plainText": "六五：黄色下裳，大吉。",
+        "plainXiaoXiang": "《象传》说：黄裳元吉，因为文采在内。",
+        "coreMeaning": "居中得正，以谦卑柔顺之德居高位，大吉。",
+        "favorableMeaning": "居中谦卑，大德大吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "龙战于野",
+        "classicText": "上六：龍戰于野，其血玄黃。",
+        "xiaoXiang": "龍戰于野，其道窮也。",
+        "plainText": "上六：龙在野外交战，流出青黄交杂的血。",
+        "plainXiaoXiang": "《象传》说：龙战于野，因为到了穷极之处。",
+        "coreMeaning": "阴气盛极而与阳气交战，两败俱伤。柔顺走到极点变成对抗，凶险。",
+        "cautionMeaning": "阴柔到极点转为对抗，两败俱伤。"
+      }
+    ]
+  },
+  "3": {
+    "kingWen": 3,
+    "name": "屯",
+    "classic": {
+      "judgment": "元亨，利貞。勿用有攸往，利建侯。",
+      "tuan": "屯，剛柔始交而難生，動乎險中，大亨貞。雷雨之動滿盈，天造草昧，宜建侯而不寧。",
+      "daXiang": "雲雷，屯；君子以經綸。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/屯"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "屯：大通顺，利于守正。不宜冒进前往，利于建立根基（封侯）。",
+      "plainTuan": "《彖传》说：屯，刚柔开始交合而艰难产生，在险境中行动，大通顺而守正。雷雨交作、充满天地，正是初创草昧之时，应该建立根基而不可安逸。",
+      "plainDaXiang": "《大象传》说：云雷交作，这是屯卦。君子因此在初创之际治理纲纪。",
+      "coreMeaning": "\"屯\"代表万事开头难——初创时期充满艰难，但也充满生机。关键是不要冒进，先建立根基和组织。",
+      "keyThemes": [
+        "初创艰难",
+        "建基立业",
+        "不可冒进",
+        "草创时期"
+      ],
+      "asBaseHexagram": "当前事情的主旨处于初创阶段，困难重重。不宜急进，应先建立根基、组织力量。",
+      "asMutualHexagram": "作为互卦，表示事情中段处于艰难推进期，需要打基础。",
+      "asChangedHexagram": "作为变卦，表示后段趋向进入艰难初创期，需要稳扎稳打。",
+      "cautions": [
+        "开头难，不可急躁冒进",
+        "先建组织、立根基再求发展",
+        "艰难中仍要守正"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "磐桓利贞",
+        "classicText": "初九：磐桓，利居貞，利建侯。",
+        "xiaoXiang": "雖磐桓，志行正也。以貴下賤，大得民也。",
+        "plainText": "初九：徘徊不进，利于安居守正，利于建立根基。",
+        "plainXiaoXiang": "《象传》说：虽然徘徊，但志向行为端正。以尊贵而下居卑贱，大得民心。",
+        "coreMeaning": "初创时徘徊不前是正常的，守正安居、建立根基则有利。",
+        "favorableMeaning": "安守正道、建立组织，可得民心。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "屯如邅如",
+        "classicText": "六二：屯如邅如，乘馬班如，匪寇婚媾，女子貞不字，十年乃字。",
+        "xiaoXiang": "六二之難，乘剛也。十年乃字，反常也。",
+        "plainText": "六二：艰难徘徊，乘马旋转，不是寇盗而是求婚。女子守正不嫁，十年才出嫁。",
+        "plainXiaoXiang": "《象传》说：六二的艰难，是因为乘凌刚爻。十年才出嫁，是回复常道。",
+        "coreMeaning": "艰难中遇到看似机会的选择，需要耐心等待时机，不可轻许。",
+        "cautionMeaning": "时机未到不可轻许，耐心等待。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "即鹿无虞",
+        "classicText": "六三：即鹿无虞，惟入于林中，君子幾不如舍，往吝。",
+        "xiaoXiang": "即鹿无虞，以從禽也。君子舍之，往吝窮也。",
+        "plainText": "六三：追逐野鹿没有虞人引导，只会陷入林中。君子见机不如舍弃，前往会有吝惜。",
+        "plainXiaoXiang": "《象传》说：追鹿无虞人引导，是追逐禽兽。君子舍弃它，前往则吝惜困穷。",
+        "coreMeaning": "没有引导和准备就盲目追逐目标，不如及时放弃。知止为智。",
+        "cautionMeaning": "没有准备不要盲目追逐，知难而退。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "乘马求婚",
+        "classicText": "六四：乘馬班如，求婚媾，往，吉无不利。",
+        "xiaoXiang": "求而往，明也。",
+        "plainText": "六四：乘马旋转，前去求婚，前往则吉无不利。",
+        "plainXiaoXiang": "《象传》说：主动求亲前往，是明智。",
+        "coreMeaning": "主动寻求合作、寻求帮助，前往则吉。",
+        "favorableMeaning": "主动寻求合作，明智而有利。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "屯其膏",
+        "classicText": "九五：屯其膏；小貞吉，大貞凶。",
+        "xiaoXiang": "屯其膏，施未光也。",
+        "plainText": "九五：囤积恩泽不施散；小事守正则吉，大事守正则凶。",
+        "plainXiaoXiang": "《象传》说：囤积恩泽不施散，是布施还不广大。",
+        "coreMeaning": "身居高位却囤积资源不施与，小事尚可，大事必凶。",
+        "cautionMeaning": "不可吝啬囤积，资源应及时布施。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "泣血涟如",
+        "classicText": "上六：乘馬班如，泣血漣如。",
+        "xiaoXiang": "泣血漣如，何可長也。",
+        "plainText": "上六：乘马旋转，泣血涟涟。",
+        "plainXiaoXiang": "《象传》说：泣血涟涟，怎么能长久呢。",
+        "coreMeaning": "初创到了极点，孤立无援，悲泣不止。走到穷途末路。",
+        "cautionMeaning": "孤立无援，不可继续坚持，须及时调整。"
+      }
+    ]
+  },
+  "4": {
+    "kingWen": 4,
+    "name": "蒙",
+    "classic": {
+      "judgment": "亨。匪我求童蒙，童蒙求我。初筮告，再三瀆，瀆則不告。利貞。",
+      "tuan": "蒙，山下有險，險而止，蒙。蒙亨，以亨行，時中也。匪我求童蒙，童蒙求我，志應也。初筮告，以剛中也。再三瀆，瀆則不告，瀆蒙也。蒙以養正，聖功也。",
+      "daXiang": "山下出泉，蒙；君子以果行育德。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/蒙"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "蒙：亨通。不是我求蒙童，是蒙童求我。初次占问则告知，重复轻慢则不告。利于守正。",
+      "plainTuan": "《彖传》说：蒙，山下有险，遇险而止，这是蒙昧。蒙之所以亨通，是因为以亨通之道而行，合乎时中。不是我求蒙童，是蒙童求我，心志相应。初次占问则告知，因为刚健居中。重复轻慢则不告，因为轻慢了蒙道。蒙昧之时培养正道，是圣人之功。",
+      "plainDaXiang": "《大象传》说：山下流出泉水，这是蒙卦。君子因此以果决的行动培育德行。",
+      "coreMeaning": "\"蒙\"代表蒙昧、启蒙、教育。核心是\"童蒙求我\"——求学必须有真诚的意愿，施教才能生效。蒙以养正是根本。",
+      "keyThemes": [
+        "启蒙教育",
+        "诚心求教",
+        "养正",
+        "果行育德"
+      ],
+      "asBaseHexagram": "当前事情的主旨处于蒙昧不明阶段，需要虚心学习、寻求指导。施教需对方有诚意。",
+      "asMutualHexagram": "作为互卦，表示事情中段处于学习摸索期，需要引导和教育。",
+      "asChangedHexagram": "作为变卦，表示后段趋向蒙昧待启的状态，需耐心学习。",
+      "cautions": [
+        "求学必须诚心，轻慢无效",
+        "启蒙重在养正，不只传授知识",
+        "行动要果决，不可优柔寡断"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "利用刑人",
+        "classicText": "初六：發蒙，利用刑人，用說桎梏，以往吝。",
+        "xiaoXiang": "利用刑人，以正法也。",
+        "plainText": "初六：启发蒙昧，利于用规范约束人，脱去桎梏。但操之过急则有吝。",
+        "plainXiaoXiang": "《象传》说：利用规范约束人，是为了端正法度。",
+        "coreMeaning": "启蒙之初需要规矩约束，但不可操之过急。",
+        "cautionMeaning": "规矩要有，但不可过严。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "包蒙纳妇",
+        "classicText": "九二：包蒙吉，納婦吉，子克家。",
+        "xiaoXiang": "子克家，剛柔接也。",
+        "plainText": "九二：包容蒙昧则吉，迎娶妇人则吉，子弟能治家。",
+        "plainXiaoXiang": "《象传》说：子弟能治家，因为刚柔相接。",
+        "coreMeaning": "以包容之心对待蒙昧者，刚柔相济，子弟可担当家事。",
+        "favorableMeaning": "包容施教，刚柔相济，吉。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "勿用取女",
+        "classicText": "六三：勿用取女，見金夫，不有躬，无攸利。",
+        "xiaoXiang": "勿用取女，行不順也。",
+        "plainText": "六三：不要娶这样的女子，见到有钱有势的男人就失身，无所利。",
+        "plainXiaoXiang": "《象传》说：不要娶这样的女子，因为行为不顺。",
+        "coreMeaning": "见利忘义、不能自主的人，不可合作或亲近。",
+        "cautionMeaning": "见利忘义者不可亲近。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "困蒙",
+        "classicText": "六四：困蒙，吝。",
+        "xiaoXiang": "困蒙之吝，獨遠實也。",
+        "plainText": "六四：困于蒙昧之中，有吝。",
+        "plainXiaoXiang": "《象传》说：困于蒙昧的吝惜，是因为远离了实在的师友。",
+        "coreMeaning": "孤陋寡闻、远离良师益友，困在蒙昧中，可吝。",
+        "cautionMeaning": "闭门造车，远离良师益友，困而不学。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "童蒙",
+        "classicText": "六五：童蒙，吉。",
+        "xiaoXiang": "童蒙之吉，順以巽也。",
+        "plainText": "六五：像童蒙一样虚心受教，吉。",
+        "plainXiaoXiang": "《象传》说：童蒙之吉，因为顺从而谦逊。",
+        "coreMeaning": "以赤子之心虚心受教，谦逊顺从，自然吉祥。",
+        "favorableMeaning": "虚心好学，谦逊受教，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "利御寇",
+        "classicText": "上九：擊蒙，不利為寇，利禦寇。",
+        "xiaoXiang": "利禦寇，上下順也。",
+        "plainText": "上九：以刚猛手段击破蒙昧，不利于成为寇暴，利于防御寇暴。",
+        "plainXiaoXiang": "《象传》说：利于防御寇暴，因为上下顺从。",
+        "coreMeaning": "治蒙可以刚猛，但目的是防御寇暴而非施暴，过刚则反成寇。",
+        "cautionMeaning": "刚猛治蒙须有分寸，过刚则反成害。"
+      }
+    ]
+  },
+  "5": {
+    "kingWen": 5,
+    "name": "需",
+    "classic": {
+      "judgment": "有孚，光亨。貞吉，利涉大川。",
+      "tuan": "需，須也，險在前也；剛健而不陷，其義不困窮矣。需，有孚，光亨，貞吉，位乎天位，以正中也。利涉大川，往有功也。",
+      "daXiang": "雲上於天，需；君子以飲食宴樂。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/需"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "需：心怀诚信，光明亨通。守正吉，利于涉越大川。",
+      "plainTuan": "《彖传》说：需，就是等待，因为险难在前。刚健而不陷入险境，道义上不会困穷。心怀诚信，光明亨通，守正吉祥，居天位而得正中。利于涉越大川，前往有功。",
+      "plainDaXiang": "《大象传》说：云升到天上（待雨而降），这是需卦。君子因此饮食宴乐，耐心等待。",
+      "coreMeaning": "\"需\"代表等待、耐心。前方有险，但刚健居中，只要心怀诚信、耐心等待，时机成熟就可以行动。等待不是消极，而是积蓄力量。",
+      "keyThemes": [
+        "耐心等待",
+        "心怀诚信",
+        "不冒险",
+        "待时而动"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向等待时机。前方有险，不宜冒进，应心怀诚信、耐心积累，待时而动。",
+      "asMutualHexagram": "作为互卦，表示事情中段需要耐心等待，不可急于推进。",
+      "asChangedHexagram": "作为变卦，表示后段趋向等待时机、养精蓄锐的状态。",
+      "cautions": [
+        "前方有险，不可冒进",
+        "等待不是消极，是积蓄力量",
+        "心怀诚信，守正待时"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "需于郊",
+        "classicText": "初九：需于郊，利用恆，无咎。",
+        "xiaoXiang": "需于郊，不犯難行也。利用恆，无咎，未失常也。",
+        "plainText": "初九：在郊外等待，利于保持恒心，无咎。",
+        "plainXiaoXiang": "《象传》说：在郊外等待，不冒险犯难。保持恒心无咎，是没有失去常道。",
+        "coreMeaning": "在远离险地之处耐心等待，保持恒心，则无咎。",
+        "favorableMeaning": "远离险地，耐心等待，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "需于沙",
+        "classicText": "九二：需于沙，小有言，終吉。",
+        "xiaoXiang": "需于沙，衍在中也。雖小有言，以終吉也。",
+        "plainText": "九二：在沙滩上等待，稍有言语争执，最终吉祥。",
+        "plainXiaoXiang": "《象传》说：在沙滩等待，宽绰居中。虽有小的言语争执，最终吉祥。",
+        "coreMeaning": "接近险地，稍有口舌是非，但居中行正，最终吉祥。",
+        "favorableMeaning": "小有口舌，终得吉祥。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "需于泥",
+        "classicText": "九三：需于泥，致寇至。",
+        "xiaoXiang": "需于泥，災在外也。自我致寇，敬慎不敗也。",
+        "plainText": "九三：在泥泞中等待，会招来寇盗。",
+        "plainXiaoXiang": "《象传》说：在泥泞中等待，灾在外。自己招来寇盗，只要敬慎就不会失败。",
+        "coreMeaning": "过于靠近险地，会招来麻烦。但只要敬慎，仍可不败。",
+        "cautionMeaning": "过于靠近险地，易招麻烦，须敬慎。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "需于血",
+        "classicText": "六四：需于血，出自穴。",
+        "xiaoXiang": "需于血，順以聽也。",
+        "plainText": "六四：在血泊中等待，从陷阱中逃出。",
+        "plainXiaoXiang": "《象传》说：在血泊中等待，是顺从而听命。",
+        "coreMeaning": "已经陷入危险，但顺从等待，最终能从险境中脱身。",
+        "favorableMeaning": "身处险境，顺从等待，终能脱身。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "需于酒食",
+        "classicText": "九五：需于酒食，貞吉。",
+        "xiaoXiang": "酒食，貞吉，以中正也。",
+        "plainText": "九五：在酒食宴乐中等待，守正吉祥。",
+        "plainXiaoXiang": "《象传》说：酒食守正吉祥，因为居中得正。",
+        "coreMeaning": "居中得正，从容等待，以饮食宴乐养精蓄锐，守正吉祥。",
+        "favorableMeaning": "从容中道，安心等待，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "不速之客",
+        "classicText": "上六：入于穴，有不速之客三人來，敬之終吉。",
+        "xiaoXiang": "不速之客來，敬之終吉。雖不當位，未大失也。",
+        "plainText": "上六：落入陷阱，有三位不请自来的客人，恭敬对待则最终吉祥。",
+        "plainXiaoXiang": "《象传》说：不速之客来，恭敬对待则终吉。虽然不当位，也没有大的损失。",
+        "coreMeaning": "陷入被动境地，有意外来客。恭敬对待，即使不当位也终吉。",
+        "favorableMeaning": "意外来客，恭敬应对，终吉。"
+      }
+    ]
+  },
+  "6": {
+    "kingWen": 6,
+    "name": "讼",
+    "classic": {
+      "judgment": "有孚，窒，惕，中吉，終凶。利見大人，不利涉大川。",
+      "tuan": "訟，上剛下險，險而健，訟。訟，有孚，窒，惕，中吉，剛來而得中也。終凶，訟不可成也。利見大人，尚中正也。不利涉大川，入于淵也。",
+      "daXiang": "天與水違行，訟；君子以作事謀始。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/訟"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "讼：心怀诚信但被窒塞，警惕戒惧，中途和解则吉，争讼到底则凶。利于见大人，不利于涉大川。",
+      "plainTuan": "《彖传》说：讼，上刚下险，遇险而健，这就是争讼。有诚信但被窒塞，警惕戒惧，中途和解则吉，因为刚来得中。争讼到底则凶，因为争讼不可成。利于见大人，因为崇尚中正。不利于涉大川，因为会坠入深渊。",
+      "plainDaXiang": "《大象传》说：天与水背道而行，这是讼卦。君子因此做事之初就谋划好。",
+      "coreMeaning": "\"讼\"代表争讼、冲突。核心智慧是：争讼可以中途和解则吉，不可争到底。做事要谋始，从源头避免冲突。",
+      "keyThemes": [
+        "争讼冲突",
+        "中途和解",
+        "谋始",
+        "不可争到底"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向冲突争议。可以据理力争，但宜适可而止，不可争到底。",
+      "asMutualHexagram": "作为互卦，表示事情中段容易产生分歧争执，需寻求和解。",
+      "asChangedHexagram": "作为变卦，表示后段趋向争议纠纷状态，需谨慎应对。",
+      "cautions": [
+        "争讼不可到底，适可而止",
+        "做事要从源头谋划，避免冲突",
+        "不宜冒险大动作"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "不永所事",
+        "classicText": "初六：不永所事，小有言，終吉。",
+        "xiaoXiang": "不永所事，訟不可長也。雖小有言，其辯明也。",
+        "plainText": "初六：不把争执拖久，虽有小口舌，最终吉祥。",
+        "plainXiaoXiang": "《象传》说：不把争执拖久，争讼不可长久。虽有小口舌，辩明即可。",
+        "coreMeaning": "争执不宜持久，小口舌说清楚就好，终吉。",
+        "favorableMeaning": "争执早了断，小口舌无妨。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "不克讼",
+        "classicText": "九二：不克訟，歸而逋，其邑人三百戶无眚。",
+        "xiaoXiang": "不克訟，歸逋竄也。自下訟上，患至掇也。",
+        "plainText": "九二：争讼不胜，逃回躲藏，他的邑人三百户不受牵连。",
+        "plainXiaoXiang": "《象传》说：争讼不胜，逃回躲藏。以下讼上，祸患是自己招来的。",
+        "coreMeaning": "争讼打不赢就及时退避，不要连累他人。以下犯上，祸患自取。",
+        "cautionMeaning": "争不过就退，不可以下犯上。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "食旧德",
+        "classicText": "六三：食舊德，貞厲，終吉。或從王事，无成。",
+        "xiaoXiang": "食舊德，從上吉也。",
+        "plainText": "六三：安享旧德，守正防危，最终吉祥。或从事王事，不居功。",
+        "plainXiaoXiang": "《象传》说：安享旧德，服从上位则吉。",
+        "coreMeaning": "安守旧有基业，不参与争讼，谨慎守正，终吉。",
+        "favorableMeaning": "安守本分，不争不抢，终吉。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "复即命渝",
+        "classicText": "九四：不克訟，復即命渝，安貞吉。",
+        "xiaoXiang": "復即命渝，安貞，不失也。",
+        "plainText": "九四：争讼不胜，回头改变态度、安于正理，吉祥。",
+        "plainXiaoXiang": "《象传》说：回头改变态度、安于正理，没有损失。",
+        "coreMeaning": "争不赢就回头认命，改变初衷，安守正道，吉。",
+        "favorableMeaning": "及时回头，安守正道，吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "讼元吉",
+        "classicText": "九五：訟，元吉。",
+        "xiaoXiang": "訟，元吉，以中正也。",
+        "plainText": "九五：明断争讼，大吉。",
+        "plainXiaoXiang": "《象传》说：明断争讼大吉，因为居中得正。",
+        "coreMeaning": "居中得正，公正断案，大吉。这是争讼中最理想的位置——有公正的裁决者。",
+        "favorableMeaning": "公正明断，居中得正，大吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "终朝三褫",
+        "classicText": "上九：或錫之鞶帶，終朝三褫之。",
+        "xiaoXiang": "以訟受服，亦不足敬也。",
+        "plainText": "上九：或许得到赏赐的腰带，但一天之内被多次剥夺。",
+        "plainXiaoXiang": "《象传》说：靠争讼得来的赏赐，不值得敬重。",
+        "coreMeaning": "靠争讼赢来的东西，得来不光彩，也保不住。",
+        "cautionMeaning": "靠争讼获胜所得，终将失去，不足为敬。"
+      }
+    ]
+  },
+  "7": {
+    "kingWen": 7,
+    "name": "师",
+    "classic": {
+      "judgment": "貞丈人吉，无咎。",
+      "tuan": "師，眾也。貞，正也。能以眾正，可以王矣。剛中而應，行險而順，以此毒天下，而民從之，吉又何咎矣。",
+      "daXiang": "地中有水，師；君子以容民畜衆。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/师"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "师：守正，由老成持重之人统领则吉，无咎。",
+      "plainTuan": "《彖传》说：师就是众，贞就是正。能率众行正道就可以称王。刚中而应，行险而顺，百姓跟随，吉无咎。",
+      "plainDaXiang": "《大象传》说：地中有水，师卦。君子容民畜众。",
+      "coreMeaning": "师代表兵众组织。核心：用兵必须守正，由老成持重者统领。",
+      "keyThemes": [
+        "兵众组织",
+        "老成统领",
+        "守正"
+      ],
+      "asBaseHexagram": "当前主旨偏向组织力量统一行动，须由有经验者主导。",
+      "asMutualHexagram": "互卦表示中段需团队协作、纪律严明。",
+      "asChangedHexagram": "变卦表示后段趋向组织动员、集体行动。",
+      "cautions": [
+        "须老成持重者统领",
+        "行动必须守正",
+        "纪律严明"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "师出以律",
+        "classicText": "初六：師出以律，否臧，凶。",
+        "xiaoXiang": "師出以律；失律，凶也。",
+        "plainText": "初六：军队出动必须有纪律，否则凶。",
+        "plainXiaoXiang": "《象传》：军队要有纪律，失律则凶。",
+        "coreMeaning": "开始就必须严明纪律。",
+        "cautionMeaning": "无纪律的集体行动必凶。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "师中吉",
+        "classicText": "九二：在師中吉，无咎；王三錫命。",
+        "xiaoXiang": "在師中吉，承天寵也。王三錫命，懷萬邦也。",
+        "plainText": "九二：军中持中则吉，王三锡命。",
+        "plainXiaoXiang": "《象传》：持中吉，承蒙天宠。",
+        "coreMeaning": "居中行正，统领得人心。",
+        "favorableMeaning": "持中统领，深得信任。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "师或舆尸",
+        "classicText": "六三：師或輿尸，凶。",
+        "xiaoXiang": "師或輿尸，大无功也。",
+        "plainText": "六三：师或舆尸，凶。",
+        "plainXiaoXiang": "《象传》：载尸而归，大败无功。",
+        "coreMeaning": "指挥不当，盲目冒进。",
+        "cautionMeaning": "指挥失当必败。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "师左次",
+        "classicText": "六四：師左次，无咎。",
+        "xiaoXiang": "左次无咎，未失常也。",
+        "plainText": "六四：师左次，无咎。",
+        "plainXiaoXiang": "《象传》：退守无咎，未失常道。",
+        "coreMeaning": "见势不利主动退守。",
+        "favorableMeaning": "知难而退，无咎。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "长子帅师",
+        "classicText": "六五：田有禽，利執言，无咎。長子帥師，弟子輿尸，貞凶。",
+        "xiaoXiang": "長子帥師，以中行也。弟子輿尸，使不當也。",
+        "plainText": "六五：长子帅师，弟子舆尸，贞凶。",
+        "plainXiaoXiang": "《象传》：长子帅师中行，弟子舆尸不当。",
+        "coreMeaning": "用人必须得当。",
+        "cautionMeaning": "用人不当最大风险。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "开国承家",
+        "classicText": "上六：大君有命，開國承家，小人勿用。",
+        "xiaoXiang": "大君有命，以正功也。小人勿用，必亂邦也。",
+        "plainText": "上六：大君有命，小人勿用。",
+        "plainXiaoXiang": "《象传》：论功行赏，小人勿用。",
+        "coreMeaning": "论功行赏须选贤任能。",
+        "cautionMeaning": "功成后小人不可重用。"
+      }
+    ]
+  },
+  "8": {
+    "kingWen": 8,
+    "name": "比",
+    "classic": {
+      "judgment": "吉。原筮元永貞，无咎。不寧方來，後夫凶。",
+      "tuan": "比，吉也。比，輔也，下順從也。原筮，元永貞，无咎，以剛中也。不寧方來，上下應也。後夫凶，其道窮也。",
+      "daXiang": "地上有水，比；先王以建萬國，親諸侯。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/比"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "比：吉祥。占问长久贞正之事无咎。不安宁者都来归附，迟疑落后者凶。",
+      "plainTuan": "《彖传》说：比就是辅佐，在下者顺从而归附。刚健居中，上下相应。迟疑落后者凶，因为道穷。",
+      "plainDaXiang": "《大象传》说：地上有水，比卦。先王建万国、亲诸侯。",
+      "coreMeaning": "比代表亲密团结、辅佐归附。核心：团结要主动趁早，迟疑则凶，但比附对象必须正当。",
+      "keyThemes": [
+        "亲密团结",
+        "辅佐归附",
+        "择善而从"
+      ],
+      "asBaseHexagram": "当前主旨偏向团结协作、寻求盟友，宜主动归附正道。",
+      "asMutualHexagram": "互卦表示中段需要建立合作关系、团结力量。",
+      "asChangedHexagram": "变卦表示后段趋向团结归附、亲密合作。",
+      "cautions": [
+        "团结要趁早",
+        "比附对象必须正当",
+        "不可盲目依附"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "有孚比之",
+        "classicText": "初六：有孚，比之，无咎。有孚盈缶，終來有它，吉。",
+        "xiaoXiang": "比之初六，有它吉也。",
+        "plainText": "初六：有孚比之，无咎。有孚盈缶，终来有它吉。",
+        "plainXiaoXiang": "《象传》：比之初六，有它吉。",
+        "coreMeaning": "诚心待人主动亲比，终得吉庆。",
+        "favorableMeaning": "诚心亲比，吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "比之自内",
+        "classicText": "六二：比之自內，貞吉。",
+        "xiaoXiang": "比之自內，不自失也。",
+        "plainText": "六二：比之自内，贞吉。",
+        "plainXiaoXiang": "《象传》：自内亲比，不自失。",
+        "coreMeaning": "从内心真诚归附，守正不阿。",
+        "favorableMeaning": "内心真诚，守正亲比。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "比之匪人",
+        "classicText": "六三：比之匪人。",
+        "xiaoXiang": "比之匪人，不亦傷乎！",
+        "plainText": "六三：比之匪人。",
+        "plainXiaoXiang": "《象传》：比之匪人，不亦伤乎。",
+        "coreMeaning": "跟错了人，亲近了不该亲近的。",
+        "cautionMeaning": "择人而比，跟错人则伤。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "外比之",
+        "classicText": "六四：外比之，貞吉。",
+        "xiaoXiang": "外比於賢，以從上也。",
+        "plainText": "六四：外比之，贞吉。",
+        "plainXiaoXiang": "《象传》：外比于贤，从上也。",
+        "coreMeaning": "向外亲近贤明，追随正道。",
+        "favorableMeaning": "亲近贤明，追随正道。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "显比",
+        "classicText": "九五：顯比。王用三驅，失前禽，邑人不誡，吉。",
+        "xiaoXiang": "顯比之吉，位正中也。舍逆取順，失前禽也。邑人不誡，上使中也。",
+        "plainText": "九五：显比。王用三驱，失前禽，邑人不诫，吉。",
+        "plainXiaoXiang": "《象传》：显比吉，位正中。来者不拒去者不追。",
+        "coreMeaning": "居尊位光明团结人，以德服人。",
+        "favorableMeaning": "光明正大，以德服人。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "比之无首",
+        "classicText": "上六：比之无首，凶。",
+        "xiaoXiang": "比之无首，无所終也。",
+        "plainText": "上六：比之无首，凶。",
+        "plainXiaoXiang": "《象传》：比之无首，无所终。",
+        "coreMeaning": "想亲比却错过时机，终究无成。",
+        "cautionMeaning": "亲比要趁早。"
+      }
+    ]
+  },
+  "9": {
+    "kingWen": 9,
+    "name": "小畜",
+    "classic": {
+      "judgment": "亨。密雲不雨，自我西郊。",
+      "tuan": "小畜，柔得位而上下應之，曰小畜。健而巽，剛中而志行，乃亨。密雲不雨，尚往也。自我西郊，施未行也。",
+      "daXiang": "風行天上，小畜，君子以懿文德。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/小畜"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "小畜：亨通。密云不雨，自我西郊。",
+      "plainTuan": "《彖传》说：小畜，柔得位而上下应之。健而巽，刚中志行乃亨。密云不雨，尚往也。自我西郊，施未行也。",
+      "plainDaXiang": "《大象传》说：风行天上，小畜。君子以懿文德。",
+      "coreMeaning": "小畜代表小有积蓄、条件未熟。密云不雨——有态势但未到结果。此时宜修养文德，不宜大动作。",
+      "keyThemes": [
+        "小有积蓄",
+        "密云不雨",
+        "修养文德"
+      ],
+      "asBaseHexagram": "当前主旨偏向小有积蓄、条件未熟，宜修文养德不宜冒进。",
+      "asMutualHexagram": "互卦表示中段处于蓄力阶段，进展有限。",
+      "asChangedHexagram": "变卦表示后段趋向小有积累、小有助益。",
+      "cautions": [
+        "时机未到",
+        "只宜小积不宜大动作",
+        "修养自身等待时机"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "复自道",
+        "classicText": "初九：復自道，何其咎，吉。",
+        "xiaoXiang": "復自道，其義吉也。",
+        "plainText": "初九：复自道，何其咎，吉。",
+        "plainXiaoXiang": "《象传》：复自道，其义吉。",
+        "coreMeaning": "回归正道，自然无咎而吉。",
+        "favorableMeaning": "回归正道，吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "牵复",
+        "classicText": "九二：牽復，吉。",
+        "xiaoXiang": "牽復在中，亦不自失也。",
+        "plainText": "九二：牵复，吉。",
+        "plainXiaoXiang": "《象传》：牵复在中，不自失。",
+        "coreMeaning": "被人带动而归正，居中不偏。",
+        "favorableMeaning": "受人牵引而归正。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "夫妻反目",
+        "classicText": "九三：輿說輻，夫妻反目。",
+        "xiaoXiang": "夫妻反目，不能正室也。",
+        "plainText": "九三：舆说輹，夫妻反目。",
+        "plainXiaoXiang": "《象传》：夫妻反目，不能正室。",
+        "coreMeaning": "刚猛过急导致关系破裂。",
+        "cautionMeaning": "过刚急躁导致配合破裂。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "有孚血去",
+        "classicText": "六四：有孚，血去惕出，无咎。",
+        "xiaoXiang": "有孚。惕出。上合志也。",
+        "plainText": "六四：有孚，血去惕出，无咎。",
+        "plainXiaoXiang": "《象传》：有孚惕出，上合志。",
+        "coreMeaning": "以诚信消除恐惧，同心无咎。",
+        "favorableMeaning": "诚信待人，脱离危险。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "有孚挛如",
+        "classicText": "九五：有孚攣如，富以其鄰。",
+        "xiaoXiang": "有孚攣如，不獨富也。",
+        "plainText": "九五：有孚挛如，富以其邻。",
+        "plainXiaoXiang": "《象传》：有孚挛如，不独富。",
+        "coreMeaning": "诚信团结众人，有福同享。",
+        "favorableMeaning": "诚信团结，共享富有。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "既雨既处",
+        "classicText": "上九：既雨既處，尚德載，婦貞厲，月幾望，君子征凶。",
+        "xiaoXiang": "既雨既處，德積載也。君子征凶，有所疑也。",
+        "plainText": "上九：既雨既处，尚德载。君子征凶。",
+        "plainXiaoXiang": "《象传》：既雨既处，德积载。征凶，有所疑。",
+        "coreMeaning": "积蓄已满不可再进，过满则溢。",
+        "cautionMeaning": "积蓄已满不可再进。"
+      }
+    ]
+  },
+  "10": {
+    "kingWen": 10,
+    "name": "履",
+    "classic": {
+      "judgment": "虎尾，不咥人，亨。",
+      "tuan": "履，柔履剛也。說而應乎乾，是以履虎尾，不咥人，亨。剛中正，履帝位而不疚，光明也。",
+      "daXiang": "上天下澤，履；君子以辨上下，定民志。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/履"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "履：履虎尾，不咥人，亨。",
+      "plainTuan": "《彖传》说：履，柔履刚也。说而应乎乾，是以履虎尾不咥人，亨。刚中正，履帝位而不疚，光明也。",
+      "plainDaXiang": "《大象传》说：上天下泽，履。君子以辨上下，定民志。",
+      "coreMeaning": "履代表践履、以柔履刚。核心：在危险中以和悦谨慎守礼行事，虽如踩虎尾却能化险为夷。",
+      "keyThemes": [
+        "践履礼仪",
+        "谨慎行事",
+        "化险为夷"
+      ],
+      "asBaseHexagram": "当前主旨偏向如履虎尾——有风险但谨慎守礼可化险为夷。",
+      "asMutualHexagram": "互卦表示中段需谨慎行事、守礼而进。",
+      "asChangedHexagram": "变卦表示后段趋向需小心履行、按规矩行事。",
+      "cautions": [
+        "如踩虎尾必须谨慎",
+        "以和悦守礼应对强者",
+        "不可鲁莽"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "素履",
+        "classicText": "初九：素履，往无咎。",
+        "xiaoXiang": "素履之往，獨行願也。",
+        "plainText": "初九：素履，往无咎。",
+        "plainXiaoXiang": "《象传》：素履之往，独行愿。",
+        "coreMeaning": "朴素本分行事，不慕虚荣。",
+        "favorableMeaning": "朴素守分，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "履道坦坦",
+        "classicText": "九二：履道坦坦，幽人貞吉。",
+        "xiaoXiang": "幽人貞吉，中不自亂也。",
+        "plainText": "九二：履道坦坦，幽人贞吉。",
+        "plainXiaoXiang": "《象传》：幽人贞吉，中不自乱。",
+        "coreMeaning": "道路平坦，内心恬淡守正者吉。",
+        "favorableMeaning": "内心恬淡，守正不迷。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "履虎尾",
+        "classicText": "六三：眇能視，跛能履，履虎尾，咥人，凶。武人為于大君。",
+        "xiaoXiang": "眇能視，不足以有明也。跛能履，不足以與行也。咥人之凶，位不當也。武人為于大君，志剛也。",
+        "plainText": "六三：眇能视，跛能履，履虎尾咥人，凶。",
+        "plainXiaoXiang": "《象传》：位不当也，志刚也。",
+        "coreMeaning": "能力不足却逞强，如踩虎尾被咬。",
+        "cautionMeaning": "不自量力逞强必凶。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "愬愬终吉",
+        "classicText": "九四：履虎尾，愬愬終吉。",
+        "xiaoXiang": "愬愬終吉，志行也。",
+        "plainText": "九四：履虎尾，愬愬终吉。",
+        "plainXiaoXiang": "《象传》：愬愬终吉，志行也。",
+        "coreMeaning": "处境危险但恐惧谨慎，终化险为夷。",
+        "favorableMeaning": "危而能慎，终吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "夬履",
+        "classicText": "九五：夬履，貞厲。",
+        "xiaoXiang": "夬履貞厲，位正當也。",
+        "plainText": "九五：夬履，贞厉。",
+        "plainXiaoXiang": "《象传》：夬履贞厉，位正当。",
+        "coreMeaning": "居中但过于果断独行，须守正防危。",
+        "cautionMeaning": "过于刚断独行需防危。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "视履考祥",
+        "classicText": "上九：視履考祥，其旋元吉。",
+        "xiaoXiang": "元吉在上，大有慶也。",
+        "plainText": "上九：视履考祥，其旋元吉。",
+        "plainXiaoXiang": "《象传》：元吉在上，大有庆。",
+        "coreMeaning": "回顾全程善始善终，大吉。",
+        "favorableMeaning": "善始善终，大吉。"
+      }
+    ]
+  },
+  "11": {
+    "kingWen": 11,
+    "name": "泰",
+    "classic": {
+      "judgment": "小往大來，吉亨。",
+      "tuan": "泰，小往大來，吉亨。則是天地交而萬物通也，上下交而其志同也。內陽而外陰，內健而外順，內君子而外小人，君子道長，小人道消也。",
+      "daXiang": "天地交，泰；后以財成天地之道，輔相天地之宜，以左右民。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/泰"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "泰：小往大来，吉亨。",
+      "plainTuan": "《彖传》说：泰，小往大来吉亨。天地交而万物通，上下交而其志同。内阳外阴，内健外顺，君子道长小人道消。",
+      "plainDaXiang": "《大象传》说：天地交，泰。后以财成天地之道，辅相天地之宜。",
+      "coreMeaning": "泰代表通泰和谐、天地交泰。这是极佳状态，但泰极否来——越通泰越要警惕。",
+      "keyThemes": [
+        "通泰和谐",
+        "天地交泰",
+        "居安思危"
+      ],
+      "asBaseHexagram": "当前主旨处于通泰和谐状态，上下同心，但不可安逸忘危。",
+      "asMutualHexagram": "互卦表示中段处于通达顺畅、内外交泰阶段。",
+      "asChangedHexagram": "变卦表示后段趋向通泰和谐、顺畅发展。",
+      "cautions": [
+        "泰极必否居安思危",
+        "通泰时不可骄奢",
+        "越是顺越要谨慎"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "拔茅茹",
+        "classicText": "初九：拔茅茹以其彙，征吉。",
+        "xiaoXiang": "拔茅征吉，志在外也。",
+        "plainText": "初九：拔茅茹以其汇，征吉。",
+        "plainXiaoXiang": "《象传》：拔茅征吉，志在外。",
+        "coreMeaning": "同类相聚携手并进。",
+        "favorableMeaning": "同类同心，征吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "包荒",
+        "classicText": "九二：包荒。用馮河，不遐遺；朋亡。得尚于中行。",
+        "xiaoXiang": "包荒，得尚于中行，以光大也。",
+        "plainText": "九二：包荒，用冯河，不遐遗；朋亡。得尚于中行。",
+        "plainXiaoXiang": "《象传》：包荒得尚于中行，光大。",
+        "coreMeaning": "心胸宽广不结党，中道而行。",
+        "favorableMeaning": "心胸宽广，中道而行。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "无平不陂",
+        "classicText": "九三：无平不陂，无往不復，艱貞无咎。勿恤其孚，于食有福。",
+        "xiaoXiang": "无往不復，天地際也。",
+        "plainText": "九三：无平不陂，无往不复，艰贞无咎。",
+        "plainXiaoXiang": "《象传》：无往不复，天地际。",
+        "coreMeaning": "泰极否来是必然，通泰时要认识到。",
+        "cautionMeaning": "通泰中要有忧患意识。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "翩翩不富",
+        "classicText": "六四：翩翩，不富以其鄰；不戒以孚。",
+        "xiaoXiang": "翩翩不富，皆失實也。不戒以孚，中心願也。",
+        "plainText": "六四：翩翩，不富以其邻，不戒以孚。",
+        "plainXiaoXiang": "《象传》：翩翩不富，皆失实。不戒以孚，中心愿。",
+        "coreMeaning": "不囤积不设防，以诚待人。",
+        "favorableMeaning": "不囤积以诚待人。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "帝乙归妹",
+        "classicText": "六五：帝乙歸妹，以祉，元吉。",
+        "xiaoXiang": "以祉，元吉。中以行願也。",
+        "plainText": "六五：帝乙归妹，以祉元吉。",
+        "plainXiaoXiang": "《象传》：以祉元吉，中以行愿。",
+        "coreMeaning": "居尊位下嫁谦逊，以德感召。",
+        "favorableMeaning": "居尊谦逊，大德大吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "城复于隍",
+        "classicText": "上六：城復于隍，勿用師，自邑告命，貞吝。",
+        "xiaoXiang": "城復于隍，其命亂也。",
+        "plainText": "上六：城复于隍，勿用师，贞吝。",
+        "plainXiaoXiang": "《象传》：城复于隍，其命乱。",
+        "coreMeaning": "泰到极点城墙崩塌，由泰转否。",
+        "cautionMeaning": "泰极否来不可强行。"
+      }
+    ]
+  },
+  "12": {
+    "kingWen": 12,
+    "name": "否",
+    "classic": {
+      "judgment": "之匪人，不利君子貞，大往小來。",
+      "tuan": "否之匪人，不利君子貞，大往小來。則是天地不交而萬物不通也，上下不交而天下无邦也。內陰而外陽，內柔而外剛，內小人而外君子，小人道長，君子道消也。",
+      "daXiang": "天地不交，否；君子以儉德辟難，不可榮以祿。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/否"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "否：之匪人，不利君子贞，大往小来。",
+      "plainTuan": "《彖传》说：否之匪人，不利君子贞，大往小来。天地不交而万物不通，上下不交而天下无邦。内阴外阳，小人道长君子道消。",
+      "plainDaXiang": "《大象传》说：天地不交，否。君子以俭德辟难，不可荣以禄。",
+      "coreMeaning": "否代表闭塞不通、天地不交。此时应收敛自守、俭德避难，但否极泰来。",
+      "keyThemes": [
+        "闭塞不通",
+        "俭德避难",
+        "否极泰来"
+      ],
+      "asBaseHexagram": "当前主旨处于闭塞不通逆境，宜收敛自守不可强求。",
+      "asMutualHexagram": "互卦表示中段处于闭塞阻滞期，不宜强行推进。",
+      "asChangedHexagram": "变卦表示后段趋向闭塞不顺、需要忍耐。",
+      "cautions": [
+        "闭塞时不可强求",
+        "俭德避难不慕荣华",
+        "否极泰来耐心等待"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "拔茅茹",
+        "classicText": "初六：拔茅茹以其彙，貞吉。亨。",
+        "xiaoXiang": "拔茅貞吉，志在君也。",
+        "plainText": "初六：拔茅茹以其汇，贞吉亨。",
+        "plainXiaoXiang": "《象传》：拔茅贞吉，志在君。",
+        "coreMeaning": "闭塞之初同类相聚守正待时。",
+        "favorableMeaning": "同类相守守正待时。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "包承",
+        "classicText": "六二：包承，小人吉，大人否。亨。",
+        "xiaoXiang": "大人否，亨。不亂羣也。",
+        "plainText": "六二：包承，小人吉，大人否亨。",
+        "plainXiaoXiang": "《象传》：大人否亨，不乱群。",
+        "coreMeaning": "小人得势时大人闭塞自守不随波逐流。",
+        "favorableMeaning": "不与小人为伍，终亨。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "包羞",
+        "classicText": "六三：包羞。",
+        "xiaoXiang": "包羞，位不當也。",
+        "plainText": "六三：包羞。",
+        "plainXiaoXiang": "《象传》：包羞，位不当。",
+        "coreMeaning": "位置不当只能忍辱含耻。",
+        "cautionMeaning": "位置不当忍辱含耻。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "有命无咎",
+        "classicText": "九四：有命，无咎，疇離祉。",
+        "xiaoXiang": "有命无咎，志行也。",
+        "plainText": "九四：有命无咎，畴离祉。",
+        "plainXiaoXiang": "《象传》：有命无咎，志行。",
+        "coreMeaning": "否极将转泰，奉天命而行。",
+        "favorableMeaning": "否极转泰，众福同沾。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "休否",
+        "classicText": "九五：休否，大人吉。其亡其亡，繫于苞桑。",
+        "xiaoXiang": "大人之吉，位正當也。",
+        "plainText": "九五：休否，大人吉。其亡其亡，系于苞桑。",
+        "plainXiaoXiang": "《象传》：大人之吉，位正当。",
+        "coreMeaning": "高位终止闭塞，居安思危。",
+        "favorableMeaning": "终止闭塞，居安思危。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "倾否",
+        "classicText": "上九：傾否，先否後喜。",
+        "xiaoXiang": "否終則傾，何可長也。",
+        "plainText": "上九：倾否，先否后喜。",
+        "plainXiaoXiang": "《象传》：否终则倾，何可长。",
+        "coreMeaning": "闭塞到极点必然倾覆，先苦后喜。",
+        "favorableMeaning": "否极泰来，先苦后喜。"
+      }
+    ]
+  },
+  "13": {
+    "kingWen": 13,
+    "name": "同人",
+    "classic": {
+      "judgment": "同人于野，亨。利涉大川，利君子貞。",
+      "tuan": "同人，柔得位得中，而應乎乾，曰同人。同人曰，同人于野，亨。利涉大川，乾行也。文明以健，中正而應，君子正也。唯君子為能通天下之志。",
+      "daXiang": "天與火，同人；君子以類族辨物。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/同人"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "同人于野，亨。利涉大川，利君子贞。",
+      "plainTuan": "《彖传》说：同人，柔得位得中而应乎乾。同人于野亨，利涉大川，乾行也。文明以健，中正而应，君子正也。唯君子能通天下之志。",
+      "plainDaXiang": "《大象传》说：天与火，同人。君子以类族辨物。",
+      "coreMeaning": "同人代表与人和同、团结众人。关键是同人于野——大公无私地与天下人和同，而非小圈子。",
+      "keyThemes": [
+        "与人和同",
+        "大公无私",
+        "类族辨物"
+      ],
+      "asBaseHexagram": "当前主旨偏向寻求志同道合者，宜大公无私不可囿于小圈子。",
+      "asMutualHexagram": "互卦表示中段需要广泛团结、寻求同盟。",
+      "asChangedHexagram": "变卦表示后段趋向与人合作、和同共济。",
+      "cautions": [
+        "同人要大公不偏私",
+        "先辨物类再求和同",
+        "中正相应才能真团结"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "同人于门",
+        "classicText": "初九：同人于門，無咎。",
+        "xiaoXiang": "出門同人，又誰咎也。",
+        "plainText": "初九：同人于门，无咎。",
+        "plainXiaoXiang": "《象传》：出门同人，又谁咎。",
+        "coreMeaning": "刚出门就公开和同，坦荡无私。",
+        "favorableMeaning": "公开坦荡，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "同人于宗",
+        "classicText": "六二：同人于宗，吝。",
+        "xiaoXiang": "同人于宗，吝道也。",
+        "plainText": "六二：同人于宗，吝。",
+        "plainXiaoXiang": "《象传》：同人于宗，吝道。",
+        "coreMeaning": "只跟小圈子和同，格局狭隘。",
+        "cautionMeaning": "只团结小圈子格局狭隘。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "伏戎于莽",
+        "classicText": "九三：伏戎于莽，升其高陵，三歲不興。",
+        "xiaoXiang": "伏戎于莽，敵剛也。三歲不興，安行也。",
+        "plainText": "九三：伏戎于莽，升其高陵，三岁不兴。",
+        "plainXiaoXiang": "《象传》：伏戎于莽，敌刚也。三岁不兴，安行。",
+        "coreMeaning": "想同人却遇强敌，只能埋伏隐忍。",
+        "cautionMeaning": "力量不足不可强争。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "乘其墉",
+        "classicText": "九四：乘其墉，弗克，攻吉。",
+        "xiaoXiang": "乘其墉，義弗克也，其吉，則困而反則也。",
+        "plainText": "九四：乘其墉，弗克攻吉。",
+        "plainXiaoXiang": "《象传》：乘其墉，义弗克。其吉，困而反则。",
+        "coreMeaning": "想进攻却发现不可胜，知难而退。",
+        "favorableMeaning": "知难而退，回归正道。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "先号后笑",
+        "classicText": "九五：同人，先號啕而后笑。大師克相遇。",
+        "xiaoXiang": "同人之先，以中直也。大師相遇，言相克也。",
+        "plainText": "九五：同人，先号啕而后笑。大师克相遇。",
+        "plainXiaoXiang": "《象传》：同人之先，以中直。大师相遇，言相克。",
+        "coreMeaning": "经历冲突困苦后终于志同道合。",
+        "favorableMeaning": "经历冲突后终得志同道合。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "同人于郊",
+        "classicText": "上九：同人于郊，無悔。",
+        "xiaoXiang": "同人于郊，志未得也。",
+        "plainText": "上九：同人于郊，无悔。",
+        "plainXiaoXiang": "《象传》：同人于郊，志未得。",
+        "coreMeaning": "在远郊和同，大志未酬但无悔。",
+        "cautionMeaning": "和同于远郊，大志未实现。"
+      }
+    ]
+  },
+  "14": {
+    "kingWen": 14,
+    "name": "大有",
+    "classic": {
+      "judgment": "元亨。",
+      "tuan": "大有，柔得尊位，大中而上下應之，曰大有。其德剛健而文明，應乎天而時行，是以元亨。",
+      "daXiang": "火在天上，大有；君子以遏惡揚善，順天休命。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/大有"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "大有：元亨。",
+      "plainTuan": "《彖传》说：大有，柔得尊位，大中而上下应之。其德刚健而文明，应乎天而时行，是以元亨。",
+      "plainDaXiang": "《大象传》说：火在天上，大有。君子以遏恶扬善，顺天休命。",
+      "coreMeaning": "大有代表大有所得、丰盛富有。核心：富有之后更要刚健文明、遏恶扬善，不可因富骄纵。",
+      "keyThemes": [
+        "大有所得",
+        "丰盛富有",
+        "遏恶扬善"
+      ],
+      "asBaseHexagram": "当前主旨处于丰盛富有状态，更应遏恶扬善谦逊守正。",
+      "asMutualHexagram": "互卦表示中段收获丰硕、大有作为。",
+      "asChangedHexagram": "变卦表示后段趋向丰盛收获、大有成就。",
+      "cautions": [
+        "富有不可骄纵",
+        "遏恶扬善顺应天道",
+        "富而好礼才能长保"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "无交害",
+        "classicText": "初九：无交害，匪咎，艱則无咎。",
+        "xiaoXiang": "大有初九，无交害也。",
+        "plainText": "初九：无交害，匪咎，艰则无咎。",
+        "plainXiaoXiang": "《象传》：大有初九，无交害。",
+        "coreMeaning": "大有之初不与人交恶，艰难自守。",
+        "favorableMeaning": "不结怨，艰难自守。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "大车以载",
+        "classicText": "九二：大車以載，有攸往，无咎。",
+        "xiaoXiang": "大車以載，積中不敗也。",
+        "plainText": "九二：大车以载，有攸往无咎。",
+        "plainXiaoXiang": "《象传》：大车以载，积中不败。",
+        "coreMeaning": "才德厚实如大车重载，可担当。",
+        "favorableMeaning": "才德厚实，可担重任。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "亨于天子",
+        "classicText": "九三：公用亨于天子，小人弗克。",
+        "xiaoXiang": "公用亨于天子，小人害也。",
+        "plainText": "九三：公用亨于天子，小人弗克。",
+        "plainXiaoXiang": "《象传》：公用亨于天子，小人害。",
+        "coreMeaning": "公侯可朝献天子，小人无德居此位则害。",
+        "cautionMeaning": "无德小人居大位则害。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "匪其彭",
+        "classicText": "九四：匪其彭，无咎。",
+        "xiaoXiang": "匪其彭，无咎；明辨晰也。",
+        "plainText": "九四：匪其彭，无咎。",
+        "plainXiaoXiang": "《象传》：匪其彭无咎，明辨晰。",
+        "coreMeaning": "富有而不骄盈膨胀，明辨分寸。",
+        "favorableMeaning": "富而不骄，无咎。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "厥孚交如",
+        "classicText": "六五：厥孚交如，威如；吉。",
+        "xiaoXiang": "厥孚交如，信以發志也。威如之吉，易而无備也。",
+        "plainText": "六五：厥孚交如，威如，吉。",
+        "plainXiaoXiang": "《象传》：厥孚交如，信以发志。威如之吉，易而无备。",
+        "coreMeaning": "居尊位以诚信待人又有威严。",
+        "favorableMeaning": "诚信威严并济，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "自天佑之",
+        "classicText": "上九：自天佑之，吉无不利。",
+        "xiaoXiang": "大有上吉，自天佑也。",
+        "plainText": "上九：自天佑之，吉无不利。",
+        "plainXiaoXiang": "《象传》：大有上吉，自天佑。",
+        "coreMeaning": "顺天休命者上天保佑。",
+        "favorableMeaning": "顺天应人，自天佑之。"
+      }
+    ]
+  },
+  "15": {
+    "kingWen": 15,
+    "name": "谦",
+    "classic": {
+      "judgment": "亨，君子有終。",
+      "tuan": "謙，亨，天道下濟而光明，地道卑而上行。天道虧盈而益謙，地道變盈而流謙，鬼神害盈而福謙，人道惡盈而好謙。謙尊而光，卑而不可逾，君子之終也。",
+      "daXiang": "地中有山，謙；君子以裒多益寡，稱物平施。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/谦"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "谦：亨，君子有终。",
+      "plainTuan": "《彖传》说：谦亨。天道下济而光明，地道卑而上行。天道亏盈而益谦，鬼神害盈而福谦，人道恶盈而好谦。谦尊而光，卑而不可逾，君子之终。",
+      "plainDaXiang": "《大象传》说：地中有山，谦。君子以裒多益寡，称物平施。",
+      "coreMeaning": "谦是唯一六爻皆吉的卦。核心：谦尊而光——有实力却甘居人下，最终不可逾越。",
+      "keyThemes": [
+        "谦逊",
+        "谦尊而光",
+        "裒多益寡"
+      ],
+      "asBaseHexagram": "当前主旨偏向谦虚退让，有实力不张扬，公平处事。",
+      "asMutualHexagram": "互卦表示中段以谦逊态度推进，不骄不躁。",
+      "asChangedHexagram": "变卦表示后段趋向谦虚受益、以谦得福。",
+      "cautions": [
+        "谦不是自卑是有实力不张扬",
+        "公平处事损多益寡",
+        "谦卦六爻皆吉仍需力行"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "谦谦君子",
+        "classicText": "初六：謙謙君子，用涉大川，吉。",
+        "xiaoXiang": "謙謙君子，卑以自牧也。",
+        "plainText": "初六：谦谦君子，用涉大川，吉。",
+        "plainXiaoXiang": "《象传》：谦谦君子，卑以自牧。",
+        "coreMeaning": "谦而又谦，卑以自守，可涉险。",
+        "favorableMeaning": "谦而又谦，自守谦卑。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "鸣谦",
+        "classicText": "六二：鳴謙，貞吉。",
+        "xiaoXiang": "鳴謙貞吉，中心得也。",
+        "plainText": "六二：鸣谦，贞吉。",
+        "plainXiaoXiang": "《象传》：鸣谦贞吉，中心得。",
+        "coreMeaning": "谦虚发自内心名声外闻。",
+        "favorableMeaning": "中心谦逊，名实相符。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "劳谦",
+        "classicText": "九三：勞謙君子，有終吉。",
+        "xiaoXiang": "勞謙君子，萬民服也。",
+        "plainText": "九三：劳谦君子，有终吉。",
+        "plainXiaoXiang": "《象传》：劳谦君子，万民服。",
+        "coreMeaning": "有功不居勤劳谦逊，万民敬服。",
+        "favorableMeaning": "勤劳功高而谦，万民服。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "撝谦",
+        "classicText": "六四：无不利，撝謙。",
+        "xiaoXiang": "无不利撝謙；不違則也。",
+        "plainText": "六四：无不利，撝谦。",
+        "plainXiaoXiang": "《象传》：无不利撝谦，不违则。",
+        "coreMeaning": "发挥谦德，无所不利。",
+        "favorableMeaning": "发挥谦德，无所不利。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "不富以邻",
+        "classicText": "六五：不富，以其鄰，利用侵伐，无不利。",
+        "xiaoXiang": "利用侵伐，征不服也。",
+        "plainText": "六五：不富以其邻，利用侵伐，无不利。",
+        "plainXiaoXiang": "《象传》：利用侵伐，征不服。",
+        "coreMeaning": "谦虚但不软弱，对不服可征伐。",
+        "favorableMeaning": "谦而有威，征伐不服。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "鸣谦",
+        "classicText": "上六：鳴謙，利用行師，征邑國。",
+        "xiaoXiang": "鳴謙，志未得也。可用行師，征邑國也。",
+        "plainText": "上六：鸣谦，利用行师，征邑国。",
+        "plainXiaoXiang": "《象传》：鸣谦，志未得。可用行师，征邑国。",
+        "coreMeaning": "谦名虽闻但志未得，可先定内部。",
+        "cautionMeaning": "谦名虽闻大志未酬。"
+      }
+    ]
+  },
+  "16": {
+    "kingWen": 16,
+    "name": "豫",
+    "classic": {
+      "judgment": "利建侯行師。",
+      "tuan": "豫，剛應而志行，順以動，豫。豫，順以動，故天地如之，而況建侯行師乎？天地以順動，故日月不過，而四時不忒；聖人以順動，則刑罰清而民服。豫之時義大矣哉！",
+      "daXiang": "雷出地奮，豫。先王以作樂崇德，殷薦之上帝，以配祖考。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/豫"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "豫：利建侯行师。",
+      "plainTuan": "《彖传》说：豫，刚应而志行，顺以动。顺以动，故天地如之，况建侯行师。天地以顺动，故日月不过四时不忒。圣人以顺动，则刑罚清而民服。",
+      "plainDaXiang": "《大象传》说：雷出地奋，豫。先王作乐崇德，殷荐上帝。",
+      "coreMeaning": "豫代表愉悦和乐、顺势而动。核心不是单纯享乐，而是顺以动——顺应形势而动，和乐中易沉溺需警惕。",
+      "keyThemes": [
+        "愉悦和乐",
+        "顺时而动",
+        "戒沉溺"
+      ],
+      "asBaseHexagram": "当前主旨处于和乐顺畅状态，顺势而动有利，但不可沉溺安逸。",
+      "asMutualHexagram": "互卦表示中段处于和乐顺势阶段，上下同心。",
+      "asChangedHexagram": "变卦表示后段趋向和乐愉悦、顺势发展。",
+      "cautions": [
+        "和乐中不可沉溺安逸",
+        "顺以动才是真豫",
+        "安乐时要想到忧患"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "鸣豫",
+        "classicText": "初六：鳴豫，凶。",
+        "xiaoXiang": "初六鳴豫，志窮凶也。",
+        "plainText": "初六：鸣豫，凶。",
+        "plainXiaoXiang": "《象传》：初六鸣豫，志穷凶。",
+        "coreMeaning": "得意忘形到处炫耀，志向短浅。",
+        "cautionMeaning": "得意忘形炫耀自满。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "介于石",
+        "classicText": "六二：介于石，不終日，貞吉。",
+        "xiaoXiang": "不終日，貞吉；以中正也。",
+        "plainText": "六二：介于石，不终日，贞吉。",
+        "plainXiaoXiang": "《象传》：不终日贞吉，以中正。",
+        "coreMeaning": "坚如磐石，见微知著不沉溺。",
+        "favorableMeaning": "坚贞自守，见机而作。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "盱豫",
+        "classicText": "六三：盱豫，悔。遲有悔。",
+        "xiaoXiang": "盱豫有悔，位不當也。",
+        "plainText": "六三：盱豫，悔。迟有悔。",
+        "plainXiaoXiang": "《象传》：盱豫有悔，位不当。",
+        "coreMeaning": "仰视巴结谄媚求悦，位置不当。",
+        "cautionMeaning": "谄媚求悦位置不当。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "由豫",
+        "classicText": "九四：由豫，大有得。勿疑。朋盍簪。",
+        "xiaoXiang": "由豫，大有得；志大行也。",
+        "plainText": "九四：由豫，大有得。勿疑，朋盍簪。",
+        "plainXiaoXiang": "《象传》：由豫大有得，志大行。",
+        "coreMeaning": "众人因他而和乐，朋友归心。",
+        "favorableMeaning": "众人归心，大有得。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "贞疾",
+        "classicText": "六五：貞疾，恆不死。",
+        "xiaoXiang": "六五貞疾，乘剛也。恆不死，中未亡也。",
+        "plainText": "六五：贞疾，恒不死。",
+        "plainXiaoXiang": "《象传》：六五贞疾，乘刚也。恒不死，中未亡。",
+        "coreMeaning": "居安思危，虽有疾但中道未亡。",
+        "favorableMeaning": "居安思危，虽危不死。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "冥豫",
+        "classicText": "上六：冥豫，成有渝，无咎。",
+        "xiaoXiang": "冥豫在上，何可長也。",
+        "plainText": "上六：冥豫，成有渝，无咎。",
+        "plainXiaoXiang": "《象传》：冥豫在上，何可长。",
+        "coreMeaning": "沉溺安乐到极点，但能幡然改变。",
+        "cautionMeaning": "沉溺冥乐不可长久，及时改。"
+      }
+    ]
+  },
+  "17": {
+    "kingWen": 17,
+    "name": "随",
+    "classic": {
+      "judgment": "元亨。利貞。无咎。",
+      "tuan": "隨，剛來而下柔，動而說，隨。大亨貞，无咎，而天下隨時，隨之時義大矣哉！",
+      "daXiang": "澤中有雷，隨；君子以嚮晦入宴息。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/随"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "随：大通顺。利于守正。没有咎害。",
+      "plainTuan": "《彖传》说：随卦，刚健者来而柔顺居下，下动而上悦，象征随顺。大通顺而守正，没有咎害；天下万物都随顺时机，随顺时宜的意义太大了。",
+      "plainDaXiang": "《大象传》说：泽中有雷（雷在泽中蛰伏），这是随卦。君子因此在傍晚时入室安息，顺应昼夜节律。",
+      "coreMeaning": "随强调根据时机和条件调整行动，但利贞说明顺应必须以原则和正当性为边界，并不是无条件跟随。",
+      "keyThemes": [
+        "顺应时机",
+        "择善而从",
+        "因时制宜",
+        "守正随顺"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向顺势而行、因时调整。重点不是强行推进，而是判断什么值得跟随、何时调整。",
+      "asMutualHexagram": "作为互卦，表示事情中段偏向顺应现有格局、随附已有条件推进，不宜逆势强行。",
+      "asChangedHexagram": "作为变卦，表示后段趋向随顺环境、灵活调整，以配合为主。",
+      "cautions": [
+        "顺应不等于盲从仍需守原则",
+        "利贞是底线：随顺对象必须正当",
+        "不要随波逐流失去判断"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "官有渝",
+        "classicText": "初九：官有渝，貞吉。出門交有功。",
+        "xiaoXiang": "官有渝，從正吉也。出門交有功，不失也。",
+        "plainText": "初九：官有渝，贞吉。出门交有功。",
+        "plainXiaoXiang": "《象传》说：职务有变动，是随从正道才吉祥。出门交往有功，是因为没有失去分寸。",
+        "coreMeaning": "变化在职务或角色调整时，守正而出、主动交往则有利。",
+        "favorableMeaning": "环境变动时主动调整、外出建立联系可得功。",
+        "cautionMeaning": "变动中必须守正不可随波逐流。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "系小子",
+        "classicText": "六二：系小子，失丈夫。",
+        "xiaoXiang": "系小子，弗兼與也。",
+        "plainText": "六二：系小子，失丈夫。",
+        "plainXiaoXiang": "《象传》说：牵系于小子，是因为不能同时兼得。",
+        "coreMeaning": "变化点在取舍。过度牵系眼前次要对象，可能因此失去更重要的目标。很多选择不能兼得，需明确主次。",
+        "favorableMeaning": "认清主次后可果断取舍。",
+        "cautionMeaning": "不可因小失大。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "系丈夫",
+        "classicText": "六三：系丈夫，失小子。隨，有求得利，居貞。",
+        "xiaoXiang": "系丈夫，志舍下也。",
+        "plainText": "六三：系丈夫，失小子。随有求得利，居贞。",
+        "plainXiaoXiang": "《象传》说：牵系于丈夫，是心志舍弃了下位的小子。",
+        "coreMeaning": "取舍方向与六二相反——选择重要的、舍弃次要的。有求必得，但仍需安居守正。",
+        "favorableMeaning": "跟对了方向，有所求可得。",
+        "cautionMeaning": "即使选择正确也不可躁动。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "随有获",
+        "classicText": "九四：隨有獲，貞凶。有孚在道，以明，何咎。",
+        "xiaoXiang": "隨有獲，其義凶也。有孚在道，明功也。",
+        "plainText": "九四：随有获，贞凶。有孚在道，以明，何咎。",
+        "plainXiaoXiang": "《象传》说：随顺而有所获，从道义看有凶。心存诚信、合乎正道，是明察之功。",
+        "coreMeaning": "有所获时反而要警惕——随顺上位者虽有所得，但如果失去原则就会有凶。",
+        "favorableMeaning": "以诚信道义行事可获而无咎。",
+        "cautionMeaning": "跟随强者虽有所得但若丧失原则则凶。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "孚于嘉",
+        "classicText": "九五：孚于嘉，吉。",
+        "xiaoXiang": "孚于嘉，吉；位正中也。",
+        "plainText": "九五：孚于嘉，吉。",
+        "plainXiaoXiang": "《象传》说：诚信于美善而吉祥，因为居中得正。",
+        "coreMeaning": "以诚信追随美善，居中得正，自然吉祥。",
+        "favorableMeaning": "居于中正之位，以诚信待人，吉祥无不利。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "拘系之",
+        "classicText": "上六：拘系之，乃從維之。王用亨于西山。",
+        "xiaoXiang": "拘系之，上窮也。",
+        "plainText": "上六：拘系之，乃从维之。王用亨于西山。",
+        "plainXiaoXiang": "《象传》说：被拘系捆绑，是因为到了上位的穷极之处。",
+        "coreMeaning": "过度被束缚、被绑定，反而到了穷极之处。虽然可以通过虔诚祭祀来化解，但随顺到了极点也就失去了自由。",
+        "favorableMeaning": "以诚心祭祀、归顺正道可化解困缚。",
+        "cautionMeaning": "随顺过度会变成被束缚，不可失去自主。"
+      }
+    ]
+  },
+  "18": {
+    "kingWen": 18,
+    "name": "蛊",
+    "classic": {
+      "judgment": "元亨。利涉大川。先甲三日，後甲三日。",
+      "tuan": "蠱，剛上而柔下，巽而止，蠱。蠱，元亨，而天下治也。利涉大川，往有事也。先甲三日，後甲三日，終則有始，天行也。",
+      "daXiang": "山下有風，蠱；君子以振民育德。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/蛊"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "蛊：元亨。利涉大川。先甲三日，后甲三日。",
+      "plainTuan": "《彖传》说：蛊，刚上而柔下，巽而止。蛊元亨而天下治。利涉大川，往有事也。先甲三日后甲三日，终则有始，天行也。",
+      "plainDaXiang": "《大象传》说：山下有风，蛊。君子以振民育德。",
+      "coreMeaning": "蛊代表整治积弊、革新治乱。核心：有腐败就有整治，先甲后甲——深思熟虑后开始，终而复始。",
+      "keyThemes": [
+        "整治积弊",
+        "革新治乱",
+        "深思熟虑"
+      ],
+      "asBaseHexagram": "当前主旨偏向整治积弊、革新治乱。需要先深思熟虑再行动。",
+      "asMutualHexagram": "互卦表示中段处于整治问题、清理积弊的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向整顿革新、拨乱反正。",
+      "cautions": [
+        "整治前必须深思熟虑",
+        "终则有始循环往复",
+        "振民育德是根本"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "干父之蛊",
+        "classicText": "初六：幹父之蠱，有子考，无咎，厲終吉。",
+        "xiaoXiang": "幹父之蠱，意承考也。",
+        "plainText": "初六：干父之蛊，有子考，无咎，厉终吉。",
+        "plainXiaoXiang": "《象传》：干父之蛊，意承考。",
+        "coreMeaning": "整治父辈积弊，有子继承，无咎终吉。",
+        "favorableMeaning": "继承整治，终吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "干母之蛊",
+        "classicText": "九二：幹母之蠱，不可貞。",
+        "xiaoXiang": "幹母之蠱，得中道也。",
+        "plainText": "九二：干母之蛊，不可贞。",
+        "plainXiaoXiang": "《象传》：干母之蛊，得中道。",
+        "coreMeaning": "整治母辈积弊，不可过于刚直，须中道。",
+        "cautionMeaning": "整治须讲方式不可过刚。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "干父之蛊",
+        "classicText": "九三：幹父之蠱，小有悔，无大咎。",
+        "xiaoXiang": "幹父之蠱，終无咎也。",
+        "plainText": "九三：干父之蛊，小有悔，无大咎。",
+        "plainXiaoXiang": "《象传》：干父之蛊，终无咎。",
+        "coreMeaning": "整治父辈积弊略有小悔，但无大咎。",
+        "favorableMeaning": "小有悔，无大咎。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "裕父之蛊",
+        "classicText": "六四：裕父之蠱，往見吝。",
+        "xiaoXiang": "裕父之蠱，往未得也。",
+        "plainText": "六四：裕父之蛊，往见吝。",
+        "plainXiaoXiang": "《象传》：裕父之蛊，往未得。",
+        "coreMeaning": "宽缓姑息父辈积弊，前往见吝。",
+        "cautionMeaning": "姑息养弊不可取。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "干父用誉",
+        "classicText": "六五：幹父之蠱，用譽。",
+        "xiaoXiang": "幹父用譽，承以德也。",
+        "plainText": "六五：干父之蛊，用誉。",
+        "plainXiaoXiang": "《象传》：干父用誉，承以德。",
+        "coreMeaning": "整治父辈积弊而得美誉。",
+        "favorableMeaning": "整治得法，享有美誉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "不事王侯",
+        "classicText": "上九：不事王侯，高尚其事。",
+        "xiaoXiang": "不事王侯，志可則也。",
+        "plainText": "上九：不事王侯，高尚其事。",
+        "plainXiaoXiang": "《象传》：不事王侯，志可则。",
+        "coreMeaning": "不事王侯，高尚其志。",
+        "favorableMeaning": "不事王侯，志可效法。"
+      }
+    ]
+  },
+  "19": {
+    "kingWen": 19,
+    "name": "临",
+    "classic": {
+      "judgment": "元亨。利貞。至于八月有凶。",
+      "tuan": "臨，剛浸而長。說而順，剛中而應，大亨以正，天之道也。至于八月有凶，消不久也。",
+      "daXiang": "澤上有地，臨；君子以教思无窮，容保民无疆。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/临"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "临：元亨。利贞。至于八月有凶。",
+      "plainTuan": "《彖传》说：临，刚浸而长。说而顺，刚中而应，大亨以正，天之道也。至于八月有凶，消不久也。",
+      "plainDaXiang": "《大象传》说：泽上有地，临。君子以教思无穷，容保民无疆。",
+      "coreMeaning": "临代表居高临下、以上临下、治理督导。核心：阳气渐长之势有利，但盛极必衰，八月有凶——需知盛不可久。",
+      "keyThemes": [
+        "居高临下",
+        "治理督导",
+        "盛极必衰"
+      ],
+      "asBaseHexagram": "当前主旨处于阳气渐长、以上临下的有利态势，但要警惕盛极而衰。",
+      "asMutualHexagram": "互卦表示中段处于督导治理、积极推进阶段。",
+      "asChangedHexagram": "变卦表示后段趋向临下治理、主动督导的状态。",
+      "cautions": [
+        "盛极必衰不可骄傲",
+        "教导保民是根本",
+        "知盛不可长久"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "咸临",
+        "classicText": "初九：咸臨，貞吉。",
+        "xiaoXiang": "咸臨貞吉，志行正也。",
+        "plainText": "初九：咸临，贞吉。",
+        "plainXiaoXiang": "《象传》：咸临贞吉，志行正。",
+        "coreMeaning": "以感化之心临民，守正吉。",
+        "favorableMeaning": "感化临民，守正吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "咸临",
+        "classicText": "九二：咸臨，吉无不利。",
+        "xiaoXiang": "咸臨，吉无不利；未順命也。",
+        "plainText": "九二：咸临，吉无不利。",
+        "plainXiaoXiang": "《象传》：咸临吉无不利，未顺命。",
+        "coreMeaning": "以中和之道临民，吉无不利。",
+        "favorableMeaning": "中和临民，吉无不利。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "甘临",
+        "classicText": "六三：甘臨，无攸利。既憂之，无咎。",
+        "xiaoXiang": "甘臨，位不當也。既憂之，咎不長也。",
+        "plainText": "六三：甘临，无攸利。既忧之，无咎。",
+        "plainXiaoXiang": "《象传》：甘临，位不当。既忧之，咎不长。",
+        "coreMeaning": "以甘言巧语临民无利，知忧则无咎。",
+        "cautionMeaning": "甘言巧语不可取，知忧则改。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "至临",
+        "classicText": "六四：至臨，无咎。",
+        "xiaoXiang": "至臨无咎，位當也。",
+        "plainText": "六四：至临，无咎。",
+        "plainXiaoXiang": "《象传》：至临无咎，位当。",
+        "coreMeaning": "以至诚临民，无咎。",
+        "favorableMeaning": "至诚临民，无咎。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "知临",
+        "classicText": "六五：知臨，大君之宜，吉。",
+        "xiaoXiang": "大君之宜，行中之謂也。",
+        "plainText": "六五：知临，大君之宜，吉。",
+        "plainXiaoXiang": "《象传》：大君之宜，行中。",
+        "coreMeaning": "以智慧临民，是大君之宜，吉。",
+        "favorableMeaning": "智慧临民，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "敦临",
+        "classicText": "上六：敦臨，吉无咎。",
+        "xiaoXiang": "敦臨之吉，志在內也。",
+        "plainText": "上六：敦临，吉无咎。",
+        "plainXiaoXiang": "《象传》：敦临之吉，志在内。",
+        "coreMeaning": "以敦厚临民，吉无咎。",
+        "favorableMeaning": "敦厚临民，吉。"
+      }
+    ]
+  },
+  "20": {
+    "kingWen": 20,
+    "name": "观",
+    "classic": {
+      "judgment": "盥而不荐，有孚顒若。",
+      "tuan": "大觀在上，順而巽，中正以觀天下。觀，盥而不荐，有孚顒若，下觀而化也。觀天之神道，而四時不忒，聖人以神道設教，而天下服矣。",
+      "daXiang": "風行地上，觀；先王以省方，觀民設教。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/观"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "观：盥而不荐，有孚颙若。",
+      "plainTuan": "《彖传》说：大观在上，顺而巽，中正以观天下。观盥而不荐，有孚颙若，下观而化也。观天之神道，四时不忒。圣人以神道设教而天下服。",
+      "plainDaXiang": "《大象传》说：风行地上，观。先王以省方观民设教。",
+      "coreMeaning": "观代表观察、展示、被人瞻仰。核心：观察要中正，展示要诚信。「盥而不荐」——诚敬之心比形式更重要。",
+      "keyThemes": [
+        "观察审视",
+        "中正展示",
+        "神道设教"
+      ],
+      "asBaseHexagram": "当前主旨偏向观察形势、审视自身。需要中正诚信地展示和观察。",
+      "asMutualHexagram": "互卦表示中段处于观察学习、审视局面的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向观察反思、展示教化。",
+      "cautions": [
+        "观察要中正客观",
+        "诚敬之心重于形式",
+        "以身作则感化他人"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "童观",
+        "classicText": "初六：童觀，小人无咎，君子吝。",
+        "xiaoXiang": "初六童觀，小人道也。",
+        "plainText": "初六：童观，小人无咎，君子吝。",
+        "plainXiaoXiang": "《象传》：初六童观，小人道。",
+        "coreMeaning": "像孩童一样浅观察，小人无咎君子吝。",
+        "cautionMeaning": "浅见薄识不可取。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "窥观",
+        "classicText": "六二：窺觀，利女貞。",
+        "xiaoXiang": "窺觀女貞，亦可丑也。",
+        "plainText": "六二：窥观，利女贞。",
+        "plainXiaoXiang": "《象传》：窥观女贞，亦可丑。",
+        "coreMeaning": "从门缝偷看，所见狭隘。",
+        "cautionMeaning": "视野狭隘所见有限。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "观我生",
+        "classicText": "六三：觀我生，進退。",
+        "xiaoXiang": "觀我生，進退；未失道也。",
+        "plainText": "六三：观我生，进退。",
+        "plainXiaoXiang": "《象传》：观我生进退，未失道。",
+        "coreMeaning": "观察自身所作所为，决定进退。",
+        "favorableMeaning": "自省进退，不失道。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "观国之光",
+        "classicText": "六四：觀國之光，利用賓于王。",
+        "xiaoXiang": "觀國之光，尚賓也。",
+        "plainText": "六四：观国之光，利用宾于王。",
+        "plainXiaoXiang": "《象传》：观国之光，尚宾。",
+        "coreMeaning": "观察国家光辉，利于做王的宾客。",
+        "favorableMeaning": "观察盛德，可为辅佐。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "观我生",
+        "classicText": "九五：觀我生，君子无咎。",
+        "xiaoXiang": "觀我生，觀民也。",
+        "plainText": "九五：观我生，君子无咎。",
+        "plainXiaoXiang": "《象传》：观我生，观民。",
+        "coreMeaning": "观察自身与民情，君子无咎。",
+        "favorableMeaning": "自省观民，无咎。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "观其生",
+        "classicText": "上九：觀其生，君子无咎。",
+        "xiaoXiang": "觀其生，志未平也。",
+        "plainText": "上九：观其生，君子无咎。",
+        "plainXiaoXiang": "《象传》：观其生，志未平。",
+        "coreMeaning": "观察他人所作所为，君子无咎。",
+        "favorableMeaning": "观察他人，志未平。"
+      }
+    ]
+  },
+  "21": {
+    "kingWen": 21,
+    "name": "噬嗑",
+    "classic": {
+      "judgment": "亨。利用獄。",
+      "tuan": "頤中有物，曰噬嗑，噬嗑而亨。剛柔分，動而明，雷電合而章。柔得中而上行，雖不當位，利用獄也。",
+      "daXiang": "雷電噬嗑；先王以明罰敕法。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/噬嗑"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "噬嗑：亨。利用狱。",
+      "plainTuan": "《彖传》说：颐中有物曰噬嗑，噬嗑而亨。刚柔分，动而明，雷电合而章。柔得中而上行，虽不当位，利用狱也。",
+      "plainDaXiang": "《大象传》说：雷电噬嗑。先王以明敕法。",
+      "coreMeaning": "噬嗑代表咬合、清除障碍、明断执法。核心：颐中有物必须咬碎才能亨通——清除梗阻、明正刑法。",
+      "keyThemes": [
+        "咬合除障",
+        "明断执法",
+        "雷电合章"
+      ],
+      "asBaseHexagram": "当前主旨偏向清除障碍、明断是非。需要刚柔并济、明察秋毫。",
+      "asMutualHexagram": "互卦表示中段处于排除梗阻、解决硬骨头问题的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向明断执法、清除障碍。",
+      "cautions": [
+        "清除障碍必须果断",
+        "明察秋毫不枉不纵",
+        "刚柔并济"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "屦校灭趾",
+        "classicText": "初九：屨校滅趾，无咎。",
+        "xiaoXiang": "屨校滅趾，不行也。",
+        "plainText": "初九：屦校灭趾，无咎。",
+        "plainXiaoXiang": "《象传》：屦校灭趾，不行。",
+        "coreMeaning": "脚上戴刑具遮住脚趾，小惩大诫无咎。",
+        "favorableMeaning": "小惩大诫，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "噬肤灭鼻",
+        "classicText": "六二：噬膚滅鼻，无咎。",
+        "xiaoXiang": "噬膚滅鼻，乘剛也。",
+        "plainText": "六二：噬肤灭鼻，无咎。",
+        "plainXiaoXiang": "《象传》：噬肤灭鼻，乘刚。",
+        "coreMeaning": "咬软肉没入鼻子，容易但乘刚无咎。",
+        "favorableMeaning": "事易但勿过刚。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "噬腊肉",
+        "classicText": "六三：噬臘肉，遇毒；小吝，无咎。",
+        "xiaoXiang": "遇毒，位不當也。",
+        "plainText": "六三：噬腊肉，遇毒；小吝，无咎。",
+        "plainXiaoXiang": "《象传》：遇毒，位不当。",
+        "coreMeaning": "咬干肉遇到毒，小吝但无咎。",
+        "cautionMeaning": "处理棘手问题遇小阻。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "噬干胏",
+        "classicText": "九四：噬乾胏，得金矢，利艱貞，吉。",
+        "xiaoXiang": "利艱貞吉，未光也。",
+        "plainText": "九四：噬乾胏，得金矢，利艰贞，吉。",
+        "plainXiaoXiang": "《象传》：利艰贞吉，未光。",
+        "coreMeaning": "咬带骨干肉，得金属箭头，艰贞则吉。",
+        "favorableMeaning": "艰难守正，吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "噬干肉",
+        "classicText": "六五：噬乾肉，得黃金，貞厲，无咎。",
+        "xiaoXiang": "貞厲无咎，得當也。",
+        "plainText": "六五：噬乾肉，得黄金，贞厉，无咎。",
+        "plainXiaoXiang": "《象传》：贞厉无咎，得当。",
+        "coreMeaning": "咬干肉得黄金，守正防危无咎。",
+        "favorableMeaning": "守正防危，无咎。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "何校灭耳",
+        "classicText": "上九：何校滅耳，凶。",
+        "xiaoXiang": "何校滅耳，聰不明也。",
+        "plainText": "上九：何校灭耳，凶。",
+        "plainXiaoXiang": "《象传》：何校灭耳，聪不明。",
+        "coreMeaning": "肩扛刑具遮住耳朵，听不进劝告，凶。",
+        "cautionMeaning": "不听劝告终至凶险。"
+      }
+    ]
+  },
+  "22": {
+    "kingWen": 22,
+    "name": "贲",
+    "classic": {
+      "judgment": "亨。小利有攸往。",
+      "tuan": "賁，亨；柔來而文剛，故亨。分剛上而文柔，故小利有攸往。剛柔交錯，天文也；文明以止，人文也。觀乎天文，以察時變；觀乎人文，以化成天下。",
+      "daXiang": "山下有火，賁；君子以明庶政，无敢折獄。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/贲"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "贲：亨。小利有攸往。",
+      "plainTuan": "《彖传》说：贲亨，柔来而文刚故亨。分刚上而文柔，小利有攸往。刚柔交错，天文也。文明以止，人文也。观天文以察时变，观人文以化成天下。",
+      "plainDaXiang": "《大象传》说：山下有火，贲。君子以明庶政，无敢折狱。",
+      "coreMeaning": "贲代表文饰、修饰、文采。核心：文饰是手段不是目的，刚柔交错才有文明。文不可掩质，白贲无咎——返璞归真才是最高境界。",
+      "keyThemes": [
+        "文饰修饰",
+        "文明以止",
+        "返璞归真"
+      ],
+      "asBaseHexagram": "当前主旨偏向文饰修饰、表面美化。但文不可掩质，须有实质。",
+      "asMutualHexagram": "互卦表示中段处于修饰润色、包装完善的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向文饰美化、外在修饰。",
+      "cautions": [
+        "文饰不可掩质",
+        "白贲无咎返璞归真",
+        "务实重于表面"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "贲其趾",
+        "classicText": "初九：賁其趾，舍車而徒。",
+        "xiaoXiang": "舍車而徒，義弗乘也。",
+        "plainText": "初九：贲其趾，舍车而徒。",
+        "plainXiaoXiang": "《象传》：舍车而徒，义弗乘。",
+        "coreMeaning": "修饰脚趾，舍车步行，安于本分。",
+        "favorableMeaning": "安步当车，守义。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "贲其须",
+        "classicText": "六二：賁其須。",
+        "xiaoXiang": "賁其須，與上興也。",
+        "plainText": "六二：贲其须。",
+        "plainXiaoXiang": "《象传》：贲其须，与上兴。",
+        "coreMeaning": "修饰胡须，随上位而动。",
+        "favorableMeaning": "附从上位而修饰。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "贲如濡如",
+        "classicText": "九三：賁如濡如，永貞吉。",
+        "xiaoXiang": "永貞之吉，終莫之陵也。",
+        "plainText": "九三：贲如濡如，永贞吉。",
+        "plainXiaoXiang": "《象传》：永贞之吉，终莫之陵。",
+        "coreMeaning": "修饰润泽，永久守正则吉。",
+        "favorableMeaning": "永贞修饰，吉。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "贲如皤如",
+        "classicText": "六四：賁如皤如，白馬翰如，匪寇婚媾。",
+        "xiaoXiang": "六四，當位疑也。匪寇婚媾，終无尤也。",
+        "plainText": "六四：贲如皤如，白马翰如，匪寇婚媾。",
+        "plainXiaoXiang": "《象传》：六四当位疑，匪寇婚媾终无尤。",
+        "coreMeaning": "修饰朴素，白马如飞，不是寇盗是求婚。",
+        "favorableMeaning": "素洁修饰，终无尤。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "贲于丘园",
+        "classicText": "六五：賁於丘園，束帛戔戔，吝，終吉。",
+        "xiaoXiang": "六五之吉，有喜也。",
+        "plainText": "六五：贲于丘园，束帛戋戋，吝，终吉。",
+        "plainXiaoXiang": "《象传》：六五之吉，有喜。",
+        "coreMeaning": "修饰丘园，束帛微薄，虽吝终吉。",
+        "favorableMeaning": "朴素修饰，终吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "白贲",
+        "classicText": "上九：白賁，无咎。",
+        "xiaoXiang": "白賁无咎，上得志也。",
+        "plainText": "上九：白贲，无咎。",
+        "plainXiaoXiang": "《象传》：白贲无咎，上得志。",
+        "coreMeaning": "素白无饰，返璞归真，无咎。",
+        "favorableMeaning": "白贲无咎，返璞归真。"
+      }
+    ]
+  },
+  "23": {
+    "kingWen": 23,
+    "name": "剥",
+    "classic": {
+      "judgment": "不利。有攸往。",
+      "tuan": "剝，剝也，柔變剛也。不利有攸往，小人長也。順而止之，觀象也。君子尚消息盈虛，天行也。",
+      "daXiang": "山附地上，剝；上以厚下，安宅。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/剥"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "剥：不利有攸往。",
+      "plainTuan": "《彖传》说：剥，剥也，柔变刚也。不利有攸往，小人长也。顺而止之，观象也。君子尚消息盈虚，天行也。",
+      "plainDaXiang": "《大象传》说：山附地上，剥。上以厚下安宅。",
+      "coreMeaning": "剥代表剥落、侵蚀、阴气盛长。核心：小人道长之时不可有所往。君子应认识消息盈虚的天道规律，厚下安宅。",
+      "keyThemes": [
+        "剥落侵蚀",
+        "消息盈虚",
+        "厚下安宅"
+      ],
+      "asBaseHexagram": "当前主旨处于阴气剥落、小人道长的逆境。不宜有所往，应厚下安宅。",
+      "asMutualHexagram": "互卦表示中段处于被侵蚀消耗、逐渐剥落的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向剥落衰退、守势为主。",
+      "cautions": [
+        "小人道长不可冒进",
+        "认识消息盈虚规律",
+        "厚下安宅固本培元"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "剥床以足",
+        "classicText": "初六：剝牀以足，蔑貞凶。",
+        "xiaoXiang": "剝牀以足，以滅下也。",
+        "plainText": "初六：剥床以足，蔑贞凶。",
+        "plainXiaoXiang": "《象传》：剥床以足，以灭下。",
+        "coreMeaning": "剥蚀从床足开始，渐灭正道，凶。",
+        "cautionMeaning": "剥蚀从根基开始。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "剥床以辨",
+        "classicText": "六二：剝牀以辨，蔑貞凶。",
+        "xiaoXiang": "剝牀以辨，未有與也。",
+        "plainText": "六二：剥床以辨，蔑贞凶。",
+        "plainXiaoXiang": "《象传》：剥床以辨，未有与。",
+        "coreMeaning": "剥蚀到床腿，无人相助，凶。",
+        "cautionMeaning": "剥蚀加深无人助。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "剥之无咎",
+        "classicText": "六三：剝之，无咎。",
+        "xiaoXiang": "剝之无咎，失上下也。",
+        "plainText": "六三：剥之，无咎。",
+        "plainXiaoXiang": "《象传》：剥之无咎，失上下。",
+        "coreMeaning": "在剥落中独善其身，无咎。",
+        "favorableMeaning": "剥落中独善无咎。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "剥床以肤",
+        "classicText": "六四：剝牀以膚，凶。",
+        "xiaoXiang": "剝牀以膚，切近災也。",
+        "plainText": "六四：剥床以肤，凶。",
+        "plainXiaoXiang": "《象传》：剥床以肤，切近灾。",
+        "coreMeaning": "剥蚀到床面触及肌肤，凶。",
+        "cautionMeaning": "剥蚀切近自身，凶。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "以宫人宠",
+        "classicText": "六五：貫魚，以宮人寵，无不利。",
+        "xiaoXiang": "以宮人寵，終无尤也。",
+        "plainText": "六五：贯鱼，以宫人宠，无不利。",
+        "plainXiaoXiang": "《象传》：以宫人宠，终无尤。",
+        "coreMeaning": "如贯鱼排列，率宫人受宠，无不利。",
+        "favorableMeaning": "率众有序，无不利。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "硕果不食",
+        "classicText": "上九：碩果不食，君子得輿，小人剝廬。",
+        "xiaoXiang": "君子得輿，民所載也。小人剝廬，終不可用也。",
+        "plainText": "上九：硕果不食，君子得舆，小人剥庐。",
+        "plainXiaoXiang": "《象传》：君子得舆，民所载。小人剥庐，终不可用。",
+        "coreMeaning": "硕果未被食，君子得车小人毁屋。",
+        "favorableMeaning": "硕果仅存，君子载民。"
+      }
+    ]
+  },
+  "24": {
+    "kingWen": 24,
+    "name": "复",
+    "classic": {
+      "judgment": "亨。出入无疾，朋來无咎。反復其道，七日來復，利有攸往。",
+      "tuan": "復亨；剛反，動而以順行，是以出入无疾，朋來无咎。反復其道，七日來復，天行也。利有攸往，剛長也。復其見天地之心乎？",
+      "daXiang": "雷在地中，復；先王以至日閉關，商旅不行，后不省方。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/复"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "复：亨。出入无疾，朋来无咎。反复其道，七日来复，利有攸往。",
+      "plainTuan": "《彖传》说：复亨，刚反，动而以顺行。出入无疾，朋来无咎。反复其道，七日来复，天行也。利有攸往，刚长也。复其见天地之心乎。",
+      "plainDaXiang": "《大象传》说：雷在地中，复。先王以至日闭关，商旅不行。",
+      "coreMeaning": "复代表一阳来复、回归正道、转机初现。核心：剥极必复，阳气初生。「七日来复」是天道循环。此时利有所往，因为刚在长。",
+      "keyThemes": [
+        "一阳来复",
+        "回归正道",
+        "转机初现"
+      ],
+      "asBaseHexagram": "当前主旨处于剥极而复、转机初现的阶段。一阳来复，利有所往。",
+      "asMutualHexagram": "互卦表示中段处于恢复回归、逐渐向好的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向回归复兴、阳气渐长。",
+      "cautions": [
+        "转机初现不可急躁",
+        "闭关静养等待时机",
+        "复见天地之心"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "不远复",
+        "classicText": "初九：不復遠，无袛悔，元吉。",
+        "xiaoXiang": "不遠之復，以修身也。",
+        "plainText": "初九：不远复，无祗悔，元吉。",
+        "plainXiaoXiang": "《象传》：不远之复，以修身。",
+        "coreMeaning": "走不远就回来，知过即改，大吉。",
+        "favorableMeaning": "知过即改，元吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "休复",
+        "classicText": "六二：休復，吉。",
+        "xiaoXiang": "休復之吉，以下仁也。",
+        "plainText": "六二：休复，吉。",
+        "plainXiaoXiang": "《象传》：休复之吉，以下仁。",
+        "coreMeaning": "圆满而归复，吉。",
+        "favorableMeaning": "休美复归，吉。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "频复",
+        "classicText": "六三：頻復，厲无咎。",
+        "xiaoXiang": "頻復之厲，義无咎也。",
+        "plainText": "六三：频复，厉无咎。",
+        "plainXiaoXiang": "《象传》：频复之厉，义无咎。",
+        "coreMeaning": "屡次反复，有危但无咎。",
+        "favorableMeaning": "屡改屡犯，终无咎。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "中行独复",
+        "classicText": "六四：中行獨復。",
+        "xiaoXiang": "中行獨復，以從道也。",
+        "plainText": "六四：中行独复。",
+        "plainXiaoXiang": "《象传》：中行独复，以从道。",
+        "coreMeaning": "中道而行独自复归。",
+        "favorableMeaning": "中道独复，从道。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "敦复",
+        "classicText": "六五：敦復，无悔。",
+        "xiaoXiang": "敦復无悔，中以自考也。",
+        "plainText": "六五：敦复，无悔。",
+        "plainXiaoXiang": "《象传》：敦复无悔，中以自考。",
+        "coreMeaning": "敦厚复归，无悔。",
+        "favorableMeaning": "敦厚复归，无悔。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "迷复",
+        "classicText": "上六：迷復，凶，有災眚。用行師，終有大敗，以其國君，凶；至于十年，不克征。",
+        "xiaoXiang": "迷復之凶，反君道也。",
+        "plainText": "上六：迷复，凶，有灾眚。",
+        "plainXiaoXiang": "《象传》：迷复之凶，反君道。",
+        "coreMeaning": "迷失不复归，凶，有灾。",
+        "cautionMeaning": "迷途不知返，凶。"
+      }
+    ]
+  },
+  "25": {
+    "kingWen": 25,
+    "name": "无妄",
+    "classic": {
+      "judgment": "元亨。利貞。其匪正有眚，不利有攸往。",
+      "tuan": "无妄，剛自外來，而為主於內。動而健，剛中而應，大亨以正，天之命也。其匪正有眚，不利有攸往。无妄之往，何之矣？天命不佑，行矣哉？",
+      "daXiang": "天下雷行，物與无妄；先王以茂對時，育萬物。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/无妄"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "无妄：元亨。利贞。其匪正有眚，不利有攸往。",
+      "plainTuan": "《彖传》说：无妄，刚自外来而为主于内。动而健，刚中而应，大亨以正，天之命也。其匪正有眚，不利有攸往。无妄之往，何之矣？天命不佑。",
+      "plainDaXiang": "《大象传》说：天下雷行，物与无妄。先王以茂对时育万物。",
+      "coreMeaning": "无妄代表真实无妄、不期而至。核心：守正则亨，不正则有灾。即使意外之灾也不怨天尤人，因为天命不佑妄动。",
+      "keyThemes": [
+        "真实无妄",
+        "守正不妄",
+        "不期而然"
+      ],
+      "asBaseHexagram": "当前主旨偏向真实无妄、顺其自然。守正则亨，不可妄为。",
+      "asMutualHexagram": "互卦表示中段处于不期而遇、真实自然的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向无妄真实、不期而然。",
+      "cautions": [
+        "守正不妄动",
+        "不期之灾不怨天尤人",
+        "匪正有眚"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "无妄往吉",
+        "classicText": "初九：无妄，往吉。",
+        "xiaoXiang": "无妄之往，得志也。",
+        "plainText": "初九：无妄，往吉。",
+        "plainXiaoXiang": "《象传》：无妄之往，得志。",
+        "coreMeaning": "真实无妄前往则吉。",
+        "favorableMeaning": "无妄而往，吉。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "不耕获",
+        "classicText": "六二：不耕穫，不菑畬，則利有攸往。",
+        "xiaoXiang": "不耕穫，未富也。",
+        "plainText": "六二：不耕获，不菑畬，则利有攸往。",
+        "plainXiaoXiang": "《象传》：不耕获，未富。",
+        "coreMeaning": "不刻意追求收获，顺其自然则利往。",
+        "favorableMeaning": "不刻意求，利往。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "无妄之灾",
+        "classicText": "六三：无妄之災，或系之牛，行人之得，邑人之災。",
+        "xiaoXiang": "行人得牛，邑人災也。",
+        "plainText": "六三：无妄之灾，或系之牛，行人之得，邑人之灾。",
+        "plainXiaoXiang": "《象传》：行人得牛，邑人灾。",
+        "coreMeaning": "无妄而遭灾：路人得牛，邑人遭殃。",
+        "cautionMeaning": "无妄之灾意外横来。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "可贞无咎",
+        "classicText": "九四：可貞，无咎。",
+        "xiaoXiang": "可貞无咎，固有之也。",
+        "plainText": "九四：可贞，无咎。",
+        "plainXiaoXiang": "《象传》：可贞无咎，固有之。",
+        "coreMeaning": "可以守正，无咎。",
+        "favorableMeaning": "守正无咎。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "无妄之疾",
+        "classicText": "九五：无妄之疾，勿藥有喜。",
+        "xiaoXiang": "无妄之藥，不可試也。",
+        "plainText": "九五：无妄之疾，勿药有喜。",
+        "plainXiaoXiang": "《象传》：无妄之药，不可试。",
+        "coreMeaning": "无妄之疾，不必用药自会好。",
+        "favorableMeaning": "勿药有喜，自愈。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "行有眚",
+        "classicText": "上九：无妄，行有眚，无攸利。",
+        "xiaoXiang": "无妄之行，窮之災也。",
+        "plainText": "上九：无妄，行有眚，无攸利。",
+        "plainXiaoXiang": "《象传》：无妄之行，穷之灾。",
+        "coreMeaning": "无妄之时行动有灾，无所利。",
+        "cautionMeaning": "穷极妄动有灾。"
+      }
+    ]
+  },
+  "26": {
+    "kingWen": 26,
+    "name": "大畜",
+    "classic": {
+      "judgment": "利貞，不家食吉，利涉大川。",
+      "tuan": "大畜，剛健篤實輝光，日新其德，剛上而尚賢。能止健，大正也。不家食吉，養賢也。利涉大川，應乎天也。",
+      "daXiang": "天在山中，大畜；君子以多識前言往行，以畜其德。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/大畜"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "大畜：利贞，不家食吉，利涉大川。",
+      "plainTuan": "《彖传》说：大畜，刚健笃实辉光，日新其德，刚上而尚贤。能止健，大正也。不家食吉，养贤也。利涉大川，应乎天也。",
+      "plainDaXiang": "《大象传》说：天在山中，大畜。君子以多识前言往行，以畜其德。",
+      "coreMeaning": "大畜代表大的积蓄、刚健被止而蓄德。核心：不止于小蓄，而是大蓄德、大养贤。日新其德，利涉大川。",
+      "keyThemes": [
+        "大蓄德行",
+        "刚健笃实",
+        "尚贤养德"
+      ],
+      "asBaseHexagram": "当前主旨偏向大积大蓄、厚养德行。不家食——出而养贤。",
+      "asMutualHexagram": "互卦表示中段处于大力积累、蓄德蓄能的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向大蓄大成、厚积薄发。",
+      "cautions": [
+        "积蓄要厚不可浅尝",
+        "尚贤养德是关键",
+        "日新其德"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "有厉利已",
+        "classicText": "初九：有厲利已。",
+        "xiaoXiang": "有厲利已，不犯災也。",
+        "plainText": "初九：有厉利已。",
+        "plainXiaoXiang": "《象传》：有厉利已，不犯灾。",
+        "coreMeaning": "有危险，利于停止不前。",
+        "favorableMeaning": "有危则止，不犯灾。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "舆说輹",
+        "classicText": "九二：輿說輹。",
+        "xiaoXiang": "輿說輹，中无尤也。",
+        "plainText": "九二：舆说輹。",
+        "plainXiaoXiang": "《象传》：舆说輹，中无尤。",
+        "coreMeaning": "车脱了輹条，主动停止，无尤。",
+        "favorableMeaning": "主动停住，无尤。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "良马逐",
+        "classicText": "九三：良馬逐，利艱貞。曰閑輿衛，利有攸往。",
+        "xiaoXiang": "利有攸往，上合志也。",
+        "plainText": "九三：良马逐，利艰贞。曰闲舆卫，利有攸往。",
+        "plainXiaoXiang": "《象传》：利有攸往，上合志。",
+        "coreMeaning": "良马奔驰，艰贞利往，练习车卫。",
+        "favorableMeaning": "熟练技艺，利往。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "童牛之牿",
+        "classicText": "六四：童牛之牿，元吉。",
+        "xiaoXiang": "六四元吉，有喜也。",
+        "plainText": "六四：童牛之牿，元吉。",
+        "plainXiaoXiang": "《象传》：童牛之牿，有喜。",
+        "coreMeaning": "小牛加上木牿，防患未然，元吉。",
+        "favorableMeaning": "防患未然，元吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "豮豕之牙",
+        "classicText": "六五：豶豕之牙，吉。",
+        "xiaoXiang": "六五之吉，有慶也。",
+        "plainText": "六五：豮豕之牙，吉。",
+        "plainXiaoXiang": "《象传》：六五之吉，有庆。",
+        "coreMeaning": "阉割公猪的牙，吉。",
+        "favorableMeaning": "治本去恶，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "何天之衢",
+        "classicText": "上九：何天之衢，亨。",
+        "xiaoXiang": "何天之衢，道大行也。",
+        "plainText": "上九：何天之衢，亨。",
+        "plainXiaoXiang": "《象传》：何天之衢，道大行。",
+        "coreMeaning": "何等通天大道，亨。",
+        "favorableMeaning": "大道通行，亨。"
+      }
+    ]
+  },
+  "27": {
+    "kingWen": 27,
+    "name": "颐",
+    "classic": {
+      "judgment": "貞吉。觀頤，自求口實。",
+      "tuan": "頤貞吉，養正則吉也。觀頤，觀其所養也；自求口實，觀其自養也。天地養萬物，聖人養賢，以及萬民；頤之時義大矣哉！",
+      "daXiang": "山下有雷，頤；君子以慎言語，節飲食。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/颐"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "颐：贞吉。观颐，自求口实。",
+      "plainTuan": "《彖传》说：颐贞吉，养正则吉。观颐，观其所养也。自求口实，观其自养也。天地养万物，圣人养贤以及万民。颐之时义大矣哉。",
+      "plainDaXiang": "《大象传》说：山下有雷，颐。君子以慎言语，节饮食。",
+      "coreMeaning": "颐代表颐养、保养、求养。核心：养正则吉。观其所养——看他养什么人、怎么自养。慎言语节饮食是养身之本。",
+      "keyThemes": [
+        "颐养正道",
+        "养正则吉",
+        "慎言节食"
+      ],
+      "asBaseHexagram": "当前主旨偏向颐养保养、自求口实。关键是养正——所养必须正当。",
+      "asMutualHexagram": "互卦表示中段处于自我修养、滋养积累的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向颐养补益、养身养德。",
+      "cautions": [
+        "养正则吉养邪则凶",
+        "慎言语节饮食",
+        "观其所养观其自养"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "观我朵颐",
+        "classicText": "初九：舍爾靈龜，觀我朵頤，凶。",
+        "xiaoXiang": "觀我朵頤，亦不足貴也。",
+        "plainText": "初九：舍尔灵龟，观我朵颐，凶。",
+        "plainXiaoXiang": "《象传》：观我朵颐，亦不足贵。",
+        "coreMeaning": "舍弃自己灵龟般的自养能力，贪看我腮帮咀嚼，凶。",
+        "cautionMeaning": "贪求口食不足贵。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "颠颐",
+        "classicText": "六二：顛頤，拂經，于丘頤，征凶。",
+        "xiaoXiang": "六二征凶，行失類也。",
+        "plainText": "六二：颠颐，拂经，于丘颐，征凶。",
+        "plainXiaoXiang": "《象传》：六二征凶，行失类。",
+        "coreMeaning": "颠倒求养，违反常道，向高处求养，征凶。",
+        "cautionMeaning": "颠倒求养征凶。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "拂颐",
+        "classicText": "六三：拂頤，貞凶，十年勿用，无攸利。",
+        "xiaoXiang": "十年勿用，道大悖也。",
+        "plainText": "六三：拂颐，贞凶，十年勿用，无攸利。",
+        "plainXiaoXiang": "《象传》：十年勿用，道大悖。",
+        "coreMeaning": "违反颐养正道，守正防凶，十年勿用。",
+        "cautionMeaning": "违反养道十年勿用。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "虎视眈眈",
+        "classicText": "六四：顛頤吉，虎視眈眈，其欲逐逐，无咎。",
+        "xiaoXiang": "顛頤之吉，上施光也。",
+        "plainText": "六四：颠颐吉，虎视眈眈，其欲逐逐，无咎。",
+        "plainXiaoXiang": "《象传》：颠颐之吉，上施光。",
+        "coreMeaning": "颠倒求养于下，吉。虎视眈眈求养不绝，无咎。",
+        "favorableMeaning": "向下施养，吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "拂经居贞",
+        "classicText": "六五：拂經，居貞吉，不可涉大川。",
+        "xiaoXiang": "居貞之吉，順以從上也。",
+        "plainText": "六五：拂经，居贞吉，不可涉大川。",
+        "plainXiaoXiang": "《象传》：居贞之吉，顺以从上。",
+        "coreMeaning": "违反常道，安居守正吉，不可涉大川。",
+        "favorableMeaning": "安居守正，不可冒险。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "由颐",
+        "classicText": "上九：由頤，厲吉，利涉大川。",
+        "xiaoXiang": "由頤厲吉，大有慶也。",
+        "plainText": "上九：由颐，厉吉，利涉大川。",
+        "plainXiaoXiang": "《象传》：由颐厉吉，大有庆。",
+        "coreMeaning": "天下由他而得养，危而吉，利涉大川。",
+        "favorableMeaning": "天下由养，危而吉。"
+      }
+    ]
+  },
+  "28": {
+    "kingWen": 28,
+    "name": "大过",
+    "classic": {
+      "judgment": "棟橈，利有攸往，亨。",
+      "tuan": "大過，大者過也。棟橈，本末弱也。剛過而中，巽而說行，利有攸往，乃亨。大過之時義大矣哉！",
+      "daXiang": "澤滅木，大過。君子以獨立不懼，遯世无悶。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/大过"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "大过：栋桡，利有攸往，亨。",
+      "plainTuan": "《彖传》说：大过，大者过也。栋桡，本末弱也。刚过而中，巽而说行，利有攸往乃亨。大过之时义大矣哉。",
+      "plainDaXiang": "《大象传》说：泽灭木，大过。君子以独立不惧，遁世无闷。",
+      "coreMeaning": "大过代表大为过越、非常之时。核心：栋桡——大梁弯曲，局面非常。此时必须独立不惧、非常之举才能亨。",
+      "keyThemes": [
+        "大为过越",
+        "非常之时",
+        "独立不惧"
+      ],
+      "asBaseHexagram": "当前主旨处于非常时期、负荷过重。需要非常之举，但须巽而说行。",
+      "asMutualHexagram": "互卦表示中段处于非常考验、超越常规的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向非常变动、过越之举。",
+      "cautions": [
+        "非常时期需非常人",
+        "独立不惧遁世无闷",
+        "本末弱须警惕"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "藉用白茅",
+        "classicText": "初六：藉用白茅，无咎。",
+        "xiaoXiang": "藉用白茅，柔在下也。",
+        "plainText": "初六：藉用白茅，无咎。",
+        "plainXiaoXiang": "《象传》：藉用白茅，柔在下。",
+        "coreMeaning": "用白茅垫祭品，敬慎无咎。",
+        "favorableMeaning": "敬慎于初，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "枯杨生稊",
+        "classicText": "九二：枯楊生稊，老夫得其女妻，无不利。",
+        "xiaoXiang": "老夫女妻，過以相與也。",
+        "plainText": "九二：枯杨生稊，老夫得其女妻，无不利。",
+        "plainXiaoXiang": "《象传》：老夫女妻，过以相与。",
+        "coreMeaning": "枯杨树发新芽，老夫得少妻，无不利。",
+        "favorableMeaning": "枯木逢春，无不利。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "栋桡",
+        "classicText": "九三：棟橈，凶。",
+        "xiaoXiang": "棟橈之凶，不可以有輔也。",
+        "plainText": "九三：栋桡，凶。",
+        "plainXiaoXiang": "《象传》：栋桡之凶，不可以有辅。",
+        "coreMeaning": "大梁弯曲，凶。",
+        "cautionMeaning": "刚过则折凶。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "栋隆",
+        "classicText": "九四：棟隆，吉。有它吝。",
+        "xiaoXiang": "棟隆之吉，不橈乎下也。",
+        "plainText": "九四：栋隆，吉。有它吝。",
+        "plainXiaoXiang": "《象传》：栋隆之吉，不桡乎下。",
+        "coreMeaning": "大梁隆起，吉。但有它吝。",
+        "favorableMeaning": "梁隆能任，吉。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "枯杨生华",
+        "classicText": "九五：枯楊生華，老婦得其士夫，无咎无譽。",
+        "xiaoXiang": "枯楊生華，何可久也。老婦士夫，亦可丑也。",
+        "plainText": "九五：枯杨生华，老妇得其士夫，无咎无誉。",
+        "plainXiaoXiang": "《象传》：枯杨生华，何可久。老妇士夫，亦可丑。",
+        "coreMeaning": "枯杨树开花，老妇得壮夫，无咎无誉。",
+        "cautionMeaning": "华而不实不可久。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "过涉灭顶",
+        "classicText": "上六：過涉滅頂，凶，无咎。",
+        "xiaoXiang": "過涉之凶，不可咎也。",
+        "plainText": "上六：过涉灭顶，凶，无咎。",
+        "plainXiaoXiang": "《象传》：过涉之凶，不可咎。",
+        "coreMeaning": "涉水过深淹没头顶，凶但无咎。",
+        "cautionMeaning": "过涉灭顶凶，义不可咎。"
+      }
+    ]
+  },
+  "29": {
+    "kingWen": 29,
+    "name": "坎",
+    "classic": {
+      "judgment": "有孚，維心亨。行有尚。",
+      "tuan": "習坎，重險也。水流而不盈，行險而不失其信。維心亨，乃以剛中也。行有尚，往有功也。天險不可升也，地險山川丘陵也，王公設險以守其國，坎之時用大矣哉！",
+      "daXiang": "水洊至，習坎；君子以常德行，習教事。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/坎"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "习坎：有孚，维心亨。行有尚。",
+      "plainTuan": "《彖传》说：习坎，重险也。水流而不盈，行险而不失其信。维心亨，乃以刚中也。行有尚，往有功也。天险不可升，地险山川丘陵，王公设险以守其国。坎之时用大矣哉。",
+      "plainDaXiang": "《大象传》说：水洊至，习坎。君子以常德行，习教事。",
+      "coreMeaning": "坎代表重险、陷阱、水。核心：险中须有孚维心亨——心怀诚信、内心亨通，才能行险而不失信。水流而不盈——持续前进不自满。",
+      "keyThemes": [
+        "重险陷阱",
+        "心怀诚信",
+        "行险不失信"
+      ],
+      "asBaseHexagram": "当前主旨处于重重险难之中。必须心怀诚信、内心亨通，才能渡过。",
+      "asMutualHexagram": "互卦表示中段处于接连遇险、反复考验的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向险难重重、需要坚守。",
+      "cautions": [
+        "险中必须守诚信",
+        "水流不盈持续前进",
+        "常德行习教事"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "习坎入窞",
+        "classicText": "初六：習坎，入于坎窞，凶。",
+        "xiaoXiang": "習坎入坎，失道凶也。",
+        "plainText": "初六：习坎，入于坎窞，凶。",
+        "plainXiaoXiang": "《象传》：习坎入坎，失道凶。",
+        "coreMeaning": "习险而入陷阱深处，凶。",
+        "cautionMeaning": "重险陷深失道凶。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "坎有险",
+        "classicText": "九二：坎有險，求小得。",
+        "xiaoXiang": "求小得，未出中也。",
+        "plainText": "九二：坎有险，求小得。",
+        "plainXiaoXiang": "《象传》：求小得，未出中。",
+        "coreMeaning": "坎中有险，小有所得。",
+        "favorableMeaning": "险中求小得。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "来之坎坎",
+        "classicText": "六三：來之坎坎，險且枕，入于坎窞，勿用。",
+        "xiaoXiang": "來之坎坎，終无功也。",
+        "plainText": "六三：来之坎坎，险且枕，入于坎窞，勿用。",
+        "plainXiaoXiang": "《象传》：来之坎坎，终无功。",
+        "coreMeaning": "来去皆险，陷入陷阱，不可用。",
+        "cautionMeaning": "前后皆险勿用。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "樽酒簋贰",
+        "classicText": "六四：樽酒簋貳，用缶，納約自牖，終无咎。",
+        "xiaoXiang": "樽酒簋貳，剛柔濟也。",
+        "plainText": "六四：樽酒簋贰，用缶，纳约自牖，终无咎。",
+        "plainXiaoXiang": "《象传》：樽酒簋贰，刚柔际。",
+        "coreMeaning": "一樽酒二簋饭，从窗户纳约，终无咎。",
+        "favorableMeaning": "朴素以诚，终无咎。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "坎不盈",
+        "classicText": "九五：坎不盈，祗既平，无咎。",
+        "xiaoXiang": "坎不盈，中未大也。",
+        "plainText": "九五：坎不盈，祗既平，无咎。",
+        "plainXiaoXiang": "《象传》：坎不盈，中未大。",
+        "coreMeaning": "坎水未盈，即将平，无咎。",
+        "favorableMeaning": "险将平，无咎。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "系用徽纆",
+        "classicText": "上六：係用徽纆，寘于叢棘，三歲不得，凶。",
+        "xiaoXiang": "上六失道，凶三歲也。",
+        "plainText": "上六：系用徽纆，寘于丛棘，三岁不得，凶。",
+        "plainXiaoXiang": "《象传》：上六失道，凶三岁。",
+        "coreMeaning": "被绳索捆绑置于丛棘，三年不得，凶。",
+        "cautionMeaning": "失道被囚三年凶。"
+      }
+    ]
+  },
+  "30": {
+    "kingWen": 30,
+    "name": "离",
+    "classic": {
+      "judgment": "利貞。亨。畜牝牛，吉。",
+      "tuan": "離，麗也；日月麗乎天，百谷草木麗乎土，重明以麗乎正，乃化成天下。柔麗乎中正，故亨；是以畜牝牛吉也。",
+      "daXiang": "明兩作離，大人以繼明照于四方。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/离"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "离：利贞。亨。畜牝牛，吉。",
+      "plainTuan": "《彖传》说：离，丽也。日月丽乎天，百谷草木丽乎土。重明以丽乎正，乃化成天下。柔丽乎中正，故亨。是以畜牝牛吉也。",
+      "plainDaXiang": "《大象传》说：明两作离，大人以继明照于四方。",
+      "coreMeaning": "离代表依附、光明、火。核心：附丽于正才能亨。日月附天、草木附土。畜牝牛——以柔顺守正为吉。重明继照——光明不绝。",
+      "keyThemes": [
+        "依附光明",
+        "丽乎中正",
+        "继明照四方"
+      ],
+      "asBaseHexagram": "当前主旨偏向依附光明、附丽于正。以柔顺守正则吉。",
+      "asMutualHexagram": "互卦表示中段处于依附光明、相继而明的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向光明依附、文明丽正。",
+      "cautions": [
+        "依附对象必须正",
+        "柔顺守正如牝牛",
+        "重明继照不绝"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "履错然",
+        "classicText": "初九：履錯然，敬之无咎。",
+        "xiaoXiang": "履錯之敬，以辟咎也。",
+        "plainText": "初九：履错然，敬之无咎。",
+        "plainXiaoXiang": "《象传》：履错之敬，以辟咎。",
+        "coreMeaning": "行事错落有致，敬慎则无咎。",
+        "favorableMeaning": "敬慎处事，无咎。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "黄离",
+        "classicText": "六二：黃離，元吉。",
+        "xiaoXiang": "黃離元吉，得中道也。",
+        "plainText": "六二：黄离，元吉。",
+        "plainXiaoXiang": "《象传》：黄离元吉，得中道。",
+        "coreMeaning": "黄色光明，居中得中，元吉。",
+        "favorableMeaning": "黄丽中正，元吉。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "日昃之离",
+        "classicText": "九三：日昃之離，不鼓缶而歌，則大耋之嗟，凶。",
+        "xiaoXiang": "日昃之離，何可久也。",
+        "plainText": "九三：日昃之离，不鼓缶而歌，则大耋之嗟，凶。",
+        "plainXiaoXiang": "《象传》：日昃之离，何可久。",
+        "coreMeaning": "太阳西斜，不鼓缶而歌，老来叹息，凶。",
+        "cautionMeaning": "日斜不可久，达观则吉。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "突如其来",
+        "classicText": "九四：突如其來如，焚如，死如，棄如。",
+        "xiaoXiang": "突如其來如，无所容也。",
+        "plainText": "九四：突如其来如，焚如，死如，弃如。",
+        "plainXiaoXiang": "《象传》：突如其来如，无所容。",
+        "coreMeaning": "突然而来，焚烧、死亡、抛弃。",
+        "cautionMeaning": "暴起暴亡无所容。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "出涕沱若",
+        "classicText": "六五：出涕沱若，戚嗟若，吉。",
+        "xiaoXiang": "六五之吉，離王公也。",
+        "plainText": "六五：出涕沱若，戚嗟若，吉。",
+        "plainXiaoXiang": "《象传》：六五之吉，离王公。",
+        "coreMeaning": "涕泪滂沱，忧戚叹息，吉。",
+        "favorableMeaning": "忧惧慎戒，吉。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "王用出征",
+        "classicText": "上九：王用出征，有嘉折首，獲匪其醜，无咎。",
+        "xiaoXiang": "王用出征，以正邦也。",
+        "plainText": "上九：王用出征，有嘉折首，获匪其丑，无咎。",
+        "plainXiaoXiang": "《象传》：王用出征，以正邦。",
+        "coreMeaning": "王出兵征伐，斩首恶，不胁从不问，无咎。",
+        "favorableMeaning": "出征正邦，无咎。"
+      }
+    ]
+  },
+  "31": {
+    "kingWen": 31,
+    "name": "咸",
+    "classic": {
+      "judgment": "亨。利貞。取女吉。",
+      "tuan": "咸，感也。柔上而剛下，二氣感應以相與，止而說，男下女，是以亨利貞，取女吉也。天地感而萬物化生，聖人感人心而天下和平；觀其所感，而天地萬物之情可見矣！",
+      "daXiang": "山上有澤，咸；君子以虛受人。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/咸"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "咸：亨。利贞。取女吉。",
+      "plainTuan": "《彖传》说：咸，感也。柔上而刚下，二气感应以相与。止而说，男下女，是以亨利贞，取女吉。天地感而万物化生，圣人感人心而天下和平。观其所感，而天地万物之情可见。",
+      "plainDaXiang": "《大象传》说：山上有泽，咸。君子以虚受人。",
+      "coreMeaning": "咸代表感应、交感、相互影响。核心：二气感应、虚以受人。男下女——谦逊相待。天地感而万物化生，圣人感人心而天下和平。",
+      "keyThemes": [
+        "感应交感",
+        "虚以受人",
+        "男下女"
+      ],
+      "asBaseHexagram": "当前主旨偏向感应交流、相互影响。虚心待人，谦逊相感则吉。",
+      "asMutualHexagram": "互卦表示中段处于感应相通、相互影响的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向感应和谐、心心相印。",
+      "cautions": [
+        "虚心才能感通",
+        "感应须正不可邪思",
+        "男下女谦逊相待"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "咸其拇",
+        "classicText": "初六：咸其拇。",
+        "xiaoXiang": "咸其拇，志在外也。",
+        "plainText": "初六：咸其拇。",
+        "plainXiaoXiang": "《象传》：咸其拇，志在外。",
+        "coreMeaning": "感应在脚趾，意念初动在外。",
+        "favorableMeaning": "感应初动，志在外。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "咸其腓",
+        "classicText": "六二：咸其腓，凶，居吉。",
+        "xiaoXiang": "雖凶，居吉，順不害也。",
+        "plainText": "六二：咸其腓，凶，居吉。",
+        "plainXiaoXiang": "《象传》：虽凶居吉，顺不害。",
+        "coreMeaning": "感应在小腿，动则凶，安居则吉。",
+        "cautionMeaning": "躁动不动，居吉。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "咸其股",
+        "classicText": "九三：咸其股，執其隨，往吝。",
+        "xiaoXiang": "咸其股，亦不處也。志在隨人，所執下也。",
+        "plainText": "九三：咸其股，执其随，往吝。",
+        "plainXiaoXiang": "《象传》：咸其股，亦不处。志在随人，所执下。",
+        "coreMeaning": "感应在大腿，盲目跟随人，往吝。",
+        "cautionMeaning": "盲目跟随人往吝。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "憧憧往来",
+        "classicText": "九四：貞吉悔亡，憧憧往來，朋從爾思。",
+        "xiaoXiang": "貞吉悔亡，未感害也。憧憧往來，未光大也。",
+        "plainText": "九四：贞吉悔亡，憧憧往来，朋从尔思。",
+        "plainXiaoXiang": "《象传》：贞吉悔亡，未感害。憧憧往来，未光大。",
+        "coreMeaning": "守正吉悔亡，心思往来不定，朋友从你所想。",
+        "favorableMeaning": "守正感应，朋从尔思。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "咸其脢",
+        "classicText": "九五：咸其脢，无悔。",
+        "xiaoXiang": "咸其脢，志末也。",
+        "plainText": "九五：咸其脢，无悔。",
+        "plainXiaoXiang": "《象传》：咸其脢，志末。",
+        "coreMeaning": "感应在脊背肉，无感无知，无悔。",
+        "favorableMeaning": "感在背，无悔。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "咸其辅",
+        "classicText": "上六：咸其輔，頰，舌。",
+        "xiaoXiang": "咸其輔，頰，舌，滕口說也。",
+        "plainText": "上六：咸其辅颊舌。",
+        "plainXiaoXiang": "《象传》：咸其辅颊舌，滕口说。",
+        "coreMeaning": "感应在口舌牙齿，只动嘴皮。",
+        "cautionMeaning": "徒以口舌感人。"
+      }
+    ]
+  },
+  "32": {
+    "kingWen": 32,
+    "name": "恒",
+    "classic": {
+      "judgment": "亨，无咎。利貞，利有攸往。",
+      "tuan": "恆，久也。剛上而柔下，雷風相與，巽而動，剛柔皆應，恆。恆亨无咎，利貞；久于其道也，天地之道，恆久而不已也。利有攸往，終則有始也。日月得天，而能久照，四時變化，而能久成，聖人久于其道，而天下化成；觀其所恆，而天地萬物之情可見矣！",
+      "daXiang": "雷風，恆；君子以立不易方。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/恒"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "恒：亨，无咎。利贞，利有攸往。",
+      "plainTuan": "《彖传》说：恒，久也。刚上而柔下，雷风相与，巽而动，刚柔皆应，恒。恒亨无咎利贞，久于其道也。天地之道，恒久而不已。利有攸往，终则有始。日月得天而久照，四时变化而久成，圣人久于其道而天下化成。",
+      "plainDaXiang": "《大象传》说：雷风，恒。君子以立不易方。",
+      "coreMeaning": "恒代表恒久、常久、持久。核心：恒不是僵化不变，而是久于其道——在变化中保持原则。终则有始，循环不息。立不易方——确立方向不动摇。",
+      "keyThemes": [
+        "恒久持久",
+        "久于其道",
+        "立不易方"
+      ],
+      "asBaseHexagram": "当前主旨偏向恒久坚持、持之以恒。确立方向不动摇，但也要终则有始。",
+      "asMutualHexagram": "互卦表示中段处于持久坚持、稳定发展的阶段。",
+      "asChangedHexagram": "变卦表示后段趋向恒久不变、长久稳定。",
+      "cautions": [
+        "恒不是僵化是守道不变",
+        "终则有始循环不息",
+        "立不易方"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "浚恒",
+        "classicText": "初六：浚恆，貞凶，无攸利。",
+        "xiaoXiang": "浚恆之凶，始求深也。",
+        "plainText": "初六：浚恒，贞凶，无攸利。",
+        "plainXiaoXiang": "《象传》：浚恒之凶，始求深。",
+        "coreMeaning": "深求恒久，一开始就过深，凶。",
+        "cautionMeaning": "一开始就强求恒，凶。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "悔亡",
+        "classicText": "九二：悔亡。",
+        "xiaoXiang": "九二悔亡，能久中也。",
+        "plainText": "九二：悔亡。",
+        "plainXiaoXiang": "《象传》：九二悔亡，能久中。",
+        "coreMeaning": "悔恨消亡，能久于中道。",
+        "favorableMeaning": "久于中道，悔亡。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "不恒其德",
+        "classicText": "九三：不恆其德，或承之羞，貞吝。",
+        "xiaoXiang": "不恆其德，无所容也。",
+        "plainText": "九三：不恒其德，或承之羞，贞吝。",
+        "plainXiaoXiang": "《象传》：不恒其德，无所容。",
+        "coreMeaning": "不能恒守德行，或蒙羞，贞吝。",
+        "cautionMeaning": "不恒其德无所容。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "田无禽",
+        "classicText": "九四：田无禽。",
+        "xiaoXiang": "久非其位，安得禽也。",
+        "plainText": "九四：田无禽。",
+        "plainXiaoXiang": "《象传》：久非其位，安得禽。",
+        "coreMeaning": "田猎无获，久居不当位。",
+        "cautionMeaning": "久非其位无收获。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "恒其德",
+        "classicText": "六五：恆其德，貞，婦人吉，夫子凶。",
+        "xiaoXiang": "婦人貞吉，從一而終也。夫子制義，從婦凶也。",
+        "plainText": "六五：恒其德，贞，妇人吉，夫子凶。",
+        "plainXiaoXiang": "《象传》：妇人贞吉，从一而终。夫子制义，从妇凶。",
+        "coreMeaning": "恒守德行，妇人吉，夫子须决断否则凶。",
+        "favorableMeaning": "妇人从一吉，夫子须制义。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "振恒",
+        "classicText": "上六：振恆，凶。",
+        "xiaoXiang": "振恆在上，大无功也。",
+        "plainText": "上六：振恒，凶。",
+        "plainXiaoXiang": "《象传》：振恒在上，大无功。",
+        "coreMeaning": "振动无常，动摇不定，凶。",
+        "cautionMeaning": "振动无常凶。"
+      }
+    ]
+  },
+  "53": {
+    "kingWen": 53,
+    "name": "渐",
+    "classic": {
+      "judgment": "女歸吉，利貞。",
+      "tuan": "漸之進也，女歸吉也。進得位，往有功也。進以正，可以正邦也。其位剛，得中也。止而巽，動不窮也。",
+      "daXiang": "山上有木，漸；君子以居賢德，善俗。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/渐"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "渐：女子出嫁，吉祥。利于守正。",
+      "plainTuan": "《彖传》说：渐，就是渐进。如同女子出嫁按礼循序渐进则吉。前进而得其位，前往有功。以正道前进可以端正邦国。刚健居中得正。内止而外巽，行动不会困穷。",
+      "plainDaXiang": "《大象传》说：山上有树木（渐渐生长），这是渐卦。君子因此居于贤德，改善风俗。",
+      "coreMeaning": "渐的核心是循序渐进、依次前进。古义以婚嫁依礼而行为典型象征，但一般事件中不应机械理解为婚姻。",
+      "keyThemes": [
+        "循序渐进",
+        "依次推进",
+        "耐心积累",
+        "按部就班"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向稳步推进——不可急于求成，需要按步骤、有耐心地逐步发展。",
+      "asMutualHexagram": "作为互卦，《梅花易数》把它视为中间之应，表示事情中段更偏向循序渐进，不适合突然跳跃。",
+      "asChangedHexagram": "作为变卦，表示后段趋向逐步发展、稳步推进，急不得。",
+      "cautions": [
+        "不可急于求成跳步推进",
+        "每个阶段需打好基础再进入下一步",
+        "耐心是关键"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "鸿渐于干",
+        "classicText": "初六：鴻漸于干，小子厲，有言，无咎。",
+        "xiaoXiang": "小子之厲，義无咎也。",
+        "plainText": "初六：鸿渐于干，小子厉，有言，无咎。",
+        "plainXiaoXiang": "《象传》说：小子虽有危险，但从道义上看没有咎害。",
+        "coreMeaning": "渐进的初始阶段，稚嫩者有小风险和口舌，但总体无咎。",
+        "cautionMeaning": "起步阶段经验不足，注意言语和小风险。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "鸿渐于磐",
+        "classicText": "六二：鴻漸于磐，飲食衎衎，吉。",
+        "xiaoXiang": "飲食衎衎，不素飽也。",
+        "plainText": "六二：鸿渐于磐，饮食衎衎，吉。",
+        "plainXiaoXiang": "《象传》说：和乐饮食，不是白白吃饱，而是安守正道。",
+        "coreMeaning": "渐进到安稳之处，饮食和乐，吉祥。基础已经稳固。",
+        "favorableMeaning": "位置安稳，生活和乐，稳步发展中。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "鸿渐于陆",
+        "classicText": "九三：鴻漸于陸，夫征不復，婦孕不育，凶；利禦寇。",
+        "xiaoXiang": "夫征不復，離群丑也。婦孕不育，失其道也。利用禦寇，順相保也。",
+        "plainText": "九三：鸿渐于陆，夫征不复，妇孕不育，凶；利御寇。",
+        "plainXiaoXiang": "《象传》说：丈夫出征不回，是离开了群体。妇人怀孕不能养育，是丧失了正道。",
+        "coreMeaning": "渐进到了高原之处，却出现了偏离正道的情况。前行太远而失去归属，凶。但可以用于防御。",
+        "cautionMeaning": "渐进不可脱离根本，走得太远而不回头则凶。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "鸿渐于木",
+        "classicText": "六四：鴻漸于木，或得其桷，无咎。",
+        "xiaoXiang": "或得其桷，順以巽也。",
+        "plainText": "六四：鸿渐于木，或得其桷，无咎。",
+        "plainXiaoXiang": "《象传》说：或许找到平整的树枝，是因为顺从而巽入。",
+        "coreMeaning": "渐进到树上并非大雁的理想栖息之处，但找到平枝就可以安身。随遇而安，无咎。",
+        "favorableMeaning": "环境虽不完全理想，但找到合适位置即可安稳。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "鸿渐于陵",
+        "classicText": "九五：鴻漸于陵，婦三歲不孕，終莫之勝，吉。",
+        "xiaoXiang": "終莫之勝，吉；得所愿也。",
+        "plainText": "九五：鸿渐于陵，妇三岁不孕，终莫之胜，吉。",
+        "plainXiaoXiang": "《象传》说：最终无人能胜过而吉祥，是因为实现了心愿。",
+        "coreMeaning": "渐进到高陵，虽然有长期未得所愿的困境，但最终坚持正道者必胜，吉祥。",
+        "favorableMeaning": "长期坚持后终能如愿，不可因暂时困境放弃。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "鸿渐于陆",
+        "classicText": "上九：鴻漸于陸，其羽可用為儀，吉。",
+        "xiaoXiang": "其羽可用為儀，吉；不可亂也。",
+        "plainText": "上九：鸿渐于陆，其羽可用为仪，吉。",
+        "plainXiaoXiang": "《象传》说：羽毛可用作仪饰而吉祥，是因为不可紊乱秩序。",
+        "coreMeaning": "渐进到了最高处，威仪可观，可以作为榜样。吉祥。",
+        "favorableMeaning": "渐进已成，德行可观，可为人师表。"
+      }
+    ]
+  },
+  "58": {
+    "kingWen": 58,
+    "name": "兑",
+    "classic": {
+      "judgment": "亨。利貞。",
+      "tuan": "兌，說也。剛中而柔外，說以利貞，是以順乎天，而應乎人。說以先民，民忘其勞；說以犯難，民忘其死；說之大，民勸矣哉！",
+      "daXiang": "麗澤，兌；君子以朋友講習。",
+      "sourceRefs": [
+        "https://zh.wikisource.org/wiki/周易",
+        "https://zh.wikisource.org/wiki/周易/兑"
+      ]
+    },
+    "localMeaning": {
+      "plainJudgment": "兑：亨通。利于守正。",
+      "plainTuan": "《彖传》说：兑，就是喜悦。刚健居中而柔顺在外，喜悦而利于守正，因此顺乎天道而应乎人心。以喜悦引导百姓，百姓忘记劳苦；以喜悦赴难，百姓忘记死亡。喜悦的意义太大了。",
+      "plainDaXiang": "《大象传》说：两泽相连（互相滋润），这是兑卦。君子因此与朋友讲习切磋。",
+      "coreMeaning": "兑的核心是悦、交流、和顺、沟通。但刚中而柔外——内在要有原则，外在可以柔和沟通。",
+      "keyThemes": [
+        "喜悦",
+        "交流沟通",
+        "和顺",
+        "朋友讲习",
+        "刚中柔外"
+      ],
+      "asBaseHexagram": "当前事情的主旨偏向沟通、交流、关系互动。外在可以柔和，但内在必须保持原则。",
+      "asMutualHexagram": "作为互卦，表示事情中段偏向沟通协商、关系和顺，通过交流化解分歧。",
+      "asChangedHexagram": "作为变卦，表示后段更可能进入沟通、协商、表达、关系互动或较舒展的状态。",
+      "cautions": [
+        "刚中而柔外：外在柔和内在必须有原则",
+        "不能为了取悦他人而失去底线",
+        "真正的喜悦来自真诚交流"
+      ]
+    },
+    "lines": [
+      {
+        "index": 1,
+        "themeKeyword": "和兑",
+        "classicText": "初九：和兌，吉。",
+        "xiaoXiang": "和兌之吉，行未疑也。",
+        "plainText": "初九：和兑，吉。",
+        "plainXiaoXiang": "《象传》说：和悦而吉祥，是因为行为没有疑虑。",
+        "coreMeaning": "以平和喜悦待人，行为坦荡无疑，吉祥。",
+        "favorableMeaning": "和而不同，以真诚待人，自然吉祥。"
+      },
+      {
+        "index": 2,
+        "themeKeyword": "孚兑",
+        "classicText": "九二：孚兌，吉，悔亡。",
+        "xiaoXiang": "孚兌之吉，信志也。",
+        "plainText": "九二：孚兑，吉，悔亡。",
+        "plainXiaoXiang": "《象传》说：诚信喜悦而吉祥，是因为心志诚信。",
+        "coreMeaning": "内心诚信而外显喜悦，吉祥，悔恨消亡。",
+        "favorableMeaning": "以诚为本的喜悦，可消除悔恨。"
+      },
+      {
+        "index": 3,
+        "themeKeyword": "来兑",
+        "classicText": "六三：來兌，凶。",
+        "xiaoXiang": "來兌之凶，位不當也。",
+        "plainText": "六三：来兑，凶。",
+        "plainXiaoXiang": "《象传》说：前来取悦而凶，是因为位置不当。",
+        "coreMeaning": "刻意讨好、主动逢迎，位置不当，凶。",
+        "cautionMeaning": "不可刻意取悦他人，失了自己的立场。"
+      },
+      {
+        "index": 4,
+        "themeKeyword": "商兑",
+        "classicText": "九四：商兌，未寧，介疾有喜。",
+        "xiaoXiang": "九四之喜，有慶也。",
+        "plainText": "九四：商兑，未宁，介疾有喜。",
+        "plainXiaoXiang": "《象传》说：九四的喜庆，是因为有值得庆贺之事。",
+        "coreMeaning": "在沟通商议中尚未完全安定，但只要隔除邪疾、坚持正道，就有喜庆。",
+        "favorableMeaning": "通过坦诚沟通解决问题，最终有喜。",
+        "cautionMeaning": "商议中勿心存犹豫，须明辨是非。"
+      },
+      {
+        "index": 5,
+        "themeKeyword": "孚于剥",
+        "classicText": "九五：孚于剝，有厲。",
+        "xiaoXiang": "孚于剝，位正當也。",
+        "plainText": "九五：孚于剥，有厉。",
+        "plainXiaoXiang": "《象传》说：诚信于剥落，虽然位置正当，但居位必须守正戒危。",
+        "coreMeaning": "虽然居中得正，但如果信任了不该信任的剥落之势，就有危险。",
+        "cautionMeaning": "即使位置正当，也要警惕被不好的因素侵蚀。"
+      },
+      {
+        "index": 6,
+        "themeKeyword": "引兑",
+        "classicText": "上六：引兌。",
+        "xiaoXiang": "上六引兌，未光也。",
+        "plainText": "上六：引兑。",
+        "plainXiaoXiang": "《象传》说：上六的引导喜悦，光明之道还未发扬光大。",
+        "coreMeaning": "以引导方式示人喜悦，虽然能影响人，但尚未达到光明正大的境界。",
+        "cautionMeaning": "引导他人喜悦需动机纯正，否则有讨好之嫌。"
+      }
+    ]
+  }
+}

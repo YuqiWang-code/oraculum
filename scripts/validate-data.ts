@@ -1,18 +1,45 @@
 /**
  * 数据校验脚本：tsx scripts/validate-data.ts
- * 校验八卦/64卦/八宫/纳甲/世应等静态数据一致性。
+ * 校验范围：
+ *  - 八卦/64卦/八宫/纳甲/世应等静态结构
+ *  - 64 卦知识（LocalHexagramKnowledge）：卦辞/彖传/大象传/来源/现代白话
+ *  - 384 爻：爻辞/小象传/themeKeyword 全部非空
+ *  - 古籍表：TUAN_MAP / DA_XIANG_MAP / XIAO_XIANG_MAP / SOURCE_REFS 齐全
+ *
+ * 注意：大 JSON 文件用 fs.readFileSync + JSON.parse 直接读取，
+ * 不走 tsx/esbuild 的 import 转换（~300KB JSON 会导致 tsx 挂起）。
  */
+import { readFileSync } from 'fs'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { HEXAGRAMS } from '../src/data/hexagrams'
 import { TRIGRAMS } from '../src/data/trigrams'
 import { PALACE_ELEMENT } from '../src/data/palaces'
+import { TUAN_MAP } from '../src/local-data/classics/tuan'
+import { DA_XIANG_MAP } from '../src/local-data/classics/daxiang'
+import { XIAO_XIANG_MAP } from '../src/local-data/classics/xiaoxiang'
+import { SOURCE_REFS } from '../src/local-data/classics/sources'
+import type { LocalHexagramKnowledge } from '../src/local-data/types'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const DATA_DIR = resolve(__dirname, '..', 'src', 'local-data', 'interpretation')
+
+function loadJson<T>(filename: string): T {
+  const raw = readFileSync(resolve(DATA_DIR, filename), 'utf-8')
+  return JSON.parse(raw) as T
+}
+
+const HEXAGRAM_MEANINGS = loadJson<Record<number, LocalHexagramKnowledge>>('hexagramMeanings.json')
+const HEXAGRAM_MEANINGS_PART2 = loadJson<Record<number, LocalHexagramKnowledge>>('hexagramMeaningsPart2.json')
 
 let errors = 0
 function check(cond: boolean, msg: string) {
   if (!cond) { console.error('✗', msg); errors++ }
 }
 
+// ---------- 1. 既有结构校验：八卦/64卦/宫/世应 ----------
 check(Object.keys(TRIGRAMS).length === 8, '八卦应为8个')
-check(HEXAGRAMS.length === 64, '六十四卦应为64个，实际 ' + HEXAGRAMS.length)
+check(HEXAGRAMS.length === 64, `六十四卦应为64个，实际 ${HEXAGRAMS.length}`)
 
 const nameSet = new Set(HEXAGRAMS.map((h) => h.name))
 check(nameSet.size === 64, '卦名应唯一')
@@ -29,8 +56,86 @@ for (const h of HEXAGRAMS) {
   check(h.lineTextsClassic.length === 6, `${h.name} 爻辞应为6条`)
 }
 
+// ---------- 2. 本地卦象知识合并 ----------
+const ALL: Record<number, LocalHexagramKnowledge> = {
+  ...HEXAGRAM_MEANINGS,
+  ...HEXAGRAM_MEANINGS_PART2
+}
+check(Object.keys(ALL).length === 64, `本地卦象知识应为64卦，实际 ${Object.keys(ALL).length}`)
+
+let lineCount = 0
+let themeKeywordCount = 0
+let emptyTheme = 0
+
+for (let kw = 1; kw <= 64; kw++) {
+  const k = ALL[kw]
+  check(!!k, `第${kw}卦知识缺失`)
+  if (!k) continue
+  check(k.kingWen === kw, `第${kw}卦 kingWen 字段不一致：${k.kingWen}`)
+
+  // 古籍原文层
+  check(k.classic.judgment.trim().length > 0, `第${kw}卦（${k.name}）卦辞(judgment)为空`)
+  check(k.classic.tuan.trim().length > 0, `第${kw}卦（${k.name}）彖传(tuan)为空`)
+  check(k.classic.daXiang.trim().length > 0, `第${kw}卦（${k.name}）大象传(daXiang)为空`)
+  check(Array.isArray(k.classic.sourceRefs) && k.classic.sourceRefs.length >= 1,
+    `第${kw}卦（${k.name}）sourceRefs 至少1个来源`)
+
+  // 现代白话层
+  check(k.localMeaning.plainJudgment.trim().length > 0, `第${kw}卦（${k.name}）plainJudgment 为空`)
+  check(k.localMeaning.plainTuan.trim().length > 0, `第${kw}卦（${k.name}）plainTuan 为空`)
+  check(k.localMeaning.plainDaXiang.trim().length > 0, `第${kw}卦（${k.name}）plainDaXiang 为空`)
+
+  // 六爻
+  check(k.lines.length === 6, `第${kw}卦（${k.name}）爻数应为6，实际 ${k.lines.length}`)
+  for (let i = 0; i < k.lines.length; i++) {
+    const ln = k.lines[i]
+    check(ln.index === (i + 1), `第${kw}卦第${i + 1}爻 index 应为 ${i + 1}，实际 ${ln.index}`)
+    check(ln.classicText.trim().length > 0, `第${kw}卦第${i + 1}爻 classicText 为空`)
+    check(ln.xiaoXiang.trim().length > 0, `第${kw}卦第${i + 1}爻 xiaoXiang 为空`)
+    check(ln.plainText.trim().length > 0, `第${kw}卦第${i + 1}爻 plainText 为空`)
+    check(ln.plainXiaoXiang.trim().length > 0, `第${kw}卦第${i + 1}爻 plainXiaoXiang 为空`)
+    check(ln.coreMeaning.trim().length > 0, `第${kw}卦第${i + 1}爻 coreMeaning 为空`)
+    if (ln.themeKeyword && ln.themeKeyword.trim().length > 0) {
+      themeKeywordCount++
+    } else {
+      emptyTheme++
+      check(false, `第${kw}卦第${i + 1}爻 themeKeyword 为空`)
+    }
+    lineCount++
+  }
+}
+
+check(lineCount === 384, `爻总数应为384，实际 ${lineCount}`)
+check(emptyTheme === 0, `themeKeyword 有 ${emptyTheme} 条为空`)
+check(themeKeywordCount === 384, `themeKeyword 非空应384，实际 ${themeKeywordCount}`)
+
+// ---------- 3. 古籍表校验 ----------
+check(Object.keys(TUAN_MAP).length === 64, `TUAN_MAP 应为64条彖传，实际 ${Object.keys(TUAN_MAP).length}`)
+check(Object.keys(DA_XIANG_MAP).length === 64, `DA_XIANG_MAP 应为64条大象传，实际 ${Object.keys(DA_XIANG_MAP).length}`)
+check(Object.keys(XIAO_XIANG_MAP).length === 64, `XIAO_XIANG_MAP 应为64卦，实际 ${Object.keys(XIAO_XIANG_MAP).length}`)
+check(Object.keys(SOURCE_REFS).length === 64, `SOURCE_REFS 应为64条来源，实际 ${Object.keys(SOURCE_REFS).length}`)
+
+for (let kw = 1; kw <= 64; kw++) {
+  check((TUAN_MAP[kw] || '').trim().length > 0, `TUAN_MAP 第${kw}卦为空`)
+  check((DA_XIANG_MAP[kw] || '').trim().length > 0, `DA_XIANG_MAP 第${kw}卦为空`)
+  const xx = XIAO_XIANG_MAP[kw]
+  check(Array.isArray(xx) && xx.length === 6, `XIAO_XIANG_MAP 第${kw}卦应6条，实际 ${Array.isArray(xx) ? xx.length : '缺失'}`)
+  if (Array.isArray(xx)) {
+    for (let i = 0; i < xx.length; i++) {
+      check((xx[i] || '').trim().length > 0, `XIAO_XIANG_MAP 第${kw}卦第${i + 1}爻为空`)
+    }
+  }
+  check(Array.isArray(SOURCE_REFS[kw]) && SOURCE_REFS[kw].length >= 1, `SOURCE_REFS 第${kw}卦至少1个来源`)
+}
+
+// 小象传总数
+let xiaoXiangTotal = 0
+for (const arr of Object.values(XIAO_XIANG_MAP)) xiaoXiangTotal += arr.length
+check(xiaoXiangTotal === 384, `小象传总数应384，实际 ${xiaoXiangTotal}`)
+
+// ---------- 结果 ----------
 if (errors === 0) {
-  console.log('✓ 数据校验通过：64卦结构、编码、宫、世应均一致。')
+  console.log('✓ 数据校验通过：64卦结构、64卦辞/彖/大象、384爻辞/小象、384 themeKeyword、来源均一致。')
   process.exit(0)
 } else {
   console.error(`校验失败：${errors} 处错误`)

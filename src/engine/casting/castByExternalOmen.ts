@@ -1,5 +1,5 @@
 import { mod6, MeihuaCastingResult } from './common'
-import { TRIGRAM_BY_NUMBER, TRIGRAMS } from '../../data/trigrams'
+import { TRIGRAMS } from '../../data/trigrams'
 import { BRANCH_INDEX } from '../../data/solarTerms'
 import type { CalendarContext, TrigramName } from '../../types'
 

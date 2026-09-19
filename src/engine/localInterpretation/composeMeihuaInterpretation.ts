@@ -6,7 +6,7 @@
 
 import type { MeihuaResult } from '../meihua/castByTime'
 import type { QuestionCategory, Rating } from '../../types'
-import type { LocalDetailedInterpretation, LocalInterpretationSection } from './types'
+import type { LocalDetailedInterpretation } from './types'
 import { interpretBaseHexagram } from './interpretBaseHexagram'
 import { interpretMovingLine } from './interpretMovingLines'
 import { interpretMutualHexagram } from './interpretMutualHexagram'
@@ -177,19 +177,13 @@ export function composeMeihuaInterpretation(
     )
   }
 
-  // 收尾短语：从各卦 keyThemes 提取主题词
+  // 收尾短语：本卦/互卦/变卦取 keyThemes；动爻直接取该爻自己的 themeKeyword
   const themeWords = [
     extractThemeWord(r.ben.kingWen, r.ben.editorialKeywords),
-    lineKnowledge?.coreMeaning ? '取舍' : '变化',
+    lineKnowledge?.themeKeyword ?? '变化',
     extractThemeWord(r.hu.kingWen, r.hu.editorialKeywords),
     extractThemeWord(r.bian.kingWen, r.bian.editorialKeywords)
   ]
-  // 如果动爻有明确的 favorable/caution 含义，用更贴切的词
-  if (lineKnowledge?.cautionMeaning) {
-    themeWords[1] = '取舍'
-  } else if (lineKnowledge?.favorableMeaning) {
-    themeWords[1] = '顺势'
-  }
 
   synthesisParts.push(
     `因此本次卦象可以概括为：「${themeWords.join('—')}」。`

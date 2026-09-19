@@ -15,7 +15,7 @@
       <div @click="view(r)" style="cursor:pointer">
         <span :class="cls(r.label)">{{ r.label }} {{ r.score }}</span>
         {{ r.hexagramName }} · {{ r.question }}
-        <div class="muted">{{ new Date(r.createdAt).toLocaleString('zh-CN') }}　规则 {{ r.ruleVersion }}</div>
+        <div class="muted">{{ fmtTime(r) }} 规则 {{ r.ruleVersion }}</div>
       </div>
       <button class="btn secondary" @click="remove(r.id)">删除</button>
     </div>
@@ -24,10 +24,12 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { listHistory, deleteRecord, clearHistory, exportAll, importAll } from '../db'
 import type { HistoryRecord } from '../db/schema'
 import { useAppStore } from '../stores/app'
 
+const router = useRouter()
 const store = useAppStore()
 const rows = ref<HistoryRecord[]>([])
 const kw = ref('')
@@ -38,11 +40,25 @@ const filtered = computed(() => rows.value.filter((r) => !kw.value || r.question
 function cls(l: string) {
   return l === '大吉' || l === '吉' ? 'label-good' : l === '大凶' || l === '凶' ? 'label-bad' : 'label-flat'
 }
+
+/** 用记录自身的时区格式化起卦时间，而非浏览器本地时区 */
+function fmtTime(r: HistoryRecord): string {
+  const tz = r.input?.timezone || 'Asia/Shanghai'
+  return new Intl.DateTimeFormat('zh-CN', {
+    timeZone: tz,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(new Date(r.createdAt))
+}
 onMounted(async () => { rows.value = await listHistory() })
 
 function view(r: HistoryRecord) {
   store.lastResult = r
-  location.href = '#/result'
+  router.push('/result/' + r.id)
 }
 async function remove(id: string) {
   await deleteRecord(id)

@@ -6,7 +6,6 @@
 
 import { getHexagramKnowledge } from '../../local-data'
 import type { LocalHexagramKnowledge, LocalLineKnowledge } from '../../local-data'
-import { ZHOUYI_MAP } from '../../data/classics/zhouyi'
 import { WIKISOURCE_ZHOUYI, SOURCE_REFS } from '../../local-data/classics/sources'
 import type { HexagramData } from '../../types'
 

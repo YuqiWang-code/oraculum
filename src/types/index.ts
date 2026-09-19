@@ -1,6 +1,6 @@
 // 全局规则版本：算法或数据变更时必须递增，历史记录据此可重现
-export const APP_VERSION = '4.0.0'
-export const RULESET_VERSION = '4.0.0'
+export const APP_VERSION = '4.1.0'
+export const RULESET_VERSION = '4.1.0'
 export const DATASET_VERSION = '3.0.0'
 export const LOCAL_KNOWLEDGE_VERSION = '1.0.0'
 
@@ -97,6 +97,7 @@ export interface ScoreEvidence {
 /** 评分分类明细（v3.2） */
 export interface RatingBreakdown {
   usefulGod: number
+  sourceTaboo: number
   shiYing: number
   monthDay: number
   movement: number

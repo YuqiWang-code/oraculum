@@ -78,7 +78,7 @@
         <!-- 降级：无完整知识时展示基础信息 -->
         <template v-else>
           <div class="muted" style="margin-top:8px">
-            关键词：{{ h.editorialKeywords.join('、') }}　宫：{{ h.palace }}
+            关键词：{{ h.editorialKeywords.join('、') }} 宫：{{ h.palace }}
           </div>
           <div v-if="h.judgmentClassic" style="margin-top:6px;white-space:pre-wrap">
             卦辞：{{ h.judgmentClassic }}

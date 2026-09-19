@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useAppStore } from './stores/app'
-const store = useAppStore()
-onMounted(() => store.loadSettings())
+// 设置已在 main.ts 的 bootstrap 中、挂载前通过 store.loadSettings() 加载，
+// 此处不再重复调用，避免首次渲染与二次加载的竞态。
 </script>

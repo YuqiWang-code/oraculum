@@ -46,26 +46,30 @@ export function evaluateLineStrength(
   const isKong = xunkong.includes(line.branch)
 
   let monthState: MonthState = 'neutral'
-  if (monthEl === el) monthState = 'month_value'
+  if (monthBranch === line.branch) monthState = 'month_value'
+  else if (isClash(monthBranch, line.branch)) monthState = 'month_broken'
+  else if (isCombine(monthBranch, line.branch)) monthState = 'month_combined'
+  else if (monthEl === el) monthState = 'month_same_element'
   else if (generates(monthEl, el)) monthState = 'month_generated'
   else if (controls(monthEl, el)) monthState = 'month_controlled'
-  else if (isCombine(monthBranch, line.branch)) monthState = 'month_combined'
-  else if (isClash(monthBranch, line.branch)) monthState = 'month_broken'
 
   let dayState: DayState = 'neutral'
-  if (dayEl === el) dayState = 'day_value'
+  if (dayBranch === line.branch) dayState = 'day_value'
+  else if (isClash(dayBranch, line.branch)) dayState = 'day_clashed'
+  else if (isCombine(dayBranch, line.branch)) dayState = 'day_combined'
+  else if (dayEl === el) dayState = 'day_same_element'
   else if (generates(dayEl, el)) dayState = 'day_generated'
   else if (controls(dayEl, el)) dayState = 'day_controlled'
-  else if (isCombine(dayBranch, line.branch)) dayState = 'day_combined'
-  else if (isClash(dayBranch, line.branch)) dayState = 'day_clashed'
 
   // strengthScore: 本项目现代权重
   let score = 0
   if (monthState === 'month_value') score += 3
+  if (monthState === 'month_same_element') score += 1
   if (monthState === 'month_generated') score += 2
   if (monthState === 'month_controlled') score -= 2
   if (monthState === 'month_broken') score -= 3
   if (dayState === 'day_value') score += 3
+  if (dayState === 'day_same_element') score += 1
   if (dayState === 'day_generated') score += 2
   if (dayState === 'day_controlled') score -= 2
   if (dayState === 'day_clashed') score -= 1

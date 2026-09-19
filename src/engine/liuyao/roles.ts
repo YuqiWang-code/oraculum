@@ -39,13 +39,13 @@ export function deriveLineRoles(
       if (usefulLineIndexes.includes(line.index)) {
         role = 'useful'
         reason = '用神'
-      } else if (generates(usefulEl, el)) {
+      } else if (generates(el, usefulEl)) {
         role = 'source'
         reason = `元神（生用神${usefulEl}）`
-      } else if (controls(usefulEl, el)) {
+      } else if (controls(el, usefulEl)) {
         role = 'taboo'
         reason = `忌神（克用神${usefulEl}）`
-      } else if (controls(el, usefulEl)) {
+      } else if (controls(usefulEl, el)) {
         role = 'enemy'
         reason = `仇神（克元神）`
       }

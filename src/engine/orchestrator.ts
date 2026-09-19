@@ -18,7 +18,7 @@ import { castByOmen, OmenResult } from './casting/castByExternalOmen'
 import { castBySixSources, SixSourceResult } from './casting/castBySixSources'
 import type { SecondTimeResult } from './casting/castBySecondTime'
 import type { CoinThrow } from './casting/castByCoins'
-import { throwsToLines, throwsExplanation } from './casting/castByCoins'
+import { throwsExplanation } from './casting/castByCoins'
 import { parseLocalDateTime } from '../utils/datetime'
 import { selectMeihuaClassicEvidence, selectLiuyaoClassicEvidence } from './classics/selectClassicEvidence'
 
@@ -72,7 +72,7 @@ function finishMeihua(
   input: DivinationInput,
   cal: CalendarContext,
   caster: MeihuaCastingResult & Partial<MeihuaResult>,
-  useShensha: boolean
+  _useShensha: boolean
 ): DivinationRecord {
   const meihua = finalizeMeihua(caster, cal)
   const rating = scoreMeihua(meihua, cal.monthBranch)
@@ -94,7 +94,7 @@ function finishMeihua(
 }
 
 /** v1 旧时间起卦（保留兼容，行为不变） */
-export function runMeihuaTime(input: DivinationInput, useShensha: boolean): DivinationRecord {
+export function runMeihuaTime(input: DivinationInput, _useShensha: boolean): DivinationRecord {
   const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const meihua = castMeihuaByTime(cal)
   const rating = scoreMeihua(meihua, cal.monthBranch)
@@ -170,7 +170,7 @@ export function runLiuyao(
   const cal = buildCalendarContext({ date: input.castTime, timezone: input.timezone, dayBoundaryRule: input.dayBoundaryRule })
   const liuyao = buildLiuyao(lines as 0[], movingMask, cal)
   const rating = scoreLiuyao(liuyao, cal.monthBranch, cal.dayGanzhi, useShensha, input.category)
-  const { interpretation, usefulGodReason } = interpretLiuyao(liuyao, rating, input.category)
+  const { interpretation, usefulGodReason } = interpretLiuyao(liuyao, rating, input.category, cal.monthBranch, cal.dayGanzhi)
 
   const evidence: CastingEvidence[] = []
   if (throws) {

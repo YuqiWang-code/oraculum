@@ -19,7 +19,7 @@ export function normalizeText(input: string): string {
   // 去掉所有空白
   s = s.replace(/\s+/g, '')
   // 去掉常见中英文标点
-  s = s.replace(/[，。！？；：、""''（）【】《》…—·,.!?;:"'()\[\]<>~`@#$%^&*\-_=+|\\/]/g, '')
+  s = s.replace(/[，。！？；：、""''（）【】《》…—·,.!?;:"'()[\]<>~`@#$%^&*\-_=+|\\/]/g, '')
   return s
 }
 

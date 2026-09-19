@@ -3,7 +3,7 @@
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
-  const component: DefineComponent<{}, {}, any>
+  const component: DefineComponent
   export default component
 }
 
@@ -24,6 +24,7 @@ declare module 'lunar-javascript' {
   }
   export class Solar {
     static fromDate(d: Date): Solar
+    static fromYmdHms(year: number, month: number, day: number, hour: number, minute: number, second: number): Solar
     getLunar(): Lunar
     toYmdHms(): string
   }

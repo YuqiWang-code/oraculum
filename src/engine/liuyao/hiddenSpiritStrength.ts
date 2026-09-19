@@ -51,11 +51,14 @@ export function hiddenEvidence(a: HiddenSpiritAssessment) {
   if (a.hiddenGeneratedByMonth) {
     ev.push({ id: `ly_hidden_month_gen_${a.lineIndex}`, title: `伏神得月生`, delta: 1, reason: `伏神${a.hiddenBranch}得月建生`, sourceRule: 'ly_hidden_v2' })
   }
+  if (a.hiddenGeneratedByDay) {
+    ev.push({ id: `ly_hidden_day_gen_${a.lineIndex}`, title: `伏神得日生`, delta: 1, reason: `伏神${a.hiddenBranch}得日辰生`, sourceRule: 'ly_hidden_v2' })
+  }
   if (a.flyingIsKong) {
     ev.push({ id: `ly_flying_kong_${a.lineIndex}`, title: `飞神空`, delta: 1, reason: `飞神${a.flyingBranch}逢空，伏神易出`, sourceRule: 'ly_hidden_v2' })
   }
   if (a.flyingIsYuepo) {
-    ev.push({ id: `ly_flying_yuepo_${a.lineIndex}`, title: `飞神月破`, delta: -1, reason: `飞神${a.flyingBranch}月破，伏神难出`, sourceRule: 'ly_hidden_v2' })
+    ev.push({ id: `ly_flying_yuepo_${a.lineIndex}`, title: `飞神月破`, delta: 1, reason: `飞神${a.flyingBranch}月破，伏神易出`, sourceRule: 'ly_hidden_v2' })
   }
   return ev
 }

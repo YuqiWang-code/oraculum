@@ -17,9 +17,11 @@ import type { LocalDetailedInterpretation } from '../localInterpretation/types'
 export function interpretLiuyao(
   r: LiuYaoResult,
   rating: Rating,
-  category: QuestionCategory
+  category: QuestionCategory,
+  monthBranch?: string,
+  dayGanzhi?: string
 ): { interpretation: Interpretation; usefulGodReason: string } {
-  const detailed = composeLiuyaoInterpretation(r, rating, category)
+  const detailed = composeLiuyaoInterpretation(r, rating, category, monthBranch, dayGanzhi)
   return {
     interpretation: {
       summary: detailed.overview,
@@ -39,7 +41,9 @@ export function interpretLiuyao(
 export function interpretLiuyaoDetailed(
   r: LiuYaoResult,
   rating: Rating,
-  category: QuestionCategory
+  category: QuestionCategory,
+  monthBranch?: string,
+  dayGanzhi?: string
 ): LocalDetailedInterpretation {
-  return composeLiuyaoInterpretation(r, rating, category)
+  return composeLiuyaoInterpretation(r, rating, category, monthBranch, dayGanzhi)
 }

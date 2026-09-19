@@ -18,6 +18,8 @@ export function secureRandomInt(min: number, max: number): number {
   const limit = Math.floor(0x100000000 / range) * range
   const buf = new Uint32Array(1)
   const c = getCrypto()
+  // rejection sampling：内部 return 保证必然退出，true 为有意的常量条件
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     c.getRandomValues(buf)
     const x = buf[0]

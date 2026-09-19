@@ -23,12 +23,20 @@ export interface CalendarInput {
   dayBoundaryRule?: DayBoundaryRule
 }
 
+/** 目标时区墙上时间分量 */
+export interface WallTimeParts {
+  year: number
+  month: number
+  day: number
+  hour: number
+  minute: number
+  second: number
+}
+
 /**
- * 将本地墙上时间字符串按指定 IANA 时区解释为 Date。
- * 对于 Asia/Shanghai / UTC 等常用时区，用 Intl 反推偏移。
+ * 用 Intl.DateTimeFormat 提取某 instant 在目标时区的墙上时间分量。
  */
-export function wallTimeInTimezone(localDate: Date, timezone: string): Date {
-  // 用 Intl.DateTimeFormat 拿到该时区此刻的墙上时间各分量
+export function wallTimeParts(localDate: Date, timezone: string): WallTimeParts {
   const dtf = new Intl.DateTimeFormat('en-US', {
     timeZone: timezone,
     year: 'numeric',
@@ -43,24 +51,58 @@ export function wallTimeInTimezone(localDate: Date, timezone: string): Date {
   const get = (type: string) => parseInt(parts.find((p) => p.type === type)!.value, 10)
   let hour = get('hour')
   if (hour === 24) hour = 0 // Intl 在某些浏览器返回 24
-  // 这个 Date 的"本地墙上时间"分量等于目标时区的墙上时间
-  // Solar.fromDate 会按 JS Date 的 UTC 毫秒解析；我们需要构造一个 Date，
-  // 其 UTC 毫秒值对应"目标时区墙上时间"。
-  // 方法：直接用 new Date(year, month-1, day, hour, min, sec) — 这是本地时区时间，
-  // 然后 getTime() 返回该墙上时间对应的 UTC 毫秒。
-  // 但这会受运行环境本地时区影响。更可靠的做法：
-  // 计算目标时区与 UTC 的偏移，然后用 UTC 分量构造。
-  const utcMs = Date.UTC(get('year'), get('month') - 1, get('day'), hour, get('minute'), get('second'))
-  return new Date(utcMs)
+  return {
+    year: get('year'),
+    month: get('month'),
+    day: get('day'),
+    hour,
+    minute: get('minute'),
+    second: get('second')
+  }
+}
+
+/**
+ * 将目标时区墙上时间分量构造成一个 Date。
+ * 该 Date 的 UTC 毫秒值对应"目标时区墙上时间"，
+ * 因此 getUTC*() 取出的就是目标时区墙上时间分量。
+ */
+export function wallTimeInTimezone(localDate: Date, timezone: string): Date {
+  const p = wallTimeParts(localDate, timezone)
+  return new Date(Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second))
+}
+
+/** 从 Date.UTC 构造的 Date 中取出墙上时间分量 */
+function partsFromUtcDate(dt: Date): WallTimeParts {
+  return {
+    year: dt.getUTCFullYear(),
+    month: dt.getUTCMonth() + 1,
+    day: dt.getUTCDate(),
+    hour: dt.getUTCHours(),
+    minute: dt.getUTCMinutes(),
+    second: dt.getUTCSeconds()
+  }
+}
+
+/**
+ * 解析 lunar-javascript toYmdHms() 输出的 "YYYY-MM-DD HH:mm:ss" 为
+ * 与 wallTimeInTimezone 一致的墙上时间毫秒（Date.UTC 分量）。
+ */
+function termStringToWallMs(str: string): number {
+  const [datePart, timePart] = str.split(' ')
+  const [y, mo, da] = datePart.split('-').map(Number)
+  const [h, mi, s] = (timePart || '00:00:00').split(':').map(Number)
+  return Date.UTC(y, mo - 1, da, h, mi, s)
 }
 
 export function buildCalendarContext(input: CalendarInput): CalendarContext {
   const raw = typeof input.date === 'string' ? new Date(input.date) : input.date
   const dayBoundary: DayBoundaryRule = input.dayBoundaryRule || 'midnight'
 
-  // 按指定时区获取墙上时间对应的 Date
+  // 按指定时区获取墙上时间分量，直接交给 Solar.fromYmdHms，
+  // 避免中间 Date 被 Solar.fromDate 再次按浏览器本地时区解释。
+  const parts = wallTimeParts(raw, input.timezone)
   const d = wallTimeInTimezone(raw, input.timezone)
-  const solar = Solar.fromDate(d)
+  const solar = Solar.fromYmdHms(parts.year, parts.month, parts.day, parts.hour, parts.minute, parts.second)
   const lunar = solar.getLunar()
 
   let yearGanzhi = lunar.getYearInGanZhi()
@@ -69,12 +111,14 @@ export function buildCalendarContext(input: CalendarInput): CalendarContext {
   let hourGanzhi = lunar.getTimeInGanZhi()
 
   // 子初换日：23:00 起算次日（日柱和时柱都进次日）
+  // d 是 Date.UTC 构造的，其 UTC 分量 == 目标时区墙上时间分量
   if (dayBoundary === 'zi_hour') {
     const hour24 = d.getUTCHours()
     if (hour24 >= 23) {
-      // 加一天的 Date，重新取干支
+      // 加一小时的墙上时间，重新取干支
       const next = new Date(d.getTime() + 3600 * 1000)
-      const solarNext = Solar.fromDate(next)
+      const np = partsFromUtcDate(next)
+      const solarNext = Solar.fromYmdHms(np.year, np.month, np.day, np.hour, np.minute, np.second)
       const lunarNext = solarNext.getLunar()
       dayGanzhi = lunarNext.getDayInGanZhi()
       hourGanzhi = lunarNext.getTimeInGanZhi()
@@ -97,21 +141,23 @@ export function buildCalendarContext(input: CalendarInput): CalendarContext {
   try {
     const table = lunar.getJieQiTable() as Record<string, { toYmdHms(): string }>
     const nowMs = d.getTime()
-    let bestAll: { name: string; at: Date; str: string } | null = null
-    let bestJie: { name: string; at: Date; str: string } | null = null
-    let next: { at: Date; str: string } | null = null
+    let bestAll: { name: string; at: number; str: string } | null = null
+    let bestJie: { name: string; at: number; str: string } | null = null
+    let next: { at: number; str: string } | null = null
     for (const name of Object.keys(table)) {
       // 只处理标准24节气名
       if (!(SOLAR_TERMS as readonly string[]).includes(name)) continue
       const str = table[name].toYmdHms()
-      const at = new Date(str.replace(' ', 'T'))
-      if (at.getTime() <= nowMs) {
-        if (!bestAll || at.getTime() > bestAll.at.getTime()) bestAll = { name, at, str }
-        if (isJieTerm(name) && (!bestJie || at.getTime() > bestJie.at.getTime())) {
+      // 节气时间已是目标时区墙上时间，按与 d 相同的 Date.UTC 分量方式比较，
+      // 不用 new Date(str)（会被浏览器本地时区解释）。
+      const at = termStringToWallMs(str)
+      if (at <= nowMs) {
+        if (!bestAll || at > bestAll.at) bestAll = { name, at, str }
+        if (isJieTerm(name) && (!bestJie || at > bestJie.at)) {
           bestJie = { name, at, str }
         }
       } else {
-        if (!next || at.getTime() < next.at.getTime()) next = { at, str }
+        if (!next || at < next.at) next = { at, str }
       }
     }
     if (bestAll) {
