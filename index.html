@@ -9,6 +9,19 @@
   </head>
   <body>
     <div id="app"></div>
+    <div id="error-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;color:#ff6b6b;padding:20px;z-index:99999;overflow:auto;font-family:monospace;white-space:pre-wrap;"></div>
+    <script>
+      window.addEventListener('error', function(e) {
+        var el = document.getElementById('error-overlay');
+        el.style.display = 'block';
+        el.textContent = 'ERROR: ' + e.message + '\n' + (e.filename || '') + ':' + (e.lineno || '') + '\n' + (e.error && e.error.stack ? e.error.stack : '');
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        var el = document.getElementById('error-overlay');
+        el.style.display = 'block';
+        el.textContent = 'UNHANDLED REJECTION: ' + (e.reason && e.reason.message ? e.reason.message : e.reason) + '\n' + (e.reason && e.reason.stack ? e.reason.stack : '');
+      });
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
