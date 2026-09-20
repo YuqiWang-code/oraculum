@@ -1,15 +1,37 @@
 # Oraculum（智能推理与预测）
 
-Oraculum **v4.0.0**
+Oraculum **v4.1.0**
 
 一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。
 
 **核心计算和解读完全本地。无需后端。无需 API Key。无需 AI。支持离线。**
 
+**正式上线：**[https://oraculum-3g8.pages.dev](https://oraculum-3g8.pages.dev)
+
 > **免责声明**
 > 本应用用于传统文化研究、娱乐与自我反思，不代表客观事实或未来必然结果。涉及医疗、法律、财务、安全、升学就业等重要决定时，请以现实证据和专业意见为准，不以占卜结果替代决策。
 
-## 运行方式
+
+
+***
+
+## 快速开始
+
+### 直接使用
+
+打开 [https://oraculum-3g8.pages.dev](https://oraculum-3g8.pages.dev) 即可使用，无需安装任何东西。
+
+### 手机安装 PWA
+
+
+
+* **Android**：用 Chrome 打开网址 → 菜单 → "安装应用" 或 "添加到主屏幕"
+
+* **iOS**：用 Safari 打开网址 → 分享 → "添加到主屏幕"
+
+安装后可从桌面图标以全屏模式启动，核心功能离线可用。
+
+### 本地开发
 
 
 
@@ -20,78 +42,126 @@ npm run dev        # 开发服务器，默认 http://localhost:5173
 
 npm run build      # 类型检查 + 生产构建，输出 dist/
 
-npm run preview    # 预览生产构建
+npm run preview    # 预览生产构建（http://localhost:4173）
 ```
+
+
+
+***
 
 ## 测试与校验
 
 
 
 ```
-npm run test       # 运行 Vitest 单元测试
+npm run test       # 运行 Vitest 单元测试（173 tests）
 
 npm run test:watch # 监视模式
 
-npm run validate   # 本地数据完整性校验
+npm run validate   # 本地数据完整性校验（64卦/384爻/彖传/大象/小象/现代释义/themeKeyword）
 
 npm run lint       # ESLint 检查
 
 npm run format     # Prettier 格式化
 ```
 
+
+
+***
+
 ## 起卦方式
 
+### 传统 / 常用
 
 
-| 方式         | 规则版本                        | 性质                 |
-| ---------- | --------------------------- | ------------------ |
-| 六源合参       | six\_source\_hybrid\_v1     | 本项目实验（非古籍原法）       |
-| 梅花・秒级时间    | meihua\_time\_second\_v2    | 现代扩展（秒参与算法）        |
-| 梅花・随机数     | meihua\_random\_numbers\_v1 | 现代数字化（crypto 安全随机） |
-| 梅花・摇骰      | meihua\_dice\_v1            | 现代交互               |
-| 六爻・三枚钱     | liuyao\_three\_coins\_v1    | 传统实践（真实六爻）         |
-| 梅花・文字      | meihua\_text\_count\_v1     | 传统（长文本字数）          |
-| 梅花・外应      | meihua\_external\_omen\_v1  | 传统 + 规范化           |
-| 梅花・时间 (v1) | meihua\_time\_v1            | 旧法保留兼容             |
+
+| 方式      | 标识                        | 说明               |
+| ------- | ------------------------- | ---------------- |
+| 梅花・年月日时 | `meihua_time_v1`          | 传统梅花易数起卦法        |
+| 六爻・三枚钱  | `liuyao_three_coins_v1`   | 传统六爻纳甲真实摇卦       |
+| 梅花・文字   | `meihua_text_count_v1`    | 传统思想・项目规范（长文本字数） |
+| 梅花・外应   | `meihua_external_omen_v1` | 传统 + 规范化         |
+
+### 现代数字化
+
+
+
+| 方式      | 标识                         | 说明                 |
+| ------- | -------------------------- | ------------------ |
+| 梅花・秒级时间 | `meihua_time_second_v2`    | 现代扩展（秒参与算法）        |
+| 梅花・随机数  | `meihua_random_numbers_v1` | 现代数字化（crypto 安全随机） |
+| 梅花・摇骰   | `meihua_dice_v1`           | 现代交互               |
+
+### 实验
+
+
+
+| 方式   | 标识                     | 说明           |
+| ---- | ---------------------- | ------------ |
+| 六源合参 | `six_source_hybrid_v1` | 本项目实验（非古籍原法） |
+
+
+
+***
 
 ## 功能
 
 
 
-* 梅花易数多种起卦：时间、随机数、摇骰、文字、外应
+* **梅花易数多种起卦**：年月日时、秒级时间、随机数、摇骰、文字、外应
 
-* 六爻纳甲排盘：八宫、世应、纳甲、六亲、六神、伏神、神煞
+* **六爻纳甲排盘**：八宫、世应、纳甲、六亲、六神、伏神、神煞、旬空
 
-* 64 卦完整本地经典解读：卦辞、彖传、大象传、384 爻辞、384 小象传
+* **64 卦完整本地经典解读**：卦辞、彖传、大象传、384 爻辞、384 小象传
 
-* 本地确定性解读引擎：本卦 → 动爻 → 互卦 → 变卦 → 体用 → 综合
+* **本地确定性解读引擎**：本卦 → 动爻 → 互卦 → 变卦 → 体用 → 综合，每段原文→白话→角色解释
 
-* 0–100 传统规则评分 + 五档（大凶 / 凶 / 平 / 吉 / 大吉）+ 评分明细
+* **0–100 传统规则评分** + 五档（大凶 / 凶 / 平 / 吉 / 大吉）+ RatingBreakdown 七项明细
 
-* 六爻规则状态：用神、元神 / 忌神、旺衰、暗动 / 日破、合绊、回头生克、三合、进退、飞伏
+* **六爻规则状态**：用神、元神 / 忌神 / 仇神、旺衰、暗动 / 日破、合绊、回头生克、三合、进退、飞伏
 
-* 本地历史记录（IndexedDB）、导出 / 导入 JSON
+* **统一 LiuYaoAnalysis 事实源**：scorer、解读引擎、ResultView 共享同一份分析结果，不漂移
 
-* 知识库浏览：卦辞、彖传、大象、爻辞、小象、Oraculum 现代释义、来源
+* **本地历史记录**（IndexedDB）：导出 / 导入 JSON，`/result/:id` 路由刷新可恢复
 
-* PWA 离线支持：起卦、历法、梅花、六爻、本地解读、历史、知识库全部离线工作
+* **知识库浏览**：64 卦可展开详情（卦辞 / 彖传 / 大象 / 六爻爻辞 + 小象 / 现代释义 / 来源），支持搜索
+
+* **PWA 离线支持**：起卦、历法、梅花、六爻、本地解读、历史、知识库全部离线工作
+
+* **安装与分享**：Android beforeinstallprompt 安装卡片、iOS 添加到主屏幕指引、navigator.share 分享应用
+
+* **时区感知**：记录起卦时的目标时区，历史和结果页按记录时区显示时间
+
+* **移动端优化**：响应式布局、经典原文折叠（details）、六爻高级状态默认折叠、底部导航
+
+
+
+***
 
 ## 技术栈
 
-Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB) · lunar-javascript · vite-plugin-pwa · Vitest
+Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB) · lunar-javascript · vite-plugin-pwa · Vitest · ESLint
+
+
+
+***
 
 ## 版本
 
 
 
-| 版本标识                      | 值     | 说明                                |
-| ------------------------- | ----- | --------------------------------- |
-| APP\_VERSION              | 4.0.0 | 应用版本（v4 为纯本地化改造）                  |
-| RULESET\_VERSION          | 4.0.0 | 起卦算法与评分规则版本                       |
-| DATASET\_VERSION          | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整） |
-| LOCAL\_KNOWLEDGE\_VERSION | 1.0.0 | 本地现代释义版本                          |
+| 版本标识                      | 值     | 说明                                                     |
+| ------------------------- | ----- | ------------------------------------------------------ |
+| `APP_VERSION`             | 4.1.0 | 应用版本（v4 纯本地化，v4.1 最终稳定化 + 移动端优化 + Cloudflare Pages 上线） |
+| `RULESET_VERSION`         | 4.1.0 | 起卦算法与评分规则版本                                            |
+| `DATASET_VERSION`         | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整）                      |
+| `LOCAL_KNOWLEDGE_VERSION` | 1.0.0 | 本地现代释义版本                                               |
 
 每条历史记录均保存版本号，算法升级不改变旧结果。
+
+
+
+***
 
 ## 目录结构
 
@@ -100,68 +170,144 @@ Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB
 ```
 src/
 
-├─ data/           经典资料层（八卦/64卦/八宫/纳甲/六亲/六神/神煞/历法）
+├─ data/                    经典资料层（八卦/64卦/八宫/纳甲/六亲/六神/神煞/历法）
 
-├─ engine/         确定性规则引擎
+├─ engine/                  确定性规则引擎
 
-│  ├─ calendar/    历法
+│  ├─ calendar/             历法（节气、月建、旬空、时区墙时间）
 
-│  ├─ casting/    起卦
+│  ├─ casting/              起卦（多种方式）
 
-│  ├─ meihua/      梅花易数
+│  ├─ meihua/               梅花易数（体用、互卦、变卦）
 
-│  ├─ liuyao/     六爻纳甲排盘
+│  ├─ liuyao/               六爻纳甲排盘（roles/strength/analyze/scorer）
 
-│  ├─ scoring/    评分
+│  ├─ scoring/              评分
 
 │  ├─ localInterpretation/  本地确定性解读引擎
 
 │  └─ orchestrator.ts       总编排
 
-├─ local-data/     本地经典文本 + Oraculum 现代释义
+├─ local-data/              本地经典文本 + Oraculum 现代释义
 
-│  ├─ classics/    古籍原文（周易卦辞/彖传/大象/小象）
+│  ├─ classics/             古籍原文（周易卦辞/彖传/大象/小象，JSON 数据）
 
-│  ├─ interpretation/  Oraculum 现代释义
+│  ├─ interpretation/       Oraculum 现代释义（64卦 + 384爻，JSON 数据）
 
-│  └─ meihua/      梅花体用角色与含义
+│  └─ meihua/               梅花体用角色与含义
 
-├─ components/     组件
+├─ components/              组件
 
-├─ views/          页面
+├─ views/                   页面（Home/Divination/Result/History/Knowledge/Settings）
 
-├─ db/             Dexie 历史（IndexedDB）
+├─ db/                      Dexie 历史（IndexedDB，version 3 已删除 aiSessions）
 
-├─ router/         路由
+├─ router/                  路由（/result/:id + IndexedDB 刷新恢复）
 
-├─ stores/         Pinia 状态
+├─ stores/                  Pinia 状态（async bootstrap，mount 前加载设置）
 
-├─ types/         类型定义
+├─ types/                   类型定义
 
-└─ utils/          工具函数
+└─ utils/                   工具函数
 
-docs/              文档
+public/
 
-tests/             Vitest 测试
+├─ \_redirects               SPA fallback（/\* /index.html 200）
+
+├─ icons/                   PWA 图标（含独立 maskable-512）
+
+└─ manifest.webmanifest     PWA manifest
+
+docs/                       文档
+
+tests/                      Vitest 测试（173 tests）
+
+scripts/                    数据校验脚本
 ```
+
+
+
+***
 
 ## 三层架构
 
 
 
-1. **经典资料层** `src/data/` + `src/local-data/classics/`：卦、卦辞、爻辞、彖传、大象传、小象传、术数基础表。古籍原文与现代释义严格分字段。
+1. **经典资料层** `src/data/` + `src/local-data/classics/`：卦、卦辞、爻辞、彖传、大象传、小象传、术数基础表。古籍原文与现代释义严格分字段，所有现代解释标注 "Oraculum 现代释义"。
 
-2. **确定性规则引擎层** `src/engine/`：历法、起卦、八宫、世应、纳甲、六亲、六神、伏神、旬空、神煞、评分。全部离线、确定性、可复现。
+2. **确定性规则引擎层** `src/engine/`：历法、起卦、八宫、世应、纳甲、六亲、六神、伏神、旬空、神煞、评分。全部离线、确定性、可复现。六爻分析通过 `analyzeLiuyao()` 生成统一 `LiuYaoAnalysis`，scorer 和解读共享同一事实源。
 
-3. **本地解读层** `src/engine/localInterpretation/`：只读结构化结果，查本地知识数据 + 套确定性模板生成现代中文。运行时不联网、不调用大模型。
-
-## 手机使用
+3. **本地解读层** `src/engine/localInterpretation/`：只读结构化结果，查本地知识数据 + 套确定性模板生成现代中文。运行时不联网、不调用大模型、不临时生成空洞句子。
 
 
 
-1. **局域网**：`npm run dev -- --host`，手机同局域网访问 `http://电脑IP:5173`。
+***
 
-2. **PWA**：将 `dist` 部署到 HTTPS 后，手机浏览器 "添加到主屏幕" 即可离线使用。详见 `docs/MOBILE_INSTALL.md`。
+## 部署
+
+### Cloudflare Pages（正式）
+
+生产网址：[https://oraculum-3g8.pages.dev](https://oraculum-3g8.pages.dev)
+
+
+
+| 配置项                    | 值                        |
+| ---------------------- | ------------------------ |
+| Project name           | `oraculum`               |
+| GitHub repo            | `YuqiWang-code/oraculum` |
+| Production branch      | `main`                   |
+| Framework preset       | `None`                   |
+| Build command          | `npm run build`          |
+| Build output directory | `dist`                   |
+| Environment variables  | 无                        |
+
+`public/_redirects` 提供 SPA fallback（`/* /index.html 200`），确保 `/history`、`/knowledge`、`/settings`、`/result/:id` 等深路由直接刷新不 404。
+
+详见 [docs/DEPLOY\_CLOUDFLARE\_PAGES.md](docs/DEPLOY_CLOUDFLARE_PAGES.md)。
+
+### 自动部署
+
+GitHub `main` 分支已连接 Cloudflare Pages。每次 `git push origin main` 自动触发构建并更新到同一个生产域名。
+
+### 临时分享（备选）
+
+如需在正式部署前临时分享给朋友测试，可用 Cloudflare Tunnel：
+
+
+
+```
+npm run build
+
+npm run preview          # http://localhost:4173
+
+\# 另一个终端：
+
+cloudflared tunnel --url http://localhost:4173
+```
+
+详见 [docs/REMOTE\_SHARE\_TEMPORARY.md](docs/REMOTE_SHARE_TEMPORARY.md)。
+
+
+
+***
+
+## 隐私
+
+
+
+* **每台设备自己的 IndexedDB**：问卦历史仅存储在当前浏览器的 IndexedDB 中
+
+* **Cloudflare 不保存问卦数据**：纯静态托管，无后端、无数据库、无用户账号
+
+* **A 用户看不到 B 用户的历史**：数据不跨设备同步
+
+* `/result/:id`**&#x20;URL 不携带完整问卦数据**：只包含记录 ID，其他设备打开同 URL 找不到本地记录是正常设计
+
+* **无 Analytics、无广告、无第三方追踪**
+
+
+
+***
 
 ## 文档
 
@@ -175,7 +321,25 @@ tests/             Vitest 测试
 
 * [AI 移除迁移说明](docs/AI_REMOVAL_MIGRATION.md)
 
-## Git 提交
+* [Cloudflare Pages 部署](docs/DEPLOY_CLOUDFLARE_PAGES.md)
+
+* [临时分享（Cloudflare Tunnel）](docs/REMOTE_SHARE_TEMPORARY.md)
+
+* [手机安装 PWA](docs/MOBILE_INSTALL.md)
+
+* [架构说明](docs/ARCHITECTURE.md)
+
+* [规则说明](docs/RULES.md)
+
+* [测试说明](docs/TESTING.md)
+
+* [变更日志](docs/CHANGELOG.md)
+
+
+
+***
+
+## Git
 
 
 
@@ -184,7 +348,7 @@ git add -A
 
 git commit -m "说明本次改动"
 
-git push
+git push origin main
 ```
 
-远程仓库：`https://github.com/YuqiWang-code/oraculum`（main 分支）。
+远程仓库：`https://github.com/YuqiWang-code/oraculum`（main 分支）。push 后 Cloudflare Pages 自动部署。
