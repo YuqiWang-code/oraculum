@@ -5,22 +5,19 @@
       逐年干支是传统记号，不显示"得分""发财率"之类伪精确数字；如何应对取决于现实处境与你自己的选择。
     </p>
 
-    <!-- 年龄范围筛选 -->
-    <div class="filter">
-      <div class="filter-item">
-        <label for="ln-from">从（岁）</label>
-        <input id="ln-from" v-model.number="fromAge" type="number" inputmode="numeric" min="0" max="120" />
-      </div>
-      <div class="filter-item">
-        <label for="ln-to">到（岁）</label>
-        <input id="ln-to" v-model.number="toAge" type="number" inputmode="numeric" min="0" max="120" />
-      </div>
+    <!-- 分十年页 -->
+    <div class="decade-row">
+      <button
+        v-for="d in decades" :key="d" type="button"
+        :class="['dec-btn', activeDecade === d ? 'active' : '']"
+        @click="switchDecade(d)"
+      >{{ d }}-{{ d + 9 }}岁</button>
     </div>
 
-    <p class="muted count">共 {{ filtered.length }} 年</p>
+    <p class="muted count">本十年共 {{ pageEntries.length }} 年（全部 {{ entries.length }} 年）</p>
 
     <div class="ln-list">
-      <div v-for="e in filtered" :key="e.year" class="ln-item">
+      <div v-for="e in pageEntries" :key="e.year" class="ln-item">
         <div class="ln-head">
           <span class="ln-year">{{ e.year }} 年</span>
           <span class="ln-age">{{ e.age }} 岁</span>
@@ -31,9 +28,8 @@
         </div>
         <div v-if="e.structureHint" class="ln-hint">{{ e.structureHint }}</div>
         <div v-if="e.clashHarmonyHint" class="ln-hint clash">{{ e.clashHarmonyHint }}</div>
-        <div class="ln-plain">
-          {{ e.plainReading ?? neutralReading(e) }}
-        </div>
+        <div v-if="e.plainReading" class="ln-plain">{{ e.plainReading }}</div>
+        <div v-else class="ln-plain">{{ neutralReading(e) }}</div>
       </div>
     </div>
   </div>
@@ -44,20 +40,35 @@ import { ref, computed } from 'vue'
 import type { LiuNianEntry } from '../../engine/fortune'
 
 const props = defineProps<{ entries: LiuNianEntry[] }>()
+const emit = defineEmits<{
+  (e: 'decade', decadeStart: number): void
+}>()
 
-const fromAge = ref<number>(0)
-const toAge = ref<number>(30)
+/** 所有出现过的十年起点（0,10,20...） */
+const decades = computed<number[]>(() => {
+  const set = new Set<number>()
+  for (const e of props.entries) {
+    set.add(Math.floor(e.age / 10) * 10)
+  }
+  return Array.from(set).sort((a, b) => a - b)
+})
 
-const filtered = computed(() => {
-  const lo = Number.isFinite(fromAge.value) ? fromAge.value : 0
-  const hi = Number.isFinite(toAge.value) ? toAge.value : 120
+const activeDecade = ref<number>(0)
+
+const pageEntries = computed(() => {
+  const lo = activeDecade.value
+  const hi = lo + 9
   return props.entries.filter((e) => e.age >= lo && e.age <= hi)
 })
 
+function switchDecade(d: number) {
+  activeDecade.value = d
+  // 通知父组件按需扩展流年计算范围
+  emit('decade', d)
+}
+
 /**
- * Oraculum 项目规范的中性白话：
- * 不预测确定命运，只提示"这一年在传统记号里是什么干支"，
- * 把判断权交还给现实处境与个人选择。
+ * 中性白话（无 plainReading 时兜底）
  */
 function neutralReading(e: LiuNianEntry): string {
   return `传统记号：流年 ${e.liuNianGanzhi}${e.daYunGanzhi ? `，行 ${e.daYunGanzhi} 大运` : ''}。` +
@@ -66,12 +77,16 @@ function neutralReading(e: LiuNianEntry): string {
 </script>
 
 <style scoped>
-.filter {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 10px 0 4px;
+.decade-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px;
 }
+.dec-btn {
+  border: 1px solid var(--line);
+  background: transparent; color: var(--text);
+  padding: 5px 10px; font-size: 14px; cursor: pointer;
+  border-radius: 8px;
+}
+.dec-btn.active { background: var(--accent); color: var(--bg); }
 .count { margin: 4px 0 10px; }
 .ln-list { display: flex; flex-direction: column; gap: 10px; }
 .ln-item {

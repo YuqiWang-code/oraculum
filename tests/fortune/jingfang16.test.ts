@@ -17,7 +17,8 @@ import {
   getPalaceBaseLines,
   SOURCE_LAYER_NOTES,
   SIXTEEN_TRANSFORM_SOURCE_NOTE,
-  NO_AGE_MAPPING_NOTE
+  NO_AGE_MAPPING_NOTE,
+  buildStepReadings
 } from '../../src/engine/fortune'
 import type { SixteenTransformResult, TransformStep } from '../../src/engine/fortune'
 
@@ -191,6 +192,74 @@ describe('来源可追溯（常量存在性）', () => {
       expect(s.lines.length).toBe(6)
       expect(typeof s.hexagramName).toBe('string')
       expect(typeof s.kingWen).toBe('number')
+    }
+  })
+})
+
+describe('归魂翻爻位（不手写）', () => {
+  it('21. 归魂（index 9）flippedLine = 1（初爻），非"三爻再变"', () => {
+    const r = transformSixteen(getPalaceBaseLines('乾')!)
+    const guihun = r.steps[9]
+    expect(guihun.stage.name).toBe('归魂')
+    expect(guihun.flippedLine).toBe(1)
+  })
+
+  it('22. 归魂 modernNote 不再手写具体爻位', () => {
+    const guihun = SIXTEEN_STAGES.find((s) => s.name === '归魂')!
+    expect(guihun.modernNote).not.toContain('三爻再变')
+  })
+})
+
+describe('buildStepReadings', () => {
+  it('23. 17 步 reading 全部非空', () => {
+    const r = transformSixteen(getPalaceBaseLines('乾')!)
+    const readings = buildStepReadings(r)
+    expect(readings.length).toBe(17)
+    for (const rd of readings) {
+      expect(rd.transition).toBeTruthy()
+      expect(rd.stageMeaning).toBeTruthy()
+      expect(rd.hexagramMeaning).toBeTruthy()
+      expect(rd.structuralChange).toBeTruthy()
+    }
+  })
+
+  it('24. 每步 hexagramMeaning 来自实际当前卦', () => {
+    const r = transformSixteen(getPalaceBaseLines('乾')!)
+    const readings = buildStepReadings(r)
+    for (let i = 0; i < readings.length; i++) {
+      // transition 的末段应为当前卦名
+      expect(readings[i].transition).toContain(r.steps[i].hexagramName)
+    }
+  })
+
+  it('25. 不同宫同 index 的解读不完全相同（随卦变化）', () => {
+    const qian = buildStepReadings(transformSixteen(getPalaceBaseLines('乾')!))
+    const kun = buildStepReadings(transformSixteen(getPalaceBaseLines('坤')!))
+    // 至少 transition 或 hexagramMeaning 有差异
+    const diff = qian.filter((q, i) => q.hexagramMeaning !== kun[i].hexagramMeaning)
+    expect(diff.length).toBeGreaterThan(0)
+  })
+
+  it('26. structuralChange 描述阳转阴/阴转阳', () => {
+    const r = transformSixteen(getPalaceBaseLines('乾')!)
+    const readings = buildStepReadings(r)
+    // 乾宫第一步（姤）是初爻由阳转阴
+    expect(readings[1].structuralChange).toContain('阳')
+    expect(readings[1].structuralChange).toContain('阴')
+  })
+})
+
+describe('历史术语保护（reading 层）', () => {
+  it('27. 所有 reading 不含死亡/重病预测', () => {
+    const banned = ['你会死亡', '某年去世', '必患重病', '必死']
+    for (const palace of EIGHT_PALACES) {
+      const readings = buildStepReadings(transformSixteen(getPalaceBaseLines(palace)!))
+      for (const rd of readings) {
+        const text = rd.hexagramMeaning + rd.stageMeaning
+        for (const b of banned) {
+          expect(text).not.toContain(b)
+        }
+      }
     }
   })
 })

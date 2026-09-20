@@ -69,7 +69,7 @@ export const SIXTEEN_STAGES: SixteenStage[] = [
     index: 9,
     name: '归魂',
     sourceLayer: 'jingfang-eight-palace',
-    modernNote: '三爻再变，代表变化后回归根本，事物开始向原有结构收敛。'
+    modernNote: '代表变化后回归根本，事物开始向原有结构收敛。本次翻动的爻位由程序按翻爻序列动态给出。'
   },
   {
     index: 10,

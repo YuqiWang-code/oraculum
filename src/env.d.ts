@@ -10,6 +10,8 @@ declare module '*.vue' {
 declare module 'lunar-javascript' {
   /** 八字（EightChar）——仅声明引擎用到的方法 */
   export class EightChar {
+    setSect(sect: number): void
+    getSect(): number
     getYearGan(): string
     getYearZhi(): string
     getMonthGan(): string
@@ -18,8 +20,7 @@ declare module 'lunar-javascript' {
     getDayZhi(): string
     getTimeGan(): string
     getTimeZhi(): string
-    getYun(gender: number): Yun
-    getWuXing(): Record<string, number>
+    getYun(gender: number, sect?: number): Yun
     getYearNaYin(): string
     getMonthNaYin(): string
     getDayNaYin(): string
@@ -36,16 +37,27 @@ declare module 'lunar-javascript' {
     getGanZhi(): string
     getStartAge(): number
     getEndAge(): number
-    getLiuNian(): LiuNian[]
+    getIndex(): number
+    getLiuNian(n?: number): LiuNian[]
   }
   /** 起运（Yun） */
   export class Yun {
     getStartYear(): number
+    getStartMonth(): number
+    getStartDay(): number
+    getStartHour(): number
     getStartSolar(): Solar
-    getDaYun(): DaYun[]
+    isForward(): boolean
+    getDaYun(n?: number): DaYun[]
+  }
+  /** 农历年（用于闰月查询） */
+  export class LunarYear {
+    static fromYear(year: number): LunarYear
+    getLeapMonth(): number
   }
   export class Lunar {
     static fromYmd(year: number, month: number, day: number): Lunar
+    static fromYmdHms(year: number, month: number, day: number, hour: number, minute: number, second: number): Lunar
     getYearInGanZhi(): string
     getMonthInGanZhi(): string
     getDayInGanZhi(): string
@@ -69,6 +81,10 @@ declare module 'lunar-javascript' {
     getYear(): number
     getMonth(): number
     getDay(): number
+    nextYear(n: number): Solar
+    nextMonth(n: number): Solar
+    next(n: number): Solar
+    nextHour(n: number): Solar
     toYmd(): string
     toYmdHms(): string
   }

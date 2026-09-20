@@ -1,5 +1,5 @@
 // 全局规则版本：算法或数据变更时必须递增，历史记录据此可重现
-export const APP_VERSION = '4.3.0'
+export const APP_VERSION = '4.4.0'
 export const RULESET_VERSION = '4.1.0'
 export const DATASET_VERSION = '3.0.0'
 export const LOCAL_KNOWLEDGE_VERSION = '1.2.0'

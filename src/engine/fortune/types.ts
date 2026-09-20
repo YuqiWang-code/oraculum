@@ -1,6 +1,11 @@
 /**
  * 运势模块——类型定义
- * v4.3 新增：八字大运流年 + 京房八宫 / 《易隐》十六变研究层。
+ * v4.4 重构：
+ * - 统一出生历法 normalize（公历/农历/闰月）
+ * - 大运顺逆以 yun.isForward() 为唯一事实源
+ * - 诚实精度（year_month 不伪造日=1）
+ * - 晚子时日界 sect 显式记录
+ * - 运势解释引擎（十神/地支冲合 evidence 闭环）
  * 纯本地、离线、确定性。不引入模型权重。
  */
 
@@ -25,6 +30,16 @@ export interface BirthProfile {
   traditionalGenderParam: 'male' | 'female' | 'unspecified'
   /** 是否保存本地档案（默认 false，只有用户主动勾选才保存） */
   saveLocally: boolean
+  /** 农历：本个月是否为闰月（仅 calendarType=lunar 时有意义） */
+  lunarLeapMonth?: boolean
+  /** 时间精度：有 minute='minute'，只有 hour='hour' */
+  timePrecision?: 'hour' | 'minute'
+  /**
+   * 八字日界（晚子时规则）：
+   * - 2：00:00 换日，23:00-23:59 日柱按当天（默认）
+   * - 1：23:00 子初换日，晚子时按次日
+   */
+  daySect?: 1 | 2
 }
 
 /** 规则来源层——所有运势规则都必须标注来源 */
@@ -84,6 +99,26 @@ export interface LiuNianEntry {
   sourceLayer: FortuneSourceLayer
 }
 
+/** 起运信息（完整） */
+export interface QiYunInfo {
+  /** 起运年龄（虚岁） */
+  startAge: number
+  /** 出生后 X 年起运 */
+  startYears: number
+  /** 出生后 X 个月起运（配合 startYears） */
+  startMonths: number
+  /** 出生后 X 天起运（配合 startYears/startMonths） */
+  startDays: number
+  /** 出生后 X 个时辰起运（配合前面） */
+  startHours: number
+  /** 起运公历日期（YYYY-MM-DD） */
+  startDate: string
+  /** 排列方向：顺排 / 逆排 */
+  direction: '顺' | '逆'
+  /** 采用的晚子时日界 sect */
+  yunSect: 1 | 2
+}
+
 /** 八字概览 */
 export interface BaziOverview {
   pillars: BaziPillars
@@ -91,17 +126,17 @@ export interface BaziOverview {
   /** 精度说明文字，如"仅展示年月二柱" */
   precisionNote: string
   /** 起运信息（仅 exact_time 且 gender 非 unspecified） */
-  qiYun?: {
-    startAge: number
-    startDate: string
-    direction: '顺' | '逆'
-  }
-  /** 五行统计 */
+  qiYun?: QiYunInfo
+  /** 五行统计（仅表层八字干支计数） */
   wuxingCount?: Record<string, number>
   /** 纳音 */
   nayin?: { year: string; month: string; day?: string; hour?: string }
+  /** 采用的晚子时日界 sect */
+  daySect?: 1 | 2
+  /** 日界规则说明文字 */
+  dayBoundaryLabel?: string
 }
 
 /** 运势独立版本号 */
-export const FORTUNE_RULESET_VERSION = '1.0.0'
-export const FORTUNE_DATASET_VERSION = '1.0.0'
+export const FORTUNE_RULESET_VERSION = '2.0.0'
+export const FORTUNE_DATASET_VERSION = '1.1.0'

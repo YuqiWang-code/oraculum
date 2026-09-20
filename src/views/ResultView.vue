@@ -47,6 +47,11 @@
     </div>
 
     <!-- 3. 现实白话解读（新增，长辈友好，默认展开） -->
+    <div class="card rw-card" v-if="elderLoading && !realWorldReading" style="border-color:var(--accent)">
+      <h2>现实白话解读</h2>
+      <p class="muted" style="margin:8px 0">正在整理本地白话解读…</p>
+    </div>
+
     <div class="card rw-card" v-if="realWorldReading" style="border-color:var(--accent)">
       <h2>现实白话解读</h2>
       <div class="rw-headline">{{ realWorldReading.headline }}</div>
@@ -349,7 +354,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, shallowRef, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '../stores/app'
 import HexagramDiagram from '../components/hexagram/HexagramDiagram.vue'
@@ -361,6 +366,7 @@ import { interpretMeihuaPlain, interpretLiuyaoPlain } from '../engine/plainInter
 import type { PlainInterpretation } from '../engine/plainInterpretation'
 import { interpretMeihuaRealWorld, interpretLiuyaoRealWorld } from '../engine/realWorldInterpretation'
 import type { RealWorldPlainReading } from '../engine/realWorldInterpretation'
+import { loadElderFriendlyBatches } from '../local-data'
 import type { DivinationRecord } from '../engine/orchestrator'
 import type { RatingBucket } from '../types'
 
@@ -436,31 +442,70 @@ const plain = computed<PlainInterpretation | undefined>(() => {
 
 /**
  * 「现实白话解读」——v4.3 长辈友好层。
- * 优先用记录上已持久化的 realWorldReading；旧记录就地生成（只读已有结果，不重起卦、不改评分）。
+ * v4.4：长辈友好数据已改为动态分批加载。本卦/互卦/变卦所需批次就绪后再生成；
+ * 旧记录优先用已持久化的 realWorldReading，否则就地生成（只读，不重起卦、不改评分）。
  */
-const realWorldReading = computed<RealWorldPlainReading | undefined>(() => {
-  const r = rec.value
-  if (!r) return undefined
-  if (r.realWorldReading) return r.realWorldReading
-  try {
-    if (r.meihua) {
-      return interpretMeihuaRealWorld(r.input.question, r.input.category, r.meihua, r.rating)
-    }
-    if (r.liuyao) {
-      return interpretLiuyaoRealWorld(
-        r.input.question,
-        r.input.category,
-        r.liuyao,
-        r.rating,
-        r.calendar.monthBranch,
-        r.calendar.dayGanzhi
-      )
-    }
-  } catch {
-    return undefined
+const elderLoading = ref(false)
+const realWorldReading = shallowRef<RealWorldPlainReading | undefined>(undefined)
+
+/** 收集记录中涉及的所有 kingWen（本/互/变卦），用于按需加载长辈友好批次 */
+function collectKingWens(r: RecordWithRealWorld): number[] {
+  const kws: number[] = []
+  if (r.meihua) {
+    kws.push(r.meihua.ben.kingWen, r.meihua.hu.kingWen, r.meihua.bian.kingWen)
   }
-  return undefined
-})
+  if (r.liuyao) {
+    kws.push(r.liuyao.hexagram.kingWen)
+    if (r.liuyao.changedHexagram) kws.push(r.liuyao.changedHexagram.kingWen)
+  }
+  return kws
+}
+
+async function loadRealWorldForRecord(r: RecordWithRealWorld): Promise<void> {
+  // 已持久化的现实白话直接用，不必等 elder 批次
+  if (r.realWorldReading) {
+    realWorldReading.value = r.realWorldReading
+  }
+  elderLoading.value = true
+  try {
+    await loadElderFriendlyBatches(collectKingWens(r))
+    if (r.realWorldReading) {
+      realWorldReading.value = r.realWorldReading
+      return
+    }
+    try {
+      if (r.meihua) {
+        realWorldReading.value = interpretMeihuaRealWorld(r.input.question, r.input.category, r.meihua, r.rating)
+      } else if (r.liuyao) {
+        realWorldReading.value = interpretLiuyaoRealWorld(
+          r.input.question,
+          r.input.category,
+          r.liuyao,
+          r.rating,
+          r.calendar.monthBranch,
+          r.calendar.dayGanzhi
+        )
+      }
+    } catch {
+      realWorldReading.value = undefined
+    }
+  } finally {
+    elderLoading.value = false
+  }
+}
+
+watch(
+  rec,
+  (r) => {
+    if (!r) {
+      realWorldReading.value = undefined
+      return
+    }
+    if (r.realWorldReading) realWorldReading.value = r.realWorldReading
+    void loadRealWorldForRecord(r)
+  },
+  { immediate: true }
+)
 
 /**
  * 阅读模式：simple（默认）/ research。
@@ -546,22 +591,57 @@ function copyText() {
   if (!rec.value) return
   const r = rec.value
   const d = detailed.value
-  const txt = [
-    `【智能推理与预测】`,
-    `所问：${r.input.question}（${r.input.category}）`,
-    `卦：${r.meihua?.ben.name ?? r.liuyao?.hexagram.name} 评分：${r.rating.score}（${r.rating.label}）`,
-    `历法：${r.calendar.lunarDate} ${r.calendar.dayGanzhi}日`,
-    '',
-    d ? `【核心解读】\n${d.overview}\n\n${d.base.title}\n${d.base.plainExplanation}\n` : '',
-    d?.mutual ? `互卦：${d.mutual.title}\n${d.mutual.plainExplanation}\n` : '',
-    d?.changed ? `变卦：${d.changed.title}\n${d.changed.plainExplanation}\n` : '',
-    d ? `\n【综合】\n${d.synthesis}\n` : '',
-    d && d.favorable.length ? `\n有利：${d.favorable.join('；')}` : '',
-    d && d.constraints.length ? `\n制约：${d.constraints.join('；')}` : '',
-    d && d.actionTips.length ? `\n提示：${d.actionTips.join('；')}` : '',
-    '\n免责：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。'
-  ].join('\n')
-  navigator.clipboard.writeText(txt).then(() => alert('已复制'))
+  const pw = plain.value
+  const rw = realWorldReading.value
+
+  const parts: string[] = []
+  parts.push(`【智能推理与预测】`)
+  parts.push(`所问：${r.input.question}（${r.input.category}）`)
+  parts.push(`卦：${r.meihua?.ben.name ?? r.liuyao?.hexagram.name} 评分：${r.rating.score}（${r.rating.label}）`)
+  parts.push(`历法：${r.calendar.lunarDate} ${r.calendar.dayGanzhi}日`)
+  parts.push('')
+
+  // 最前面：一句话看懂
+  if (pw?.oneLiner) {
+    parts.push(`【一句话看懂】`)
+    parts.push(pw.oneLiner)
+    parts.push('')
+  }
+
+  // 现实白话：现在 / 为什么 / 怎么做 / 注意
+  if (rw) {
+    parts.push(`【现实白话】`)
+    if (rw.headline) parts.push(rw.headline)
+    if (rw.currentSituation) parts.push(`现在：${rw.currentSituation}`)
+    const whyLines: string[] = []
+    if (rw.why.base) whyLines.push(`本卦 ${rw.why.base}`)
+    for (const m of rw.why.moving) whyLines.push(`动爻 ${m}`)
+    if (rw.why.mutual) whyLines.push(`互卦 ${rw.why.mutual}`)
+    if (rw.why.changed) whyLines.push(`变卦 ${rw.why.changed}`)
+    if (rw.why.bodyUse) whyLines.push(`体用 ${rw.why.bodyUse}`)
+    if (rw.why.rating) whyLines.push(`评分 ${rw.why.rating}`)
+    if (whyLines.length) parts.push(`为什么：${whyLines.join('；')}`)
+    if (rw.howToAct.length) parts.push(`怎么做：${rw.howToAct.join('；')}`)
+    const watch = [...rw.watchOutFor]
+    if (rw.realityGuard) watch.push(rw.realityGuard)
+    if (watch.length) parts.push(`注意：${watch.join('；')}`)
+    parts.push('')
+  }
+
+  // 传统详细内容放后面
+  if (d) {
+    parts.push(`【传统解读】`)
+    parts.push(`【核心解读】\n${d.overview}\n\n${d.base.title}\n${d.base.plainExplanation}`)
+    if (d.mutual) parts.push(`互卦：${d.mutual.title}\n${d.mutual.plainExplanation}`)
+    if (d.changed) parts.push(`变卦：${d.changed.title}\n${d.changed.plainExplanation}`)
+    parts.push(`\n【综合】\n${d.synthesis}`)
+    if (d.favorable.length) parts.push(`有利：${d.favorable.join('；')}`)
+    if (d.constraints.length) parts.push(`制约：${d.constraints.join('；')}`)
+    if (d.actionTips.length) parts.push(`提示：${d.actionTips.join('；')}`)
+  }
+
+  parts.push('\n免责：传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。')
+  navigator.clipboard.writeText(parts.join('\n')).then(() => alert('已复制'))
 }
 </script>
 

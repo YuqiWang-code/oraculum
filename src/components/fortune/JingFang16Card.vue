@@ -7,13 +7,37 @@
 
     <!-- 来源选择 -->
     <div class="src-group">
-      <label class="src-opt" :class="{ disabled: false }">
+      <label class="src-opt">
         <input type="radio" value="a" v-model="sourceMode" class="src-input" />
         <span>
-          <strong>A. 身命卦研究模式</strong>
-          <span class="muted sub">复用现有问卦起卦方式得到一卦，再识别它属于哪一宫。本卡片不自动起卦；请到"问卦"页起卦后，记下所得卦象，再在 C 中手动选宫。</span>
+          <strong>A. 身命卦研究模式（本机历史问卦）</strong>
+          <span class="muted sub">
+            从本机历史问卦记录中选一条，读取它的卦与所属宫；
+            <em>不会自动用最近一次</em>，必须由你点"以此作为研究身命卦"才进入十六变。
+          </span>
         </span>
       </label>
+
+      <!-- Source A 记录列表 -->
+      <div v-if="sourceMode === 'a'" class="a-panel">
+        <button class="btn small" @click="loadHistory">加载本机历史记录</button>
+        <div v-if="historyError" class="muted warn-inline">{{ historyError }}</div>
+        <div v-if="historyRecords.length" class="a-list">
+          <div
+            v-for="r in historyRecords" :key="r.id"
+            :class="['a-item', selectedHistoryId === r.id ? 'sel' : '']"
+            @click="selectedHistoryId = r.id"
+          >
+            <div class="a-q">{{ r.question || '（无问题）' }}</div>
+            <div class="muted a-meta">{{ formatTime(r.createdAt) }} · 卦：{{ r.hexagramName || '未知' }} · 宫：{{ recordPalace(r) || '未知' }}</div>
+          </div>
+        </div>
+        <p v-else-if="!historyLoaded" class="muted tip">点击上方按钮加载历史问卦记录。</p>
+        <button
+          class="btn" :disabled="!selectedHistoryPalace"
+          @click="runFromHistory"
+        >以此作为研究身命卦</button>
+      </div>
 
       <label class="src-opt" :class="{ disabled: !canUseTime }">
         <input type="radio" value="b" v-model="sourceMode" class="src-input" :disabled="!canUseTime" />
@@ -43,6 +67,17 @@
       </div>
     </div>
 
+    <!-- 来源链（Source B / Source A） -->
+    <div v-if="sourceChain" class="source-note">
+      <h3>来源链</h3>
+      <div class="chain-row"><span class="chain-label">起得卦</span><strong>{{ sourceChain.hexagramName }}</strong></div>
+      <div class="chain-row"><span class="chain-label">所属宫</span><strong>{{ sourceChain.palace }}宫</strong></div>
+      <div class="chain-row"><span class="chain-label">十六变基准</span><strong>{{ sourceChain.palace }}宫纯卦</strong></div>
+      <div v-if="sourceChain.kind === 'b'" class="muted note-box">
+        本结果由"出生时刻时间起卦"实验而来。<em class="warn-inline">这是 Oraculum 项目规范 / 实验，不是《京氏易传》明确记载的出生本命卦算法。</em>
+      </div>
+    </div>
+
     <!-- 来源说明 -->
     <div v-if="result" class="source-note">
       <h3>基准卦</h3>
@@ -54,22 +89,30 @@
       <div class="muted note-box">{{ NO_AGE_MAPPING_NOTE }}</div>
     </div>
 
-    <!-- 十六变序列 -->
-    <div v-if="result" class="steps">
+    <!-- 十六变序列（默认折叠） -->
+    <div v-if="readings.length" class="steps">
       <div
-        v-for="(s, i) in result.steps" :key="i"
+        v-for="r in readings" :key="r.index"
         class="step"
-        :class="{ historic: isHistoric(s.stage.name) }"
+        :class="{ open: openSteps.has(r.index), historic: isHistoric(stageName(r.index)) }"
       >
-        <div class="step-head">
-          <span class="step-index">{{ s.stage.index }}</span>
-          <span class="step-name">{{ s.stage.name }}</span>
-          <span class="step-hex">{{ s.hexagramName }}</span>
-          <span class="layer-tag">{{ layerLabel(s.stage.sourceLayer) }}</span>
+        <div class="step-head" @click="toggleStep(r.index)">
+          <span class="step-index">{{ r.index }}</span>
+          <span class="step-name">{{ stageName(r.index) }}</span>
+          <span class="step-hex">{{ stepHexagram(r.index) }}</span>
+          <span class="step-trans">{{ r.transition }}</span>
+          <span class="layer-tag">{{ layerLabel(stepLayer(r.index)) }}</span>
+          <span class="toggle">{{ openSteps.has(r.index) ? '收起' : '展开' }}</span>
         </div>
-        <div class="step-note">{{ s.stage.modernNote }}</div>
-        <div v-if="isHistoric(s.stage.name)" class="historic-warn">
-          {{ HISTORICAL_TERM_DISCLAIMER }}
+        <div v-if="openSteps.has(r.index)" class="step-body">
+          <div class="sb-row"><span class="sb-label">本次翻动</span>{{ r.flippedLine > 0 ? `第${r.flippedLine}爻` : '无' }}</div>
+          <div class="sb-row"><span class="sb-label">结构变化</span>{{ r.structuralChange }}</div>
+          <div class="sb-row"><span class="sb-label">阶段意思</span>{{ r.stageMeaning }}</div>
+          <div class="sb-row"><span class="sb-label">卦意思</span>{{ r.hexagramMeaning }}</div>
+          <div class="sb-row"><span class="sb-label">来源层</span>{{ layerLabel(r.sourceNote) }}</div>
+          <div v-if="isHistoric(stageName(r.index))" class="historic-warn">
+            {{ HISTORICAL_TERM_DISCLAIMER }}
+          </div>
         </div>
       </div>
     </div>
@@ -82,8 +125,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { Lunar } from 'lunar-javascript'
-import type { BirthProfile, SixteenTransformResult } from '../../engine/fortune'
+import type { BirthProfile, SixteenTransformResult, JingFangStepReading } from '../../engine/fortune'
 import {
   transformSixteen,
   getPalaceBaseLines,
@@ -91,10 +133,15 @@ import {
   HISTORICAL_TERMS,
   SIXTEEN_TRANSFORM_SOURCE_NOTE,
   NO_AGE_MAPPING_NOTE,
-  SOURCE_LAYER_NOTES
+  SOURCE_LAYER_NOTES,
+  buildStepReadings,
+  SIXTEEN_STAGES
 } from '../../engine/fortune'
+import { normalizeBirthProfile } from '../../engine/fortune'
 import { buildCalendarContext } from '../../engine/calendar/calendarEngine'
 import { castMeihuaByTime } from '../../engine/meihua/castByTime'
+import { listHistory } from '../../db'
+import type { HistoryRecord } from '../../db/schema'
 
 const props = defineProps<{ profile: BirthProfile | null }>()
 
@@ -103,12 +150,26 @@ const PALACES = ['乾', '兑', '离', '震', '巽', '坎', '艮', '坤'] as cons
 const sourceMode = ref<'none' | 'a' | 'b' | 'c'>('none')
 const selectedPalace = ref<string>('乾')
 const result = ref<SixteenTransformResult | null>(null)
+const readings = ref<JingFangStepReading[]>([])
+const openSteps = ref<Set<number>>(new Set())
+
+interface SourceChain {
+  kind: 'a' | 'b'
+  hexagramName: string
+  palace: string
+}
+const sourceChain = ref<SourceChain | null>(null)
+
+/** Source A 历史记录 */
+const historyRecords = ref<HistoryRecord[]>([])
+const historyLoaded = ref(false)
+const historyError = ref('')
+const selectedHistoryId = ref<string>('')
 
 const canUseTime = computed(
   () => !!props.profile && props.profile.precision === 'exact_time'
 )
 
-/** 把"某时区墙上时钟"转成对应 UTC instant，供 buildCalendarContext 还原墙上时间。 */
 function wallClockToInstant(
   y: number, m: number, d: number, h: number, min: number, tz: string
 ): Date {
@@ -124,49 +185,100 @@ function wallClockToInstant(
   return new Date(utcGuess - offset)
 }
 
-function runFromBase(baseLines: [0 | 1, 0 | 1, 0 | 1, 0 | 1, 0 | 1, 0 | 1]) {
-  result.value = transformSixteen(baseLines)
+function runFromBase(palace: string, hexagramName: string, kind: 'a' | 'b') {
+  const lines = getPalaceBaseLines(palace)
+  if (!lines) return
+  result.value = transformSixteen(lines)
+  readings.value = buildStepReadings(result.value)
+  openSteps.value = new Set([0])
+  sourceChain.value = { kind, hexagramName, palace }
 }
 
-function computeForSource() {
+function stageName(index: number): string {
+  return SIXTEEN_STAGES[index]?.name ?? ''
+}
+function stepHexagram(index: number): string {
+  return readings.value[index] ? readings.value[index].transition.split(' → ').pop() ?? '' : ''
+}
+function stepLayer(index: number): string {
+  return SIXTEEN_STAGES[index]?.sourceLayer ?? ''
+}
+
+/** Source B */
+function computeSourceB() {
   result.value = null
-  if (sourceMode.value === 'c') {
-    const lines = getPalaceBaseLines(selectedPalace.value)
-    if (lines) runFromBase(lines)
-    return
-  }
-  if (sourceMode.value === 'b' && canUseTime.value && props.profile) {
-    const p = props.profile
-    let y = p.year, m = p.month, d = p.day ?? 1
-    // 农历转公历（日期部分）
-    if (p.calendarType === 'lunar') {
-      try {
-        const lunar = Lunar.fromYmd(y, m, d)
-        const solar = lunar.getSolar()
-        y = solar.getYear(); m = solar.getMonth(); d = solar.getDay()
-      } catch {
-        // 转换失败则放弃 B
-        return
-      }
-    }
+  readings.value = []
+  sourceChain.value = null
+  const p = props.profile
+  if (!p) return
+  try {
+    // 复用统一 normalize helper
+    const norm = normalizeBirthProfile(p)
+    const { year, month, day } = norm.wallClock
     const h = p.hour ?? 0
     const min = p.minute ?? 0
-    try {
-      const instant = wallClockToInstant(y, m, d, h, min, p.timezone)
-      const cal = buildCalendarContext({ date: instant, timezone: p.timezone, dayBoundaryRule: 'midnight' })
-      const mh = castMeihuaByTime(cal)
-      const lines = getPalaceBaseLines(mh.ben.palace)
-      if (lines) runFromBase(lines)
-    } catch {
-      result.value = null
-    }
-    return
+    const instant = wallClockToInstant(year, month, day ?? 1, h, min, p.timezone)
+    const cal = buildCalendarContext({ date: instant, timezone: p.timezone, dayBoundaryRule: 'midnight' })
+    const mh = castMeihuaByTime(cal)
+    const palace = mh.ben.palace
+    runFromBase(palace, mh.ben.name, 'b')
+  } catch {
+    result.value = null
+    readings.value = []
   }
-  // A：仅提示，不自动计算
-  result.value = null
 }
 
-watch([sourceMode, selectedPalace], computeForSource)
+/** Source A：加载历史 */
+async function loadHistory() {
+  historyError.value = ''
+  try {
+    historyRecords.value = await listHistory(50)
+    historyLoaded.value = true
+  } catch (e) {
+    historyError.value = e instanceof Error ? e.message : String(e)
+  }
+}
+
+function recordPalace(r: HistoryRecord): string {
+  // 六爻优先，其次梅花
+  const liuYaoPalace = (r as unknown as { liuyao?: { palace?: string } }).liuyao?.palace
+  if (liuYaoPalace) return liuYaoPalace
+  const meiHuaBen = (r as unknown as { meihua?: { ben?: { palace?: string } } }).meihua?.ben?.palace
+  return meiHuaBen ?? ''
+}
+
+const selectedHistoryPalace = computed(() => {
+  const r = historyRecords.value.find((x) => x.id === selectedHistoryId.value)
+  if (!r) return ''
+  return recordPalace(r)
+})
+
+function runFromHistory() {
+  const r = historyRecords.value.find((x) => x.id === selectedHistoryId.value)
+  if (!r) return
+  const palace = recordPalace(r)
+  if (!palace) {
+    historyError.value = '该记录没有可用的宫位信息。'
+    return
+  }
+  runFromBase(palace, r.hexagramName || palace, 'a')
+}
+
+function formatTime(iso: string): string {
+  try {
+    const d = new Date(iso)
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  } catch {
+    return iso
+  }
+}
+
+function toggleStep(index: number) {
+  const next = new Set(openSteps.value)
+  if (next.has(index)) next.delete(index)
+  else next.add(index)
+  openSteps.value = next
+}
 
 function isHistoric(name: string): boolean {
   return HISTORICAL_TERMS.includes(name)
@@ -175,6 +287,33 @@ function isHistoric(name: string): boolean {
 function layerLabel(layer: string): string {
   return SOURCE_LAYER_NOTES[layer]?.label ?? layer
 }
+
+watch(sourceMode, (mode) => {
+  result.value = null
+  readings.value = []
+  sourceChain.value = null
+  if (mode === 'b') computeSourceB()
+  else if (mode === 'c') {
+    // 手动选宫：立即用当前选中的宫计算
+    const lines = getPalaceBaseLines(selectedPalace.value)
+    if (lines) {
+      result.value = transformSixteen(lines)
+      readings.value = buildStepReadings(result.value)
+      openSteps.value = new Set([0])
+    }
+  }
+})
+
+watch(selectedPalace, () => {
+  if (sourceMode.value === 'c') {
+    const lines = getPalaceBaseLines(selectedPalace.value)
+    if (lines) {
+      result.value = transformSixteen(lines)
+      readings.value = buildStepReadings(result.value)
+      openSteps.value = new Set([0])
+    }
+  }
+})
 </script>
 
 <style scoped>
@@ -197,8 +336,20 @@ function layerLabel(layer: string): string {
 .tip { margin: -4px 0 8px; }
 .warn-inline { color: var(--bad); font-style: normal; }
 .c-row { margin: 4px 0 8px; }
+.a-panel { margin: 0 0 8px; padding: 8px; border: 1px dashed var(--line); border-radius: 10px; }
+.a-list { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; max-height: 240px; overflow-y: auto; }
+.a-item {
+  padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px;
+  cursor: pointer; background: var(--bg);
+}
+.a-item.sel { border-color: var(--accent); }
+.a-q { font-size: 15px; }
+.a-meta { font-size: 12px; margin-top: 2px; }
+
 .source-note { margin: 12px 0; }
 .source-note h3 { margin: 0 0 6px; font-size: 16px; }
+.chain-row { display: flex; gap: 10px; padding: 3px 0; font-size: 15px; }
+.chain-label { display: inline-block; min-width: 5em; color: var(--muted); }
 .base-row {
   display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;
 }
@@ -209,16 +360,16 @@ function layerLabel(layer: string): string {
   margin: 6px 0;
   line-height: 1.7;
 }
-.steps { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.steps { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
 .step {
   border: 1px solid var(--line);
   border-radius: 10px;
-  padding: 8px 10px;
   background: var(--bg);
 }
 .step.historic { border-color: var(--flat); }
 .step-head {
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 10px; cursor: pointer;
 }
 .step-index {
   display: inline-flex; align-items: center; justify-content: center;
@@ -227,15 +378,18 @@ function layerLabel(layer: string): string {
 }
 .step-name { font-size: 16px; font-weight: 700; }
 .step-hex { font-size: 15px; color: var(--accent); }
+.step-trans { font-size: 13px; color: var(--muted); }
 .layer-tag {
-  margin-left: auto;
   font-size: 11px;
   padding: 1px 6px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--muted);
 }
-.step-note { font-size: 15px; line-height: 1.7; margin-top: 4px; }
+.toggle { margin-left: auto; font-size: 12px; color: var(--accent); }
+.step-body { padding: 4px 10px 10px; border-top: 1px dashed var(--line); }
+.sb-row { font-size: 14px; line-height: 1.7; padding: 2px 0; }
+.sb-label { display: inline-block; min-width: 5em; color: var(--muted); }
 .historic-warn {
   margin-top: 6px;
   padding: 6px 8px;
@@ -245,4 +399,5 @@ function layerLabel(layer: string): string {
   font-size: 13px;
   line-height: 1.6;
 }
+.btn.small { font-size: 14px; padding: 5px 10px; }
 </style>

@@ -4,7 +4,7 @@
  *       工作黄金样例、上厕所样例、确定性、无网络、旧数据 fallback。
  * 纯本地、离线、确定性。
  */
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeAll } from 'vitest'
 import * as localData from '../../src/local-data'
 import {
   interpretMeihuaRealWorld,
@@ -16,6 +16,11 @@ import { HEXAGRAM_BY_KINGWEN } from '../../src/data/hexagrams'
 import type { MeihuaResult } from '../../src/engine/meihua/castByTime'
 import type { Rating, QuestionCategory } from '../../src/types'
 import { buildRating } from '../../src/engine/scoring/rating'
+
+/** v4.4 起 elderFriendly 改为动态分批加载；测试前预加载全部 8 批。 */
+beforeAll(async () => {
+  await localData.loadElderFriendlyBatches([1, 9, 17, 25, 33, 41, 49, 57])
+})
 
 /** score=48, label=平（50 + (-2)） */
 function pingRating(): Rating {

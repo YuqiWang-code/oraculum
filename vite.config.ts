@@ -14,7 +14,7 @@ export default defineConfig({
       manifest: {
         name: '智能推理与预测',
         short_name: '推理预测',
-        description: '传统文化研究与娱乐用问卦工具（梅花易数/六爻纳甲）',
+        description: '传统文化研究与娱乐用问卦工具（梅花易数/六爻纳甲）— 纯本地离线，运势传统结构参考',
         theme_color: '#2b3a4a',
         background_color: '#f7f5f0',
         display: 'standalone',

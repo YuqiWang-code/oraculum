@@ -36,6 +36,21 @@
       </div>
     </div>
 
+    <!-- 农历闰月选择（仅农历且该月确为闰月时显示） -->
+    <div v-if="form.calendarType === 'lunar' && leapMonth === form.month" class="field-row">
+      <label>该月类型</label>
+      <div class="segmented">
+        <button type="button" :class="['seg-btn', !form.lunarLeapMonth ? 'active' : '']"
+                @click="form.lunarLeapMonth = false">普通{{ form.month }}月</button>
+        <button type="button" :class="['seg-btn', form.lunarLeapMonth ? 'active' : '']"
+                @click="form.lunarLeapMonth = true">闰{{ form.month }}月</button>
+      </div>
+    </div>
+    <p v-if="form.calendarType === 'lunar' && form.year && form.month && leapMonth !== form.month"
+       class="muted tip">
+      {{ form.year }}年{{ leapMonthText }}。
+    </p>
+
     <!-- 日 / 时 / 分 -->
     <div class="grid-3">
       <div>
@@ -67,7 +82,19 @@
                 @click="form.traditionalGenderParam = 'unspecified'">不指定</button>
       </div>
     </div>
-    <p class="muted tip">传统大运顺逆需要选择男 / 女参数；选“不指定”时不计算精确大运与流年。</p>
+    <p class="muted tip">传统大运顺逆以出生年阴阳与男/女为准（由引擎按 yun.isForward() 计算）；选"不指定"时不计算精确大运与流年。</p>
+
+    <!-- 八字日界（晚子时） -->
+    <div class="field-row">
+      <label>八字日界</label>
+      <div class="segmented">
+        <button type="button" :class="['seg-btn', form.daySect === 2 ? 'active' : '']"
+                @click="form.daySect = 2">00:00换日</button>
+        <button type="button" :class="['seg-btn', form.daySect === 1 ? 'active' : '']"
+                @click="form.daySect = 1">23:00子初换日</button>
+      </div>
+    </div>
+    <p class="muted tip">23:00-23:59 出生时，日界规则会影响日柱归属；"00:00换日"按当天，"23:00子初换日"按次日。</p>
 
     <!-- 时区 -->
     <div>
@@ -102,11 +129,29 @@
 
 <script setup lang="ts">
 import { reactive, computed, ref } from 'vue'
+import { LunarYear } from 'lunar-javascript'
 import type { BirthProfile, BirthPrecision } from '../../engine/fortune'
 
 const emit = defineEmits<{
   (e: 'compute', profile: BirthProfile): void
 }>()
+
+/** 由 FortuneView 调用：用已保存档案填充表单 */
+function fillFromProfile(p: BirthProfile) {
+  form.calendarType = p.calendarType
+  form.year = p.year
+  form.month = p.month
+  form.day = p.day ?? null
+  form.hour = p.hour ?? null
+  form.minute = p.minute ?? null
+  form.timezone = p.timezone
+  form.traditionalGenderParam = p.traditionalGenderParam
+  form.saveLocally = false
+  form.lunarLeapMonth = p.lunarLeapMonth ?? false
+  form.daySect = p.daySect ?? 2
+  errorMsg.value = ''
+}
+defineExpose({ fillFromProfile })
 
 interface FormState {
   calendarType: 'solar' | 'lunar'
@@ -118,6 +163,8 @@ interface FormState {
   timezone: string
   traditionalGenderParam: 'male' | 'female' | 'unspecified'
   saveLocally: boolean
+  lunarLeapMonth: boolean
+  daySect: 1 | 2
 }
 
 const form = reactive<FormState>({
@@ -129,7 +176,9 @@ const form = reactive<FormState>({
   minute: null,
   timezone: 'Asia/Shanghai',
   traditionalGenderParam: 'unspecified',
-  saveLocally: false
+  saveLocally: false,
+  lunarLeapMonth: false,
+  daySect: 2
 })
 
 const errorMsg = ref('')
@@ -138,6 +187,21 @@ const hasYear = computed(() => form.year != null && Number.isFinite(form.year))
 const hasMonth = computed(() => form.month != null && form.month >= 1 && form.month <= 12)
 const hasDay = computed(() => form.day != null && form.day >= 1 && form.day <= 31)
 const hasHour = computed(() => form.hour != null && form.hour >= 0 && form.hour <= 23)
+
+/** 该年闰月（0=无闰月） */
+const leapMonth = computed<number>(() => {
+  if (!hasYear.value) return 0
+  try {
+    return LunarYear.fromYear(form.year as number).getLeapMonth()
+  } catch {
+    return 0
+  }
+})
+
+const leapMonthText = computed(() => {
+  if (leapMonth.value === 0) return '该年没有闰月'
+  return `该年闰${leapMonth.value}月`
+})
 
 const precision = computed<BirthPrecision | null>(() => {
   if (hasYear.value && hasMonth.value && hasDay.value && hasHour.value) return 'exact_time'
@@ -150,16 +214,18 @@ const precisionLabel = computed(() => {
   switch (precision.value) {
     case 'exact_time': return '完整四柱'
     case 'date': return '三柱，时柱未知'
-    case 'year_month': return '仅展示年月二柱'
+    case 'year_month': return '仅出生年月（不伪造节令柱）'
     default: return '请至少填写出生年月'
   }
 })
 
 const precisionHint = computed(() => {
   switch (precision.value) {
-    case 'exact_time': return '出生年月日时齐全，可排大运与流年。'
+    case 'exact_time': return form.minute != null
+      ? '出生年月日时（含分）齐全，可排大运与流年。'
+      : '只有时辰没有分钟，按该时辰起点排盘，起运精度有限。'
     case 'date': return '缺出生时辰，时柱未知，不推算大运流年。'
-    case 'year_month': return '只有年月，不推算大运流年。'
+    case 'year_month': return '只有年月，年/月柱会因节气交界而不确定，不伪造。'
     default: return '先填出生年与月。'
   }
 })
@@ -196,7 +262,10 @@ function onCompute() {
     timezone: form.timezone,
     precision: p,
     traditionalGenderParam: form.traditionalGenderParam,
-    saveLocally: form.saveLocally
+    saveLocally: form.saveLocally,
+    lunarLeapMonth: form.calendarType === 'lunar' ? form.lunarLeapMonth : undefined,
+    daySect: form.daySect,
+    timePrecision: form.minute != null ? 'minute' : (form.hour != null ? 'hour' : undefined)
   }
   emit('compute', profile)
 }

@@ -9,10 +9,17 @@
     <div class="card">
       <h2>免责声明</h2>
       <p>本应用用于传统文化研究、娱乐与自我反思，<strong>不代表客观事实或未来必然结果</strong>。</p>
+      <p>运势是传统结构研究，不代表事实预测。</p>
       <p>涉及医疗、法律、财务、安全、升学就业等重要决定时，请以现实证据和专业意见为准，不以占卜结果替代决策。</p>
     </div>
     <div class="card">
+      <h2>隐私与本地存储</h2>
+      <p>历史记录与出生档案仅保存在本机浏览器（IndexedDB），<strong>不跨设备同步</strong>。</p>
+      <p>不上传任何问卦数据；Cloudflare 仅托管静态应用文件，不存储用户数据。导出 / 导入 JSON 仅在用户主动操作时发生。</p>
+    </div>
+    <div class="card">
       <h2>技术</h2>
+      <p class="muted">纯本地、离线、确定性：无 AI、无后端、无云同步。</p>
       <p class="muted">Vue 3 + TypeScript + Vite + Pinia + Dexie。历法由 lunar-javascript 本地计算，规则引擎完全本地、确定性可复现。</p>
     </div>
   </div>

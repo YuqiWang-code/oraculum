@@ -1,8 +1,8 @@
 ﻿# Oraculum（智能推理与预测）
 
-Oraculum **v4.3.0**
+Oraculum **v4.4.0**
 
-一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。**v4.3 新增长辈友好现实白话解读（64卦+384爻）与运势栏目（八字大运流年 + 京房八宫/《易隐》十六变研究层）。**
+一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。**v4.4 运势正确性大修（大运顺逆/出生历法统一/农历闰月/晚子时日界/分钟精度/year_month不伪造）+ 运势解释引擎（十神/六合六冲/大运流年白话）+ 京房十六变逐节点解释 + 本地出生档案 + 性能专项（dynamic import 懒加载/bundle budget）。**
 
 **核心计算和解读完全本地。无需后端。无需 API Key。无需 AI。支持离线。**
 
@@ -54,7 +54,7 @@ npm run preview    # 预览生产构建（http://localhost:4173）
 
 
 ```
-npm run test       # 运行 Vitest 单元测试（259 tests）
+npm run test       # 运行 Vitest 单元测试（307 tests）
 
 npm run test:watch # 监视模式
 
@@ -62,7 +62,9 @@ npm run validate   # 本地数据完整性校验（64卦/384爻/彖传/大象/�
 
 npm run lint       # ESLint 检查
 
-npm run format     # Prettier 格式化
+npm run bundle:check # 构建产物体积预算检查
+
+npm run audit:privacy # 源码审计：禁止远程 DB SDK（Firebase/Supabase/D1/KV）
 ```
 
 
@@ -120,7 +122,13 @@ npm run format     # Prettier 格式化
 
 * **现实白话解读（v4.3 新增）**：长辈友好三层解读——现在是什么情况 / 为什么这么看（本卦·动爻·互卦·变卦·体用·评分）/ 接下来怎么做 / 最需要注意。64卦+384爻全部长辈友好现代释义，默认展开，大字号高对比。
 
-* **运势栏目（v4.3 新增）**：八字大运流年（lunar-javascript，输入精度诚实——年月二柱/三柱/四柱分级展示，不伪造时柱）+ 京房八宫/《易隐》十六变研究层（乾宫 golden 序列验证，历史术语保护，不映射年龄不预测死亡）。
+* **运势栏目（v4.3 新增，v4.4 大修）**：八字大运流年（lunar-javascript 1.7.7，输入精度诚实——年月二柱/三柱/四柱分级展示，不伪造时柱；大运顺逆由 yun.isForward() 唯一事实源，阳男阴女顺/阴男阳女逆；晚子时日界 sect=1/2 可切换；农历闰月支持；分钟精度标记）+ 京房八宫/《易隐》十六变研究层（逐节点 step reading，归魂初爻修复，Source A 本机历史/Source B 出生时刻起卦/Source C 手动选宫，历史术语保护不预测死亡）。
+
+* **运势解释引擎（v4.4 新增）**：十神（日干为日主，10×10 全覆盖，与 6tail 交叉 golden）、地支六合六冲（大运支/流年支 vs 原局四支及互相对比）、DaYunAnalysis/LiuNianAnalysis（每步 focus/why/howToAct/watchOut，所有解释可回溯 FortuneStructureEvidence）。禁止伪精确（无 80 分/发财率/升职概率）。
+
+* **本地出生档案（v4.4 新增）**：运势页可保存出生资料到本机 IndexedDB，支持使用/重命名/删除。默认不保存，需主动勾选。不云同步。
+
+* **性能专项（v4.4）**：elderFriendly 8 批真实 dynamic import 懒加载（非静态 import）、local-data 两层化（light 索引 66KB + heavy 按需）、ResultView 异步加载+骨架、KnowledgeView 按展开加载、Fortune 流年按范围计算+分十年页、bundle:check 预算脚本。local-data 主 chunk gzip 从 74.8KB 降至 62.7KB。
 
 * **阅读模式（v4.3 新增）**：简明模式（默认，一句话+现实白话+必要传统信息）/ 研究模式（完整经典、详细规则、评分依据），兼容旧设置迁移。
 
@@ -160,12 +168,12 @@ Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB
 
 | 版本标识                      | 值     | 说明                                                     |
 | ------------------------- | ----- | ------------------------------------------------------ |
-| `APP_VERSION`             | 4.3.0 | 应用版本（v4.3 新增长辈友好现实白话解读 + 运势栏目）        |
+| `APP_VERSION`             | 4.4.0 | 应用版本（v4.4 运势正确性大修 + 解释引擎 + 性能专项）        |
 | `RULESET_VERSION`         | 4.1.0 | 起卦算法与评分规则版本（不变）                                  |
 | `DATASET_VERSION`         | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整，不变）            |
-| `LOCAL_KNOWLEDGE_VERSION` | 1.2.0 | 本地现代释义版本（v4.3 新增 64卦+384爻长辈友好字段）                |
-| `FORTUNE_RULESET_VERSION` | 1.0.0 | 运势规则版本（八字 + 京房十六变，v4.3 新增）                    |
-| `FORTUNE_DATASET_VERSION` | 1.0.0 | 运势数据版本（v4.3 新增）                                |
+| `LOCAL_KNOWLEDGE_VERSION` | 1.2.0 | 本地现代释义版本（不变）                |
+| `FORTUNE_RULESET_VERSION` | 2.0.0 | 运势规则版本（顺逆/出生历法/精度/解释引擎重大行为修正）                    |
+| `FORTUNE_DATASET_VERSION` | 1.1.0 | 运势数据版本（v4.4 十神/地支关系/step reading）                                |
 
 每条历史记录均保存版本号，算法升级不改变旧结果。
 
@@ -198,16 +206,18 @@ src/
 
 │  ├─ realWorldInterpretation/ 现实白话解读引擎（v4.3 新增，长辈友好）
 
-│  ├─ fortune/              运势引擎（v4.3 新增：八字大运流年 + 京房十六变）
+│  ├─ fortune/              运势引擎（v4.3 新增，v4.4 大修：八字大运流年 + 京房十六变）
+│  │  ├─ birth/            出生历法统一转换 + 校验（v4.4 新增：normalizeBirthProfile/validateBirthProfile）
+│  │  ├─ bazi/             八字排盘（顺逆 yun.isForward()、晚子时 sect、五行显式统计）
+│  │  ├─ analysis/         运势解释引擎（v4.4 新增：十神/六合六冲/DaYunAnalysis/LiuNianAnalysis）
+│  │  └─ jingfang16/       京房十六变（buildStepReading 逐节点解释，归魂初爻修复）
 
 │  └─ orchestrator.ts       总编排
 
 ├─ local-data/              本地经典文本 + Oraculum 现代释义
-
 │  ├─ classics/             古籍原文（周易卦辞/彖传/大象/小象，JSON 数据）
-
-│  ├─ interpretation/       Oraculum 现代释义（64卦 + 384爻，JSON 数据）
-
+│  ├─ interpretation/       Oraculum 现代释义（64卦 + 384爻，JSON 数据 + elderBatch TS 包装）
+│  ├─ light/                轻量索引（v4.4 新增：kingWen/name/core/theme，66KB，首屏搜索用）
 │  └─ meihua/               梅花体用角色与含义
 
 ├─ components/              组件
@@ -234,9 +244,9 @@ public/
 
 docs/                       文档
 
-tests/                      Vitest 测试（259 tests）
+tests/                      Vitest 测试（307 tests：正确性/运势解释/十六变/隐私/realWorld）
 
-scripts/                    数据校验脚本
+scripts/                    数据校验 + bundle:check + audit-local-only 脚本
 ```
 
 
@@ -309,15 +319,23 @@ cloudflared tunnel --url http://localhost:4173
 
 
 
-* **每台设备自己的 IndexedDB**：问卦历史仅存储在当前浏览器的 IndexedDB 中
+* **每台设备自己的 IndexedDB**：问卦历史和出生档案仅存储在当前浏览器的 IndexedDB 中
 
 * **Cloudflare 不保存问卦数据**：纯静态托管，无后端、无数据库、无用户账号
 
-* **A 用户看不到 B 用户的历史**：数据不跨设备同步
+* **A 用户看不到 B 用户的历史**：数据不跨设备同步，跨设备自动同步关闭/不支持
+
+* **出生档案默认不保存**：运势页需主动勾选"保存本地档案"才写入；导出默认不含出生档案，需用户显式选择
+
+* **本地存储用量可见**：设置页可查看本机站点存储用量（navigator.storage.estimate()）
+
+* **无远程 DB SDK**：源码审计脚本（audit:privacy）扫描禁止 Firebase/Supabase/D1/KV 导入
 
 * `/result/:id`**&#x20;URL 不携带完整问卦数据**：只包含记录 ID，其他设备打开同 URL 找不到本地记录是正常设计
 
 * **无 Analytics、无广告、无第三方追踪**
+
+* **运势是传统结构研究，不代表事实预测**
 
 
 
@@ -346,6 +364,12 @@ cloudflared tunnel --url http://localhost:4173
 * [本地模型研究（不采用记录）](docs/LOCAL_MODEL_RESEARCH.md)
 
 * [v4.3 审计](docs/V43_AUDIT.md)
+
+* [v4.4 审计](docs/V44_AUDIT.md)
+
+* [v4.4 浏览器 Smoke 测试](docs/V44_BROWSER_SMOKE.md)
+
+* [v4.3 性能 Baseline](docs/PERFORMANCE_BASELINE_V43.md)
 
 * [本地知识数据](docs/LOCAL_KNOWLEDGE_DATA.md)
 

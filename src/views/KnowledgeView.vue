@@ -45,21 +45,21 @@
 
       <div v-if="expanded === h.kingWen" style="margin-top:12px">
         <!-- 有完整本地知识 -->
-        <template v-if="knowledgeMap[h.kingWen]">
+        <template v-if="detailedMap[h.kingWen]">
           <!-- 卦辞 -->
           <div class="muted" style="margin-top:8px">卦辞</div>
-          <div style="white-space:pre-wrap">{{ knowledgeMap[h.kingWen].classic.judgment }}</div>
+          <div style="white-space:pre-wrap">{{ detailedMap[h.kingWen].classic.judgment }}</div>
 
           <!-- 彖传 -->
           <div class="muted" style="margin-top:10px">彖传</div>
-          <div style="white-space:pre-wrap">{{ knowledgeMap[h.kingWen].classic.tuan }}</div>
+          <div style="white-space:pre-wrap">{{ detailedMap[h.kingWen].classic.tuan }}</div>
 
           <!-- 大象传 -->
           <div class="muted" style="margin-top:10px">大象传</div>
-          <div style="white-space:pre-wrap">{{ knowledgeMap[h.kingWen].classic.daXiang }}</div>
+          <div style="white-space:pre-wrap">{{ detailedMap[h.kingWen].classic.daXiang }}</div>
 
           <!-- 六爻：爻辞 + 小象 -->
-          <div v-for="line in knowledgeMap[h.kingWen].lines" :key="line.index" style="margin-top:10px">
+          <div v-for="line in detailedMap[h.kingWen].lines" :key="line.index" style="margin-top:10px">
             <div class="muted">第{{ line.index }}爻</div>
             <div style="white-space:pre-wrap">{{ line.classicText }}</div>
             <div class="muted" style="font-size:12px;margin-top:2px">
@@ -70,21 +70,21 @@
           <!-- Oraculum 现代释义 -->
           <div style="margin-top:14px;padding-top:10px;border-top:1px dashed var(--line)">
             <div class="muted">Oraculum 现代释义（非古籍原文）</div>
-            <div style="margin-top:4px">{{ knowledgeMap[h.kingWen].localMeaning.coreMeaning }}</div>
+            <div style="margin-top:4px">{{ detailedMap[h.kingWen].localMeaning.coreMeaning }}</div>
             <div style="margin-top:4px" class="muted">
-              白话卦辞：{{ knowledgeMap[h.kingWen].localMeaning.plainJudgment }}
+              白话卦辞：{{ detailedMap[h.kingWen].localMeaning.plainJudgment }}
             </div>
             <div style="margin-top:4px" class="muted">
-              作为本卦：{{ knowledgeMap[h.kingWen].localMeaning.asBaseHexagram }}
+              作为本卦：{{ detailedMap[h.kingWen].localMeaning.asBaseHexagram }}
             </div>
             <div style="margin-top:4px" class="muted">
-              主题：{{ knowledgeMap[h.kingWen].localMeaning.keyThemes.join('、') }}
+              主题：{{ detailedMap[h.kingWen].localMeaning.keyThemes.join('、') }}
             </div>
           </div>
 
           <!-- 来源 -->
           <div class="muted" style="margin-top:10px;font-size:11px">
-            来源：{{ knowledgeMap[h.kingWen].classic.sourceRefs.join('；') }}
+            来源：{{ detailedMap[h.kingWen].classic.sourceRefs.join('；') }}
           </div>
         </template>
 
@@ -117,32 +117,48 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { HEXAGRAMS } from '../data/hexagrams'
 import { TRIGRAMS } from '../data/trigrams'
 import { RULESET_VERSION, DATASET_VERSION, APP_VERSION, LOCAL_KNOWLEDGE_VERSION } from '../types'
 import { FORTUNE_RULESET_VERSION, FORTUNE_DATASET_VERSION } from '../engine/fortune'
-import { getHexagramKnowledge } from '../local-data'
+import { getHexagramKnowledge, loadElderFriendlyBatch } from '../local-data'
 import type { LocalHexagramKnowledge } from '../local-data'
+import { LIGHT_HEXAGRAMS } from '../local-data/light'
 
 const kw = ref('')
 
 /** 当前展开的卦（按 kingWen） */
 const expanded = ref<number | null>(null)
 
-function toggle(kingWen: number) {
-  expanded.value = expanded.value === kingWen ? null : kingWen
-}
+/**
+ * 已展开卦的完整知识映射（按需填充，禁止首屏构造全部 64 个大对象）。
+ * 完整古文/白话来自静态 local-data；长辈友好白话按批次异步加载后再注入。
+ */
+const detailedMap = shallowRef<Record<number, LocalHexagramKnowledge>>({})
+const detailLoading = ref<number | null>(null)
 
-/** 预计算所有卦的本地知识映射 */
-const knowledgeMap = computed<Record<number, LocalHexagramKnowledge>>(() => {
-  const map: Record<number, LocalHexagramKnowledge> = {}
-  for (const h of HEXAGRAMS) {
-    const k = getHexagramKnowledge(h.kingWen)
-    if (k) map[h.kingWen] = k
+async function toggle(kingWen: number) {
+  if (expanded.value === kingWen) {
+    expanded.value = null
+    return
   }
-  return map
-})
+  expanded.value = kingWen
+  // 首屏只构造轻量索引；展开某卦时才取该卦完整知识
+  if (!detailedMap.value[kingWen]) {
+    const k = getHexagramKnowledge(kingWen)
+    if (k) {
+      detailedMap.value = { ...detailedMap.value, [kingWen]: k }
+    }
+  }
+  // 长辈友好白话按需加载（纯本地静态资源，离线可用）
+  detailLoading.value = kingWen
+  try {
+    await loadElderFriendlyBatch(kingWen)
+  } finally {
+    detailLoading.value = null
+  }
+}
 
 /** 八卦列表 */
 const trigramList = computed(() =>
@@ -154,21 +170,30 @@ const trigramList = computed(() =>
   }))
 )
 
-/** 搜索过滤：卦名、卦辞原文、关键词 */
+/**
+ * 搜索过滤：首屏只用轻量索引（卦名/主题词/爻关键词）+ HEXAGRAMS 静态字段。
+ * 不触发全部 64 个完整知识对象的构造。
+ */
 const filteredHexagrams = computed(() => {
   if (!kw.value) return HEXAGRAMS
   const q = kw.value
+  const lightHits = new Set(
+    Object.values(LIGHT_HEXAGRAMS)
+      .filter(
+        (h) =>
+          h.name.includes(q) ||
+          h.theme.includes(q) ||
+          h.themes.some((t) => t.includes(q)) ||
+          h.core.includes(q) ||
+          h.lines.some((l) => l.themeKeyword.includes(q) || l.core.includes(q))
+      )
+      .map((h) => h.kingWen)
+  )
   return HEXAGRAMS.filter((h) => {
-    // 卦名匹配
     if (h.name.includes(q)) return true
-    // editorialKeywords 匹配
     if (h.editorialKeywords.some((k) => k.includes(q))) return true
-    // 本地知识 keyThemes 匹配
-    const k = knowledgeMap.value[h.kingWen]
-    if (k && k.localMeaning.keyThemes.some((t) => t.includes(q))) return true
-    // 卦辞原文匹配
-    if (k && k.classic.judgment.includes(q)) return true
     if (h.judgmentClassic && h.judgmentClassic.includes(q)) return true
+    if (lightHits.has(h.kingWen)) return true
     return false
   })
 })

@@ -8,7 +8,22 @@
         <button class="btn secondary" style="margin:6px 0" @click="doImport">导入 JSON</button>
         <button class="btn secondary" style="margin:6px 0" @click="doClear">清空</button>
       </div>
+      <label style="display:flex;align-items:center;gap:8px;margin-top:4px">
+        <input type="checkbox" v-model="exportProfiles" style="width:auto" />
+        同时导出出生档案（默认不导出）
+      </label>
       <input ref="fileInput" type="file" accept="application/json" style="display:none" @change="onFile" />
+    </div>
+
+    <div class="card">
+      <h2>隐私与存储</h2>
+      <ul class="privacy-list">
+        <li>✓ 问卦历史仅保存在本机浏览器（IndexedDB）</li>
+        <li>✓ 出生档案仅在勾选"保存本地档案"后才保存到本机</li>
+        <li>✓ 不上传 Cloudflare，不跨设备自动同步</li>
+        <li>✓ 导出 / 导入 JSON 只有用户主动操作才会移动数据</li>
+        <li>Cloudflare 仅托管静态应用文件，不存储问卦历史或出生档案</li>
+      </ul>
     </div>
 
     <div class="card" v-for="r in filtered" :key="r.id">
@@ -34,6 +49,7 @@ const store = useAppStore()
 const rows = ref<HistoryRecord[]>([])
 const kw = ref('')
 const fileInput = ref<HTMLInputElement | null>(null)
+const exportProfiles = ref(false)
 
 const filtered = computed(() => rows.value.filter((r) => !kw.value || r.question.includes(kw.value)))
 
@@ -68,7 +84,11 @@ async function doClear() {
   if (confirm('确定清空全部历史？此操作不可恢复。')) { await clearHistory(); rows.value = [] }
 }
 async function doExport() {
-  const json = await exportAll()
+  const tip = exportProfiles.value
+    ? '将导出问卦历史与出生档案。导出后文件由您自己保管，请妥善存放。'
+    : '将导出问卦历史（不含出生档案）。导出后文件由您自己保管，请妥善存放。'
+  if (!confirm(tip)) return
+  const json = await exportAll({ includeFortuneProfiles: exportProfiles.value })
   const blob = new Blob([json], { type: 'application/json' })
   const a = document.createElement('a')
   a.href = URL.createObjectURL(blob)
@@ -85,3 +105,11 @@ async function onFile(e: Event) {
   rows.value = await listHistory()
 }
 </script>
+
+<style scoped>
+.privacy-list {
+  margin: 8px 0;
+  padding-left: 20px;
+  line-height: 1.8;
+}
+</style>

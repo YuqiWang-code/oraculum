@@ -3,6 +3,8 @@ import type { HistoryRecord, Settings, FortuneProfileRecord } from './schema'
 import type { DivinationRecord } from '../engine/orchestrator'
 import { APP_VERSION } from '../types'
 
+export type { HistoryRecord, Settings, FortuneProfileRecord } from './schema'
+
 class DivinationDB extends Dexie {
   history!: Table<HistoryRecord, string>
   settings!: Table<Settings, string>

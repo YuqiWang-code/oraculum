@@ -16,14 +16,14 @@
       </div>
     </div>
 
-    <!-- 横向时间轴（可横向滑动，避免 320px 溢出） -->
+    <!-- 横向时间轴 -->
     <div class="track">
       <div
         v-for="e in visible" :key="e.index"
         :class="['dy-node', expanded === e.index ? 'open' : '']"
         @click="toggle(e.index)"
       >
-        <div class="dot" :class="e.direction === '顺' ? 'shun' : 'ni'"></div>
+        <div class="dot"></div>
         <div class="dy-gz">{{ e.ganzhi }}</div>
         <div class="dy-age">{{ e.startAge }}-{{ e.endAge }}</div>
       </div>
@@ -31,12 +31,33 @@
 
     <!-- 展开详情 -->
     <div v-if="expandedEntry" class="detail">
-      <h3>{{ expandedEntry.ganzhi }} 大运</h3>
+      <h3>{{ expandedEntry.ganzhi }} 大运（{{ expandedEntry.direction }}排）</h3>
       <div class="d-row"><span>起止年龄</span><strong>{{ expandedEntry.startAge }} 岁 至 {{ expandedEntry.endAge }} 岁</strong></div>
-      <div class="d-row"><span>顺逆</span><strong>{{ expandedEntry.direction }}行</strong></div>
       <div v-if="expandedEntry.startDate" class="d-row"><span>起运公历</span><strong>{{ expandedEntry.startDate }}</strong></div>
+
+      <div v-if="analysisFor(expandedEntry.index)" class="reading">
+        <div class="rd-row" v-if="analysisFor(expandedEntry.index)!.stemTenGod">
+          <span>十神</span><strong>{{ analysisFor(expandedEntry.index)!.stemTenGod }}</strong>
+        </div>
+        <div v-if="analysisFor(expandedEntry.index)!.evidence.length" class="ev-list">
+          <div v-for="ev in analysisFor(expandedEntry.index)!.evidence" :key="ev.id" class="ev-item">
+            {{ ev.detail }}
+          </div>
+        </div>
+        <div class="rd-block">
+          <div class="rd-label">值得关注</div>
+          <div>{{ analysisFor(expandedEntry.index)!.reading.focus }}</div>
+          <div class="rd-label">为什么</div>
+          <div>{{ analysisFor(expandedEntry.index)!.reading.why }}</div>
+          <div class="rd-label">适合怎么做</div>
+          <div>{{ analysisFor(expandedEntry.index)!.reading.howToAct }}</div>
+          <div class="rd-label">注意</div>
+          <div>{{ analysisFor(expandedEntry.index)!.reading.watchOut }}</div>
+        </div>
+      </div>
+
       <div class="muted" style="margin-top:6px">
-        每步大运约十年，是传统命理对人生阶段的粗粒度划分，不表示确定命运。
+        每步大运约十年，是传统命理对人生阶段的粗粒度划分，不是事实预测。
       </div>
     </div>
   </div>
@@ -44,9 +65,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { DaYunEntry } from '../../engine/fortune'
+import type { DaYunEntry, DaYunAnalysis } from '../../engine/fortune'
 
-const props = defineProps<{ entries: DaYunEntry[] }>()
+const props = defineProps<{
+  entries: DaYunEntry[]
+  analyses?: DaYunAnalysis[]
+}>()
 
 const ranges = [80, 90, 100, 120] as const
 const maxAge = ref<number>(100)
@@ -59,6 +83,10 @@ const visible = computed(() =>
 const expandedEntry = computed(() =>
   props.entries.find((e) => e.index === expanded.value) ?? null
 )
+
+function analysisFor(index: number): DaYunAnalysis | undefined {
+  return props.analyses?.find((a) => a.entry.index === index)
+}
 
 function toggle(index: number) {
   expanded.value = expanded.value === index ? null : index
@@ -101,9 +129,8 @@ function toggle(index: number) {
 .dot {
   width: 10px; height: 10px; border-radius: 50%;
   margin: 0 auto 6px;
+  background: var(--muted);
 }
-.dot.shun { background: var(--good); }
-.dot.ni { background: var(--bad); }
 .dy-gz { font-size: 18px; font-weight: 700; line-height: 1.2; }
 .dy-age { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
@@ -120,4 +147,14 @@ function toggle(index: number) {
   padding: 4px 0; font-size: 15px;
 }
 .d-row span { color: var(--muted); }
+.ev-list { margin: 6px 0; }
+.ev-item {
+  font-size: 14px; color: var(--muted);
+  padding: 2px 0; line-height: 1.6;
+}
+.rd-block { margin-top: 8px; font-size: 15px; line-height: 1.7; }
+.rd-label {
+  color: var(--muted); font-size: 13px;
+  margin-top: 6px;
+}
 </style>
