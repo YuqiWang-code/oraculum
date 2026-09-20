@@ -2,6 +2,40 @@
 
 本文档说明如何将本项目（Vite + Vue 3 PWA）部署到 Cloudflare Pages 静态托管。
 
+## 实际部署信息（2026-09-20）
+
+| 项目 | 值 |
+|---|---|
+| Production URL | **https://oraculum-3g8.pages.dev** |
+| Project name | `oraculum` |
+| GitHub 仓库 | `YuqiWang-code/oraculum` |
+| Production branch | `main` |
+| Framework preset | `None` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Environment variables | 无 |
+| 首次成功部署 commit | `32f4846`（fix: LiuYaoResult import from layout.ts） |
+| 基准版本 commit | `9c36d75`（v4.1.0 最终稳定化） |
+| 首次部署日期 | 2026-09-20 |
+| 构建耗时 | 37s |
+| 自动部署 | 已启用（git push main → 自动构建） |
+
+> 注：首次构建（commit 9c36d75）因测试文件 `LiuYaoResult` import 路径错误失败，修复后（commit 32f4846）构建成功。
+
+## 后续更新流程
+
+代码修改后：
+
+```bash
+git add -A
+git commit -m "描述修改"
+git push origin main
+```
+
+Cloudflare Pages 会自动检测到 main 分支的新 commit 并触发构建，构建成功后自动更新到同一个生产域名 `https://oraculum-3g8.pages.dev`。
+
+可在 Cloudflare Dashboard → Workers & Pages → oraculum → Deployments 中查看每次构建的状态和日志。
+
 ## 前置条件
 
 - 代码已推送到 GitHub 仓库 `YuqiWang-code/oraculum`，主分支为 `main`
