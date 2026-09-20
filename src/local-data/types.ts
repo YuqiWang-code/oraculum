@@ -3,6 +3,16 @@
  * 严格区分：古籍原文（classics/）与 Oraculum 现代释义（interpretation/）
  */
 
+/** 长辈友好爻级释义（v4.3 新增，Oraculum 现代释义，非古籍原文） */
+export interface ElderFriendlyLineMeaning {
+  /** 长辈能懂的这爻在说什么（综合爻辞+小象，不逐字翻译） */
+  elderFriendlyMeaning: string
+  /** 现实中可以怎么做 */
+  realLifeAction: string
+  /** 需要注意什么（可选） */
+  realLifeCaution?: string
+}
+
 /** 单条爻的本地知识 */
 export interface LocalLineKnowledge {
   /** 爻位 1=初 ... 6=上 */
@@ -23,6 +33,22 @@ export interface LocalLineKnowledge {
   favorableMeaning?: string
   /** 警示面（可选） */
   cautionMeaning?: string
+  /** v4.3 长辈友好释义（运行时从 elderFriendly JSON 合并注入） */
+  elderFriendly?: ElderFriendlyLineMeaning
+}
+
+/** 长辈友好卦级释义（v4.3 新增，Oraculum 现代释义，非古籍原文） */
+export interface ElderFriendlyHexagramMeaning {
+  /** 一句话总结这卦在说什么，长辈能直接懂 */
+  elderFriendlySummary: string
+  /** 现在是什么情况 */
+  realLifeNow: string
+  /** 中间过程会怎样 */
+  realLifeProcess: string
+  /** 后续趋向如何 */
+  realLifeLater: string
+  /** 常见误解（可选） */
+  commonMisunderstanding?: string
 }
 
 /** 单卦的本地知识 */
@@ -65,6 +91,9 @@ export interface LocalHexagramKnowledge {
     /** 注意事项 */
     cautions: string[]
   }
+
+  /** v4.3 长辈友好释义（运行时从 elderFriendly JSON 合并注入） */
+  elderFriendly?: ElderFriendlyHexagramMeaning
 
   /** 六爻知识（自下而上） */
   lines: [

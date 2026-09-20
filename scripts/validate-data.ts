@@ -133,9 +133,100 @@ let xiaoXiangTotal = 0
 for (const arr of Object.values(XIAO_XIANG_MAP)) xiaoXiangTotal += arr.length
 check(xiaoXiangTotal === 384, `小象传总数应384，实际 ${xiaoXiangTotal}`)
 
+// ---------- 4. v4.3 长辈友好数据校验 ----------
+const ELDER_FILES = [
+  'elderFriendly_01_08.json',
+  'elderFriendly_09_16.json',
+  'elderFriendly_17_24.json',
+  'elderFriendly_25_32.json',
+  'elderFriendly_33_40.json',
+  'elderFriendly_41_48.json',
+  'elderFriendly_49_56.json',
+  'elderFriendly_57_64.json'
+]
+
+interface ElderLineEntry {
+  elderFriendlyMeaning: string
+  realLifeAction: string
+  realLifeCaution?: string
+}
+interface ElderHexEntry {
+  elderFriendlySummary: string
+  realLifeNow: string
+  realLifeProcess: string
+  realLifeLater: string
+  commonMisunderstanding?: string
+  lines: ElderLineEntry[]
+}
+
+const ALL_ELDER: Record<number, ElderHexEntry> = {}
+for (const fname of ELDER_FILES) {
+  const batch = loadJson<Record<number, ElderHexEntry>>(fname)
+  Object.assign(ALL_ELDER, batch)
+}
+
+check(Object.keys(ALL_ELDER).length === 64, `长辈友好数据应覆盖64卦，实际 ${Object.keys(ALL_ELDER).length}`)
+
+let elderHexCount = 0
+let elderLineCount = 0
+let forbiddenHits = 0
+const FORBIDDEN = ['一定', '必然', '百分之百', '百分百', '命中注定', '必死', '会死亡', '某年重病', '你会死亡', '某年去世', '某年必患重病', '寿命到这里']
+
+function scanForbidden(text: string, field: string): void {
+  for (const word of FORBIDDEN) {
+    if (text.includes(word)) {
+      console.error(`✗ 禁词「${word}」出现在 ${field}`)
+      forbiddenHits++
+    }
+  }
+}
+
+for (let kw = 1; kw <= 64; kw++) {
+  const e = ALL_ELDER[kw]
+  check(!!e, `第${kw}卦长辈友好数据缺失`)
+  if (!e) continue
+
+  check(e.elderFriendlySummary && e.elderFriendlySummary.trim().length > 0, `第${kw}卦 elderFriendlySummary 为空`)
+  check(e.realLifeNow && e.realLifeNow.trim().length > 0, `第${kw}卦 realLifeNow 为空`)
+  check(e.realLifeProcess && e.realLifeProcess.trim().length > 0, `第${kw}卦 realLifeProcess 为空`)
+  check(e.realLifeLater && e.realLifeLater.trim().length > 0, `第${kw}卦 realLifeLater 为空`)
+
+  if (e.elderFriendlySummary) {
+    const len = e.elderFriendlySummary.replace(/\s/g, '').length
+    check(len >= 20 && len <= 200, `第${kw}卦 elderFriendlySummary 字数异常：${len}`)
+    scanForbidden(e.elderFriendlySummary, `第${kw}卦.elderFriendlySummary`)
+  }
+  if (e.realLifeNow) scanForbidden(e.realLifeNow, `第${kw}卦.realLifeNow`)
+  if (e.realLifeProcess) scanForbidden(e.realLifeProcess, `第${kw}卦.realLifeProcess`)
+  if (e.realLifeLater) scanForbidden(e.realLifeLater, `第${kw}卦.realLifeLater`)
+  if (e.commonMisunderstanding) scanForbidden(e.commonMisunderstanding, `第${kw}卦.commonMisunderstanding`)
+
+  elderHexCount++
+
+  check(Array.isArray(e.lines) && e.lines.length === 6, `第${kw}卦长辈友好爻数应为6，实际 ${e.lines?.length}`)
+  if (!Array.isArray(e.lines)) continue
+
+  for (let i = 0; i < e.lines.length; i++) {
+    const ln = e.lines[i]
+    check(ln.elderFriendlyMeaning && ln.elderFriendlyMeaning.trim().length > 0, `第${kw}卦第${i + 1}爻 elderFriendlyMeaning 为空`)
+    check(ln.realLifeAction && ln.realLifeAction.trim().length > 0, `第${kw}卦第${i + 1}爻 realLifeAction 为空`)
+
+    if (ln.elderFriendlyMeaning) scanForbidden(ln.elderFriendlyMeaning, `第${kw}卦第${i + 1}爻.elderFriendlyMeaning`)
+    if (ln.realLifeAction) scanForbidden(ln.realLifeAction, `第${kw}卦第${i + 1}爻.realLifeAction`)
+    if (ln.realLifeCaution) scanForbidden(ln.realLifeCaution, `第${kw}卦第${i + 1}爻.realLifeCaution`)
+
+    elderLineCount++
+  }
+}
+
+check(elderHexCount === 64, `长辈友好卦级数据应64卦，实际 ${elderHexCount}`)
+check(elderLineCount === 384, `长辈友好爻级数据应384爻，实际 ${elderLineCount}`)
+check(forbiddenHits === 0, `长辈友好数据中有 ${forbiddenHits} 处禁词`)
+
 // ---------- 结果 ----------
 if (errors === 0) {
   console.log('✓ 数据校验通过：64卦结构、64卦辞/彖/大象、384爻辞/小象、384 themeKeyword、来源均一致。')
+  console.log(`✓ v4.3 长辈友好数据：64卦卦级 + 384爻爻级全部非空，禁词检查通过。`)
   process.exit(0)
 } else {
   console.error(`校验失败：${errors} 处错误`)

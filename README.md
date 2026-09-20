@@ -1,8 +1,8 @@
 ﻿# Oraculum（智能推理与预测）
 
-Oraculum **v4.2.0**
+Oraculum **v4.3.0**
 
-一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。
+一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。**v4.3 新增长辈友好现实白话解读（64卦+384爻）与运势栏目（八字大运流年 + 京房八宫/《易隐》十六变研究层）。**
 
 **核心计算和解读完全本地。无需后端。无需 API Key。无需 AI。支持离线。**
 
@@ -54,7 +54,7 @@ npm run preview    # 预览生产构建（http://localhost:4173）
 
 
 ```
-npm run test       # 运行 Vitest 单元测试（199 tests）
+npm run test       # 运行 Vitest 单元测试（259 tests）
 
 npm run test:watch # 监视模式
 
@@ -118,6 +118,12 @@ npm run format     # Prettier 格式化
 
 * **一句话看懂**：把经典卦象和规则转换为现代口语化提示（纯本地模板，不调用大模型）
 
+* **现实白话解读（v4.3 新增）**：长辈友好三层解读——现在是什么情况 / 为什么这么看（本卦·动爻·互卦·变卦·体用·评分）/ 接下来怎么做 / 最需要注意。64卦+384爻全部长辈友好现代释义，默认展开，大字号高对比。
+
+* **运势栏目（v4.3 新增）**：八字大运流年（lunar-javascript，输入精度诚实——年月二柱/三柱/四柱分级展示，不伪造时柱）+ 京房八宫/《易隐》十六变研究层（乾宫 golden 序列验证，历史术语保护，不映射年龄不预测死亡）。
+
+* **阅读模式（v4.3 新增）**：简明模式（默认，一句话+现实白话+必要传统信息）/ 研究模式（完整经典、详细规则、评分依据），兼容旧设置迁移。
+
 * **0–100 传统规则评分** + 五档（大凶 / 凶 / 平 / 吉 / 大吉）+ RatingBreakdown 七项明细
 
 * **六爻规则状态**：用神、元神 / 忌神 / 仇神、旺衰、暗动 / 日破、合绊、回头生克、三合、进退、飞伏
@@ -154,10 +160,12 @@ Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB
 
 | 版本标识                      | 值     | 说明                                                     |
 | ------------------------- | ----- | ------------------------------------------------------ |
-| `APP_VERSION`             | 4.2.0 | 应用版本（v4 纯本地化，v4.2 新增一句话看懂白话层） |
-| `RULESET_VERSION`         | 4.1.0 | 起卦算法与评分规则版本                                            |
-| `DATASET_VERSION`         | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整）                      |
-| `LOCAL_KNOWLEDGE_VERSION` | 1.1.0 | 本地现代释义版本（含遁六二白话修订）                                  |
+| `APP_VERSION`             | 4.3.0 | 应用版本（v4.3 新增长辈友好现实白话解读 + 运势栏目）        |
+| `RULESET_VERSION`         | 4.1.0 | 起卦算法与评分规则版本（不变）                                  |
+| `DATASET_VERSION`         | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整，不变）            |
+| `LOCAL_KNOWLEDGE_VERSION` | 1.2.0 | 本地现代释义版本（v4.3 新增 64卦+384爻长辈友好字段）                |
+| `FORTUNE_RULESET_VERSION` | 1.0.0 | 运势规则版本（八字 + 京房十六变，v4.3 新增）                    |
+| `FORTUNE_DATASET_VERSION` | 1.0.0 | 运势数据版本（v4.3 新增）                                |
 
 每条历史记录均保存版本号，算法升级不改变旧结果。
 
@@ -188,6 +196,10 @@ src/
 
 │  ├─ localInterpretation/  本地确定性解读引擎
 
+│  ├─ realWorldInterpretation/ 现实白话解读引擎（v4.3 新增，长辈友好）
+
+│  ├─ fortune/              运势引擎（v4.3 新增：八字大运流年 + 京房十六变）
+
 │  └─ orchestrator.ts       总编排
 
 ├─ local-data/              本地经典文本 + Oraculum 现代释义
@@ -200,9 +212,9 @@ src/
 
 ├─ components/              组件
 
-├─ views/                   页面（Home/Divination/Result/History/Knowledge/Settings）
+├─ views/                   页面（Home/Divination/Result/History/Knowledge/Settings/Fortune）
 
-├─ db/                      Dexie 历史（IndexedDB，version 3 已删除 aiSessions）
+├─ db/                      Dexie 历史（IndexedDB，version 4 新增 fortuneProfiles）
 
 ├─ router/                  路由（/result/:id + IndexedDB 刷新恢复）
 
@@ -222,7 +234,7 @@ public/
 
 docs/                       文档
 
-tests/                      Vitest 测试（199 tests）
+tests/                      Vitest 测试（259 tests）
 
 scripts/                    数据校验脚本
 ```
@@ -320,6 +332,20 @@ cloudflared tunnel --url http://localhost:4173
 * [一句话看懂白话引擎](docs/PLAIN_INTERPRETATION_ENGINE.md)
 
 * [本地释义审查记录](docs/LOCAL_INTERPRETATION_REVIEW.md)
+
+* [长辈友好现实解读设计](docs/ELDER_FRIENDLY_INTERPRETATION.md)
+
+* [本地语言数据蒸馏](docs/LOCAL_LANGUAGE_DATA_DISTILLATION.md)
+
+* [运势引擎设计](docs/FORTUNE_ENGINE.md)
+
+* [京房十六变来源笔记](docs/JINGFANG_16_SOURCE_NOTES.md)
+
+* [运势规则冲突记录](docs/FORTUNE_RULE_CONFLICTS.md)
+
+* [本地模型研究（不采用记录）](docs/LOCAL_MODEL_RESEARCH.md)
+
+* [v4.3 审计](docs/V43_AUDIT.md)
 
 * [本地知识数据](docs/LOCAL_KNOWLEDGE_DATA.md)
 

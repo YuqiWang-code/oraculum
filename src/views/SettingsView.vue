@@ -25,15 +25,15 @@
         显示农历扩展信息
       </label>
 
-      <label style="display:block;margin-top:12px">结果页默认显示</label>
+      <label style="display:block;margin-top:12px">阅读模式</label>
       <div class="muted">选择结果页默认展示方式。</div>
       <label style="display:flex;align-items:center;gap:8px;margin-top:4px">
-        <input type="radio" value="full_with_plain" v-model="displayMode" style="width:auto" />
-        一句话 + 详细解读（默认）
+        <input type="radio" value="simple" v-model="readingMode" style="width:auto" />
+        简明模式（默认）：一句话 + 现实白话 + 必要传统信息
       </label>
       <label style="display:flex;align-items:center;gap:8px">
-        <input type="radio" value="detailed_only" v-model="displayMode" style="width:auto" />
-        仅详细解读
+        <input type="radio" value="research" v-model="readingMode" style="width:auto" />
+        研究模式：完整显示经典、详细规则、评分依据
       </label>
     </div>
     <button class="btn" @click="save">保存设置</button>
@@ -55,10 +55,22 @@ const tz = ref(store.settings.timezone)
 const boundary = ref<'midnight' | 'zi_hour'>(store.settings.dayBoundaryRule)
 const shensha = ref(store.settings.useShenshaInScore)
 const detail = ref(store.settings.showLunarDetail)
-const displayMode = ref<'full_with_plain' | 'detailed_only'>(store.settings.resultDisplayMode ?? 'full_with_plain')
+const readingMode = ref<'simple' | 'research'>(
+  store.settings.readingMode
+    ?? (store.settings.resultDisplayMode === 'detailed_only' ? 'research' : 'simple')
+)
 
 async function save() {
-  await store.updateSettings({ timezone: tz.value, dayBoundaryRule: boundary.value, useShenshaInScore: shensha.value, showLunarDetail: detail.value, resultDisplayMode: displayMode.value })
+  const mode = readingMode.value
+  await store.updateSettings({
+    timezone: tz.value,
+    dayBoundaryRule: boundary.value,
+    useShenshaInScore: shensha.value,
+    showLunarDetail: detail.value,
+    readingMode: mode,
+    // 兼容旧 resultDisplayMode：simple→full_with_plain，research→detailed_only
+    resultDisplayMode: mode === 'simple' ? 'full_with_plain' : 'detailed_only'
+  })
   alert('已保存')
 }
 </script>

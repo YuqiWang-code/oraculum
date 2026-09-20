@@ -11,7 +11,8 @@ export const useAppStore = defineStore('app', () => {
     useShenshaInScore: true,
     showLunarDetail: true,
     dayBoundaryRule: 'midnight',
-    resultDisplayMode: 'full_with_plain'
+    resultDisplayMode: 'full_with_plain',
+    readingMode: 'simple'
   })
 
   async function loadSettings() {

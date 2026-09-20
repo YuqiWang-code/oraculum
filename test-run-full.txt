@@ -1,0 +1,46 @@
+﻿
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mF:/豆包/Projects/智能推理与预测[39m
+
+ [32m✓[39m tests/liuyao/liuyaoCore.test.ts [2m([22m[2m26 tests[22m[2m)[22m[90m 18[2mms[22m[39m
+ [31m❯[39m tests/engine/plainInterpretation.test.ts [2m([22m[2m0 test[22m[2m)[22m
+ [31m❯[39m tests/casting/v2.test.ts [2m([22m[2m0 test[22m[2m)[22m
+ [32m✓[39m tests/calendar/calendarEngine.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 48[2mms[22m[39m
+ [32m✓[39m tests/engine/localInterpretation.test.ts [2m([22m[2m9 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m✓[39m tests/localdata/hexagramKnowledge.test.ts [2m([22m[2m9 tests[22m[2m)[22m[90m 59[2mms[22m[39m
+ [32m✓[39m tests/engine/liuyaoInterpretation.test.ts [2m([22m[2m10 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [32m✓[39m tests/localdata/classicData.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 50[2mms[22m[39m
+ [32m✓[39m tests/localdata/localDataV2.test.ts [2m([22m[2m6 tests[22m[2m)[22m[90m 71[2mms[22m[39m
+ [32m✓[39m tests/liuyao/liuyao.test.ts [2m([22m[2m16 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32m✓[39m tests/engine/aiRemoval.test.ts [2m([22m[2m13 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [32m✓[39m tests/hexagram/hexagrams.test.ts [2m([22m[2m7 tests[22m[2m)[22m[90m 11[2mms[22m[39m
+ [32m✓[39m tests/meihua/meihua.test.ts [2m([22m[2m11 tests[22m[2m)[22m[90m 9[2mms[22m[39m
+ [32m✓[39m tests/hosting/hosting.test.ts [2m([22m[2m3 tests[22m[2m)[22m[90m 16[2mms[22m[39m
+ [32m✓[39m tests/classics/zhouyi.test.ts [2m([22m[2m8 tests[22m[2m)[22m[90m 28[2mms[22m[39m
+ [32m✓[39m tests/hexagram/trigrams.test.ts [2m([22m[2m4 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [32m✓[39m tests/engine/runtimeConfig.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 389[2mms[22m[39m
+   [33m[2m✓[22m[39m 路由配置[2m > [22mrouter 包含 path 为 /result/:id 的结果页路由 [33m331[2mms[22m[39m
+
+node.exe : [31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 2 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+At line:1 char:1
++ & "C:\Users\Administrator\AppData\Local\Doubao\User Data\sandbox_runt ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m⎯⎯⎯⎯⎯⎯[1m...22m⎯⎯⎯⎯⎯⎯⎯[39m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+[31m[1m[7m FAIL [27m[22m[39m tests/casting/v2.test.ts[2m [ tests/casting/v2.test.ts ][22m
+[31m[1mError[22m: [vitest-worker]: Timeout calling "fetch" with "["F:/豆包/Projects/智能推理与预测/tests/casting/v2.test.ts",
+"ssr"]"[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine/plainInterpretation.test.ts[2m [ tests/engine/plainInterpretation.test
+.ts ][22m
+[31m[1mError[22m: [vitest-worker]: Timeout calling "fetch" with "["/src/engine/plainInterpretation/composeOneSentenc
+e.ts","ssr"]"[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m15 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[32m149 passed[39m[22m[90m (149)[39m
+[2m   Start at [22m 14:57:27
+[2m   Duration [22m 79.56s[2m (transform 1.75s, setup 0ms, collect 1.87s, tests 757ms, environment 13.32s, prepare 4.30s)[22m
+

@@ -25,7 +25,7 @@
       <div class="muted">类别：{{ rec.input.category }} {{ rec.input.querentAlias || '未署名' }}</div>
     </div>
 
-    <!-- 一句话看懂（白话层） -->
+    <!-- 2. 一句话看懂（白话层） -->
     <div class="card" v-if="showPlain && plain" style="border-color:var(--accent)">
       <h2>
         一句话看懂
@@ -46,7 +46,56 @@
       </details>
     </div>
 
-    <!-- 2. 卦象 -->
+    <!-- 3. 现实白话解读（新增，长辈友好，默认展开） -->
+    <div class="card rw-card" v-if="realWorldReading" style="border-color:var(--accent)">
+      <h2>现实白话解读</h2>
+      <div class="rw-headline">{{ realWorldReading.headline }}</div>
+
+      <div class="rw-section">
+        <div class="rw-subhead">现在是什么情况</div>
+        <p class="rw-body">{{ realWorldReading.currentSituation }}</p>
+      </div>
+
+      <div class="rw-section">
+        <div class="rw-subhead">为什么这么看</div>
+        <div class="rw-why" v-if="realWorldReading.why.base">
+          <span class="rw-why-label">本卦</span>{{ realWorldReading.why.base }}
+        </div>
+        <div class="rw-why" v-for="(m, i) in realWorldReading.why.moving" :key="'wm' + i">
+          <span class="rw-why-label">动爻</span>{{ m }}
+        </div>
+        <div class="rw-why" v-if="realWorldReading.why.mutual">
+          <span class="rw-why-label">互卦</span>{{ realWorldReading.why.mutual }}
+        </div>
+        <div class="rw-why" v-if="realWorldReading.why.changed">
+          <span class="rw-why-label">变卦</span>{{ realWorldReading.why.changed }}
+        </div>
+        <div class="rw-why" v-if="realWorldReading.why.bodyUse">
+          <span class="rw-why-label">体用</span>{{ realWorldReading.why.bodyUse }}
+        </div>
+        <div class="rw-why" v-if="realWorldReading.why.rating">
+          <span class="rw-why-label">评分</span>{{ realWorldReading.why.rating }}
+        </div>
+      </div>
+
+      <div class="rw-section" v-if="realWorldReading.howToAct.length">
+        <div class="rw-subhead">接下来怎么做</div>
+        <ol class="rw-act">
+          <li v-for="(a, i) in realWorldReading.howToAct" :key="'act' + i">{{ a }}</li>
+        </ol>
+      </div>
+
+      <div class="rw-section" v-if="realWorldReading.watchOutFor.length">
+        <div class="rw-subhead">最需要注意</div>
+        <ul class="rw-watch">
+          <li v-for="(w, i) in realWorldReading.watchOutFor" :key="'watch' + i">{{ w }}</li>
+        </ul>
+      </div>
+
+      <div class="muted rw-disclaimer">{{ realWorldReading.disclaimer }}</div>
+    </div>
+
+    <!-- 4. 卦象 -->
     <div class="card" v-if="rec.meihua">
       <h2>卦象</h2>
       <div style="display:flex;gap:16px">
@@ -73,10 +122,10 @@
       <div class="muted" v-if="rec.liuyao.shensha.length">神煞：{{ rec.liuyao.shensha.map(s=>`${s.name}${s.branch}`).join('、') }}</div>
     </div>
 
-    <template v-if="detailed">
-      <!-- 3. 综合解读（核心解读） -->
+    <!-- 5. 传统综合解读（研究模式完整显示） -->
+    <template v-if="isResearch && detailed">
       <div class="card" style="border-color:var(--accent)">
-        <h2>核心解读</h2>
+        <h2>传统综合解读</h2>
         <p class="muted" style="margin:0">{{ detailed.overview }}</p>
       </div>
 
@@ -94,85 +143,117 @@
         <h2>制约信号</h2>
         <div v-for="(c,i) in detailed.constraints" :key="'con'+i" class="label-bad" style="margin:4px 0">− {{ c }}</div>
       </div>
+    </template>
 
-      <!-- 4. 分项解读 -->
+    <!-- 6. 传统分项（研究模式完整显示） -->
+    <template v-if="isResearch && detailed">
       <!-- 本卦 -->
       <div class="card">
         <h2>{{ detailed.base.title }}</h2>
-        <details style="margin:8px 0">
+        <details class="classic-details">
           <summary>查看《周易》原文</summary>
-          <div v-for="ct in detailed.base.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div v-for="ct in detailed.base.classicTexts" :key="ct.label" class="classic-text">
             <div class="muted">{{ ct.label }}</div>
             <div style="white-space:pre-wrap">{{ ct.text }}</div>
             <div class="muted" style="font-size:11px">{{ ct.source }}</div>
           </div>
         </details>
-        <div style="margin-top:8px"><b>白话：</b>{{ detailed.base.plainExplanation }}</div>
-        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.base.roleExplanation }}</div>
+        <div class="explain-block">
+          <div class="explain-label">人话解释</div>
+          <div class="explain-text">{{ detailed.base.plainExplanation }}</div>
+        </div>
+        <div class="explain-block">
+          <div class="explain-label">放到你这个问题里</div>
+          <div class="explain-text">{{ detailed.base.roleExplanation }}</div>
+        </div>
       </div>
 
       <!-- 动爻 -->
       <div class="card" v-for="(ml, i) in detailed.movingLines" :key="'ml'+i">
         <h2>{{ ml.title }}</h2>
-        <details style="margin:8px 0">
+        <details class="classic-details">
           <summary>查看《周易》原文</summary>
-          <div v-for="ct in ml.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div v-for="ct in ml.classicTexts" :key="ct.label" class="classic-text">
             <div class="muted">{{ ct.label }}</div>
             <div style="white-space:pre-wrap">{{ ct.text }}</div>
             <div class="muted" style="font-size:11px">{{ ct.source }}</div>
           </div>
         </details>
-        <div style="margin-top:8px"><b>白话：</b>{{ ml.plainExplanation }}</div>
-        <div style="margin-top:4px"><b>本次角色：</b>{{ ml.roleExplanation }}</div>
+        <div class="explain-block">
+          <div class="explain-label">人话解释</div>
+          <div class="explain-text">{{ ml.plainExplanation }}</div>
+        </div>
+        <div class="explain-block">
+          <div class="explain-label">放到你这个问题里</div>
+          <div class="explain-text">{{ ml.roleExplanation }}</div>
+        </div>
       </div>
 
       <!-- 互卦（梅花用） -->
       <div class="card" v-if="detailed.mutual">
         <h2>{{ detailed.mutual.title }}</h2>
-        <details style="margin:8px 0">
+        <details class="classic-details">
           <summary>查看《周易》原文</summary>
-          <div v-for="ct in detailed.mutual.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div v-for="ct in detailed.mutual.classicTexts" :key="ct.label" class="classic-text">
             <div class="muted">{{ ct.label }}</div>
             <div style="white-space:pre-wrap">{{ ct.text }}</div>
             <div class="muted" style="font-size:11px">{{ ct.source }}</div>
           </div>
         </details>
-        <div style="margin-top:8px"><b>白话：</b>{{ detailed.mutual.plainExplanation }}</div>
-        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.mutual.roleExplanation }}</div>
+        <div class="explain-block">
+          <div class="explain-label">人话解释</div>
+          <div class="explain-text">{{ detailed.mutual.plainExplanation }}</div>
+        </div>
+        <div class="explain-block">
+          <div class="explain-label">放到你这个问题里</div>
+          <div class="explain-text">{{ detailed.mutual.roleExplanation }}</div>
+        </div>
       </div>
 
       <!-- 变卦 -->
       <div class="card" v-if="detailed.changed">
         <h2>{{ detailed.changed.title }}</h2>
-        <details style="margin:8px 0">
+        <details class="classic-details">
           <summary>查看《周易》原文</summary>
-          <div v-for="ct in detailed.changed.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div v-for="ct in detailed.changed.classicTexts" :key="ct.label" class="classic-text">
             <div class="muted">{{ ct.label }}</div>
             <div style="white-space:pre-wrap">{{ ct.text }}</div>
             <div class="muted" style="font-size:11px">{{ ct.source }}</div>
           </div>
         </details>
-        <div style="margin-top:8px"><b>白话：</b>{{ detailed.changed.plainExplanation }}</div>
-        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.changed.roleExplanation }}</div>
+        <div class="explain-block">
+          <div class="explain-label">人话解释</div>
+          <div class="explain-text">{{ detailed.changed.plainExplanation }}</div>
+        </div>
+        <div class="explain-block">
+          <div class="explain-label">放到你这个问题里</div>
+          <div class="explain-text">{{ detailed.changed.roleExplanation }}</div>
+        </div>
       </div>
 
       <!-- 体用（梅花用） -->
       <div class="card" v-if="detailed.bodyUse">
         <h2>{{ detailed.bodyUse.title }}</h2>
-        <details style="margin:8px 0">
+        <details class="classic-details">
           <summary>查看《周易》原文</summary>
-          <div v-for="ct in detailed.bodyUse.classicTexts" :key="ct.label" style="margin:8px 0">
+          <div v-for="ct in detailed.bodyUse.classicTexts" :key="ct.label" class="classic-text">
             <div class="muted">{{ ct.label }}</div>
             <div style="white-space:pre-wrap">{{ ct.text }}</div>
             <div class="muted" style="font-size:11px">{{ ct.source }}</div>
           </div>
         </details>
-        <div style="margin-top:8px"><b>白话：</b>{{ detailed.bodyUse.plainExplanation }}</div>
-        <div style="margin-top:4px"><b>本次角色：</b>{{ detailed.bodyUse.roleExplanation }}</div>
+        <div class="explain-block">
+          <div class="explain-label">人话解释</div>
+          <div class="explain-text">{{ detailed.bodyUse.plainExplanation }}</div>
+        </div>
+        <div class="explain-block">
+          <div class="explain-label">放到你这个问题里</div>
+          <div class="explain-text">{{ detailed.bodyUse.roleExplanation }}</div>
+        </div>
       </div>
     </template>
 
-    <!-- 5. 传统评分 -->
+    <!-- 7. 评分 -->
     <div class="card">
       <h2>传统评分（{{ rec.rating.score }} 分 · 一致性 {{ Math.round(rec.rating.consistency*100) }}%）</h2>
       <div class="muted" style="margin-bottom:8px">标签：{{ rec.rating.label }} 有利{{ rec.rating.favorableCount }}条 / 制约{{ rec.rating.constraintCount }}条</div>
@@ -186,8 +267,8 @@
       </details>
     </div>
 
-    <!-- 6. 六爻规则状态（仅六爻） -->
-    <div class="card" v-if="rec.liuyao">
+    <!-- 六爻规则状态（仅六爻，研究模式） -->
+    <div class="card" v-if="isResearch && rec.liuyao">
       <h2>六爻规则状态</h2>
       <div v-if="detailed?.usefulGodReason" style="margin-bottom:6px">{{ detailed.usefulGodReason }}</div>
       <div v-if="rec.liuyao" class="muted" style="margin-bottom:6px">
@@ -204,17 +285,27 @@
       </details>
     </div>
 
-    <!-- 7. 经典证据 -->
+    <!-- 8. 经典证据（简明模式折叠，研究模式展开） -->
     <div class="card" v-if="rec.classicEvidence && rec.classicEvidence.length">
       <h2>经典证据</h2>
-      <div v-for="ev in rec.classicEvidence" :key="ev.id" style="margin:6px 0;font-size:14px">
-        <div class="muted">{{ ev.hexagramName }}{{ ev.lineIndex > 0 ? ` · 第${ev.lineIndex}爻` : ' · 卦辞' }}</div>
-        <div style="white-space:pre-wrap">{{ ev.original }}</div>
-        <div class="muted" style="font-size:11px">{{ ev.source }}</div>
-      </div>
+      <details v-if="!isResearch">
+        <summary>展开经典证据</summary>
+        <div v-for="ev in rec.classicEvidence" :key="ev.id" style="margin:6px 0;font-size:14px">
+          <div class="muted">{{ ev.hexagramName }}{{ ev.lineIndex > 0 ? ` · 第${ev.lineIndex}爻` : ' · 卦辞' }}</div>
+          <div style="white-space:pre-wrap">{{ ev.original }}</div>
+          <div class="muted" style="font-size:11px">{{ ev.source }}</div>
+        </div>
+      </details>
+      <template v-else>
+        <div v-for="ev in rec.classicEvidence" :key="ev.id" style="margin:6px 0;font-size:14px">
+          <div class="muted">{{ ev.hexagramName }}{{ ev.lineIndex > 0 ? ` · 第${ev.lineIndex}爻` : ' · 卦辞' }}</div>
+          <div style="white-space:pre-wrap">{{ ev.original }}</div>
+          <div class="muted" style="font-size:11px">{{ ev.source }}</div>
+        </div>
+      </template>
     </div>
 
-    <!-- 8. 起卦依据 -->
+    <!-- 9. 起卦依据 -->
     <div class="card" v-if="rec.castingEvidence && rec.castingEvidence.length">
       <h2>起卦依据</h2>
       <div v-for="(ev, i) in rec.castingEvidence" :key="i" style="font-size:14px">
@@ -241,8 +332,8 @@
       </div>
     </div>
 
-    <!-- 9. 现实行动提示 -->
-    <div class="card" v-if="detailed && detailed.actionTips.length">
+    <!-- 现实行动提示（研究模式） -->
+    <div class="card" v-if="isResearch && detailed && detailed.actionTips.length">
       <h2>现实行动提示</h2>
       <div v-for="(t,i) in detailed.actionTips" :key="'tip'+i" style="margin:4px 0">· {{ t }}</div>
     </div>
@@ -268,20 +359,25 @@ import { composeLiuyaoInterpretation } from '../engine/localInterpretation/compo
 import type { LocalDetailedInterpretation } from '../engine/localInterpretation/types'
 import { interpretMeihuaPlain, interpretLiuyaoPlain } from '../engine/plainInterpretation'
 import type { PlainInterpretation } from '../engine/plainInterpretation'
+import { interpretMeihuaRealWorld, interpretLiuyaoRealWorld } from '../engine/realWorldInterpretation'
+import type { RealWorldPlainReading } from '../engine/realWorldInterpretation'
 import type { DivinationRecord } from '../engine/orchestrator'
 import type { RatingBucket } from '../types'
 
 const route = useRoute()
 const store = useAppStore()
 
-const rec = ref<DivinationRecord | null>(null)
+/** v4.3 现实白话解读可能已随记录持久化；旧记录无此字段，就地 fallback 生成。 */
+type RecordWithRealWorld = DivinationRecord & { realWorldReading?: RealWorldPlainReading }
+
+const rec = ref<RecordWithRealWorld | null>(null)
 const loading = ref(true)
 const notFound = ref(false)
 
 async function load() {
   const id = String(route.params.id || '')
   if (store.lastResult && store.lastResult.id === id) {
-    rec.value = store.lastResult
+    rec.value = store.lastResult as RecordWithRealWorld
     loading.value = false
     notFound.value = false
     return
@@ -289,7 +385,7 @@ async function load() {
   loading.value = true
   notFound.value = false
   const r = await getRecord(id)
-  rec.value = r ?? null
+  rec.value = (r ?? null) as RecordWithRealWorld | null
   loading.value = false
   notFound.value = !r
 }
@@ -338,8 +434,49 @@ const plain = computed<PlainInterpretation | undefined>(() => {
   return undefined
 })
 
-/** 用户选择"仅详细解读"时不显示一句话卡片 */
-const showPlain = computed(() => (store.settings.resultDisplayMode ?? 'full_with_plain') !== 'detailed_only')
+/**
+ * 「现实白话解读」——v4.3 长辈友好层。
+ * 优先用记录上已持久化的 realWorldReading；旧记录就地生成（只读已有结果，不重起卦、不改评分）。
+ */
+const realWorldReading = computed<RealWorldPlainReading | undefined>(() => {
+  const r = rec.value
+  if (!r) return undefined
+  if (r.realWorldReading) return r.realWorldReading
+  try {
+    if (r.meihua) {
+      return interpretMeihuaRealWorld(r.input.question, r.input.category, r.meihua, r.rating)
+    }
+    if (r.liuyao) {
+      return interpretLiuyaoRealWorld(
+        r.input.question,
+        r.input.category,
+        r.liuyao,
+        r.rating,
+        r.calendar.monthBranch,
+        r.calendar.dayGanzhi
+      )
+    }
+  } catch {
+    return undefined
+  }
+  return undefined
+})
+
+/**
+ * 阅读模式：simple（默认）/ research。
+ * 兼容旧 resultDisplayMode：未设置 readingMode 时，detailed_only 视为 research。
+ */
+const readingMode = computed<'simple' | 'research'>(() => {
+  const s = store.settings
+  if (s.readingMode) return s.readingMode
+  if (s.resultDisplayMode === 'detailed_only') return 'research'
+  return 'simple'
+})
+
+const isResearch = computed(() => readingMode.value === 'research')
+
+/** 简明模式才显示「一句话看懂」卡片（研究模式聚焦传统详解，与旧 detailed_only 行为一致） */
+const showPlain = computed(() => !isResearch.value)
 
 /** RatingBucket 中文名 */
 const BUCKET_LABELS: Record<RatingBucket, string> = {
@@ -471,4 +608,83 @@ function copyText() {
 }
 .plain-reality { color: var(--accent, #888); }
 .plain-disclaimer { margin-top: 10px; font-size: 12px; }
+
+/* ===== 现实白话解读（长辈友好） ===== */
+.rw-card {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.rw-headline {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.75;
+  margin: 8px 0 4px;
+  word-break: break-word;
+}
+.rw-section { margin-top: 12px; }
+.rw-subhead {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+  margin: 10px 0 4px;
+}
+.rw-body {
+  font-size: 18px;
+  line-height: 1.85;
+  margin: 0;
+  word-break: break-word;
+}
+.rw-why {
+  font-size: 18px;
+  line-height: 1.85;
+  margin: 6px 0;
+  word-break: break-word;
+}
+.rw-why-label {
+  display: inline-block;
+  margin-right: 6px;
+  font-weight: 700;
+}
+.rw-act {
+  font-size: 18px;
+  line-height: 1.85;
+  padding-left: 1.4em;
+  margin: 4px 0;
+}
+.rw-act li {
+  margin: 4px 0;
+  word-break: break-word;
+}
+.rw-watch {
+  font-size: 18px;
+  line-height: 1.85;
+  padding-left: 1.4em;
+  margin: 4px 0;
+}
+.rw-watch li {
+  margin: 4px 0;
+  word-break: break-word;
+}
+.rw-disclaimer {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ===== 传统分项：人话解释 / 放到你这个问题里（比原文醒目） ===== */
+.classic-details { margin: 8px 0; }
+.classic-text { margin: 8px 0; }
+.explain-block { margin-top: 10px; }
+.explain-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.explain-text {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.75;
+  word-break: break-word;
+}
 </style>

@@ -1,11 +1,12 @@
 import Dexie, { Table } from 'dexie'
-import type { HistoryRecord, Settings } from './schema'
+import type { HistoryRecord, Settings, FortuneProfileRecord } from './schema'
 import type { DivinationRecord } from '../engine/orchestrator'
 import { APP_VERSION } from '../types'
 
 class DivinationDB extends Dexie {
   history!: Table<HistoryRecord, string>
   settings!: Table<Settings, string>
+  fortuneProfiles!: Table<FortuneProfileRecord, string>
 
   constructor() {
     super('smart-divination')
@@ -23,6 +24,12 @@ class DivinationDB extends Dexie {
     // history / settings 完全保留，旧数据不丢
     this.version(3).stores({
       aiSessions: null
+    })
+    // v4：新增 fortuneProfiles（运势出生档案），默认不保存，只有用户主动勾选才写入
+    this.version(4).stores({
+      history: 'id, createdAt, category, label',
+      settings: 'key',
+      fortuneProfiles: 'id, createdAt'
     })
   }
 }
@@ -60,15 +67,19 @@ export async function clearHistory(): Promise<void> {
   await db.history.clear()
 }
 
-export async function exportAll(): Promise<string> {
+export async function exportAll(options?: { includeFortuneProfiles?: boolean }): Promise<string> {
   const rows = await db.history.toArray()
-  return JSON.stringify({
+  const data: Record<string, unknown> = {
     app: 'Oraculum',
-    exportSchemaVersion: 3,
+    exportSchemaVersion: 4,
     appVersion: APP_VERSION,
     exportedAt: new Date().toISOString(),
     records: rows
-  }, null, 2)
+  }
+  if (options?.includeFortuneProfiles) {
+    data.fortuneProfiles = await db.fortuneProfiles.toArray()
+  }
+  return JSON.stringify(data, null, 2)
 }
 
 export async function importAll(json: string): Promise<number> {
@@ -89,12 +100,34 @@ export async function importAll(json: string): Promise<number> {
   return rows.length
 }
 
+// ---------- v4.3 出生档案（运势模块）----------
+// 默认不保存，只有用户主动勾选"保存本地档案"才写入 IndexedDB。
+
+export async function saveFortuneProfile(profile: FortuneProfileRecord): Promise<string> {
+  const raw = JSON.parse(JSON.stringify(profile)) as FortuneProfileRecord
+  await db.fortuneProfiles.put(raw)
+  return raw.id
+}
+
+export async function getFortuneProfile(id: string): Promise<FortuneProfileRecord | undefined> {
+  return db.fortuneProfiles.get(id)
+}
+
+export async function listFortuneProfiles(limit = 20): Promise<FortuneProfileRecord[]> {
+  return db.fortuneProfiles.orderBy('createdAt').reverse().limit(limit).toArray()
+}
+
+export async function deleteFortuneProfile(id: string): Promise<void> {
+  await db.fortuneProfiles.delete(id)
+}
+
 const DEFAULT_SETTINGS: Settings = {
   timezone: 'Asia/Shanghai',
   useShenshaInScore: true,
   showLunarDetail: true,
   dayBoundaryRule: 'midnight',
-  resultDisplayMode: 'full_with_plain'
+  resultDisplayMode: 'full_with_plain',
+  readingMode: 'simple'
 }
 
 export async function getSettings(): Promise<Settings> {
