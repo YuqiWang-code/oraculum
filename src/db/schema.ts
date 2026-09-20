@@ -15,4 +15,6 @@ export interface Settings {
   useShenshaInScore: boolean
   showLunarDetail: boolean
   dayBoundaryRule: DayBoundaryRule
+  /** 结果页默认显示：一句话 + 详细解读，或仅详细解读 */
+  resultDisplayMode: 'full_with_plain' | 'detailed_only'
 }

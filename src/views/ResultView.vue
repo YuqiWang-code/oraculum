@@ -25,6 +25,27 @@
       <div class="muted">类别：{{ rec.input.category }} {{ rec.input.querentAlias || '未署名' }}</div>
     </div>
 
+    <!-- 一句话看懂（白话层） -->
+    <div class="card" v-if="showPlain && plain" style="border-color:var(--accent)">
+      <h2>
+        一句话看懂
+        <span class="plain-tag">白话</span>
+      </h2>
+      <p class="plain-oneliner">{{ plain.oneLiner }}</p>
+      <details>
+        <summary>为什么这么说？</summary>
+        <div v-for="r in plain.reasons" :key="r.id" class="plain-reason">
+          <span class="plain-reason-label">{{ r.label }}</span>
+          <span>{{ r.explanation }}</span>
+        </div>
+        <div v-if="plain.realityGuard" class="plain-reason plain-reality">
+          <span class="plain-reason-label">现实提醒</span>
+          <span>{{ plain.realityGuard }}</span>
+        </div>
+        <div class="muted plain-disclaimer">{{ plain.disclaimer }}</div>
+      </details>
+    </div>
+
     <!-- 2. 卦象 -->
     <div class="card" v-if="rec.meihua">
       <h2>卦象</h2>
@@ -245,6 +266,8 @@ import { getRecord } from '../db'
 import { composeMeihuaInterpretation } from '../engine/localInterpretation/composeMeihuaInterpretation'
 import { composeLiuyaoInterpretation } from '../engine/localInterpretation/composeLiuyaoInterpretation'
 import type { LocalDetailedInterpretation } from '../engine/localInterpretation/types'
+import { interpretMeihuaPlain, interpretLiuyaoPlain } from '../engine/plainInterpretation'
+import type { PlainInterpretation } from '../engine/plainInterpretation'
 import type { DivinationRecord } from '../engine/orchestrator'
 import type { RatingBucket } from '../types'
 
@@ -286,6 +309,37 @@ const detailed = computed<LocalDetailedInterpretation | undefined>(() => {
   }
   return undefined
 })
+
+/**
+ * 「一句话看懂」白话解读。
+ * 旧记录若无 plainInterpretation 字段，就地用已有数据生成 fallback（只读，不重算卦）。
+ */
+const plain = computed<PlainInterpretation | undefined>(() => {
+  const r = rec.value
+  if (!r) return undefined
+  if (r.plainInterpretation) return r.plainInterpretation
+  try {
+    if (r.meihua) {
+      return interpretMeihuaPlain(r.input.question, r.input.category, r.meihua, r.rating)
+    }
+    if (r.liuyao) {
+      return interpretLiuyaoPlain(
+        r.input.question,
+        r.input.category,
+        r.liuyao,
+        r.rating,
+        r.calendar.monthBranch,
+        r.calendar.dayGanzhi
+      )
+    }
+  } catch {
+    return undefined
+  }
+  return undefined
+})
+
+/** 用户选择"仅详细解读"时不显示一句话卡片 */
+const showPlain = computed(() => (store.settings.resultDisplayMode ?? 'full_with_plain') !== 'detailed_only')
 
 /** RatingBucket 中文名 */
 const BUCKET_LABELS: Record<RatingBucket, string> = {
@@ -385,4 +439,36 @@ function copyText() {
 }
 .title-row h1 { margin: 0; }
 .rating-header { white-space: nowrap; }
+
+.plain-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  font-size: 12px;
+  font-weight: normal;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--muted, #888);
+  vertical-align: middle;
+}
+.plain-oneliner {
+  font-size: 19px;
+  line-height: 1.7;
+  margin: 8px 0 4px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.plain-reason {
+  font-size: 14px;
+  margin: 6px 0;
+  line-height: 1.6;
+}
+.plain-reason-label {
+  display: inline-block;
+  margin-right: 6px;
+  font-weight: 600;
+}
+.plain-reality { color: var(--accent, #888); }
+.plain-disclaimer { margin-top: 10px; font-size: 12px; }
 </style>

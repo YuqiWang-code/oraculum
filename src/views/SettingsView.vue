@@ -24,6 +24,17 @@
         <input type="checkbox" v-model="detail" style="width:auto" />
         显示农历扩展信息
       </label>
+
+      <label style="display:block;margin-top:12px">结果页默认显示</label>
+      <div class="muted">选择结果页默认展示方式。</div>
+      <label style="display:flex;align-items:center;gap:8px;margin-top:4px">
+        <input type="radio" value="full_with_plain" v-model="displayMode" style="width:auto" />
+        一句话 + 详细解读（默认）
+      </label>
+      <label style="display:flex;align-items:center;gap:8px">
+        <input type="radio" value="detailed_only" v-model="displayMode" style="width:auto" />
+        仅详细解读
+      </label>
     </div>
     <button class="btn" @click="save">保存设置</button>
 
@@ -44,9 +55,10 @@ const tz = ref(store.settings.timezone)
 const boundary = ref<'midnight' | 'zi_hour'>(store.settings.dayBoundaryRule)
 const shensha = ref(store.settings.useShenshaInScore)
 const detail = ref(store.settings.showLunarDetail)
+const displayMode = ref<'full_with_plain' | 'detailed_only'>(store.settings.resultDisplayMode ?? 'full_with_plain')
 
 async function save() {
-  await store.updateSettings({ timezone: tz.value, dayBoundaryRule: boundary.value, useShenshaInScore: shensha.value, showLunarDetail: detail.value })
+  await store.updateSettings({ timezone: tz.value, dayBoundaryRule: boundary.value, useShenshaInScore: shensha.value, showLunarDetail: detail.value, resultDisplayMode: displayMode.value })
   alert('已保存')
 }
 </script>

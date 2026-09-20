@@ -21,6 +21,8 @@ import type { CoinThrow } from './casting/castByCoins'
 import { throwsExplanation } from './casting/castByCoins'
 import { parseLocalDateTime } from '../utils/datetime'
 import { selectMeihuaClassicEvidence, selectLiuyaoClassicEvidence } from './classics/selectClassicEvidence'
+import { interpretMeihuaPlain, interpretLiuyaoPlain } from './plainInterpretation'
+import type { PlainInterpretation } from './plainInterpretation'
 
 export const DISCLAIMER = '传统文化研究与娱乐用途；重要现实决定请依据事实和专业意见。'
 
@@ -34,6 +36,8 @@ export interface DivinationRecord {
   liuyao?: LiuYaoResult
   rating: Rating
   interpretation: Interpretation
+  /** 「一句话看懂」白话层（只读已有结果，不重算术数） */
+  plainInterpretation?: PlainInterpretation
   usefulGodReason?: string
   castingRuleVersion?: string
   castingEvidence?: CastingEvidence[]
@@ -77,6 +81,7 @@ function finishMeihua(
   const meihua = finalizeMeihua(caster, cal)
   const rating = scoreMeihua(meihua, cal.monthBranch)
   const interpretation = interpretMeihua(meihua, rating, input.category)
+  const plainInterpretation = interpretMeihuaPlain(input.question, input.category, meihua, rating)
   return {
     id: input.id,
     ruleVersion: RULESET_VERSION,
@@ -86,6 +91,7 @@ function finishMeihua(
     meihua,
     rating,
     interpretation,
+    plainInterpretation,
     castingRuleVersion: caster.castingRuleVersion,
     castingEvidence: [caster.evidence],
     classicEvidence: selectMeihuaClassicEvidence(meihua),
@@ -99,6 +105,7 @@ export function runMeihuaTime(input: DivinationInput, _useShensha: boolean): Div
   const meihua = castMeihuaByTime(cal)
   const rating = scoreMeihua(meihua, cal.monthBranch)
   const interpretation = interpretMeihua(meihua, rating, input.category)
+  const plainInterpretation = interpretMeihuaPlain(input.question, input.category, meihua, rating)
   return {
     id: input.id,
     ruleVersion: RULESET_VERSION,
@@ -108,6 +115,7 @@ export function runMeihuaTime(input: DivinationInput, _useShensha: boolean): Div
     meihua,
     rating,
     interpretation,
+    plainInterpretation,
     castingRuleVersion: 'meihua_time_v1',
     classicEvidence: selectMeihuaClassicEvidence(meihua),
     createdAt: input.createdAt
@@ -171,6 +179,7 @@ export function runLiuyao(
   const liuyao = buildLiuyao(lines as 0[], movingMask, cal)
   const rating = scoreLiuyao(liuyao, cal.monthBranch, cal.dayGanzhi, useShensha, input.category)
   const { interpretation, usefulGodReason } = interpretLiuyao(liuyao, rating, input.category, cal.monthBranch, cal.dayGanzhi)
+  const plainInterpretation = interpretLiuyaoPlain(input.question, input.category, liuyao, rating, cal.monthBranch, cal.dayGanzhi)
 
   const evidence: CastingEvidence[] = []
   if (throws) {
@@ -192,6 +201,7 @@ export function runLiuyao(
     liuyao,
     rating,
     interpretation,
+    plainInterpretation,
     usefulGodReason,
     castingRuleVersion: throws ? 'liuyao_three_coins_v1' : 'manual_hexagram',
     castingEvidence: evidence,

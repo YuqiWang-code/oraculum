@@ -1,6 +1,6 @@
-# Oraculum（智能推理与预测）
+﻿# Oraculum（智能推理与预测）
 
-Oraculum **v4.1.0**
+Oraculum **v4.2.0**
 
 一个**移动端优先**的传统文化问卦 / 解卦 PWA。梅花易数多种起卦 + 六爻纳甲排盘，64 卦完整本地经典解读。
 
@@ -54,7 +54,7 @@ npm run preview    # 预览生产构建（http://localhost:4173）
 
 
 ```
-npm run test       # 运行 Vitest 单元测试（173 tests）
+npm run test       # 运行 Vitest 单元测试（199 tests）
 
 npm run test:watch # 监视模式
 
@@ -116,6 +116,8 @@ npm run format     # Prettier 格式化
 
 * **本地确定性解读引擎**：本卦 → 动爻 → 互卦 → 变卦 → 体用 → 综合，每段原文→白话→角色解释
 
+* **一句话看懂**：把经典卦象和规则转换为现代口语化提示（纯本地模板，不调用大模型）
+
 * **0–100 传统规则评分** + 五档（大凶 / 凶 / 平 / 吉 / 大吉）+ RatingBreakdown 七项明细
 
 * **六爻规则状态**：用神、元神 / 忌神 / 仇神、旺衰、暗动 / 日破、合绊、回头生克、三合、进退、飞伏
@@ -152,10 +154,10 @@ Vue 3 · TypeScript（strict）· Vite · Vue Router · Pinia · Dexie(IndexedDB
 
 | 版本标识                      | 值     | 说明                                                     |
 | ------------------------- | ----- | ------------------------------------------------------ |
-| `APP_VERSION`             | 4.1.0 | 应用版本（v4 纯本地化，v4.1 最终稳定化 + 移动端优化 + Cloudflare Pages 上线） |
+| `APP_VERSION`             | 4.2.0 | 应用版本（v4 纯本地化，v4.2 新增一句话看懂白话层） |
 | `RULESET_VERSION`         | 4.1.0 | 起卦算法与评分规则版本                                            |
 | `DATASET_VERSION`         | 3.0.0 | 经典数据集版本（卦辞 / 爻辞 / 彖传 / 大象 / 小象完整）                      |
-| `LOCAL_KNOWLEDGE_VERSION` | 1.0.0 | 本地现代释义版本                                               |
+| `LOCAL_KNOWLEDGE_VERSION` | 1.1.0 | 本地现代释义版本（含遁六二白话修订）                                  |
 
 每条历史记录均保存版本号，算法升级不改变旧结果。
 
@@ -220,7 +222,7 @@ public/
 
 docs/                       文档
 
-tests/                      Vitest 测试（173 tests）
+tests/                      Vitest 测试（199 tests）
 
 scripts/                    数据校验脚本
 ```
@@ -314,6 +316,10 @@ cloudflared tunnel --url http://localhost:4173
 
 
 * [本地解读引擎](docs/LOCAL_INTERPRETATION_ENGINE.md)
+
+* [一句话看懂白话引擎](docs/PLAIN_INTERPRETATION_ENGINE.md)
+
+* [本地释义审查记录](docs/LOCAL_INTERPRETATION_REVIEW.md)
 
 * [本地知识数据](docs/LOCAL_KNOWLEDGE_DATA.md)
 

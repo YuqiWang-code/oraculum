@@ -93,7 +93,8 @@ const DEFAULT_SETTINGS: Settings = {
   timezone: 'Asia/Shanghai',
   useShenshaInScore: true,
   showLunarDetail: true,
-  dayBoundaryRule: 'midnight'
+  dayBoundaryRule: 'midnight',
+  resultDisplayMode: 'full_with_plain'
 }
 
 export async function getSettings(): Promise<Settings> {
