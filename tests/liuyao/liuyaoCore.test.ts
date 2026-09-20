@@ -10,10 +10,10 @@ import { evaluateDayClash, dayClashEvidence } from '../../src/engine/liuyao/dayR
 import { evaluateCombine } from '../../src/engine/liuyao/combine'
 import { evaluateHiddenSpirit, hiddenEvidence } from '../../src/engine/liuyao/hiddenSpiritStrength'
 import { scoreLiuyao } from '../../src/engine/liuyao/scoreLiuyao'
-import { buildLiuyao } from '../../src/engine/liuyao/layout'
+import { buildLiuyao, type LiuYaoResult } from '../../src/engine/liuyao/layout'
 import { buildCalendarContext } from '../../src/engine/calendar/calendarEngine'
 import { HEXAGRAM_BY_KINGWEN } from '../../src/data/hexagrams'
-import type { LiuYaoResult, LiuYaoLine, Element } from '../../src/types'
+import type { LiuYaoLine, Element } from '../../src/types'
 
 /**
  * Phase 17：六爻核心逻辑单元测试
