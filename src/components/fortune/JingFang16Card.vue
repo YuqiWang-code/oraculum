@@ -1,6 +1,21 @@
 <template>
   <div class="card">
-    <h2>京房八宫 / 《易隐》十六变</h2>
+    <h2>卦象变化研究 <TermHelp term="十六变" depth="research" /></h2>
+    <p class="plain-intro">
+      古人认为事情会不断变化。这里展示<strong>一个卦是怎么一步步变化的</strong>，
+      看的是卦本身的结构，<strong>不是预测你的人生年份</strong>，也不对应寿命、祸福。
+    </p>
+    <details class="guofeng" style="margin:8px 0">
+      <summary>什么是八宫、游魂、归魂？</summary>
+      <div class="details-body">
+        <p class="muted" style="line-height:1.9">
+          古人把六十四卦分成八个「家族」（<TermHelp term="八宫" depth="research" />）。
+          一个卦在家族里按规则逐爻变化，会经过<TermHelp term="游魂" depth="research" />、
+          <TermHelp term="归魂" depth="research" />等阶段，最后回到本位。这是一套研究「变化规律」的结构图，
+          属于传统卦变研究，仅供文化参考。
+        </p>
+      </div>
+    </details>
     <p class="muted" style="margin-top:0">
       研究层：先选一个"本命卦来源"，再展示该宫的十六变结构。这里是卦变结构研究，不把十六变自动映射到年龄。
     </p>
@@ -125,6 +140,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import TermHelp from '../common/TermHelp.vue'
 import type { BirthProfile, SixteenTransformResult, JingFangStepReading } from '../../engine/fortune'
 import {
   transformSixteen,
@@ -317,6 +333,11 @@ watch(selectedPalace, () => {
 </script>
 
 <style scoped>
+.plain-intro {
+  font-size: 15.5px; line-height: 1.85; color: var(--ink-soft);
+  background: var(--paper-2); border-left: 3px solid var(--cinnabar);
+  padding: 10px 12px; border-radius: 0 10px 10px 0; margin: 8px 0;
+}
 .src-group { margin: 10px 0; }
 .src-opt {
   display: flex;

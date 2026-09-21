@@ -1,8 +1,13 @@
 <template>
   <div class="card" v-if="overview">
-    <h2>八字概览</h2>
+    <h2>八字概览 <span class="tag cinnabar">传统排盘</span></h2>
+    <p class="muted note">
+      这里是专业排盘，看不懂没关系，可以回到上面的「人生阶段时间轴」。
+      <TermHelp term="八字" depth="research" />
+    </p>
 
     <!-- 四柱 -->
+    <h3 style="display:flex;align-items:center;gap:6px">四柱 <TermHelp term="四柱" depth="research" /></h3>
     <div class="pillars">
       <div class="pillar" v-if="overview.pillars.year">
         <div class="pillar-label">年柱</div>
@@ -41,7 +46,7 @@
 
     <!-- 起运信息 -->
     <div class="qiyun" v-if="overview.qiYun">
-      <h3>起运</h3>
+      <h3 style="display:flex;align-items:center;gap:6px">起运 <TermHelp term="起运" depth="research" /></h3>
       <div class="qiyun-row">
         <span>起运时刻</span>
         <strong>{{ qiyunText(overview.qiYun) }}</strong>
@@ -57,7 +62,7 @@
 
     <!-- 五行统计 -->
     <div class="section" v-if="overview.wuxingCount && hasWuxing">
-      <h3>五行数量</h3>
+      <h3 style="display:flex;align-items:center;gap:6px">五行数量 <TermHelp term="五行" depth="research" /></h3>
       <div class="wx-row">
         <span v-for="(v, k) in overview.wuxingCount" :key="k" class="wx-chip">
           {{ wxLabel(k) }} × {{ v }}
@@ -70,7 +75,7 @@
 
     <!-- 纳音 -->
     <div class="section" v-if="overview.nayin">
-      <h3>纳音</h3>
+      <h3 style="display:flex;align-items:center;gap:6px">纳音 <TermHelp term="纳音" depth="research" /></h3>
       <div class="nayin">
         <div v-if="overview.nayin.year" class="nayin-line"><span>年</span>{{ overview.nayin.year }}</div>
         <div v-if="overview.nayin.month" class="nayin-line"><span>月</span>{{ overview.nayin.month }}</div>
@@ -83,6 +88,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import TermHelp from '../common/TermHelp.vue'
 import type { BaziOverview, QiYunInfo } from '../../engine/fortune'
 
 const props = defineProps<{ overview: BaziOverview | null }>()

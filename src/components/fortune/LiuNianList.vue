@@ -1,8 +1,8 @@
 <template>
   <div class="card" v-if="entries.length">
-    <h2>流年列表</h2>
+    <h2>逐年参考 <TermHelp term="流年" /></h2>
     <p class="muted" style="margin-top:0">
-      逐年干支是传统记号，不显示"得分""发财率"之类伪精确数字；如何应对取决于现实处境与你自己的选择。
+      按十年一段查看，每次只显示十年，不会一次铺开。逐年干支是传统记号，不显示"得分""发财率"之类伪精确数字；如何应对取决于现实处境与你自己的选择。
     </p>
 
     <!-- 分十年页 -->
@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import TermHelp from '../common/TermHelp.vue'
 import type { LiuNianEntry } from '../../engine/fortune'
 
 const props = defineProps<{ entries: LiuNianEntry[] }>()

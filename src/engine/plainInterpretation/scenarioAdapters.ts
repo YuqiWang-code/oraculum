@@ -5,10 +5,50 @@
 
 import type { ActionStance, PlainQuestionIntent, PlainSemanticFrame } from './types'
 
-/** 截断到前 n 个汉字 */
+/** 拆成完整分句（按中文标点），去掉末尾句号，绝不把一个分句切成半截 */
+export function clausesOf(s: string): string[] {
+  if (!s) return []
+  return s
+    .replace(/[。！？\s]+$/, '')
+    .split(/[，；、,;]/)
+    .map((x) => x.trim())
+    .filter(Boolean)
+}
+
+/**
+ * 取前 n 字以内的“完整分句”：只在标点处收束。
+ * 宁可带上略超 n 的第一个完整分句，也不输出「别」「三天两」这种半句话。
+ */
+export function clauseExcerpt(s: string, n: number): string {
+  if (!s) return ''
+  const clean = s.trim().replace(/[。！？\s]+$/, '')
+  if (clean.length <= n) return clean
+  const cls = clausesOf(clean)
+  if (cls.length <= 1) return clean.replace(/[。！？\s]+$/, '')
+  let out = ''
+  for (const c of cls) {
+    if (out && (out.length + 1 + c.length) > n) break
+    out = out ? `${out}，${c}` : c
+  }
+  return out || cls[0]
+}
+
+/** 从一句话里挑出 core 尚未包含的分句，拼回一段（用于短句补全，避免重复） */
+export function nextClausesNotIn(sentence: string, core: string, maxAdd = 30): string {
+  const fresh = clausesOf(sentence).filter((c) => !core.includes(c))
+  if (!fresh.length) return ''
+  let out = ''
+  for (const c of fresh) {
+    if (out && (out.length + 1 + c.length) > maxAdd) break
+    out = out ? `${out}，${c}` : c
+  }
+  return out
+}
+
+/** 截断到前 n 个汉字（按完整分句收束，不切半句） */
 function truncate(s: string, n: number): string {
   if (!s) return ''
-  return s.length > n ? s.slice(0, n) : s
+  return clauseExcerpt(s, n)
 }
 
 function basePhrase(frame: PlainSemanticFrame): string {
@@ -25,8 +65,7 @@ function changedPhrase(frame: PlainSemanticFrame): string {
 }
 
 function mainConstraint(frame: PlainSemanticFrame): string {
-  const e = frame.evidence.find((x) => x)
-  return e ? truncate(e, 12) : '关键阻碍'
+  return frame.constraintPlain ?? '眼前最卡的地方'
 }
 
 const TOILET_KEYWORDS = ['上厕所', '厕所', '方便', '尿急', '尿尿', '拉屎', '大便', '小便']
@@ -51,7 +90,7 @@ const TEMPLATES: Record<PlainQuestionIntent, Record<ActionStance, string>> = {
     do_cautiously: '可以做，但别硬冲；{movingPhrase}，先把关键条件处理好再行动。',
     small_step: '可以先试一步，别一次把决定做死；{changedPhrase}。',
     wait: '先别急着做；现在更适合{basePhrase}，等条件清楚一点再动。',
-    avoid: '现在不太适合硬上；先把{mainConstraint}解决，再考虑下一步。',
+    avoid: '现在不太适合硬上；先理顺{mainConstraint}，再考虑下一步。',
     neutral: '这件事更适合看趋势和条件，不必急着下结论；{basePhrase}。'
   },
   will_happen: {
@@ -59,15 +98,15 @@ const TEMPLATES: Record<PlainQuestionIntent, Record<ActionStance, string>> = {
     do_cautiously: '有这个苗头，但别赌太满；{movingPhrase}，边走边看。',
     small_step: '还在成形，先别急着下定论；{changedPhrase}。',
     wait: '现在还看不出结果；{basePhrase}，再等一阵。',
-    avoid: '短期内难成；先把{mainConstraint}解决再说。',
-    neutral: '趋势未定，先看{basePhrase}。'
+    avoid: '短期内比较难成；先理顺{mainConstraint}再说。',
+    neutral: '趋势还没定，先看{basePhrase}。'
   },
   how_to: {
     do: '直接按{basePhrase}的方向做就行，不用想太复杂。',
     do_cautiously: '可以做，但先把{movingPhrase}这个关键点理顺。',
     small_step: '拆成小步走；{changedPhrase}。',
     wait: '先别动，把{basePhrase}的前提看清楚。',
-    avoid: '现在方法不对路；先解决{mainConstraint}。',
+    avoid: '现在方法不太对路；先理顺{mainConstraint}。',
     neutral: '重点是看{basePhrase}，不必一步到位。'
   },
   person_relation: {
@@ -75,7 +114,7 @@ const TEMPLATES: Record<PlainQuestionIntent, Record<ActionStance, string>> = {
     do_cautiously: '有机会，但别逼太紧；{movingPhrase}，留一点余地。',
     small_step: '先从普通接触开始；{changedPhrase}。',
     wait: '现在不是推进的时候；{basePhrase}，先稳住自己。',
-    avoid: '暂时别硬推；先把{mainConstraint}处理好。',
+    avoid: '暂时别硬推；先把{mainConstraint}理顺。',
     neutral: '关系更看相处节奏；{basePhrase}。'
   },
   lost_item: {
@@ -83,25 +122,25 @@ const TEMPLATES: Record<PlainQuestionIntent, Record<ActionStance, string>> = {
     do_cautiously: '可能在近处，但别翻太乱；{movingPhrase}。',
     small_step: '先按{changedPhrase}的线索慢慢找。',
     wait: '先别慌着翻；{basePhrase}，缓一缓再找。',
-    avoid: '短期内难找；先确认{mainConstraint}。',
+    avoid: '短期内不好找；先看清{mainConstraint}。',
     neutral: '东西没走远，重点看{basePhrase}。'
   },
   generic: {
-    do: '可以做；{basePhrase}，顺势而为。',
-    do_cautiously: '可以做但留个心眼；{movingPhrase}。',
-    small_step: '先试一步；{changedPhrase}。',
-    wait: '先别急；{basePhrase}。',
-    avoid: '先放一放；把{mainConstraint}解决。',
-    neutral: '看{basePhrase}就好，不必急。'
+    do: '可以去做，{basePhrase}，顺着节奏来。',
+    do_cautiously: '可以做，但留个心眼，{movingPhrase}。',
+    small_step: '可以先试一小步，{changedPhrase}。',
+    wait: '先别急，{basePhrase}，看看再说。',
+    avoid: '先放一放，把{mainConstraint}理顺再说。',
+    neutral: '先看着{basePhrase}，不用太着急。'
   },
   // body_need / when 使用专用模板（见下方函数）
   body_need: {
-    do: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。',
-    do_cautiously: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。',
-    small_step: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。',
-    wait: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。',
-    avoid: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。',
-    neutral: '这卦更像提醒你{basePhrase}，{movingPhrase}，办完就回来。'
+    do: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。',
+    do_cautiously: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。',
+    small_step: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。',
+    wait: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。',
+    avoid: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。',
+    neutral: '先把眼前这点身体需要照顾好，回来再处理别的，别硬撑。'
   },
   when: {
     do: '这卦更适合看趋势，不适合硬给具体日期；当前重点是{basePhrase}。',

@@ -6,11 +6,11 @@
 import type { PlainReason, PlainSemanticFrame, RealityGuardResult, RatingTendency } from './types'
 
 const TENDENCY_DESC: Record<RatingTendency, string> = {
-  positive: '整体偏顺、条件有利',
-  slightly_positive: '略偏顺、小有助力',
-  neutral: '整体中性、不偏不倚',
-  slightly_negative: '略偏制约、需谨慎',
-  negative: '整体偏不利、宜守不宜进'
+  positive: '整体比较顺，有利条件多一些',
+  slightly_positive: '稍微偏顺，有一点助力',
+  neutral: '好坏不明显，关键看你接下来怎么处理',
+  slightly_negative: '稍微有点吃力，要多留心',
+  negative: '眼下阻力偏多，适合先稳住、慢慢来'
 }
 
 function lineLabel(lineIndex: number): string {
@@ -51,12 +51,12 @@ export function composePlainExplanation(
     })
   }
 
-  // 4. 评分
+  // 4. 评分（分数放括号里做参考，开头先说人话）
   reasons.push({
     id: 'rating',
     source: 'rating',
-    label: '评分',
-    explanation: `${frame.rating.score}·${frame.rating.label}：整体倾向${TENDENCY_DESC[frame.rating.tendency] ?? '中性'}`
+    label: '综合看',
+    explanation: `${TENDENCY_DESC[frame.rating.tendency] ?? '好坏不明显，先看看再说'}（参考评分 ${frame.rating.score} 分）`
   })
 
   // 5. 互卦

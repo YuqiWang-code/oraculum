@@ -1,61 +1,114 @@
 <template>
   <div>
-    <h1>问卦</h1>
-    <div class="card">
-      <label>所问之事</label>
-      <textarea v-model="question" rows="3" placeholder="例如：这份工作机会该不该接？"></textarea>
-      <label>问题类别</label>
-      <select v-model="category">
-        <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
-      </select>
-      <label>姓名/代号（可选）</label>
-      <input v-model="alias" placeholder="仅用于记录与称呼" />
-      <label>性别（可选，默认不参与起卦）</label>
-      <select v-model="gender">
-        <option value="unspecified">不指定</option>
-        <option value="male">男</option>
-        <option value="female">女</option>
-      </select>
+    <Stepper :steps="['准备问题', '起卦', '生成卦象', '解读']" :current="step" />
+
+    <!-- ============ 第一步：准备问题 ============ -->
+    <div v-show="step === 0">
+      <div class="card">
+        <span class="layer-tag">第一步</span>
+        <h1 style="margin:2px 0 6px">今天想了解什么？</h1>
+        <p class="lead">先在心里把问题想得具体一点，比如「这份工作机会该不该接」。</p>
+
+        <div class="theme-grid" style="margin:14px 0">
+          <button
+            v-for="t in themes"
+            :key="t.key"
+            type="button"
+            :class="['theme-card', category === t.category && t.key !== 'surprise' ? 'on' : '']"
+            @click="category = t.category"
+          >
+            <div class="t-icon">{{ t.icon }}</div>
+            <div class="t-title">{{ t.title }}</div>
+            <div class="t-sub">{{ t.subtitle }}</div>
+          </button>
+        </div>
+
+        <label>把你的问题写下来</label>
+        <textarea v-model="question" rows="3" placeholder="例如：这份工作机会该不该接？"></textarea>
+
+        <details class="guofeng" style="margin:10px 0">
+          <summary>🎲 没头绪？用灵感转盘挑个方向</summary>
+          <div class="details-body">
+            <InspirationWheel @pick="onWheelPick" />
+          </div>
+        </details>
+
+        <details class="guofeng" style="margin:10px 0">
+          <summary>更多问题类型 / 代号（可不填）</summary>
+          <div class="details-body">
+            <label>问题类别（专业分类）</label>
+            <select v-model="category">
+              <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
+            </select>
+            <label>姓名/代号（可选，仅记录用）</label>
+            <input v-model="alias" placeholder="不参与起卦，只用于记录与称呼" />
+            <label>性别（可选，默认不参与起卦）</label>
+            <select v-model="gender">
+              <option value="unspecified">不指定</option>
+              <option value="male">男</option>
+              <option value="female">女</option>
+            </select>
+          </div>
+        </details>
+
+        <button class="btn cinnabar" @click="goCast">开始问卦</button>
+        <p class="muted" style="text-align:center">姓名、性别不参与数学起卦；所有计算只在本机进行。</p>
+      </div>
     </div>
 
-    <h2 style="margin:16px 0 8px">选择起卦方式</h2>
+    <!-- ============ 第二步：起卦 ============ -->
+    <div v-show="step === 1">
+      <button class="btn secondary small" style="margin:10px 12px 0" @click="step = 0">← 返回修改问题</button>
 
-    <fieldset v-for="g in groups" :key="g.title" class="method-group">
-      <legend>{{ g.title }}</legend>
-      <div class="method-grid">
-        <button v-for="m in g.items" :key="m.key" :class="['method-card', mode===m.key?'on':'']" @click="mode=m.key">
-          <div class="m-icon">{{ m.icon }}</div>
-          <div class="m-name">{{ m.name }}</div>
-          <div class="m-desc">{{ m.desc }}</div>
-          <span :class="['badge', m.tier]">{{ m.badge }}</span>
-        </button>
+      <div class="card" style="background:var(--paper-2)">
+        <div class="muted">你问的是</div>
+        <div style="font-size:16px;font-weight:600;margin:2px 0 4px">{{ question }}</div>
+        <div class="tag">{{ category }}</div>
       </div>
-    </fieldset>
 
-    <div v-if="!mode" class="card muted">请选择起卦方式</div>
+      <!-- 默认：三枚钱六爻 -->
+      <CoinCaster v-if="mode === 'liuyao_coins'" @confirm="onCoins" />
 
-    <!-- 梅花年月日时（v1 旧法，传统时间起卦） -->
-    <div v-if="mode==='meihua_time'" class="card">
-      <h2>梅花 · 年月日时 <span class="tag">传统</span></h2>
-      <div class="muted">以农历年支、月、日、时支起卦（v1 旧法）。</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
-        <button class="btn" @click="onMeihuaTime('')">用当前时间起卦</button>
-        <div class="muted">或手工指定：</div>
-        <input type="datetime-local" v-model="manualTime" />
-        <button class="btn secondary" @click="onMeihuaTime(manualTime)">按指定时间起卦</button>
-      </div>
-    </div>
+      <!-- 其它传统 / 现代方式，折叠在后面，供研究用户使用 -->
+      <details class="guofeng">
+        <summary>换一种传统方式起卦（梅花、时间、字数等）</summary>
+        <div class="details-body">
+          <fieldset v-for="g in groups" :key="g.title" class="method-group">
+            <legend>{{ g.title }}</legend>
+            <div class="method-grid">
+              <button
+                v-for="m in g.items"
+                :key="m.key"
+                type="button"
+                :class="['method-card', mode === m.key ? 'on' : '']"
+                @click="mode = m.key"
+              >
+                <div class="m-icon">{{ m.icon }}</div>
+                <div class="m-name">{{ m.name }}</div>
+                <div class="m-desc">{{ m.desc }}</div>
+                <span :class="['badge', m.tier]">{{ m.badge }}</span>
+              </button>
+            </div>
+          </fieldset>
 
-    <TimeSecondCaster v-else-if="mode==='meihua_time_second'" @confirm="onSecondTime" />
-    <RandomCaster v-else-if="mode==='meihua_random'" @confirm="onRandom" />
-    <DiceCaster v-else-if="mode==='meihua_dice'" @confirm="onDice" />
-    <CoinCaster v-else-if="mode==='liuyao_coins'" @confirm="onCoins" />
-    <TextCaster v-else-if="mode==='meihua_text'" :default-text="question" @confirm="onText" />
-    <OmenCaster v-else-if="mode==='meihua_external_omen'" @confirm="onOmen" />
-    <SixSourceWizard v-else-if="mode==='six_source_hybrid'" @confirm="onSixSource" />
-
-    <div class="card muted">
-      姓名与性别不参与数学起卦，仅用于记录。本工具为传统文化研究与娱乐用途。
+          <div v-if="mode === 'meihua_time'" class="card" style="margin:8px 0">
+            <h2>梅花 · 年月日时 <span class="tag">传统</span></h2>
+            <div class="muted">以农历年支、月、日、时支起卦。</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+              <button class="btn" @click="onMeihuaTime('')">用当前时间起卦</button>
+              <div class="muted">或手工指定：</div>
+              <input type="datetime-local" v-model="manualTime" />
+              <button class="btn secondary" @click="onMeihuaTime(manualTime)">按指定时间起卦</button>
+            </div>
+          </div>
+          <TimeSecondCaster v-else-if="mode === 'meihua_time_second'" @confirm="onSecondTime" />
+          <RandomCaster v-else-if="mode === 'meihua_random'" @confirm="onRandom" />
+          <DiceCaster v-else-if="mode === 'meihua_dice'" @confirm="onDice" />
+          <TextCaster v-else-if="mode === 'meihua_text'" :default-text="question" @confirm="onText" />
+          <OmenCaster v-else-if="mode === 'meihua_external_omen'" @confirm="onOmen" />
+          <SixSourceWizard v-else-if="mode === 'six_source_hybrid'" @confirm="onSixSource" />
+        </div>
+      </details>
     </div>
   </div>
 </template>
@@ -66,7 +119,7 @@ export default { name: 'DivinationView' }
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAppStore } from '../stores/app'
 import { QUESTION_CATEGORIES } from '../engine/interpretation/classifyQuestion'
 import {
@@ -75,8 +128,12 @@ import {
 } from '../engine/orchestrator'
 import { saveRecord } from '../db'
 import { formatDateTimeLocalSeconds, parseLocalDateTime } from '../utils/datetime'
+import { FRIENDLY_THEMES } from '../local-data/plainInterpretation'
+import type { WheelSector } from '../local-data/plainInterpretation'
 import type { QuestionCategory, Gender, CastingMode } from '../types'
 import type { SixSourcePayload } from '../types'
+import Stepper from '../components/common/Stepper.vue'
+import InspirationWheel from '../components/casting/InspirationWheel.vue'
 import TimeSecondCaster from '../components/casting/TimeSecondCaster.vue'
 import RandomCaster from '../components/casting/RandomCaster.vue'
 import DiceCaster from '../components/casting/DiceCaster.vue'
@@ -86,15 +143,21 @@ import OmenCaster from '../components/casting/OmenCaster.vue'
 import SixSourceWizard from '../components/casting/SixSourceWizard.vue'
 
 const router = useRouter()
+const route = useRoute()
 const store = useAppStore()
 
+const step = ref<0 | 1>(0)
 const question = ref('')
-const category = ref<QuestionCategory>('日常综合')
+const initialCategory = route.query.category as QuestionCategory | undefined
+const category = ref<QuestionCategory>(
+  initialCategory && QUESTION_CATEGORIES.includes(initialCategory) ? initialCategory : '日常综合'
+)
 const alias = ref('')
 const gender = ref<Gender>('unspecified')
-const mode = ref<CastingMode | ''>('')
+const mode = ref<CastingMode | 'liuyao_coins'>('liuyao_coins')
 const manualTime = ref(formatDateTimeLocalSeconds(new Date()))
 const categories = QUESTION_CATEGORIES
+const themes = FRIENDLY_THEMES
 
 interface MethodItem {
   key: CastingMode
@@ -110,8 +173,7 @@ const groups: { title: string; items: MethodItem[] }[] = [
     title: '传统 / 常用',
     items: [
       { key: 'meihua_time', name: '梅花年月日时', desc: '农历年月日时起卦', badge: '传统', tier: 'ok', icon: '☰' },
-      { key: 'liuyao_coins', name: '三枚钱六爻', desc: '传统六爻', badge: '传统实践', tier: 'ok', icon: '🪙' },
-      { key: 'meihua_text', name: '传统思想·项目规范', desc: '所问字数', badge: '传统', tier: 'ok', icon: '✍' },
+      { key: 'meihua_text', name: '传统思想·字数', desc: '按所问字数起卦', badge: '传统', tier: 'ok', icon: '✍' },
       { key: 'meihua_external_omen', name: '外应', desc: '见象/色/方位', badge: '传统+规范', tier: 'ok', icon: '👁' }
     ]
   },
@@ -147,6 +209,19 @@ function buildInput(castTimeLocal: string) {
     castingMode: mode.value as CastingMode,
     castTime: d.toISOString()
   }
+}
+
+function goCast() {
+  if (!question.value.trim()) {
+    alert('先写下你想问的事情，哪怕一句话也行。')
+    return
+  }
+  step.value = 1
+}
+
+function onWheelPick(s: WheelSector) {
+  category.value = s.category
+  if (!question.value.trim()) question.value = s.placeholder
 }
 
 async function finish(rec: Awaited<ReturnType<typeof runMeihuaTime>>) {
@@ -197,16 +272,16 @@ function onSixSource(p: { payload: SixSourcePayload }) {
 </script>
 
 <style scoped>
-.method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px }
-.method-group { border:1px solid var(--line); border-radius:12px; margin:0 12px 12px; padding:10px 12px 14px; }
-.method-group legend { font-size:13px; color:var(--muted); padding:0 6px; }
-.method-card { position:relative; text-align:left; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--text) }
-.method-card.on { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) }
-.m-icon { font-size:22px }
-.m-name { font-weight:600; margin:4px 0 }
-.m-desc { font-size:12px; color:var(--muted) }
-.badge { position:absolute; top:8px; right:8px; font-size:10px; padding:2px 6px; border-radius:8px }
-.badge.warn { background:#c0392b; color:#fff }
-.badge.info { background:#2980b9; color:#fff }
-.badge.ok { background:#27ae60; color:#fff }
+.method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+.method-group { border: 1px solid var(--line); border-radius: 12px; margin: 0 0 12px; padding: 10px 12px 14px; }
+.method-group legend { font-size: 13px; color: var(--muted); padding: 0 6px; }
+.method-card { position: relative; text-align: left; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); }
+.method-card.on { border-color: var(--cinnabar); box-shadow: 0 0 0 1px var(--cinnabar); }
+.m-icon { font-size: 22px; }
+.m-name { font-weight: 600; margin: 4px 0; }
+.m-desc { font-size: 12px; color: var(--muted); }
+.badge { position: absolute; top: 8px; right: 8px; font-size: 10px; padding: 2px 6px; border-radius: 8px; }
+.badge.warn { background: var(--cinnabar); color: #fff; }
+.badge.info { background: var(--celadon); color: #fff; }
+.badge.ok { background: var(--gold); color: #fff; }
 </style>

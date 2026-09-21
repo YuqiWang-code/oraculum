@@ -7,9 +7,14 @@
 import type { QuestionCategory, Rating } from '../../types'
 import type { MeihuaResult } from '../meihua/castByTime'
 import type { LiuYaoResult } from '../liuyao/layout'
-import { analyzeLiuyao } from '../liuyao/analyze'
 import { selectHexagramKnowledge, selectLineKnowledge } from '../localInterpretation/selectKnowledge'
-import { BODY_USE_MEANINGS } from '../../local-data/meihua/bodyUseMeanings'
+import {
+  getPlainHexagram,
+  getBodyUsePlain,
+  plainEvidenceNote,
+  mainHumanConstraint,
+  mainHumanSupport
+} from '../../local-data/plainInterpretation'
 import type { PlainSemanticFrame, RatingTendency } from './types'
 
 /** 由分数推导整体倾向（与五档标签对齐，但独立成档供白话使用） */
@@ -22,7 +27,15 @@ export function tendencyForScore(score: number): RatingTendency {
 }
 
 function basePlain(kingWen: number, fallbackName: string): { theme: string; plainMeaning: string } {
+  // 表达层优先用「普通用户解释」的生活化白话；专业 coreMeaning 留给研究模式。
+  const plain = getPlainHexagram(kingWen)
   const k = selectHexagramKnowledge(kingWen)
+  if (plain) {
+    return {
+      theme: k?.localMeaning.keyThemes[0] ?? plain.name,
+      plainMeaning: plain.simple
+    }
+  }
   if (k) {
     return {
       theme: k.localMeaning.keyThemes[0] ?? k.name,
@@ -64,15 +77,21 @@ function linePlain(kingWen: number, lineIndex: 1 | 2 | 3 | 4 | 5 | 6): { theme: 
   return { theme: `第${lineIndex}爻`, plainMeaning: `第${lineIndex}爻为本次变化点，具体释义尚在整理中。` }
 }
 
-/** 从 rating.evidence 取 reason 文本（最多 n 条），并检测是否有强制约（delta <= -5） */
+/**
+ * 从 rating.evidence 提取「人话」说法（最多 n 条），并检测是否有强制约（delta <= -5）。
+ * 注意：这是表达层，证据原文里的术语在此统一翻译成生活说法，不改评分本身。
+ */
 function collectEvidence(rating: Rating, max = 5): { reasons: string[]; hasStrongCaution: boolean } {
   const reasons: string[] = []
   let hasStrongCaution = false
+  const seen = new Set<string>()
   for (const ev of rating.evidence) {
-    if (reasons.length < max) {
-      if (ev.reason) reasons.push(ev.reason)
-    }
     if (ev.delta <= -5) hasStrongCaution = true
+    const note = plainEvidenceNote(ev)
+    if (reasons.length < max && ev.reason && !seen.has(note)) {
+      seen.add(note)
+      reasons.push(note)
+    }
   }
   return { reasons, hasStrongCaution }
 }
@@ -96,7 +115,7 @@ export function buildMeihuaFrame(
     meihua.relation === 'generatesB' ||
     meihua.relation === 'same' ||
     meihua.relation === 'controlsA'
-  const buMeaning = BODY_USE_MEANINGS[meihua.relation]
+  const buPlain = getBodyUsePlain(meihua.relation)
 
   const { reasons, hasStrongCaution } = collectEvidence(rating)
 
@@ -109,9 +128,11 @@ export function buildMeihuaFrame(
     moving: moving.map((m) => ({ lineIndex: movingLine, theme: m.theme, plainMeaning: m.plainMeaning })),
     mutual: { name: meihua.hu.name, theme: mutual.theme, plainMeaning: mutual.plainMeaning },
     changed: { name: meihua.bian.name, theme: changed.theme, plainMeaning: changed.plainMeaning },
-    bodyUse: { favorable, plainMeaning: buMeaning.summary },
+    bodyUse: { favorable, plainMeaning: buPlain.simple },
     evidence: reasons,
-    hasStrongCaution
+    hasStrongCaution,
+    constraintPlain: mainHumanConstraint(rating.evidence),
+    supportPlain: mainHumanSupport(rating.evidence)
   }
 }
 
@@ -123,8 +144,8 @@ export function buildLiuyaoFrame(
   category: QuestionCategory,
   liuyao: LiuYaoResult,
   rating: Rating,
-  monthBranch: string,
-  dayGanzhi: string
+  _monthBranch: string,
+  _dayGanzhi: string
 ): PlainSemanticFrame {
   const base = basePlain(liuyao.hexagram.kingWen, liuyao.hexagram.name)
 
@@ -145,11 +166,8 @@ export function buildLiuyaoFrame(
 
   const { reasons, hasStrongCaution } = collectEvidence(rating)
 
-  // 只读 analyzeLiuyao() 的事实输出：取用神理由文字补充到 evidence，不参与重新计算
-  const analysis = analyzeLiuyao(liuyao, monthBranch, dayGanzhi, category)
-  if (analysis.usefulGod.reason && reasons.length < 5) {
-    reasons.push(analysis.usefulGod.reason)
-  }
+  // 六爻用神理由含专业术语，仅在「研究模式」的专业解读里展示；
+  // 普通用户解释层不放原始术语，避免老人看到「用神临月建」这类话术。
 
   return {
     question,
@@ -166,6 +184,8 @@ export function buildLiuyaoFrame(
         }
       : undefined,
     evidence: reasons,
-    hasStrongCaution
+    hasStrongCaution,
+    constraintPlain: mainHumanConstraint(rating.evidence),
+    supportPlain: mainHumanSupport(rating.evidence)
   }
 }

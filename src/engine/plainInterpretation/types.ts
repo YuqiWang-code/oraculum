@@ -64,6 +64,10 @@ export interface PlainSemanticFrame {
   evidence: string[]
   /** 内部信号：是否存在 delta <= -5 的强制约证据（不改公开契约，仅用于选 stance） */
   hasStrongCaution?: boolean
+  /** 最主要制约的人话说法（名词短语，供模板填充） */
+  constraintPlain?: string
+  /** 最主要支持的人话说法（名词短语） */
+  supportPlain?: string
 }
 
 export interface PlainReason {

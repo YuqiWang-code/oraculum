@@ -12,9 +12,9 @@ export default defineConfig({
       },
       includeAssets: ['icons/icon.svg'],
       manifest: {
-        name: '智能推理与预测',
-        short_name: '推理预测',
-        description: '传统文化研究与娱乐用问卦工具（梅花易数/六爻纳甲）— 纯本地离线，运势传统结构参考',
+        name: '今日问卦 · Oraculum',
+        short_name: '今日问卦',
+        description: '用《易经》传统文化陪你整理想法：梅花易数 / 六爻纳甲 / 人生阶段参考，纯本地离线计算，不预测未来、不联网、不调用 AI。',
         theme_color: '#2b3a4a',
         background_color: '#f7f5f0',
         display: 'standalone',

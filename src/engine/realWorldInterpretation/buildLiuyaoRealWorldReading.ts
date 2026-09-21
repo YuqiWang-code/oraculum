@@ -15,6 +15,7 @@ import type { QuestionCategory, Rating } from '../../types'
 import type { LiuYaoResult } from '../liuyao/layout'
 import { analyzeLiuyao } from '../liuyao/analyze'
 import { getHexagramKnowledge } from '../../local-data'
+import { getPlainHexagram, mainHumanConstraint } from '../../local-data/plainInterpretation'
 import { getCategoryAdapter } from './categoryAdapters'
 import { checkRealityGuard } from '../plainInterpretation/realityGuard'
 import { classifyQuestionIntent } from '../plainInterpretation/classifyQuestionIntent'
@@ -23,23 +24,22 @@ import type { RealWorldPlainReading } from './types'
 const REAL_WORLD_DISCLAIMER =
   '传统文化研究与参考；重要现实决定请依据事实和专业意见。所有解读均来自本地经典数据与确定性规则引擎，不调用大模型。'
 
-/** 评分的现实白话解释（与梅花版共用逻辑） */
+/** 评分的现实白话解释（说人话，少用宜/忌/凶/吉与四字句） */
 function ratingPlain(rating: Rating): string {
   const score = rating.score
-  const label = rating.label
   if (score >= 80) {
-    return `评分 ${score} 分（${label}），整体条件比较有利，但仍需踏实推进，不能掉以轻心。`
+    return `参考评分 ${score} 分，眼下条件比较齐、势头也不错，可以积极去做，但还是要踏实。`
   }
   if (score >= 60) {
-    return `评分 ${score} 分（${label}），有有利条件，也有需要注意的地方，稳步推进比较合适。`
+    return `参考评分 ${score} 分，有顺手的地方，也有要留心的地方，一步步推进比较稳。`
   }
   if (score >= 40) {
-    return `评分 ${score} 分（${label}），不是明显的好或坏，更像信息还不够完整或条件参半，先核实清楚再决定。`
+    return `参考评分 ${score} 分，好坏都不突出，更像条件还没凑齐，先弄清楚再决定。`
   }
   if (score >= 20) {
-    return `评分 ${score} 分（${label}），制约因素较多，宜谨慎、稳守，不宜仓促做重大决定。`
+    return `参考评分 ${score} 分，眼下阻力偏多，更适合先稳住、把基础理顺，不急着做重大决定。`
   }
-  return `评分 ${score} 分（${label}），当前困难较大，宜暂缓、多准备，等条件改善再行动。`
+  return `参考评分 ${score} 分，眼下困难比较明显，先放慢、多做准备，等条件好转再行动。`
 }
 
 /**
@@ -70,19 +70,23 @@ export function buildLiuyaoRealWorldReading(
   // 只读 analyzeLiuyao 事实输出
   const analysis = analyzeLiuyao(liuyao, monthBranch, dayGanzhi, category)
 
+  const plainBase = getPlainHexagram(liuyao.hexagram.kingWen)
+
   // headline
   const baseName = liuyao.hexagram.name
   const headline = composeHeadline(baseName, rating)
 
-  // currentSituation
+  // currentSituation：长辈友好 → 普通用户白话 → 专业释义
   const currentSituation =
     baseElder?.realLifeNow ||
+    plainBase?.simple ||
     baseKnowledge?.localMeaning.coreMeaning ||
     `当前是「${baseName}」的局面，需要结合具体情况判断。`
 
   // why.base
   const whyBase =
     baseElder?.elderFriendlySummary ||
+    plainBase?.simple ||
     baseKnowledge?.localMeaning.coreMeaning ||
     `本卦「${baseName}」代表当前的基本格局。`
 
@@ -122,29 +126,32 @@ export function buildLiuyaoRealWorldReading(
   // howToAct
   const howToAct = selectActions(adapter.actionTemplates, rating, 5)
 
-  // watchOutFor：类别注意 + 最强制约证据 + 卦级注意 + realityGuard
+  // watchOutFor：简单模式只放普通人看得懂的提醒
   const watchOutFor: string[] = []
   watchOutFor.push(...adapter.watchOutTemplates.slice(0, 2))
+  const humanConstraint = mainHumanConstraint(rating.evidence)
+  if (humanConstraint) {
+    watchOutFor.push(`需要留心：${humanConstraint}。`)
+  }
+  if (guard.active && guard.message) {
+    watchOutFor.push(guard.message)
+  }
 
-  // 从评分证据中取最强制约（delta <= -3）
+  // professionalNotes：含术语的原始证据/用神/卦级注意，仅研究模式折叠展示
+  const professionalNotes: string[] = []
   const strongConstraints = rating.evidence
     .filter((e) => e.delta <= -3)
     .sort((a, b) => a.delta - b.delta)
     .slice(0, 2)
   for (const sc of strongConstraints) {
-    watchOutFor.push(`需要注意：${sc.reason}`)
+    professionalNotes.push(`${sc.title}：${sc.reason}`)
   }
-
   // 用神选择理由（只读 analyzeLiuyao 事实输出，不重新计算）
   if (analysis.usefulGod.reason) {
-    watchOutFor.push(`六爻用神：${analysis.usefulGod.reason}`)
+    professionalNotes.push(`六爻用神：${analysis.usefulGod.reason}`)
   }
-
   if (baseKnowledge?.localMeaning.cautions?.length) {
-    watchOutFor.push(baseKnowledge.localMeaning.cautions[0])
-  }
-  if (guard.active && guard.message) {
-    watchOutFor.push(guard.message)
+    professionalNotes.push(...baseKnowledge.localMeaning.cautions.slice(0, 2))
   }
 
   // timeline
@@ -164,21 +171,22 @@ export function buildLiuyaoRealWorldReading(
     },
     howToAct,
     watchOutFor,
+    professionalNotes,
     timeline,
     realityGuard: guard.active ? guard.message : undefined,
     disclaimer: REAL_WORLD_DISCLAIMER
   }
 }
 
-/** 组合 headline */
+/** 组合 headline（说人话，不堆四字句） */
 function composeHeadline(baseName: string, rating: Rating): string {
   const score = rating.score
   let tendency: string
-  if (score >= 80) tendency = '整体有利，可以积极推进'
-  else if (score >= 60) tendency = '有有利条件，稳步推进'
-  else if (score >= 40) tendency = '条件参半，先核实再决定'
-  else if (score >= 20) tendency = '制约较多，宜谨慎稳守'
-  else tendency = '困难较大，宜暂缓多准备'
+  if (score >= 80) tendency = '眼下势头不错，可以积极去做'
+  else if (score >= 60) tendency = '条件还算顺手，稳步推进'
+  else if (score >= 40) tendency = '好坏参半，先弄清楚再决定'
+  else if (score >= 20) tendency = '眼下阻力偏多，先稳住慢慢来'
+  else tendency = '眼下困难较明显，先放慢多准备'
 
   return `「${baseName}」· ${tendency}`
 }

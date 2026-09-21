@@ -4,10 +4,13 @@
       <component :is="Component" />
     </keep-alive>
   </router-view>
+
+  <Onboarding />
+
   <nav class="bottom">
     <router-link to="/">首页</router-link>
     <router-link to="/divination">问卦</router-link>
-    <router-link to="/fortune">运势</router-link>
+    <router-link to="/fortune">人生</router-link>
     <router-link to="/history">历史</router-link>
     <router-link to="/knowledge">知识</router-link>
     <router-link to="/settings">设置</router-link>
@@ -15,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import Onboarding from './components/common/Onboarding.vue'
 // 设置已在 main.ts 的 bootstrap 中、挂载前通过 store.loadSettings() 加载，
 // 此处不再重复调用，避免首次渲染与二次加载的竞态。
 </script>

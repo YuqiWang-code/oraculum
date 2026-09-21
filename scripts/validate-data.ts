@@ -19,6 +19,14 @@ import { TUAN_MAP } from '../src/local-data/classics/tuan'
 import { DA_XIANG_MAP } from '../src/local-data/classics/daxiang'
 import { XIAO_XIANG_MAP } from '../src/local-data/classics/xiaoxiang'
 import { SOURCE_REFS } from '../src/local-data/classics/sources'
+import {
+  PLAIN_HEXAGRAMS,
+  TERM_GLOSSARY,
+  getTermPlain,
+  BODY_USE_PLAIN,
+  FRIENDLY_THEMES,
+  WHEEL_SECTORS
+} from '../src/local-data/plainInterpretation'
 import type { LocalHexagramKnowledge } from '../src/local-data/types'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -223,10 +231,58 @@ check(elderHexCount === 64, `长辈友好卦级数据应64卦，实际 ${elderHe
 check(elderLineCount === 384, `长辈友好爻级数据应384爻，实际 ${elderLineCount}`)
 check(forbiddenHits === 0, `长辈友好数据中有 ${forbiddenHits} 处禁词`)
 
+// ---------- 5. 普通用户解释层（plainInterpretation）校验 ----------
+const PLAIN_BANNED = ['命中注定', '百分百', '发财', '死亡预测']
+function scanPlain(text: string, field: string) {
+  for (const w of PLAIN_BANNED) {
+    if (text.includes(w)) { console.error(`✗ 白话层禁词「${w}」出现在 ${field}`); errors++ }
+  }
+  // 「一定 / 必然」只接受否定语境
+  if (/(^|[^不未])一定/.test(text)) { console.error(`✗ 白话层出现肯定式「一定」：${field}`); errors++ }
+  if (/(^|[^不未])必然/.test(text)) { console.error(`✗ 白话层出现肯定式「必然」：${field}`); errors++ }
+}
+
+check(Object.keys(PLAIN_HEXAGRAMS).length === 64, `普通用户卦解释应64卦，实际 ${Object.keys(PLAIN_HEXAGRAMS).length}`)
+for (let kw = 1; kw <= 64; kw++) {
+  const p = PLAIN_HEXAGRAMS[kw]
+  check(!!p, `普通用户解释第${kw}卦缺失`)
+  if (!p) continue
+  check(p.name.trim().length > 0, `第${kw}卦白话 name 为空`)
+  check(p.simple.trim().length > 5, `第${kw}卦（${p.name}）simple 过短`)
+  check(p.action.trim().length > 3, `第${kw}卦（${p.name}）action 过短`)
+  scanPlain(`${p.simple}${p.action}${p.elder ?? ''}`, `第${kw}卦（${p.name}）白话`)
+  for (const ch of ['宜', '忌', '凶', '吉']) {
+    check(!`${p.simple}${p.action}`.includes(ch), `第${kw}卦（${p.name}）白话仍用「${ch}」下断语`)
+  }
+}
+
+const REQUIRED_TERMS = ['本卦', '动爻', '互卦', '变卦', '体用', '世应', '用神', '六亲', '六神',
+  '五行', '八字', '四柱', '天干地支', '纳音', '十神', '起运', '大运', '流年',
+  '八宫', '游魂', '归魂', '十六变', '梅花易数', '六爻纳甲']
+for (const t of REQUIRED_TERMS) {
+  const info = getTermPlain(t)
+  check(!!info, `术语「${t}」缺少小白解释`)
+  if (info) {
+    check(info.simple.trim().length > 3, `术语「${t}」simple 过短`)
+    check(info.elder.trim().length > 3, `术语「${t}」elder 过短`)
+    scanPlain(`${info.simple}${info.elder}`, `术语「${t}」`)
+  }
+}
+check(TERM_GLOSSARY.length >= REQUIRED_TERMS.length, `术语表条目不足：${TERM_GLOSSARY.length}`)
+
+for (const key of ['same', 'generatesB', 'controlsA', 'generatesA', 'controlsB'] as const) {
+  const b = BODY_USE_PLAIN[key]
+  check(!!b && b.simple.length > 3 && b.elder.length > 3, `体用关系 ${key} 白话不完整`)
+  if (b) scanPlain(`${b.simple}${b.elder}${b.action}`, `体用关系 ${key}`)
+}
+check(FRIENDLY_THEMES.length >= 5, `主题卡至少5张，实际 ${FRIENDLY_THEMES.length}`)
+check(WHEEL_SECTORS.length >= 6, `灵感转盘至少6区，实际 ${WHEEL_SECTORS.length}`)
+
 // ---------- 结果 ----------
 if (errors === 0) {
   console.log('✓ 数据校验通过：64卦结构、64卦辞/彖/大象、384爻辞/小象、384 themeKeyword、来源均一致。')
   console.log(`✓ v4.3 长辈友好数据：64卦卦级 + 384爻爻级全部非空，禁词检查通过。`)
+  console.log(`✓ 普通用户解释层：64卦白话、${REQUIRED_TERMS.length}个必备术语、5种体用关系、主题卡/转盘齐全，禁词检查通过。`)
   process.exit(0)
 } else {
   console.error(`校验失败：${errors} 处错误`)

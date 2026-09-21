@@ -4,7 +4,7 @@
  */
 
 import type { ActionStance, PlainSemanticFrame, RealityGuardResult } from './types'
-import { bodyNeedPrefix, renderTemplate } from './scenarioAdapters'
+import { bodyNeedPrefix, nextClausesNotIn, renderTemplate } from './scenarioAdapters'
 
 const MIN_LEN = 35
 const MAX_LEN = 90
@@ -30,10 +30,12 @@ function goldenMeihuaToilet(frame: PlainSemanticFrame): string | null {
 function normalizeLength(s: string, frame: PlainSemanticFrame): string {
   let out = s.trim()
 
-  // 过短：补 basePhrase
+  // 过短：补一句 base 里“还没出现过”的完整分句（不重复、不切半句）
   if (out.length < MIN_LEN) {
-    const bp = frame.base.plainMeaning.slice(0, 18)
-    out = `${out.slice(0, out.length - 1)}；${bp}。`
+    const extra = nextClausesNotIn(frame.base.plainMeaning, out, 30)
+    if (extra) {
+      out = `${out.replace(/[。！？]$/, '')}；${extra}。`
+    }
   }
 
   // 过长：截断到 90，确保以句号结尾

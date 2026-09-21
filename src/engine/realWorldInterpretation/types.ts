@@ -26,8 +26,13 @@ export interface RealWorldPlainReading {
   }
   /** 接下来怎么做——具体行动列表 */
   howToAct: string[]
-  /** 最需要注意什么 */
+  /** 最需要注意什么（人话，简单模式直接展示） */
   watchOutFor: string[]
+  /**
+   * 专业备注：含术语的原始证据（如用神、旺衰、体用生克）。
+   * 简单模式不展示，研究模式折叠展开；与 watchOutFor 分离，避免术语吓到普通用户。
+   */
+  professionalNotes?: string[]
   /** 时间线（可选） */
   timeline?: {
     now: string

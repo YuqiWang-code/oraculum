@@ -1,12 +1,15 @@
 ﻿<template>
-  <h1>运势</h1>
+  <h1>人生阶段 <span class="tag cinnabar">传统文化参考</span></h1>
+  <p class="muted" style="margin:0 16px 8px;line-height:1.7">
+    输入出生时间，看看传统文化怎么描述人生不同阶段。这是一张参考图，不决定命运、不预测具体事件。
+  </p>
 
   <div v-if="fortuneError" class="card error-card">
     <h2>计算失败</h2>
     <p class="muted">{{ fortuneError }}</p>
   </div>
 
-  <!-- 出生资料输入 -->
+  <!-- 1. 你的出生信息 -->
   <BirthInputCard ref="inputCardRef" @compute="onCompute" />
 
   <!-- 本地出生档案 -->
@@ -28,28 +31,38 @@
     </div>
   </div>
 
-  <!-- 八字概览 -->
-  <BaziOverviewCard v-if="overview" :overview="overview" />
+  <!-- 2. 简单了解（不展示四柱） -->
+  <BaziSimpleCard v-if="profile" :profile="profile" />
 
-  <!-- 大运时间轴 -->
+  <!-- 3. 人生阶段时间轴（大运） -->
   <DaYunTimeline
     v-if="showDaYun"
     :entries="daYun"
     :analyses="daYunAnalyses"
   />
 
-  <!-- 流年列表 -->
+  <!-- 逐年参考（流年，按十年分段加载） -->
   <LiuNianList
     v-if="showDaYun"
     :entries="liuNian"
     @decade="onRequestDecade"
   />
 
-  <!-- 京房十六变研究层 -->
-  <JingFang16Card
-    v-if="profile"
-    :profile="profile"
-  />
+  <!-- 4. 传统排盘（折叠） -->
+  <details class="guofeng" v-if="overview">
+    <summary>🧮 传统排盘（四柱、纳音、五行、起运）</summary>
+    <div class="details-body">
+      <BaziOverviewCard :overview="overview" />
+    </div>
+  </details>
+
+  <!-- 5. 卦象变化研究（原京房十六变，折叠；研究卦本身，不预测年龄） -->
+  <details class="guofeng" v-if="profile">
+    <summary>🔯 卦象变化研究（传统卦变结构，进阶）</summary>
+    <div class="details-body">
+      <JingFang16Card :profile="profile" />
+    </div>
+  </details>
 
   <!-- 免责声明 -->
   <FortuneDisclaimer />
@@ -58,6 +71,7 @@
 <script setup lang="ts">
 import { ref, shallowRef, computed } from 'vue'
 import BirthInputCard from '../components/fortune/BirthInputCard.vue'
+import BaziSimpleCard from '../components/fortune/BaziSimpleCard.vue'
 import BaziOverviewCard from '../components/fortune/BaziOverviewCard.vue'
 import DaYunTimeline from '../components/fortune/DaYunTimeline.vue'
 import LiuNianList from '../components/fortune/LiuNianList.vue'
