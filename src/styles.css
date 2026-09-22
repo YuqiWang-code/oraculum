@@ -251,30 +251,60 @@ details.guofeng > .details-body { padding: 2px 16px 16px; }
 /* ============================================================
    灵感转盘（仅选主题，绝不参与起卦）
    ============================================================ */
-.wheel-wrap { position: relative; width: 260px; height: 260px; margin: 8px auto 4px; }
+.wheel-card { overflow: visible; }
+.wheel-wrap {
+  position: relative; width: 280px; height: 280px; margin: 14px auto 8px;
+  --wr: 92px;
+}
 .wheel {
   width: 100%; height: 100%; border-radius: 50%; position: relative;
-  border: 6px solid var(--card); box-shadow: var(--shadow-lg);
-  transition: transform 2.6s cubic-bezier(0.15, 0.85, 0.2, 1);
+  border: 6px solid var(--card);
+  box-shadow: var(--shadow-lg), inset 0 0 0 2px rgba(255,255,255,0.28), inset 0 0 34px rgba(60,36,20,0.22);
+  transition: transform 2.8s cubic-bezier(0.16, 0.84, 0.22, 1);
   background: conic-gradient(
     var(--cinnabar) 0 45deg, #d98d5b 45deg 90deg, var(--gold) 90deg 135deg, var(--celadon) 135deg 180deg,
     #7d8fa3 180deg 225deg, #9c6b52 225deg 270deg, #b0794a 270deg 315deg, #6f7d5e 315deg 360deg
   );
 }
+.wheel-seg {
+  position: absolute; left: 50%; top: 50%; width: 2px; height: 50%;
+  transform-origin: 50% 0; margin-left: -1px;
+  background: linear-gradient(to bottom, rgba(255,248,240,0.6), rgba(255,248,240,0) 72%);
+  pointer-events: none;
+}
 .wheel .w-label {
-  position: absolute; left: 50%; top: 50%; transform-origin: 0 0;
-  color: #fff8f0; font-size: 14px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  position: absolute; left: 50%; top: 50%; width: 52px; height: 48px; margin: -24px 0 0 -26px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  pointer-events: none;
+}
+.wheel .wl-icon { font-size: 17px; line-height: 1; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3)); }
+.wheel .wl-text {
+  font-style: normal; color: #fff8f0; font-size: 12.5px; font-weight: 700; letter-spacing: 1px;
+  background: rgba(56,34,20,0.32); border: 1px solid rgba(255,248,240,0.35);
+  padding: 1px 8px; border-radius: 999px; text-shadow: 0 1px 2px rgba(0,0,0,0.35); white-space: nowrap;
+}
+.wheel .w-label.win { z-index: 2; }
+.wheel .w-label.win .wl-icon { transform: scale(1.25); transition: transform 0.3s ease; }
+.wheel .w-label.win .wl-text {
+  background: var(--ink); color: #ffe9b8; border-color: var(--gold);
+  animation: wheelPulse 1.4s ease-in-out infinite;
+}
+@keyframes wheelPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(199,154,75,0.45), 0 4px 12px rgba(60,36,20,0.35); }
+  50% { box-shadow: 0 0 0 5px rgba(199,154,75,0.55), 0 4px 14px rgba(60,36,20,0.4); }
 }
 .wheel-hub {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  width: 52px; height: 52px; border-radius: 50%; background: var(--card); border: 2px solid var(--gold);
-  display: flex; align-items: center; justify-content: center; font-size: 22px; z-index: 2; box-shadow: var(--shadow);
+  width: 58px; height: 58px; border-radius: 50%; background: var(--card); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: var(--cinnabar);
+  z-index: 3; box-shadow: var(--shadow), inset 0 0 0 3px rgba(199,154,75,0.18);
 }
-.wheel-pointer {
-  position: absolute; left: 50%; top: -8px; transform: translateX(-50%);
-  width: 0; height: 0; border-left: 11px solid transparent; border-right: 11px solid transparent;
-  border-top: 18px solid var(--ink); z-index: 3;
+/* 指针已移除：转盘整圈停正，中奖扇区高亮 */
+.wheel-result {
+  margin-top: 10px; padding: 10px 12px; border-radius: 12px; text-align: center; font-weight: 600;
+  background: rgba(176,67,45,0.08); border: 1px solid rgba(176,67,45,0.25); color: var(--ink);
 }
+.wheel-result .wr-icon { font-size: 18px; margin-right: 4px; }
 
 /* ============================================================
    模式开关：简单看看 / 深入研究
@@ -398,9 +428,10 @@ details.guofeng > .details-body { padding: 2px 16px 16px; }
   .one-liner, .elder-text { font-size: 17.5px; }
   .headline { font-size: 19px; }
   nav.bottom a { font-size: 11px; }
-  /* 灵感转盘固定 260px，320px 卡片内宽约 264px，收到 240px 留足余量 */
-  .wheel-wrap { width: 240px; height: 240px; }
-  .wheel .w-label { font-size: 13px; }
+  /* 灵感转盘在 320px 收到 240px，标签半径同步缩小 */
+  .wheel-wrap { width: 240px; height: 240px; --wr: 76px; }
+  .wheel .wl-icon { font-size: 15px; }
+  .wheel .wl-text { font-size: 11.5px; padding: 1px 6px; }
   /* 四柱网格 / 明细表格 / 分享图，防止单格撑破列宽 */
   .pillars { gap: 6px; }
   .pillar { padding: 8px 4px; min-width: 0; }

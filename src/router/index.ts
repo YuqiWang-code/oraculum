@@ -8,7 +8,9 @@ const routes = [
   { path: '/history', name: 'history', component: () => import('../views/HistoryView.vue') },
   { path: '/knowledge', name: 'knowledge', component: () => import('../views/KnowledgeView.vue') },
   { path: '/settings', name: 'settings', component: () => import('../views/SettingsView.vue') },
-  { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') }
+  { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
+  // 兜底：任何未匹配地址回到首页，避免白屏
+  { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
 export const router = createRouter({
